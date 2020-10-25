@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
             child: Text(
               'Welcome to our app',
                   style: TextStyle(
-                color: Colors.white,
+                color: Colors.yellowAccent,
                     fontSize: 20.0
             ),
             ),
