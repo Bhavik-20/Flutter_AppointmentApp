@@ -1,33 +1,12 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_appointment_app/pages/student_dashboard.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MaterialApp(
+    routes: {
+      '/': (context) => student_dashboard()
+    },
+  ));
 }
 
-class MyApp extends StatelessWidget {
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Our App'),
-          backgroundColor: Colors.red,
-        ),
-        body: Container(
-          color: Colors.grey[900],
-          child: Center(
-            child: Text(
-              'Welcome to our app',
-                  style: TextStyle(
-                color: Colors.yellowAccent,
-                    fontSize: 20.0
-            ),
-            ),
-          ),
-        ),
-
-      ),
-    );
-  }
-}
