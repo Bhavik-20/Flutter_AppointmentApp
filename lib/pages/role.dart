@@ -2,10 +2,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(student_dashboard());
+  runApp(role());
 }
 
-class student_dashboard extends StatelessWidget {
+class role extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
