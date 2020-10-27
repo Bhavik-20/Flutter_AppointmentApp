@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_appointment_app/services/rounded_button.dart';
 import 'package:flutter_appointment_app/services/rounded_input_field.dart';
 import 'package:flutter_appointment_app/services/rounded_password_field.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 void main(){
-  runApp(student_login());
+  runApp(teacher_login());
 }
 
-class student_login extends StatelessWidget {
+class teacher_login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -28,7 +29,7 @@ class student_login extends StatelessWidget {
                   ),
                   SizedBox(width: 50.0),
                   Text(
-                    "Student Login",
+                    "Teacher Login",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontFamily: 'dosis',
@@ -38,9 +39,7 @@ class student_login extends StatelessWidget {
                 ],
               ),
               SizedBox(height: size.height * 0.03),
-              Image(
-                image: AssetImage('images/student.jpg'),
-              ),
+              SvgPicture.asset('icons/teacher.svg', height:250),
               SizedBox(height: size.height * 0.03),
               RoundedInputField(
                 hintText: "Your Email",
@@ -65,8 +64,8 @@ class student_login extends StatelessWidget {
                     ),
                     Text("OR",
                       style: TextStyle(
-                        fontFamily: 'dosis',
-                        fontWeight: FontWeight.bold
+                          fontFamily: 'dosis',
+                          fontWeight: FontWeight.bold
                       ),
                     ),
                     Expanded(
@@ -80,10 +79,10 @@ class student_login extends StatelessWidget {
               SizedBox(height: 10.0,),
               FlatButton(
                 shape:  CircleBorder(
-                  side: BorderSide(
-                    style: BorderStyle.solid,
-                    color: Colors.white
-                  )
+                    side: BorderSide(
+                        style: BorderStyle.solid,
+                        color: Colors.white
+                    )
                 ),
                 onPressed: (){},
                 child: Image(
@@ -91,8 +90,8 @@ class student_login extends StatelessWidget {
                   height: 70.0,
                   width: 50.0,
                 ),
-                  // height: size.height*0.01,
-                ),
+                // height: size.height*0.01,
+              ),
             ],
           ),
         ),
