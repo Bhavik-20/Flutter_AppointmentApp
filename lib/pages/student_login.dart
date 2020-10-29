@@ -54,36 +54,20 @@ class student_login extends StatelessWidget {
                 text: "LOGIN",
                 press: () {},
               ),
-              SizedBox(height: size.height * 0.01),
-              Row(
-                  children: <Widget>[
-                    Expanded(
-                        child: Divider(
-                          thickness: 1.0,
-                          color: Colors.purple[100],
-                        )
-                    ),
-                    Text("OR",
-                      style: TextStyle(
-                        fontFamily: 'dosis',
-                        fontWeight: FontWeight.bold
-                      ),
-                    ),
-                    Expanded(
-                        child: Divider(
-                          thickness: 1.0,
-                          color: Colors.purple[100],
-                        )
-                    ),
-                  ]
+              SizedBox(height: size.height * 0.03),
+              Text("Not Registered?",
+                style: TextStyle(
+                    fontFamily: 'dosis',
+                    fontWeight: FontWeight.bold
+                ),
               ),
               SizedBox(height: 10.0,),
               FlatButton(
                 shape:  CircleBorder(
-                  side: BorderSide(
-                    style: BorderStyle.solid,
-                    color: Colors.white
-                  )
+                    side: BorderSide(
+                        style: BorderStyle.solid,
+                        color: Colors.white
+                    )
                 ),
                 onPressed: (){},
                 child: Image(
@@ -91,8 +75,8 @@ class student_login extends StatelessWidget {
                   height: 70.0,
                   width: 50.0,
                 ),
-                  // height: size.height*0.01,
-                ),
+                // height: size.height*0.01,
+              ),
             ],
           ),
         ),

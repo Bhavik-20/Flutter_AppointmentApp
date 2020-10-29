@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_appointment_app/services/constants.dart';
 import 'package:flutter_appointment_app/services/rounded_button.dart';
 import 'package:flutter_appointment_app/services/rounded_input_field.dart';
 import 'package:flutter_appointment_app/services/rounded_password_field.dart';
@@ -91,6 +92,29 @@ class teacher_login extends StatelessWidget {
                   width: 50.0,
                 ),
                 // height: size.height*0.01,
+              ),
+              SizedBox(height: size.height * 0.03),
+              Text("Not Registered?",
+                style: TextStyle(
+                    fontFamily: 'dosis',
+                    fontWeight: FontWeight.bold
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 20),
+                width: size.width * 0.5,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(29),
+                  child: FlatButton(
+                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                    color: kPrimaryLightColor,
+                    onPressed: (){},
+                    child: Text(
+                      'Sign Up here',
+                      style: TextStyle(color: kPrimaryColor),
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
