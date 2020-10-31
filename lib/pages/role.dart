@@ -41,7 +41,7 @@ class role extends StatelessWidget {
                         ) ,
                       ),
                       SizedBox(width: 10.0),
-                      Icon(Icons.menu)
+                      Icon(Icons.person)
                     ],
                   ),
                   onPressed: (){},
@@ -69,7 +69,7 @@ class role extends StatelessWidget {
                         ) ,
                       ),
                       SizedBox(width: 10.0),
-                      Icon(Icons.menu)
+                      Icon(Icons.psychology_outlined)
                     ],
                   ),
                   onPressed: (){},
