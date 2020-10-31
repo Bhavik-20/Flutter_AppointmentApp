@@ -101,6 +101,7 @@ class student_dashboard extends StatelessWidget {
           onPressed: (){},
           backgroundColor: Colors.purple[400],
           child: Icon(Icons.add),
+
         ),
       ),
     );
