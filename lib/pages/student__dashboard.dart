@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import "package:google_fonts/google_fonts.dart";
 
 void main()
 {
@@ -43,12 +44,11 @@ class student_dashboard extends StatelessWidget {
                     child: Row(
                       children: [
                         Icon(Icons.account_circle_rounded),
-                        SizedBox(width: 20.0,),
+                        SizedBox(width: 15.0,),
                         Text('Profile',
-                          style: TextStyle(
-                              fontFamily: 'dosis',
-                              fontSize: 25.0,
-                              fontWeight: FontWeight.bold
+                          style: GoogleFonts.quicksand(
+                            fontSize: 21,
+                            fontWeight: FontWeight.w500,
                           ),
                         )
                       ],
@@ -62,12 +62,11 @@ class student_dashboard extends StatelessWidget {
                     child: Row(
                       children: [
                         Icon(Icons.calendar_today_outlined),
-                        SizedBox(width: 20.0,),
+                        SizedBox(width: 15.0,),
                         Text('Book An Appointment',
-                          style: TextStyle(
-                              fontFamily: 'dosis',
-                              fontSize: 25.0,
-                              fontWeight: FontWeight.bold
+                          style: GoogleFonts.quicksand(
+                            fontSize: 21,
+                            fontWeight: FontWeight.w500,
                           ),
                         )
                       ],
@@ -81,12 +80,11 @@ class student_dashboard extends StatelessWidget {
                     child: Row(
                       children: [
                         Icon(Icons.logout),
-                        SizedBox(width: 20.0,),
+                        SizedBox(width: 15.0,),
                         Text('Sign Out',
-                        style: TextStyle(
-                          fontFamily: 'dosis',
-                          fontSize: 25.0,
-                          fontWeight: FontWeight.bold
+                        style: GoogleFonts.quicksand(
+                              fontSize: 21,
+                              fontWeight: FontWeight.w500,
                         ),
                         )
                       ],
@@ -100,7 +98,7 @@ class student_dashboard extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           onPressed: (){},
           backgroundColor: Colors.purple[400],
-          child: Icon(Icons.add),
+          child: Icon(Icons.add, size: 30),
 
         ),
       ),
