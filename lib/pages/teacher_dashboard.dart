@@ -17,7 +17,7 @@ class teacher_dashboard extends StatelessWidget {
       home: Scaffold(
         backgroundColor: Colors.deepPurple[50],
         appBar: AppBar(
-          backgroundColor: Colors.deepPurple[400],
+          backgroundColor: Colors.deepPurple[600],
           title: Text('Teacher Dashboard'),
           centerTitle: true,
         ),
@@ -26,7 +26,7 @@ class teacher_dashboard extends StatelessWidget {
               children: [
                 DrawerHeader(
                   decoration:BoxDecoration(
-                      color: Colors.deepPurple[400]
+                      color: Colors.deepPurple[600]
                   ) ,
                   child: Stack(
                     children: [
@@ -117,7 +117,7 @@ class teacher_dashboard extends StatelessWidget {
         ),
 
         bottomNavigationBar: CurvedNavigationBar(
-          backgroundColor: Colors.deepPurple[50],
+          backgroundColor: Colors.deepPurple[600],
           height: 50,
           animationDuration: Duration(milliseconds: 200,),
           animationCurve: Curves.bounceInOut ,

@@ -11,7 +11,7 @@ class role extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-          backgroundColor: Colors.purple[400],
+          backgroundColor: Colors.deepPurple[600],
           body:Column(
             children: [
               SizedBox(height: 200.0),

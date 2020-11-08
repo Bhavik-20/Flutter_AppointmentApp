@@ -63,12 +63,15 @@ class teacher_login extends StatelessWidget {
                           color: Colors.purple[100],
                         )
                     ),
+                    SizedBox(width: 5.0,),
                     Text("OR",
                       style: TextStyle(
                           fontFamily: 'dosis',
-                          fontWeight: FontWeight.bold
+                          fontWeight: FontWeight.bold,
+                          fontSize:15.0
                       ),
                     ),
+                    SizedBox(width: 5.0,),
                     Expanded(
                         child: Divider(
                           thickness: 1.0,
@@ -93,12 +96,30 @@ class teacher_login extends StatelessWidget {
                 ),
                 // height: size.height*0.01,
               ),
-              SizedBox(height: size.height * 0.03),
-              Text("Not Registered?",
-                style: TextStyle(
-                    fontFamily: 'dosis',
-                    fontWeight: FontWeight.bold
-                ),
+              Row(
+                  children: <Widget>[
+                    Expanded(
+                        child: Divider(
+                          thickness: 1.0,
+                          color: Colors.purple[100],
+                        )
+                    ),
+                    SizedBox(width: 5.0,),
+                    Text("Not Registered?",
+                      style: TextStyle(
+                          fontFamily: 'dosis',
+                          fontWeight: FontWeight.bold,
+                          fontSize:15.0
+                      ),
+                    ),
+                    SizedBox(width: 5.0,),
+                    Expanded(
+                        child: Divider(
+                          thickness: 1.0,
+                          color: Colors.purple[100],
+                        )
+                    ),
+                  ]
               ),
               Container(
                 margin: EdgeInsets.symmetric(vertical: 20),
@@ -116,6 +137,7 @@ class teacher_login extends StatelessWidget {
                   ),
                 ),
               ),
+
             ],
           ),
         ),

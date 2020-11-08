@@ -12,7 +12,7 @@ void main() {
   runApp(MaterialApp(
     routes: {
       //'/': (context) => role()
-      '/': (context) => teacher_dashboard()
+      '/': (context) => student_login()
     },
   ));
 }

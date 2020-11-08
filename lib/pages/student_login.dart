@@ -1,8 +1,10 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_appointment_app/services/constants.dart';
 import 'package:flutter_appointment_app/services/rounded_button.dart';
 import 'package:flutter_appointment_app/services/rounded_input_field.dart';
 import 'package:flutter_appointment_app/services/rounded_password_field.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 void main(){
   runApp(student_login());
@@ -13,6 +15,7 @@ class student_login extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      //backgroundColor: Colors.deepPurple[100],
       body: SafeArea(
         minimum: EdgeInsets.only(top: 20.0),
         child: SingleChildScrollView(
@@ -54,12 +57,31 @@ class student_login extends StatelessWidget {
                 text: "LOGIN",
                 press: () {},
               ),
-              SizedBox(height: size.height * 0.03),
-              Text("Not Registered?",
-                style: TextStyle(
-                    fontFamily: 'dosis',
-                    fontWeight: FontWeight.bold
-                ),
+              SizedBox(height: size.height * 0.01),
+              Row(
+                  children: <Widget>[
+                    Expanded(
+                        child: Divider(
+                          thickness: 1.0,
+                          color: Colors.purple[100],
+                        )
+                    ),
+                    SizedBox(width: 5.0,),
+                    Text("OR",
+                      style: TextStyle(
+                          fontFamily: 'dosis',
+                          fontWeight: FontWeight.bold,
+                          fontSize:15.0
+                      ),
+                    ),
+                    SizedBox(width: 5.0,),
+                    Expanded(
+                        child: Divider(
+                          thickness: 1.0,
+                          color: Colors.purple[100],
+                        )
+                    ),
+                  ]
               ),
               SizedBox(height: 10.0,),
               FlatButton(
@@ -76,6 +98,47 @@ class student_login extends StatelessWidget {
                   width: 50.0,
                 ),
                 // height: size.height*0.01,
+              ),
+              Row(
+                  children: <Widget>[
+                    Expanded(
+                        child: Divider(
+                          thickness: 1.0,
+                          color: Colors.purple[100],
+                        )
+                    ),
+                    SizedBox(width: 5.0,),
+                    Text("Not Registered?",
+                      style: TextStyle(
+                          fontFamily: 'dosis',
+                          fontWeight: FontWeight.bold,
+                          fontSize:15.0
+                      ),
+                    ),
+                    SizedBox(width: 5.0,),
+                    Expanded(
+                        child: Divider(
+                          thickness: 1.0,
+                          color: Colors.purple[100],
+                        )
+                    ),
+                  ]
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 20),
+                width: size.width * 0.5,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(29),
+                  child: FlatButton(
+                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                    color: kPrimaryLightColor,
+                    onPressed: (){},
+                    child: Text(
+                      'Sign Up here',
+                      style: TextStyle(color: kPrimaryColor),
+                    ),
+                  ),
+                ),
               ),
             ],
           ),

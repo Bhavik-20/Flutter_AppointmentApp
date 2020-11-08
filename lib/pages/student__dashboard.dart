@@ -14,8 +14,9 @@ class student_dashboard extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: Colors.deepPurple[100],
         appBar: AppBar(
-          backgroundColor: Colors.purple[400],
+          backgroundColor: Colors.deepPurple[600],
           title: Text('Student Dashboard'),
           centerTitle: true,
         ),
@@ -24,7 +25,7 @@ class student_dashboard extends StatelessWidget {
             children: [
               DrawerHeader(
                 decoration:BoxDecoration(
-                  color: Colors.purple[400]
+                  color: Colors.deepPurple[600]
                 ) ,
                 child: Stack(
                   children: [
@@ -97,7 +98,7 @@ class student_dashboard extends StatelessWidget {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: (){},
-          backgroundColor: Colors.purple[400],
+          backgroundColor: Colors.deepPurple[600],
           child: Icon(Icons.add, size: 30),
 
         ),

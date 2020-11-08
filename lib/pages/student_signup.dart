@@ -176,12 +176,15 @@ class _State extends State {
                           color: Colors.purple[100],
                         )
                     ),
+                    SizedBox(width: 5.0,),
                     Text("Already Signed Up?",
                       style: TextStyle(
                           fontFamily: 'dosis',
-                          fontWeight: FontWeight.bold
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15.0
                       ),
                     ),
+                    SizedBox(width: 5.0,),
                     Expanded(
                         child: Divider(
                           thickness: 1.0,
