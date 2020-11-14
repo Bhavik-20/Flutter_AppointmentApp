@@ -70,7 +70,10 @@ flutter:
    - family: kanit
      fonts:
         - asset: fonts/Kanit-LightItalic.ttf
-          style : italic
+   - family: playfair
+     fonts:
+        - asset: fonts/PlayfairDisplay-VariableFont_wght.ttf
+
 
   #
   # For details regarding fonts from package dependencies,
