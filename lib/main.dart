@@ -9,12 +9,14 @@ import 'package:flutter_appointment_app/pages/teacher_login.dart';
 import 'package:flutter_appointment_app/pages/teacher_signup.dart';
 import 'package:flutter_appointment_app/pages/student__dashboard.dart';
 import 'package:flutter_appointment_app/pages/student_search_teacher.dart';
+import 'package:flutter_appointment_app/pages/student_appointment_details.dart';
+import 'package:flutter_appointment_app/pages/student_dateSelect.dart';
 
 void main() {
   runApp(MaterialApp(
     routes: {
       //'/': (context) => role()
-      '/': (context) => search_teacher()
+      '/': (context) => dateSelect()
     },
   ));
 }

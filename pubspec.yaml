@@ -67,6 +67,10 @@ flutter:
    - family: dosis
      fonts:
         - asset: fonts/Dosis-VariableFont_wght.ttf
+   - family: kanit
+     fonts:
+        - asset: fonts/Kanit-LightItalic.ttf
+          style : italic
 
   #
   # For details regarding fonts from package dependencies,
