@@ -40,7 +40,10 @@ class _dateSelectState extends State<dateSelect> {
           title: Text('Select Date and Time'),
           centerTitle: true,
           actions: [
-            Icon(Icons.access_time_sharp)
+            Icon(
+              Icons.access_time_sharp,
+              size: 30.0,
+            )
           ],
         ),
         body: SingleChildScrollView(
@@ -165,11 +168,13 @@ class _dateSelectState extends State<dateSelect> {
                               lastDate: DateTime.now().add(Duration(days: 7)),
                             ).then((date) {
                               setState(() {
+                                // ---------- Extracting day and Date from DateTime date------------
                                 day=days_of_week[date.weekday-1];
                                 var formatter = new DateFormat('dd-MM-yyyy');
                                 String formatted = formatter.format(date);
                                 full=day+" : "+formatted;
                                 print(full);
+                                //-------------Extracting ends here ------------------
                               });
                             });
                           }),
@@ -185,7 +190,6 @@ class _dateSelectState extends State<dateSelect> {
                   ),
                 ],
               ),
-
             ],
           ),
         )

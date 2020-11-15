@@ -34,7 +34,10 @@ class teacher_history extends StatelessWidget {
             centerTitle: true ,
             elevation: 10,
             backgroundColor: Colors.deepPurple[600],
-            leading: Icon(Icons.arrow_back),
+            leading: Icon(
+              Icons.arrow_back,
+              size: 30.0,
+            ),
           ),
           body: TabBarView(
             children: [

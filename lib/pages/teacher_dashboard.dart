@@ -15,7 +15,7 @@ class teacher_dashboard extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.deepPurple[50],
+        backgroundColor: Colors.deepPurple[100],
         appBar: AppBar(
           backgroundColor: Colors.deepPurple[600],
           title: Text('Teacher Dashboard'),

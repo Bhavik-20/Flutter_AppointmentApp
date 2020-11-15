@@ -23,6 +23,7 @@ class search_teacher extends StatelessWidget {
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
+            size: 30.0,
           ),
         ),
         backgroundColor: Colors.deepPurple[600],

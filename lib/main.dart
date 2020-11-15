@@ -11,12 +11,15 @@ import 'package:flutter_appointment_app/pages/student__dashboard.dart';
 import 'package:flutter_appointment_app/pages/student_search_teacher.dart';
 import 'package:flutter_appointment_app/pages/student_appointment_details.dart';
 import 'package:flutter_appointment_app/pages/student_dateSelect.dart';
+import 'package:flutter_appointment_app/pages/student_profile.dart';
+import 'package:flutter_appointment_app/pages/teacher_profile.dart';
+import 'package:flutter_appointment_app/pages/student_bookAppointment.dart';
 
 void main() {
   runApp(MaterialApp(
     routes: {
       //'/': (context) => role()
-      '/': (context) => dateSelect()
+      '/': (context) => book_Appointment()
     },
   ));
 }
