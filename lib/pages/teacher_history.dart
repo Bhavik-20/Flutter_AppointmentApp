@@ -1,5 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_appointment_app/pages/teacher_accepted_list.dart';
+import 'package:flutter_appointment_app/pages/teacher_declined_list.dart';
 import 'package:flutter_appointment_app/services/constants.dart';
 import 'package:flutter_appointment_app/services/rounded_button.dart';
 import 'package:flutter_appointment_app/services/rounded_input_field.dart';
@@ -46,8 +48,8 @@ class teacher_history extends StatelessWidget {
                 ),
               ),
 
-              Center(child: Text('Accepted')),
-              Center(child: Text('Rejected')),
+              teacher_accepted_list(),
+              teacher_declined_list(),
             ],
           ),
         ),

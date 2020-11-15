@@ -1,15 +1,40 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_appointment_app/pages/teacher_declined_list.dart';
 import "package:google_fonts/google_fonts.dart";
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:flutter_appointment_app/pages/teacher_accepted_list.dart';
 
 void main()
 {
   runApp(teacher_dashboard());
 }
 
-class teacher_dashboard extends StatelessWidget {
+class teacher_dashboard extends StatefulWidget {
+  @override
+  _teacher_dashboardState createState() => _teacher_dashboardState();
+}
+
+class _teacher_dashboardState extends State<teacher_dashboard> {
+
+  int _selectedIndex = 0;
+  static const TextStyle optionStyle =
+  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  List<Widget> _widgetOptions = <Widget>[
+    Text(
+      'Index 1: schedule',
+      style: optionStyle,
+    ),
+    teacher_accepted_list(),
+    teacher_declined_list(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -115,7 +140,9 @@ class teacher_dashboard extends StatelessWidget {
               ],
             )
         ),
-
+        body: Center(
+          child: _widgetOptions.elementAt(_selectedIndex),
+        ),
         bottomNavigationBar: CurvedNavigationBar(
           backgroundColor: Colors.deepPurple[600],
           height: 50,
@@ -126,9 +153,7 @@ class teacher_dashboard extends StatelessWidget {
             Icon(Icons.playlist_add_check, size: 30),
             Icon(Icons.cancel_presentation_outlined, size: 25),
           ],
-          onTap: (index) {
-            //Handle button tap
-          },
+          onTap: _onItemTapped,
         ),
       ),
     );

@@ -43,10 +43,10 @@ class _book_AppointmentState extends State<book_Appointment> {
       ),
       body: Theme(
         data: ThemeData(
-            accentColor: Colors.purple,
-            primarySwatch: Colors.purple,
+            accentColor: Colors.deepPurple[300],
+            primarySwatch: Colors.deepPurple,
             colorScheme: ColorScheme.light(
-                primary: Colors.purple
+                primary: Colors.deepPurple[300]
             )
         ),
         child: Stepper(
@@ -90,7 +90,10 @@ class _book_AppointmentState extends State<book_Appointment> {
   List<Step> _mySteps(){
     List<Step> _steps=[
       Step(
-        title: Text('Selected Teacher Info'),
+        title: Text('Selected Teacher Info',
+        style: TextStyle(
+          fontSize: 18,
+        ),),
         content: Container(
             decoration: BoxDecoration(
                 color: Colors.white,
@@ -104,9 +107,10 @@ class _book_AppointmentState extends State<book_Appointment> {
                 children: [
                   Container(
                     height:50.0,
+                    padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                     child: TextField(
                       style: TextStyle(
-                          fontSize: 20.0,
+                          fontSize: 18.0,
                           fontFamily: 'playfair',
                           fontWeight: FontWeight.bold
                       ),
@@ -126,9 +130,10 @@ class _book_AppointmentState extends State<book_Appointment> {
                   ),
                   Container(
                     height:50.0,
+                    padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                     child: TextField(
                       style: TextStyle(
-                          fontSize: 20.0,
+                          fontSize: 18.0,
                           fontFamily: 'playfair',
                           fontWeight: FontWeight.bold
                       ),
@@ -148,9 +153,10 @@ class _book_AppointmentState extends State<book_Appointment> {
                   ),
                   Container(
                     height:50.0,
+                    padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                     child: TextField(
                       style: TextStyle(
-                          fontSize: 20.0,
+                          fontSize: 18.0,
                           fontFamily: 'playfair',
                           fontWeight: FontWeight.bold
                       ),
@@ -170,9 +176,10 @@ class _book_AppointmentState extends State<book_Appointment> {
                   ),
                   Container(
                     height:50.0,
+                    padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                     child: TextField(
                       style: TextStyle(
-                          fontSize: 20.0,
+                          fontSize: 18.0,
                           fontFamily: 'playfair',
                           fontWeight: FontWeight.bold
                       ),
@@ -192,14 +199,17 @@ class _book_AppointmentState extends State<book_Appointment> {
         isActive: _currentStep >= 0,
       ),
       Step(
-        title: Text('Pick a Date'),
+        title: Text('Pick a Date',
+          style: TextStyle(
+            fontSize: 18,
+          ),),
         content: Row(
           children: [
             Container(
               decoration: BoxDecoration(
-                color: Colors.deepPurple[600],
+                color: Colors.deepPurple[400],
                   border: Border.all(
-                    color: Colors.deepPurple[600],
+                    color: Colors.deepPurple[400],
                   ),
                   borderRadius: BorderRadius.all(Radius.circular(30))
               ),
@@ -241,7 +251,10 @@ class _book_AppointmentState extends State<book_Appointment> {
         isActive: _currentStep >= 1,
       ),
       Step(
-        title: Text('Select Time'),
+        title: Text('Select Time',
+          style: TextStyle(
+            fontSize: 18,
+          ),),
         content: Column(
           children: [
 
@@ -277,7 +290,10 @@ class _book_AppointmentState extends State<book_Appointment> {
         isActive: _currentStep >= 2,
       ),
       Step(
-        title: Text('Your  Info'),
+        title: Text('Your  Info',
+          style: TextStyle(
+            fontSize: 18,
+          ),),
         content: Container(
           decoration: BoxDecoration(
               color: Colors.white,
@@ -402,7 +418,10 @@ class _book_AppointmentState extends State<book_Appointment> {
         isActive: _currentStep >= 3,
       ),
       Step(
-        title: Text('Purpose Of Meet'),
+        title: Text('Purpose Of Meet',
+          style: TextStyle(
+            fontSize: 18,
+          ),),
         content: Container(
           decoration: BoxDecoration(
               color: Colors.white,
