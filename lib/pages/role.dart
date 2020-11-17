@@ -44,7 +44,9 @@ class role extends StatelessWidget {
                       Icon(Icons.person)
                     ],
                   ),
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.of(context).pushNamed('/tea_login');
+                  },
                   shape:RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50.0),
                       side: BorderSide(color: Colors.white)
@@ -72,7 +74,9 @@ class role extends StatelessWidget {
                       Icon(Icons.psychology_outlined)
                     ],
                   ),
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.of(context).pushNamed('/st_login');
+                  },
                   shape:RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50.0),
                       side: BorderSide(color: Colors.white)

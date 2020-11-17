@@ -17,7 +17,9 @@ class _teacher_profileState extends State<teacher_profile> {
       backgroundColor: Colors.deepPurple[100],
       appBar: AppBar(
         leading: IconButton(
-          onPressed: (){},
+          onPressed: (){
+            Navigator.of(context).pushNamed('/tea_dash');
+          },
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
@@ -144,7 +146,9 @@ class _teacher_profileState extends State<teacher_profile> {
             SizedBox(height: 30.0,),
             RoundedButton(
               text: 'Save Changes',
-              press: (){},
+              press: (){
+                Navigator.of(context).pushNamed('/tea_dash');
+              },
             ),
             SizedBox(height: 30.0,),
           ],

@@ -27,7 +27,9 @@ class teacher_signup extends StatelessWidget {
                   Padding(padding: EdgeInsets.fromLTRB(0, 60, 0, 0)),
                   IconButton(
                     icon: Icon(Icons.arrow_back ),
-                    onPressed: (){},
+                    onPressed: (){
+                      Navigator.of(context).pushNamed('/tea_login');
+                    },
                   ),
                   SizedBox(width: 50.0),
                   Text(
@@ -66,8 +68,7 @@ class teacher_signup extends StatelessWidget {
                   onChanged: (value) {},
                   cursorColor: kPrimaryColor,
                   decoration: InputDecoration(
-                    icon: Icon(Icons.room
-                      ,
+                    icon: Icon(Icons.room,
                       color: kPrimaryColor,
                     ),
                     hintText: 'Room Number',
@@ -80,8 +81,7 @@ class teacher_signup extends StatelessWidget {
                   onChanged: (value) {},
                   cursorColor: kPrimaryColor,
                   decoration: InputDecoration(
-                    icon: Icon(Icons.email
-                      ,
+                    icon: Icon(Icons.email,
                       color: kPrimaryColor,
                     ),
                     hintText: 'Somaiya Email',
@@ -95,7 +95,9 @@ class teacher_signup extends StatelessWidget {
               Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
               RoundedButton(
                 text: "Sign Up",
-                press: () {},
+                press: () {
+                  Navigator.of(context).pushNamed('/tea_login');
+                },
               ),
               SizedBox(height: size.height * 0.03),
               Row(
@@ -131,7 +133,9 @@ class teacher_signup extends StatelessWidget {
                   child: FlatButton(
                     padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
                     color: kPrimaryLightColor,
-                    onPressed: (){},
+                    onPressed: (){
+                      Navigator.of(context).pushNamed('/tea_login');
+                    },
                     child: Text(
                       'Sign In here',
                       style: TextStyle(color: kPrimaryColor),

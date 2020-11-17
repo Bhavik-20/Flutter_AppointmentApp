@@ -26,7 +26,9 @@ class _teacher_accepted_listState extends State<teacher_accepted_list> {
               return Card(
                 margin: EdgeInsets.fromLTRB(16, 16, 16,0),
                 child: ListTile(
-                  onTap: (){},
+                  onTap: (){
+                    // Navigator.of(context).pushNamed('/tea_reqdetails');
+                  },
                   title: Text('Student'),
                   leading: CircleAvatar(
                      backgroundColor: Colors.grey,

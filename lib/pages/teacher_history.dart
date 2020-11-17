@@ -36,9 +36,11 @@ class teacher_history extends StatelessWidget {
             centerTitle: true ,
             elevation: 10,
             backgroundColor: Colors.deepPurple[600],
-            leading: Icon(
-              Icons.arrow_back,
-              size: 30.0,
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: (){
+                Navigator.of(context).pushNamed('/tea_dash');
+              },
             ),
           ),
           body: TabBarView(
@@ -47,7 +49,6 @@ class teacher_history extends StatelessWidget {
                 child: Container(child: Text('All')
                 ),
               ),
-
               teacher_accepted_list(),
               teacher_declined_list(),
             ],

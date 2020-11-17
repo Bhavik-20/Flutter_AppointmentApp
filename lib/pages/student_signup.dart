@@ -7,9 +7,9 @@ import 'package:flutter_appointment_app/services/rounded_password_field.dart';
 import 'package:flutter_appointment_app/services/text_field_container.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-void main(){
-  runApp(student_signup());
-}
+// void main(){
+//   runApp(student_signup());
+// }
 class student_signup extends StatefulWidget {
   @override
   _State createState() => _State();
@@ -51,7 +51,9 @@ class _State extends State {
                   Padding(padding: EdgeInsets.fromLTRB(0, 60, 0, 0)),
                   IconButton(
                     icon: Icon(Icons.arrow_back ),
-                    onPressed: (){},
+                    onPressed: (){
+                      Navigator.of(context).pushNamed('/st_login');
+                    },
                   ),
                   SizedBox(width: 50.0),
                   Text(
@@ -165,7 +167,9 @@ class _State extends State {
               Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
               RoundedButton(
                 text: "Sign Up",
-                press: () {},
+                press: () {
+                  Navigator.of(context).pushNamed('/st_login');
+                },
               ),
               SizedBox(height: size.height * 0.03),
               Row(
@@ -201,7 +205,9 @@ class _State extends State {
                 child: FlatButton(
                   padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
                   color: kPrimaryLightColor,
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.of(context).pushNamed('/st_login');
+                  },
                   child: Text(
                     'Sign In here',
                     style: TextStyle(color: kPrimaryColor),

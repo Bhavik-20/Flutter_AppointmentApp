@@ -17,7 +17,9 @@ class _student_profileState  extends State<student_profile> {
       backgroundColor: Colors.deepPurple[100],
       appBar: AppBar(
         leading: IconButton(
-          onPressed: (){},
+          onPressed: (){
+            Navigator.of(context).pushNamed('/st_dash');
+          },
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
@@ -165,7 +167,9 @@ class _student_profileState  extends State<student_profile> {
             SizedBox(height: 30.0,),
             RoundedButton(
               text: 'Save Changes',
-              press: (){},
+              press: (){
+                Navigator.of(context).pushNamed('/st_dash');
+              },
             ),
             SizedBox(height: 30.0,),
           ],

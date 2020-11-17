@@ -27,7 +27,9 @@ class student_login extends StatelessWidget {
                   Padding(padding: EdgeInsets.fromLTRB(0, 60, 0, 0)),
                   IconButton(
                     icon: Icon(Icons.arrow_back ),
-                    onPressed: (){},
+                    onPressed: (){
+                      Navigator.of(context).pushNamed('/');
+                    },
                   ),
                   SizedBox(width: 50.0),
                   Text(
@@ -55,7 +57,9 @@ class student_login extends StatelessWidget {
               Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
               RoundedButton(
                 text: "LOGIN",
-                press: () {},
+                press: () {
+                  Navigator.of(context).pushNamed('/st_dash');
+                },
               ),
               SizedBox(height: size.height * 0.01),
               Row(
@@ -132,7 +136,9 @@ class student_login extends StatelessWidget {
                   child: FlatButton(
                     padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
                     color: kPrimaryLightColor,
-                    onPressed: (){},
+                    onPressed: (){
+                      Navigator.of(context).pushNamed('/st_signup');
+                    },
                     child: Text(
                       'Sign Up here',
                       style: TextStyle(color: kPrimaryColor),

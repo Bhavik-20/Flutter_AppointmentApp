@@ -5,12 +5,12 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_appointment_app/services/rounded_button.dart';
 import 'package:intl/intl.dart';
 
-class book_Appointment extends StatefulWidget {
+class student_bookAppointment extends StatefulWidget {
   @override
-  _book_AppointmentState createState() => _book_AppointmentState();
+  _student_bookAppointmentState createState() => _student_bookAppointmentState();
 }
 
-class _book_AppointmentState extends State<book_Appointment> {
+class _student_bookAppointmentState extends State<student_bookAppointment> {
   int _currentStep=0;
   DateTime _dateTime;
   var day;
