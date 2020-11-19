@@ -1,9 +1,9 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_appointment_app/services/constants.dart';
-import 'package:flutter_appointment_app/services/rounded_button.dart';
-import 'package:flutter_appointment_app/services/rounded_input_field.dart';
-import 'package:flutter_appointment_app/services/rounded_password_field.dart';
+import 'package:flutter_appointment_app/ui_helpers/constants.dart';
+import 'package:flutter_appointment_app/ui_helpers/rounded_button.dart';
+import 'package:flutter_appointment_app/ui_helpers/rounded_input_field.dart';
+import 'package:flutter_appointment_app/ui_helpers/rounded_password_field.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 void main(){

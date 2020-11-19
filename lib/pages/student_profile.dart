@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_appointment_app/services/rounded_button.dart';
+import 'package:flutter_appointment_app/ui_helpers/rounded_button.dart';
 
 class student_profile extends StatefulWidget {
   @override
