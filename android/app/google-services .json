@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "546951636126",
+    "firebase_url": "https://meetup-11358.firebaseio.com",
+    "project_id": "meetup-11358",
+    "storage_bucket": "meetup-11358.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:546951636126:android:864b93bcfbe7365278c78f",
+        "android_client_info": {
+          "package_name": "com.example.flutter_appointment_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "546951636126-prs2gimoval9dq3u0pgorkkkd13u2oc6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flutter_appointment_app",
+            "certificate_hash": "7f78260c93d5965decf6e1cdcc0bb8835b6c224d"
+          }
+        },
+        {
+          "client_id": "546951636126-4utbshjbldkhvbkso8qfekutmqiteltg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_KyhwVajybbSQiiCA7JoX_d2p48qDxOc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "546951636126-4utbshjbldkhvbkso8qfekutmqiteltg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
