@@ -5,11 +5,9 @@ import 'package:flutter_appointment_app/ui_helpers/rounded_button.dart';
 import 'package:flutter_appointment_app/ui_helpers/rounded_input_field.dart';
 import 'package:flutter_appointment_app/ui_helpers/rounded_password_field.dart';
 import 'package:flutter_appointment_app/ui_helpers/text_field_container.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_appointment_app/services/auth.dart';
 
-// void main(){
-//   runApp(student_signup());
-// }
+
 class student_signup extends StatefulWidget {
   @override
   _State createState() => _State();
@@ -26,6 +24,16 @@ class _State extends State {
       selectedIndex = index;
     });
   }
+
+  final AuthService _auth=AuthService();
+
+  //text field state
+  String name="";
+  String rollno="";
+  String branch="";
+  String year="";
+  String email = "";
+  String password = "";
 
   Widget customRadio(String txt,int index){
     return OutlineButton(
@@ -73,20 +81,20 @@ class _State extends State {
               SizedBox(height: size.height * 0.03),
               RoundedInputField(
                 hintText: "Full Name",
-                onChanged: (value) {},
+                onChanged: (value) {
+                  setState(() => name=value);
+                },
               ),
               TextFieldContainer(
                 child: TextField(
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                      setState(() => rollno=value);
+                    },
                   cursorColor: kPrimaryColor,
                   decoration: InputDecoration(
                     icon: Icon(Icons.perm_identity,
                       color: kPrimaryColor,
                     ),
-                    // labelText: 'Roll Number',
-                    // labelStyle: TextStyle(
-                    //   color: kPrimaryColor,
-                    // ),
                     hintText: 'Roll Number',
                     border: InputBorder.none,
                   ),
@@ -98,9 +106,8 @@ class _State extends State {
                   child: Row(
                     children: [
                     Text( 'Branch:',
-                   style: TextStyle(fontSize: 16),
+                      style: TextStyle(fontSize: 16),
                     ),
-
                      Container(
                         decoration: BoxDecoration(
                           color: kPrimaryLightColor,
@@ -117,12 +124,13 @@ class _State extends State {
                           value: _branchVal,
                           style: TextStyle(color: Colors.black , fontSize: 16.0),
                           onChanged: (value){
-                            setState((){
+                            setState(() {
                               _branchVal = value;
+                              branch=value;
                           });
                         },
                         items: _branch.map((value){
-                          return DropdownMenuItem(
+                        return DropdownMenuItem(
                               value: value,
                               child: Text(value),
                           );
@@ -150,7 +158,9 @@ class _State extends State {
               Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
               TextFieldContainer(
                 child: TextField(
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                        setState(() => email=value);
+                    },
                   cursorColor: kPrimaryColor,
                   decoration: InputDecoration(
                     icon: Icon(Icons.email,
@@ -162,13 +172,21 @@ class _State extends State {
                 ),
               ),
               RoundedPasswordField(
-                onChanged: (value) {},
+                onChanged: (value) {
+                  setState(() => password=value);
+                },
               ),
               Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
               RoundedButton(
                 text: "Sign Up",
                 press: () {
-                  Navigator.of(context).pushNamed('/st_login');
+                  print(email);
+                  print(password);
+                  print(name);
+                  print(rollno);
+                  print(branch);
+                  // print(year);
+                  // Navigator.of(context).pushNamed('/st_login');
                 },
               ),
               SizedBox(height: size.height * 0.03),
