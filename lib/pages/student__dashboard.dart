@@ -2,15 +2,29 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import "package:google_fonts/google_fonts.dart";
+import 'package:provider/provider.dart';
+import 'package:flutter_appointment_app/model/User.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main()
-{
-  runApp(student_dashboard());
+
+class student_dashboard extends StatefulWidget {
+
+  @override
+  _student_dashboardState createState() => _student_dashboardState();
 }
 
-class student_dashboard extends StatelessWidget {
+class _student_dashboardState extends State<student_dashboard> {
+
+  Future<int> storeRole() async
+  {
+    final user = Provider.of<User>(context);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    Future<bool> isAdmin = prefs.setBool('isAdmin',false);
+  }
+
   @override
   Widget build(BuildContext context) {
+
     Size size = MediaQuery.of(context).size;
     return WillPopScope(
       onWillPop: () async => false,
@@ -84,6 +98,7 @@ class student_dashboard extends StatelessWidget {
                     ),
                     FlatButton(
                       onPressed: (){
+                        storeRole();
                         Navigator.of(context).pushNamed('/');
                       },
                       child: Row(

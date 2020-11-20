@@ -1,7 +1,11 @@
 import 'dart:ui';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_appointment_app/model/User.dart';
 import 'package:flutter_appointment_app/pages/teacher_declined_list.dart';
+import 'package:flutter_appointment_app/services/auth.dart';
+import 'package:flutter_appointment_app/ui_helpers/Loading.dart';
 import "package:google_fonts/google_fonts.dart";
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_appointment_app/pages/teacher_accepted_list.dart';
@@ -19,8 +23,11 @@ class teacher_dashboard extends StatefulWidget {
 class _teacher_dashboardState extends State<teacher_dashboard> {
 
   int _selectedIndex = 0;
+  final AuthService _auth=AuthService();
+
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+
   List<Widget> _widgetOptions = <Widget>[
     Text(
       'New Requests',
@@ -35,6 +42,7 @@ class _teacher_dashboardState extends State<teacher_dashboard> {
       _selectedIndex = index;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -127,7 +135,8 @@ class _teacher_dashboardState extends State<teacher_dashboard> {
                           color: Colors.black
                       ),
                       FlatButton(
-                        onPressed: (){
+                        onPressed: () async {
+                          await _auth.signOut();
                           Navigator.of(context).pushNamed('/');
                         },
                         child: Row(

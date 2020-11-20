@@ -1,11 +1,13 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_appointment_app/services/auth.dart';
+import 'package:flutter_appointment_app/ui_helpers/Loading.dart';
 import 'package:flutter_appointment_app/ui_helpers/constants.dart';
 import 'package:flutter_appointment_app/ui_helpers/rounded_button.dart';
 import 'package:flutter_appointment_app/ui_helpers/rounded_input_field.dart';
 import 'package:flutter_appointment_app/ui_helpers/rounded_password_field.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 void main(){
   runApp(student_login());
@@ -22,11 +24,22 @@ class _student_loginState extends State<student_login> {
   //text field state
   String email = "";
   String password = "";
+  bool loading=false;
+
+  String validate(String email, String password)
+  {
+    RegExp ofemail=new RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+    if (email.isEmpty || !ofemail.hasMatch(email))
+      return 'Invalid Email format';
+    if (password.isEmpty || password.length<6)
+      return 'Password length should be 6 char';
+    return 'valid';
+  }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Form(
+    return loading? Loading(): Form(
       child: Scaffold(
         //backgroundColor: Colors.deepPurple[100],
         body: SafeArea(
@@ -75,9 +88,43 @@ class _student_loginState extends State<student_login> {
                 RoundedButton(
                   text: "LOGIN",
                   press: () async {
-                    print(email);
-                    print(password);
-                    // Navigator.of(context).pushNamed('/st_dash');
+                    String result=validate(email,password);
+                    if(result=='valid')
+                    {
+                      setState(() => loading=true);
+                      dynamic result_auth = await _auth.signInWithEmailAndPassword(email, password);
+                      if(result_auth == null)
+                      {
+                        setState(()  {
+                          loading=false;
+                          Fluttertoast.showToast(
+                            backgroundColor: Colors.red,
+                            msg: 'An error occurred, please supply valid input',
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                          );
+                        });
+                      }
+                      else
+                      {
+                        setState(() => loading=true);
+                        Fluttertoast.showToast(
+                          backgroundColor: Colors.red,
+                          msg: 'Successful',
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.BOTTOM,
+                        );
+                        Navigator.of(context).pushNamed('/st_dash');
+                      }
+                    }
+                    else {
+                      Fluttertoast.showToast(
+                        backgroundColor: Colors.red,
+                        msg: result,
+                        toastLength: Toast.LENGTH_LONG,
+                        gravity: ToastGravity.TOP,
+                      );
+                    }
                   },
                 ),
                 SizedBox(height: size.height * 0.01),

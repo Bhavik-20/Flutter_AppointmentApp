@@ -1,6 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_appointment_app/model/User.dart';
 import 'package:flutter_appointment_app/services/auth.dart';
+import 'package:flutter_appointment_app/ui_helpers/Loading.dart';
 import 'package:flutter_appointment_app/ui_helpers/constants.dart';
 import 'package:flutter_appointment_app/ui_helpers/rounded_button.dart';
 import 'package:flutter_appointment_app/ui_helpers/rounded_input_field.dart';
@@ -8,6 +10,8 @@ import 'package:flutter_appointment_app/ui_helpers/rounded_password_field.dart';
 import 'package:flutter_appointment_app/ui_helpers/text_field_container.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // void main(){
 //   runApp(teacher_signup());
@@ -29,21 +33,22 @@ class _teacher_signupState extends State<teacher_signup> {
   String email = "";
   String password = "";
   String error="";
+  bool loading=false;
 
   String validate(String name, String initials, String room, String email, String password) {
     RegExp ofname=new RegExp(r'^[A-Za-z ]*$');
     RegExp ofini=new RegExp(r'^[a-zA-Z_]*$');
     RegExp ofroom=new RegExp(r'^[A-Za-z0-9\-]*$');
     RegExp ofemail=new RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-    if (!ofname.hasMatch(name))
+    if (name.isEmpty || !ofname.hasMatch(name))
       return 'Invalid Name';
-    if (!ofini.hasMatch(initials))
+    if (initials.isEmpty || !ofini.hasMatch(initials))
       return 'Invalid Initials';
-    if (!ofroom.hasMatch(room))
+    if (room.isEmpty || !ofroom.hasMatch(room))
       return 'Invalid Room Number';
-    if (!ofemail.hasMatch(email))
+    if (email.isEmpty || !ofemail.hasMatch(email))
       return 'Invalid Email format';
-    if (password.length<6)
+    if (password.isEmpty || password.length<6)
       return 'Password length should be 6 char';
     return 'valid';
   }
@@ -51,7 +56,7 @@ class _teacher_signupState extends State<teacher_signup> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Form(
+    return loading? Loading(): Form(
       key: _formKey,
       child: Scaffold(
         body: SafeArea(
@@ -147,19 +152,31 @@ class _teacher_signupState extends State<teacher_signup> {
                     String result=validate(name,initials,room,email,password);
                     if(result=='valid')
                       {
-                        Fluttertoast.showToast(
-                          backgroundColor: Colors.red,
-                          msg: 'Successful',
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
-                        );
-                        dynamic result1 = await _auth.registerWithEmailAndPassword(email, password);
-                          if(result1 == null){
-                              setState(() {
-                                error ='An error occured, please supply valid input';
-                              });
-                          }
-                        Navigator.of(context).pushNamed('/tea_login');
+                        setState(() => loading=true);
+                        dynamic result_auth = await _auth.registerFaculty(name,initials,room,email,password);
+                        if(result_auth == null)
+                        {
+                          setState(() {
+                            loading=false;
+                            error ='An error occurred, please supply valid input';
+                            Fluttertoast.showToast(
+                              backgroundColor: Colors.red,
+                              msg: error,
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM,
+                            );
+                          });
+                        }
+                        else
+                        {
+                          Fluttertoast.showToast(
+                            backgroundColor: Colors.red,
+                            msg: 'Successful',
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                          );
+                          Navigator.of(context).pushNamed('/tea_dashboard');
+                        }
                       }
                     else {
                       Fluttertoast.showToast(
