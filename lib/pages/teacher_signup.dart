@@ -28,6 +28,7 @@ class _teacher_signupState extends State<teacher_signup> {
   String room="";
   String email = "";
   String password = "";
+  String error="";
 
   String validate(String name, String initials, String room, String email, String password) {
     RegExp ofname=new RegExp(r'^[A-Za-z ]*$');
@@ -142,7 +143,7 @@ class _teacher_signupState extends State<teacher_signup> {
                 Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
                 RoundedButton(
                   text: "Sign Up",
-                  press: () {
+                  press: () async {
                     String result=validate(name,initials,room,email,password);
                     if(result=='valid')
                       {
@@ -152,17 +153,22 @@ class _teacher_signupState extends State<teacher_signup> {
                           toastLength: Toast.LENGTH_SHORT,
                           gravity: ToastGravity.BOTTOM,
                         );
+                        dynamic result1 = await _auth.registerWithEmailAndPassword(email, password);
+                          if(result1 == null){
+                              setState(() {
+                                error ='An error occured, please supply valid input';
+                              });
+                          }
+                        Navigator.of(context).pushNamed('/tea_login');
                       }
-                    else
-                      {
-                        Fluttertoast.showToast(
-                          backgroundColor: Colors.red,
-                          msg: result,
-                          toastLength: Toast.LENGTH_LONG,
-                          gravity: ToastGravity.TOP,
-                        );
-                      }
-                    // Navigator.of(context).pushNamed('/tea_login');
+                    else {
+                      Fluttertoast.showToast(
+                        backgroundColor: Colors.red,
+                        msg: result,
+                        toastLength: Toast.LENGTH_LONG,
+                        gravity: ToastGravity.TOP,
+                      );
+                    }
                   },
                 ),
                 SizedBox(height: size.height * 0.03),

@@ -22,6 +22,8 @@ class _State extends State {
   void changeIndex(int index){
     setState(() {
       selectedIndex = index;
+      year = _year[selectedIndex];
+      print(year);
     });
   }
 
