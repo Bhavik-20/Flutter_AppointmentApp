@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_appointment_app/services/auth.dart';
 import "package:google_fonts/google_fonts.dart";
 import 'package:provider/provider.dart';
 import 'package:flutter_appointment_app/model/User.dart';
@@ -15,13 +16,7 @@ class student_dashboard extends StatefulWidget {
 
 class _student_dashboardState extends State<student_dashboard> {
 
-  Future<int> storeRole() async
-  {
-    final user = Provider.of<User>(context);
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    Future<bool> isAdmin = prefs.setBool('isAdmin',false);
-  }
-
+  final AuthService _auth=AuthService();
   @override
   Widget build(BuildContext context) {
 
@@ -97,8 +92,8 @@ class _student_dashboardState extends State<student_dashboard> {
                         color: Colors.black
                     ),
                     FlatButton(
-                      onPressed: (){
-                        storeRole();
+                      onPressed: () async {
+                        await _auth.signOut();
                         Navigator.of(context).pushNamed('/');
                       },
                       child: Row(

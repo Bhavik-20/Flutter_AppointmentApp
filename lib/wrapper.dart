@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_appointment_app/pages/role.dart';
 import 'package:flutter_appointment_app/pages/student__dashboard.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_appointment_app/model/User.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Wrapper extends StatelessWidget {
+
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,20 @@ class Wrapper extends StatelessWidget {
 
     else
     {
-      return teacher_dashboard();
+      String xyz="";
+      var document =  Firestore.instance.collection('faculty').document(user.user_id);
+
+      document.get().then((DocumentSnapshot document) {
+         xyz=document.data['role'];
+        print("role: "+xyz);
+      });
+
+      if(xyz.compareTo('faculty')==0) {
+        return teacher_dashboard();
+      }
+      else {
+        return student_dashboard();
+      }
     }
   }
 
