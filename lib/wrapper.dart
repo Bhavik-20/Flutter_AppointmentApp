@@ -28,10 +28,12 @@ class Wrapper extends StatelessWidget {
         print("role: "+xyz);
       });
 
-      if(xyz.compareTo('faculty')==0) {
+      if(xyz=='faculty')
+      {
         return teacher_dashboard();
       }
-      else {
+      else
+      {
         return student_dashboard();
       }
     }

@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_appointment_app/services/auth.dart';
+import 'package:flutter_appointment_app/ui_helpers/Loading.dart';
 import "package:google_fonts/google_fonts.dart";
 import 'package:provider/provider.dart';
 import 'package:flutter_appointment_app/model/User.dart';
@@ -17,11 +18,13 @@ class student_dashboard extends StatefulWidget {
 class _student_dashboardState extends State<student_dashboard> {
 
   final AuthService _auth=AuthService();
+  bool loading=false;
+
   @override
   Widget build(BuildContext context) {
 
     Size size = MediaQuery.of(context).size;
-    return WillPopScope(
+    return loading? Loading() : WillPopScope(
       onWillPop: () async => false,
       child: MaterialApp(
         home: Scaffold(
@@ -93,6 +96,7 @@ class _student_dashboardState extends State<student_dashboard> {
                     ),
                     FlatButton(
                       onPressed: () async {
+                        setState(() => loading=true);
                         await _auth.signOut();
                         Navigator.of(context).pushNamed('/');
                       },

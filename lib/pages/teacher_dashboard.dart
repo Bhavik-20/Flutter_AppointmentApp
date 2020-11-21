@@ -23,6 +23,7 @@ class teacher_dashboard extends StatefulWidget {
 class _teacher_dashboardState extends State<teacher_dashboard> {
 
   int _selectedIndex = 0;
+  bool loading=false;
   final AuthService _auth=AuthService();
 
   static const TextStyle optionStyle =
@@ -46,7 +47,7 @@ class _teacher_dashboardState extends State<teacher_dashboard> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return WillPopScope(
+    return loading? Loading() : WillPopScope(
       onWillPop: () async => false,
       child: MaterialApp(
         home: Scaffold(
@@ -136,6 +137,7 @@ class _teacher_dashboardState extends State<teacher_dashboard> {
                       ),
                       FlatButton(
                         onPressed: () async {
+                          setState(() => loading=true);
                           await _auth.signOut();
                           Navigator.of(context).pushNamed('/');
                         },

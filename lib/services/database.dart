@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_appointment_app/model/Teacher.dart';
 
 class DatabaseService {
 
@@ -38,6 +39,32 @@ class DatabaseService {
   }
 
   //get data from db for faculty
+  Stream<QuerySnapshot> get faculty {
+    return facultyCollection.snapshots();
+  }
 
+  // faculty list from snapshot
+  List<Teacher> _teacherListFromSnapshot(QuerySnapshot snapshot)
+  {
+    return snapshot.documents.map((doc){
+      return Teacher(
+        name: doc.data['name'] ?? '',
+        initials:doc.data['initials'] ?? '',
+        email: doc.data['email'] ?? '',
+        room: doc.data['room'] ?? '',
+      );
+    }).toList();
+  }
+
+  //get faculty stream
+  Stream<List<Teacher>> get faculties {
+    return facultyCollection.snapshots()
+        .map(_teacherListFromSnapshot);
+  }
+
+  //get data from db for students
+  Stream<QuerySnapshot> get student {
+    return studentCollection.snapshots();
+  }
 
 }
