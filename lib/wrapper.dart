@@ -28,12 +28,14 @@ class Wrapper extends StatelessWidget {
         print("role: "+xyz);
       });
 
-      if(xyz=='faculty')
+      if(xyz=="faculty")
       {
+        print(xyz);
         return teacher_dashboard();
       }
       else
       {
+        print(xyz);
         return student_dashboard();
       }
     }

@@ -2,10 +2,15 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_appointment_app/model/Teacher.dart';
 import 'package:flutter_appointment_app/ui_helpers/rounded_button.dart';
 import 'package:intl/intl.dart';
 
 class student_bookAppointment extends StatefulWidget {
+
+  final Teacher teacher;
+  student_bookAppointment({this.teacher});
+
   @override
   _student_bookAppointmentState createState() => _student_bookAppointmentState();
 }
@@ -26,7 +31,9 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
       backgroundColor: Colors.deepPurple[100],
       appBar: AppBar(
         leading: IconButton(
-          onPressed: (){},
+          onPressed: (){
+            Navigator.of(context).pushNamed('/st_search_teacher');
+          },
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
@@ -108,20 +115,27 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                   Container(
                     height:50.0,
                     padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                    child: TextField(
-                      style: TextStyle(
-                          fontSize: 18.0,
-                          fontFamily: 'playfair',
-                          fontWeight: FontWeight.bold
-                      ),
-                      enabled: false,
-                      autocorrect: false,
-                      autofocus: false,
-                      cursorColor: Colors.black,
-                      decoration: new InputDecoration(
-                        labelText: 'Teacher Name',
-                        border: InputBorder.none,
-                      ),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Name: ',
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            fontFamily: 'playfair',
+                          ),
+                        ),
+                        Text(
+                          widget.teacher.name,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            fontFamily: 'playfair',
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   Divider(
@@ -131,20 +145,27 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                   Container(
                     height:50.0,
                     padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                    child: TextField(
-                      style: TextStyle(
-                          fontSize: 18.0,
-                          fontFamily: 'playfair',
-                          fontWeight: FontWeight.bold
-                      ),
-                      enabled: false,
-                      autocorrect: false,
-                      autofocus: false,
-                      cursorColor: Colors.black,
-                      decoration: new InputDecoration(
-                        labelText: 'Teacher Initials',
-                        border: InputBorder.none,
-                      ),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Initials: ',
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            fontFamily: 'playfair',
+                          ),
+                        ),
+                        Text(
+                          widget.teacher.initials,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            fontFamily: 'playfair',
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   Divider(
@@ -154,20 +175,28 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                   Container(
                     height:50.0,
                     padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                    child: TextField(
-                      style: TextStyle(
-                          fontSize: 18.0,
-                          fontFamily: 'playfair',
-                          fontWeight: FontWeight.bold
-                      ),
-                      enabled: false,
-                      autocorrect: false,
-                      autofocus: false,
-                      cursorColor: Colors.black,
-                      decoration: new InputDecoration(
-                        labelText: 'Room Number',
-                        border: InputBorder.none,
-                      ),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Email: ',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            fontFamily: 'playfair',
+                          ),
+                        ),
+                        Expanded(
+                          child: Text(
+                            widget.teacher.email,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              fontFamily: 'playfair',
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   Divider(
@@ -177,20 +206,27 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                   Container(
                     height:50.0,
                     padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                    child: TextField(
-                      style: TextStyle(
-                          fontSize: 18.0,
-                          fontFamily: 'playfair',
-                          fontWeight: FontWeight.bold
-                      ),
-                      enabled: false,
-                      autocorrect: false,
-                      autofocus: false,
-                      cursorColor: Colors.black,
-                      decoration: new InputDecoration(
-                        labelText: 'Email',
-                        border: InputBorder.none,
-                      ),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Room No: ',
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            fontFamily: 'playfair',
+                          ),
+                        ),
+                        Text(
+                          widget.teacher.room,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            fontFamily: 'playfair',
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ]
