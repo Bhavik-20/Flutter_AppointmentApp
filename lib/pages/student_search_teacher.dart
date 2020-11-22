@@ -2,7 +2,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_appointment_app/model/Teacher.dart';
-import 'package:flutter_appointment_app/pages/student_bookAppointment.dart';
 import 'package:flutter_appointment_app/pages/teacher_search_list.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_appointment_app/services/database.dart';

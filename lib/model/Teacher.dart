@@ -4,7 +4,8 @@ class Teacher{
   final String initials;
   final String room;
   final String email;
+  final String password;
 
 
-  Teacher({this.name, this.initials, this.email, this.room});
+  Teacher({this.name, this.initials,this.room,this.email,this.password});
 }

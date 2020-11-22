@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_appointment_app/model/Student.dart';
 import 'package:flutter_appointment_app/model/Teacher.dart';
 
 class DatabaseService {
@@ -38,9 +39,11 @@ class DatabaseService {
     });
   }
 
-  //get data from db for faculty
-  Stream<QuerySnapshot> get faculty {
-    return facultyCollection.snapshots();
+//-------------------------------------------------------------------------------------------//
+  //get faculty stream
+  Stream<List<Teacher>> get faculties {
+    return facultyCollection.snapshots()
+        .map(_teacherListFromSnapshot);
   }
 
   // faculty list from snapshot
@@ -52,19 +55,80 @@ class DatabaseService {
         initials:doc.data['initials'] ?? '',
         email: doc.data['email'] ?? '',
         room: doc.data['room'] ?? '',
+        password: doc.data['password'] ?? '',
       );
     }).toList();
   }
 
-  //get faculty stream
-  Stream<List<Teacher>> get faculties {
-    return facultyCollection.snapshots()
-        .map(_teacherListFromSnapshot);
+//-------------------------------------------------------------------------------------------//
+  //get faculty doc stream
+  Stream<Teacher> get facultyData{
+    return facultyCollection.document(uid).snapshots().map(_facultyDataFromSnapshot);
   }
+
+  // faculty data from snapshot
+  Teacher _facultyDataFromSnapshot(DocumentSnapshot snapshot)
+  {
+    return Teacher(
+      name: snapshot.data['name'],
+      initials: snapshot.data['initials'],
+      room: snapshot.data['room'],
+      email: snapshot.data['email'],
+      password: snapshot.data['password'] ?? '',
+    );
+  }
+//-------------------------------------------------------------------------------------------//
 
   //get data from db for students
   Stream<QuerySnapshot> get student {
     return studentCollection.snapshots();
   }
+
+  //get data from db for faculty
+  Stream<QuerySnapshot> get faculty {
+    return facultyCollection.snapshots();
+  }
+
+//-------------------------------------------------------------------------------------------//
+//get faculty stream
+  Stream<List<Student>> get students {
+    return studentCollection.snapshots()
+        .map(_studentListFromSnapshot);
+  }
+
+  // faculty list from snapshot
+  List<Student> _studentListFromSnapshot(QuerySnapshot snapshot)
+  {
+    return snapshot.documents.map((doc){
+      return Student(
+        name: doc.data['name'] ?? '',
+        roll:doc.data['roll'] ?? '',
+        branch: doc.data['branch'] ?? '',
+        year: doc.data['year'] ?? '',
+        email: doc.data['email'] ?? '',
+        password: doc.data['password'] ?? '',
+      );
+    }).toList();
+  }
+//-------------------------------------------------------------------------------------------//
+
+//get faculty doc stream
+  Stream<Student> get studentData{
+    return studentCollection.document(uid).snapshots().map(_studentDataFromSnapshot);
+  }
+
+  // faculty data from snapshot
+  Student _studentDataFromSnapshot(DocumentSnapshot snapshot)
+  {
+    return Student(
+      name: snapshot.data['name'],
+      roll: snapshot.data['roll no'],
+      branch: snapshot.data['branch'],
+      year: snapshot.data['year'] ,
+      email: snapshot.data['email'],
+      password: snapshot.data['password'] ?? '',
+    );
+  }
+//-------------------------------------------------------------------------------------------//
 
 }

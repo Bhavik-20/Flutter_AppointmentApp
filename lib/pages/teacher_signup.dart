@@ -175,11 +175,11 @@ class _teacher_signupState extends State<teacher_signup> {
                             toastLength: Toast.LENGTH_SHORT,
                             gravity: ToastGravity.BOTTOM,
                           );
-                          Navigator.of(context).pushNamed('/tea_dashboard');
+                          Navigator.of(context).pushNamed('/tea_dash');
                         }
                       }
                     else {
-                      Fluttertoast.showToast(
+                        Fluttertoast.showToast(
                         backgroundColor: Colors.red,
                         msg: result,
                         toastLength: Toast.LENGTH_LONG,

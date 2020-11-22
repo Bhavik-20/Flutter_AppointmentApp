@@ -13,7 +13,7 @@ class _SearchListState extends State<SearchList> {
   @override
   Widget build(BuildContext context) {
 
-    final faculties=Provider.of<List<Teacher>>(context);
+    final faculties=Provider.of<List<Teacher>>(context)??[];
     List <String> xyz = [];
     for(var i=0; i<faculties.length; i++)
       {

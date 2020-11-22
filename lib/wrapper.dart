@@ -5,7 +5,7 @@ import 'package:flutter_appointment_app/pages/student__dashboard.dart';
 import 'package:flutter_appointment_app/pages/teacher_dashboard.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_appointment_app/model/User.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 
 class Wrapper extends StatelessWidget {
 
