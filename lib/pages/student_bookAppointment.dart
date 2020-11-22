@@ -1,11 +1,17 @@
+import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_appointment_app/model/Student.dart';
 import 'package:flutter_appointment_app/model/Teacher.dart';
+import 'package:flutter_appointment_app/model/User.dart';
+import 'package:flutter_appointment_app/services/database.dart';
+import 'package:flutter_appointment_app/ui_helpers/Loading.dart';
 import 'package:flutter_appointment_app/ui_helpers/rounded_button.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class student_bookAppointment extends StatefulWidget {
 
@@ -27,113 +33,132 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
   List days_of_week=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
   final List<String> free_slots=["----Select Time----","02:30 - 02:45 pm", "03:00 - 03:15 pm"];
   String time="----Select Time----";
+  bool loading=false;
 
   @override
   Widget build(BuildContext context) {
+
+    final user = Provider.of<User>(context);
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      backgroundColor: Colors.deepPurple[100],
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: (){
-            Navigator.of(context).pushNamed('/st_search_teacher');
-          },
-          icon: Icon(
-            Icons.arrow_back,
-            color: Colors.white,
-            size: 30.0,
-          ),
-        ),
-        backgroundColor: Colors.deepPurple[600],
-        title: Text('Book Appointment'),
-        centerTitle: true,
-        actions: [
-          Icon(Icons.access_time_sharp,
-            size: 30.0,)
-        ],
-      ),
-      body: Theme(
-        data: ThemeData(
-            accentColor: Colors.deepPurple[300],
-            primarySwatch: Colors.deepPurple,
-            colorScheme: ColorScheme.light(
-                primary: Colors.deepPurple[300]
-            )
-        ),
-        child: Stepper(
-          steps: _mySteps(),
-          currentStep: this._currentStep,
-          onStepTapped: (step){
-            setState(() {
-              this._currentStep=step;
-            });
-          },
-          onStepContinue: (){
-            setState(() {
-              if(this._currentStep < this._mySteps().length-1)
-              {
-                this._currentStep = this._currentStep+1;
-              }
-              else
-              {
-                if (time== "----Select Time----"){
-                  Fluttertoast.showToast(
-                    backgroundColor: Colors.red,
-                    msg: 'Please Select Time',
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.BOTTOM,
-                  );
-                  print("Select time");
-                }
-                if(full == null){
-                Fluttertoast.showToast(
-                backgroundColor: Colors.red,
-                msg: 'Please Select Date',
-                toastLength: Toast.LENGTH_SHORT,
-                gravity: ToastGravity.BOTTOM,
-                );
-                  print("Select Date");
-                }
-                if(purpose == null){
-                  Fluttertoast.showToast(
-                  backgroundColor: Colors.red,
-                  msg: 'Please Enter Purpose',
-                  toastLength: Toast.LENGTH_SHORT,
-                  gravity: ToastGravity.BOTTOM,
-                  );
-                  print("Please enter purpose");
-                }
-                if(time != "----Select Time----" && full != null && purpose != null && this._currentStep == 4){
-                    Fluttertoast.showToast(
-                      backgroundColor: Colors.red,
-                      msg: 'Request Sent Successfully',
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.BOTTOM,
-                    );
-                  print("Completed");
-                  Navigator.of(context).pushNamed('/st_dash');
-                }
-            }
-            });
-          },
-          onStepCancel: (){
-            setState(() {
-              if(this._currentStep>0)
-                {
-                  this._currentStep=this._currentStep-1;
-                }
-              else
-                {
-                  this._currentStep=0;
-                }
-            });
-          },
-        ),
-      )
+
+    return StreamBuilder<Student>(
+        stream: DatabaseService(uid: user.user_id).studentData,
+        builder: (context,snapshot) {
+          if(snapshot.hasData)
+          {
+            Student data=snapshot.data;
+            return loading? Loading():Scaffold(
+                backgroundColor: Colors.deepPurple[100],
+                appBar: AppBar(
+                  leading: IconButton(
+                    onPressed: (){
+                      Navigator.of(context).pushNamed('/st_search_teacher');
+                    },
+                    icon: Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                      size: 30.0,
+                    ),
+                  ),
+                  backgroundColor: Colors.deepPurple[600],
+                  title: Text('Book Appointment'),
+                  centerTitle: true,
+                  actions: [
+                    Icon(Icons.access_time_sharp,
+                      size: 30.0,)
+                  ],
+                ),
+                body: Theme(
+                  data: ThemeData(
+                      accentColor: Colors.deepPurple[300],
+                      primarySwatch: Colors.deepPurple,
+                      colorScheme: ColorScheme.light(
+                          primary: Colors.deepPurple[300]
+                      )
+                  ),
+                  child: Stepper(
+                    steps: _mySteps(data),
+                    currentStep: this._currentStep,
+                    onStepTapped: (step){
+                      setState(() {
+                        this._currentStep=step;
+                      });
+                    },
+                    onStepContinue: (){
+                      setState(() {
+                        if(this._currentStep < this._mySteps(data).length-1)
+                        {
+                          this._currentStep = this._currentStep+1;
+                        }
+                        else
+                        {
+                          if (time== "----Select Time----"){
+                            Fluttertoast.showToast(
+                              backgroundColor: Colors.red,
+                              msg: 'Please Select Time',
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM,
+                            );
+                            print("Select time");
+                          }
+                          if(full == null){
+                            Fluttertoast.showToast(
+                              backgroundColor: Colors.red,
+                              msg: 'Please Select Date',
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM,
+                            );
+                            print("Select Date");
+                          }
+                          if(purpose == null){
+                            Fluttertoast.showToast(
+                              backgroundColor: Colors.red,
+                              msg: 'Please Enter Purpose',
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM,
+                            );
+                            print("Please enter purpose");
+                          }
+                          if(time != "----Select Time----" && full != null && purpose != null && this._currentStep == 4){
+                            Fluttertoast.showToast(
+                              backgroundColor: Colors.red,
+                              msg: 'Request Sent Successfully',
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM,
+                            );
+                            print("Completed");
+                            // setState(() =>loading=true);
+                            loading=true;
+                            Navigator.of(context).pushNamed('/st_dash');
+                          }
+                        }
+                      });
+                    },
+                    onStepCancel: (){
+                      setState(() {
+                        if(this._currentStep>0)
+                        {
+                          this._currentStep=this._currentStep-1;
+                        }
+                        else
+                        {
+                          this._currentStep=0;
+                        }
+                      });
+                    },
+                  ),
+                )
+            );
+          }
+          else
+          {
+            return Loading();
+          }
+        }
     );
   }
 
-  List<Step> _mySteps(){
+  List<Step> _mySteps(Student data){
     List<Step> _steps=[
       Step(
         title: Text('Selected Teacher Info',
@@ -398,20 +423,13 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
             children: [
               Container(
                 height:50.0,
-                child: TextField(
-                  style: TextStyle(
-                      fontSize: 20.0,
-                      fontFamily: 'playfair',
-                    fontWeight: FontWeight.bold
-                  ),
-                  enabled: false,
-                  autocorrect: false,
-                  autofocus: false,
-                  cursorColor: Colors.black,
-                  decoration: new InputDecoration(
-                    labelText: 'Name',
-                    border: InputBorder.none,
-                  ),
+                child: TextFormField(
+                    initialValue: data.name ,
+                    enabled: false,
+                    // onChanged: (value){},
+                    decoration: new InputDecoration(
+                      border: InputBorder.none,
+                    )
                 ),
               ),
               Divider(
@@ -420,20 +438,13 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
               ),
               Container(
                 height:50.0,
-                child: TextField(
-                  style: TextStyle(
-                      fontSize: 20.0,
-                      fontFamily: 'playfair',
-                      fontWeight: FontWeight.bold
-                  ),
-                  enabled: false,
-                  autocorrect: false,
-                  autofocus: false,
-                  cursorColor: Colors.black,
-                  decoration: new InputDecoration(
-                    labelText: 'Roll number',
-                    border: InputBorder.none,
-                  ),
+                child: TextFormField(
+                    initialValue: data.roll ,
+                    enabled: false,
+                    // onChanged: (value){},
+                    decoration: new InputDecoration(
+                      border: InputBorder.none,
+                    )
                 ),
               ),
               Divider(
@@ -441,43 +452,14 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                 thickness: 1,
               ),
               Container(
-                height:40.0,
-                child: TextField(
-                  style: TextStyle(
-                      fontSize: 20.0,
-                      fontFamily: 'playfair',
-                      fontWeight: FontWeight.bold
-                  ),
-                  enabled: false,
-                  autocorrect: false,
-                  autofocus: false,
-                  cursorColor: Colors.black,
-                  decoration: new InputDecoration(
-                    labelText: 'Branch',
-                    border: InputBorder.none,
-                  ),
-                ),
-              ),
-              Divider(
-                color: Colors.deepPurple[100],
-                thickness: 1.3,
-              ),
-              Container(
-                height:40.0,
-                child: TextField(
-                  style: TextStyle(
-                      fontSize: 20.0,
-                      fontFamily: 'playfair',
-                      fontWeight: FontWeight.bold
-                  ),
-                  enabled: false,
-                  autocorrect: false,
-                  autofocus: false,
-                  cursorColor: Colors.black,
-                  decoration: new InputDecoration(
-                    labelText: 'Year',
-                    border: InputBorder.none,
-                  ),
+                height:50.0,
+                child:TextFormField(
+                    initialValue: data.branch ,
+                    enabled: false,
+                    // onChanged: (value){},
+                    decoration: new InputDecoration(
+                      border: InputBorder.none,
+                    )
                 ),
               ),
               Divider(
@@ -485,19 +467,26 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                 thickness: 1,
               ),
               Container(
-                height:40.0,
-                child: TextField(
-                  style: TextStyle(
-                      fontSize: 20.0,
-                      fontFamily: 'playfair',
-                      fontWeight: FontWeight.bold
-                  ),
+                height:50.0,
+                child: TextFormField(
+                    initialValue: data.year ,
+                    enabled: false,
+                    // onChanged: (value){},
+                    decoration: new InputDecoration(
+                      border: InputBorder.none,
+                    )
+                ),
+              ),
+              Divider(
+                color: Colors.deepPurple[100],
+                thickness: 1,
+              ),
+              Container(
+                height:50.0,
+                child: TextFormField(
+                  initialValue: data.email,
                   enabled: false,
-                  autocorrect: false,
-                  autofocus: false,
-                  cursorColor: Colors.black,
                   decoration: new InputDecoration(
-                    labelText: 'Somaiya Email',
                     border: InputBorder.none,
                   ),
                 ),
