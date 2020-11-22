@@ -24,7 +24,7 @@ class Wrapper extends StatelessWidget {
       var document =  Firestore.instance.collection('faculty').document(user.user_id);
 
       document.get().then((DocumentSnapshot document) {
-         xyz=document.data['role'];
+        xyz=document.data['role'];
         print("role: "+xyz);
       });
 
@@ -38,7 +38,8 @@ class Wrapper extends StatelessWidget {
         print(xyz);
         return student_dashboard();
       }
-    }
+     }
   }
 
 }
+
