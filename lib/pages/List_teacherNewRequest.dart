@@ -42,4 +42,3 @@ class _listofnewFacultyRequestsState extends State<listofnewFacultyRequests> {
     );
   }
   }
-
