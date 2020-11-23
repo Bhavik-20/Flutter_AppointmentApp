@@ -26,7 +26,7 @@ class _listofnewFacultyRequestsState extends State<listofnewFacultyRequests> {
               child: ListTile(
                 onTap: (){
                   print(requests[index].date);
-                  print(index);
+                  print(requests[index]);
                   Navigator.push(context, MaterialPageRoute(builder: (context)=> teacher_request_details(request:requests[index])));
                 },
                 leading: CircleAvatar(

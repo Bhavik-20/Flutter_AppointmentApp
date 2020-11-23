@@ -48,7 +48,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
   bool loading = false;
 
   Future<void> sendRequest(String name, String roll, String branch, String year,
-      String email, purpose, String time, full, String s, String email2,String uid)
+      String email, purpose, String time, full, String email2,String uid)
   async {
     try {
       await DatabaseService(uid: uid)
@@ -61,7 +61,6 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
           purpose,
           time,
           full,
-          'Pending',
           widget.teacher.email);
     }
     catch (e) {
@@ -174,7 +173,6 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                                 purpose,
                                 time,
                                 full,
-                                'Pending',
                                 widget.teacher.email,user.user_id);
                             // setState(() =>loading=true);
                             loading = true;

@@ -17,7 +17,7 @@ class DatabaseService {
   final CollectionReference studentCollection =Firestore.instance.collection('student');
   final CollectionReference requestCollection =Firestore.instance.collection('request');
   final CollectionReference acceptCollection =Firestore.instance.collection('accepted');
-  final CollectionReference declineCollection =Firestore.instance.collection('declined');
+  final CollectionReference declineCollection =Firestore.instance.collection('rejected');
 
   Future updateFacultyData(String name,String initials,String room,String email,String password) async
   {
@@ -46,9 +46,10 @@ class DatabaseService {
     });
   }
 
-  Future updateRequests(String name,String rollno,String branch,String year,String email,String purpose,String time, String date, String status, String teacherMail) async
+  Future updateRequests(String name,String rollno,String branch,String year,String email,String purpose,String time, String date, String teacherMail) async
   {
-    return await requestCollection.document().setData({
+    DocumentReference docref=requestCollection.document();
+    return await docref.setData({
       'student_id':uid,
       'student_name': name,
       'student_rollno':rollno,
@@ -58,15 +59,17 @@ class DatabaseService {
       'purpose':purpose,
       'time': time,
       'date': date,
-      'status':status,
+      'status':'Pending',
       'teacher_mail':teacherMail,
+      'request_id':docref.documentID,
     });
   }
 
-  Future acceptRequests(String name,String rollno,String branch,String year,String email,String purpose,String time, String date, String status, String teacherMail) async
+  Future acceptRequests(String student_id,String name,String rollno,String branch,String year,String email,String purpose,String time, String date,String teacherMail,String req_id) async
   {
-    return await acceptCollection.document().setData({
-      'student_id':uid,
+    DocumentReference docref=acceptCollection.document();
+    return await docref.setData({
+      'student_id':student_id,
       'student_name': name,
       'student_rollno':rollno,
       'student_branch':branch,
@@ -75,16 +78,18 @@ class DatabaseService {
       'purpose':purpose,
       'time': time,
       'date': date,
-      'status':'accept',
+      'status':'Accepted',
       'teacher_mail':teacherMail,
+      'request_id':req_id,
     });
   }
 
 
-  Future declineRequests(String name,String rollno,String branch,String year,String email,String purpose,String time, String date, String status, String teacherMail) async
+  Future declineRequests(String docid, String student_id,String name,String rollno,String branch,String year,String email,String purpose,String time, String date,String teacherMail,String req_id) async
   {
-    return await declineCollection.document().setData({
-      'student_id':uid,
+    DocumentReference docref=declineCollection.document(docid);
+    return await docref.setData({
+      'student_id':student_id,
       'student_name': name,
       'student_rollno':rollno,
       'student_branch':branch,
@@ -93,9 +98,16 @@ class DatabaseService {
       'purpose':purpose,
       'time': time,
       'date': date,
-      'status':'decline ',
+      'status':'Rejected',
       'teacher_mail':teacherMail,
+      'request_id':req_id,
     });
+  }
+
+  Future deleteRequests(String req_id) async
+  {
+    DocumentReference docref=requestCollection.document(req_id);
+    return await docref.delete();
   }
 //-------------------------------------------------------------------------------------------//
 
@@ -116,7 +128,9 @@ class DatabaseService {
         student_rollno: doc.data['student_rollno'],
         student_year: doc.data['student_year'],
         teacher_mail: doc.data['teacher_mail'],
-        time: doc.data['time']
+        time: doc.data['time'],
+        request_id: doc.data['request_id'],
+        student_id: doc.data['student_id']
       );
     }).toList();
   }

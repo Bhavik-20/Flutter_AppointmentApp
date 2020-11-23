@@ -25,50 +25,7 @@ class teacher_request_details extends StatefulWidget {
 
 class _teacher_request_detailsState extends State<teacher_request_details> {
   bool loading = false;
-  Future<void> acceptedRequest(String name, String roll, String branch, String year,
-      String email, purpose, String time, full, String s, String email2,String uid)
-  async {
-    try {
-      await DatabaseService(uid: uid)
-          .acceptRequests(
-          name,
-          roll,
-          branch,
-          year,
-          email,
-          purpose,
-          time,
-          full,
-          'Pending',
-          email2);
-    }
-    catch (e) {
-      print(e.toString());
-      return null;
-    }
-  }
-  Future<void> rejectedRequest(String name, String roll, String branch, String year,
-      String email, purpose, String time, full, String s, String email2,String uid)
-  async {
-    try {
-      await DatabaseService(uid: uid)
-          .declineRequests(
-          name,
-          roll,
-          branch,
-          year,
-          email,
-          purpose,
-          time,
-          full,
-          'Pending',
-          email2);
-    }
-    catch (e) {
-      print(e.toString());
-      return null;
-    }
-  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -83,7 +40,12 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
             backgroundColor: Colors.deepPurple[50],
                appBar: AppBar(
                  title:Text('Request Details'),
-                 leading: Icon(Icons.arrow_back),
+                 leading: IconButton(
+                     icon: Icon(Icons.arrow_back),
+                     onPressed: (){
+                       Navigator.of(context).pushNamed('/tea_dash');
+                     },
+                 ),
                  backgroundColor: Colors.deepPurple[600],
                ),
                body: SingleChildScrollView(
@@ -100,13 +62,13 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                           borderRadius: BorderRadius.all(Radius.circular(20))
                       ),
                       // color: Colors.white,
-                      width: size.width*0.8,
-                      child: Column(
-                        children: [
-                          Container(
-                            height:50.0,
-                            padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                            child: Row(
+                          width: size.width*0.8,
+                          child: Column(
+                            children: [
+                            Container(
+                              height:50.0,
+                              padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                              child: Row(
                               children: [
                                 Icon(Icons.person, color: Colors.deepPurple,),
                                 SizedBox(width: 10.0,),
@@ -236,14 +198,14 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                               ],
                             ),
                           ),
-                          Divider(
+                            Divider(
                             color: Colors.deepPurple[100],
                             thickness: 1,
                           ),
-                          Container(
-                            height:40.0,
-                            padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                            child: Row(
+                            Container(
+                              height:40.0,
+                              padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                              child: Row(
                               children: [
                                 Icon(Icons.mail, color: Colors.deepPurple,),
                                 SizedBox(width: 10.0,),
@@ -342,8 +304,8 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 30.0,),
-                  Container(
+                    SizedBox(height: 30.0,),
+                    Container(
                     padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
                     child: Text( 'Purpose of Meet:',
                       style: TextStyle(
@@ -352,7 +314,7 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                         color: Colors.black,
                       ),),
                   ),
-                  Center(
+                    Center(
                       child: Container(
                         padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                         decoration: BoxDecoration(
@@ -387,23 +349,27 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                         ),
                       )
                   ),
-                  SizedBox(height: 30.0,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
+                    SizedBox(height: 30.0,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
                       RaisedButton(
                         onPressed: () async{
                         print('accepted');
-                        acceptedRequest( widget.request.student_name,
-                        widget.request.student_rollno,
-                        widget.request.student_branch,
-                        widget.request.student_year,
-                        widget.request.student_mail,
-                        widget.request.purpose,
-                        widget.request.time,
-                        widget.request.date,
-                        'Accepted',
-                        data.email,user.user_id);
+                        await DatabaseService().deleteRequests(widget.request.request_id);
+                        await DatabaseService().acceptRequests(
+                            widget.request.request_id,
+                            widget.request.student_name,
+                            widget.request.student_rollno,
+                            widget.request.student_branch,
+                            widget.request.student_year,
+                            widget.request.student_mail,
+                            widget.request.purpose,
+                            widget.request.time,
+                            widget.request.date,
+                            widget.request.teacher_mail,
+                            widget.request.request_id);
+                        print(widget.request.request_id);
                         },
                         color: Colors.green,
                         hoverColor: Colors.green[200],
@@ -428,7 +394,11 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                       RaisedButton(
                         onPressed: () async{
                           print('rejected');
-                          rejectedRequest( widget.request.student_name,
+                          await DatabaseService().deleteRequests(widget.request.request_id);
+                          await DatabaseService().declineRequests(
+                              widget.request.request_id,
+                              widget.request.student_id,
+                              widget.request.student_name,
                               widget.request.student_rollno,
                               widget.request.student_branch,
                               widget.request.student_year,
@@ -436,9 +406,12 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                               widget.request.purpose,
                               widget.request.time,
                               widget.request.date,
-                              'Rejected',
-                              data.email,user.user_id);
+                              widget.request.teacher_mail,
+                              widget.request.request_id);
+                          print(widget.request.request_id);
+
                         },
+
                         color: Colors.red,
                         hoverColor: Colors.red[200],
                         shape: RoundedRectangleBorder(
