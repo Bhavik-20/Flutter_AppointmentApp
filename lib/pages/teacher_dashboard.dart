@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_appointment_app/pages/teacher_declined_list.dart';
+import 'package:flutter_appointment_app/pages/teacher_new_requests.dart';
 import 'package:flutter_appointment_app/services/auth.dart';
 import 'package:flutter_appointment_app/ui_helpers/Loading.dart';
 import "package:google_fonts/google_fonts.dart";
@@ -24,15 +25,11 @@ class _teacher_dashboardState extends State<teacher_dashboard> {
   int _selectedIndex = 0;
   bool loading=false;
   final AuthService _auth=AuthService();
-
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
   List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'New Requests',
-      style: optionStyle,
-    ),
+    teacher_new_req(),
     teacher_accepted_list(),
     teacher_declined_list(),
   ];

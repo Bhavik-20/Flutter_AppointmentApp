@@ -25,21 +25,17 @@ class Wrapper extends StatelessWidget {
 
       document.get().then((DocumentSnapshot document) {
         xyz=document.data['role'];
-        print("role: "+xyz);
       });
 
       if(xyz=="faculty")
       {
-        print(xyz);
         return teacher_dashboard();
       }
       else
       {
-        print(xyz);
-        return student_dashboard();
+        return teacher_dashboard();
       }
-     }
+    }
   }
 
 }
-

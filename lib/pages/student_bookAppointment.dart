@@ -24,34 +24,71 @@ class student_bookAppointment extends StatefulWidget {
 List<GlobalKey<FormState>> formKeys = [GlobalKey<FormState>(), GlobalKey<FormState>(), GlobalKey<FormState>(), GlobalKey<FormState>()];
 
 class _student_bookAppointmentState extends State<student_bookAppointment> {
-  int _currentStep=0;
-  GlobalKey<FormState> _formKey =  GlobalKey<FormState>();
+  int _currentStep = 0;
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   DateTime _dateTime;
   var day;
   var full;
   var purpose;
-  List days_of_week=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
-  final List<String> free_slots=["----Select Time----","02:30 - 02:45 pm", "03:00 - 03:15 pm"];
-  String time="----Select Time----";
-  bool loading=false;
+  List days_of_week = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday'
+  ];
+  final List<String> free_slots = [
+    "----Select Time----",
+    "02:30 - 02:45 pm",
+    "03:00 - 03:15 pm"
+  ];
+  String time = "----Select Time----";
+  bool loading = false;
+
+  Future<void> sendRequest(String name, String roll, String branch, String year,
+      String email, purpose, String time, full, String s, String email2,String uid)
+  async {
+    try {
+      await DatabaseService(uid: uid)
+          .updateRequests(
+          name,
+          roll,
+          branch,
+          year,
+          email,
+          purpose,
+          time,
+          full,
+          'Pending',
+          widget.teacher.email);
+    }
+    catch (e) {
+      print(e.toString());
+      return null;
+    }
+
+  }
+
 
   @override
   Widget build(BuildContext context) {
-
     final user = Provider.of<User>(context);
-    Size size = MediaQuery.of(context).size;
+    Size size = MediaQuery
+        .of(context)
+        .size;
 
     return StreamBuilder<Student>(
         stream: DatabaseService(uid: user.user_id).studentData,
-        builder: (context,snapshot) {
-          if(snapshot.hasData)
-          {
-            Student data=snapshot.data;
-            return loading? Loading():Scaffold(
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            Student data = snapshot.data;
+            return loading ? Loading() : Scaffold(
                 backgroundColor: Colors.deepPurple[100],
                 appBar: AppBar(
                   leading: IconButton(
-                    onPressed: (){
+                    onPressed: () {
                       Navigator.of(context).pushNamed('/st_search_teacher');
                     },
                     icon: Icon(
@@ -79,20 +116,20 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                   child: Stepper(
                     steps: _mySteps(data),
                     currentStep: this._currentStep,
-                    onStepTapped: (step){
+                    onStepTapped: (step) {
                       setState(() {
-                        this._currentStep=step;
+                        this._currentStep = step;
                       });
                     },
                     onStepContinue: () async {
                       setState(() {
-                        if(this._currentStep < this._mySteps(data).length-1)
-                        {
-                          this._currentStep = this._currentStep+1;
+                        if (this._currentStep < this
+                            ._mySteps(data)
+                            .length - 1) {
+                          this._currentStep = this._currentStep + 1;
                         }
-                        else
-                        {
-                          if (time== "----Select Time----"){
+                        else {
+                          if (time == "----Select Time----") {
                             Fluttertoast.showToast(
                               backgroundColor: Colors.red,
                               msg: 'Please Select Time',
@@ -101,7 +138,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                             );
                             print("Select time");
                           }
-                          if(full == null){
+                          if (full == null) {
                             Fluttertoast.showToast(
                               backgroundColor: Colors.red,
                               msg: 'Please Select Date',
@@ -110,7 +147,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                             );
                             print("Select Date");
                           }
-                          if(purpose == null){
+                          if (purpose == null) {
                             Fluttertoast.showToast(
                               backgroundColor: Colors.red,
                               msg: 'Please Enter Purpose',
@@ -119,7 +156,8 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                             );
                             print("Please enter purpose");
                           }
-                          if(time != "----Select Time----" && full != null && purpose != null && this._currentStep == 4){
+                          if (time != "----Select Time----" && full != null &&
+                              purpose != null && this._currentStep == 4) {
                             Fluttertoast.showToast(
                               backgroundColor: Colors.green,
                               msg: 'Request Sent Successfully',
@@ -127,42 +165,31 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                               gravity: ToastGravity.BOTTOM,
                             );
                             print("Completed");
-
+                            sendRequest(
+                                data.name,
+                                data.roll,
+                                data.branch,
+                                data.year,
+                                data.email,
+                                purpose,
+                                time,
+                                full,
+                                'Pending',
+                                widget.teacher.email,user.user_id);
                             // setState(() =>loading=true);
-                            loading=true;
+                            loading = true;
                             Navigator.of(context).pushNamed('/st_dash');
                           }
                         }
                       });
-                      try {
-                        await DatabaseService(uid: user.user_id)
-                            .updateRequests(
-                            data.name,
-                            data.roll,
-                            data.branch,
-                            data.year,
-                            data.email,
-                            purpose,
-                            time,
-                            full,
-                            'Pending',
-                            widget.teacher.email);
-                      }
-                      catch(e)
-                      {
-                        print(e.toString());
-                        return null;
-                      }
                     },
-                    onStepCancel: (){
+                    onStepCancel: () {
                       setState(() {
-                        if(this._currentStep>0)
-                        {
-                          this._currentStep=this._currentStep-1;
+                        if (this._currentStep > 0) {
+                          this._currentStep = this._currentStep - 1;
                         }
-                        else
-                        {
-                          this._currentStep=0;
+                        else {
+                          this._currentStep = 0;
                         }
                       });
                     },
@@ -170,21 +197,20 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                 )
             );
           }
-          else
-          {
+          else {
             return Loading();
           }
         }
     );
   }
 
-  List<Step> _mySteps(Student data){
-    List<Step> _steps=[
+  List<Step> _mySteps(Student data) {
+    List<Step> _steps = [
       Step(
         title: Text('Selected Teacher Info',
-        style: TextStyle(
-          fontSize: 18,
-        ),),
+          style: TextStyle(
+            fontSize: 18,
+          ),),
         content: Container(
             decoration: BoxDecoration(
                 color: Colors.white,
@@ -197,11 +223,11 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
             child: Column(
                 children: [
                   Container(
-                    height:50.0,
+                    height: 50.0,
                     padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                     child: Row(
                       children: [
-                        Icon(Icons.person , color: Colors.deepPurple,),
+                        Icon(Icons.person, color: Colors.deepPurple,),
                         SizedBox(width: 10.0,),
                         Text(
                           'Name: ',
@@ -231,11 +257,11 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                     thickness: 1,
                   ),
                   Container(
-                    height:50.0,
+                    height: 50.0,
                     padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                     child: Row(
                       children: [
-                        Icon(Icons.sort_by_alpha , color: Colors.deepPurple,),
+                        Icon(Icons.sort_by_alpha, color: Colors.deepPurple,),
                         SizedBox(width: 10.0,),
                         Text(
                           'Initials: ',
@@ -263,11 +289,11 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                     thickness: 1,
                   ),
                   Container(
-                    height:50.0,
+                    height: 50.0,
                     padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                     child: Row(
                       children: [
-                        Icon(Icons.mail , color: Colors.deepPurple,),
+                        Icon(Icons.mail, color: Colors.deepPurple,),
                         SizedBox(width: 10.0,),
                         Text(
                           'Email: ',
@@ -296,11 +322,11 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                     thickness: 1,
                   ),
                   Container(
-                    height:50.0,
+                    height: 50.0,
                     padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                     child: Row(
                       children: [
-                        Icon(Icons.location_on , color: Colors.deepPurple,),
+                        Icon(Icons.location_on, color: Colors.deepPurple,),
                         SizedBox(width: 10.0,),
                         Text(
                           'Room No: ',
@@ -338,49 +364,49 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
           children: [
             Container(
               decoration: BoxDecoration(
-                color: Colors.deepPurple[400],
+                  color: Colors.deepPurple[400],
                   border: Border.all(
                     color: Colors.deepPurple[400],
                   ),
                   borderRadius: BorderRadius.all(Radius.circular(30))
               ),
               child: IconButton(
-                icon: Icon(
-                  Icons.calendar_today,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  showDatePicker(
-                    context: context,
-                    initialDate: DateTime.now().add(Duration(days: 1)),
-                    firstDate:  DateTime.now().add(Duration(days: 1)),
-                    lastDate: DateTime.now().add(Duration(days: 7)),
-                  ).then((date) {
-                    setState(() {
-                      // ---------- Extracting day and Date from DateTime date------------
-                      day=days_of_week[date.weekday-1];
-                      if(day != 'Saturday' && day != 'Sunday') {
-                        var formatter = new DateFormat('dd-MM-yyyy');
-                        String formatted = formatter.format(date);
-                        full = day + " : " + formatted;
-                        print(full);
-                      }
-                      else{
-                        Fluttertoast.showToast(
-                          backgroundColor: Colors.red,
-                          msg: 'Saturday and Sunday cannot be selected , Please select a Weekday.',
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
-                        );
-                      }
-                      //-------------Extracting ends here ------------------
+                  icon: Icon(
+                    Icons.calendar_today,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
+                    showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now().add(Duration(days: 1)),
+                      firstDate: DateTime.now().add(Duration(days: 1)),
+                      lastDate: DateTime.now().add(Duration(days: 7)),
+                    ).then((date) {
+                      setState(() {
+                        // ---------- Extracting day and Date from DateTime date------------
+                        day = days_of_week[date.weekday - 1];
+                        if (day != 'Saturday' && day != 'Sunday') {
+                          var formatter = new DateFormat('dd-MM-yyyy');
+                          String formatted = formatter.format(date);
+                          full = day + " : " + formatted;
+                          print(full);
+                        }
+                        else {
+                          Fluttertoast.showToast(
+                            backgroundColor: Colors.red,
+                            msg: 'Saturday and Sunday cannot be selected , Please select a Weekday.',
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                          );
+                        }
+                        //-------------Extracting ends here ------------------
+                      });
                     });
-                  });
-                }
-                ),
+                  }
+              ),
             ),
             SizedBox(width: 15.0,),
-            Text(full==null?'Select Date':full.toString(),
+            Text(full == null ? 'Select Date' : full.toString(),
               style: TextStyle(
                   fontFamily: 'playfair',
                   fontSize: 17.0,
@@ -398,11 +424,12 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
           ),),
         content: Column(
           children: [
-            Text('The dropdown consists of free slots for the faculty on selected date ',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 15,
-            )),
+            Text(
+                'The dropdown consists of free slots for the faculty on selected date ',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15,
+                )),
             SizedBox(height: 10.0,),
             Container(
               padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
@@ -417,12 +444,12 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                 dropdownColor: Colors.white,
                 icon: Icon(Icons.arrow_drop_down),
                 value: time,
-                onChanged: (value){
+                onChanged: (value) {
                   setState(() {
-                    time=value;
+                    time = value;
                   });
                 },
-                items: free_slots.map<DropdownMenuItem<String>>((value){
+                items: free_slots.map<DropdownMenuItem<String>>((value) {
                   return DropdownMenuItem(
                     child: Text(value),
                     value: value,
@@ -452,11 +479,11 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
           child: Column(
             children: [
               Container(
-                height:50.0,
+                height: 50.0,
                 padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                 child: Row(
                   children: [
-                    Icon(Icons.person , color: Colors.deepPurple,),
+                    Icon(Icons.person, color: Colors.deepPurple,),
                     SizedBox(width: 10.0,),
                     Text(
                       'Name: ',
@@ -486,7 +513,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                 thickness: 1,
               ),
               Container(
-                height:50.0,
+                height: 50.0,
                 padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                 child: Row(
                   children: [
@@ -520,7 +547,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                 thickness: 1,
               ),
               Container(
-                height:50.0,
+                height: 50.0,
                 padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                 child: Row(
                   children: [
@@ -554,11 +581,12 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                 thickness: 1,
               ),
               Container(
-                height:50.0,
+                height: 50.0,
                 padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                 child: Row(
                   children: [
-                    Icon(Icons.calendar_today_outlined , color: Colors.deepPurple,),
+                    Icon(
+                      Icons.calendar_today_outlined, color: Colors.deepPurple,),
                     SizedBox(width: 10.0,),
                     Text(
                       'Year : ',
@@ -588,11 +616,11 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                 thickness: 1,
               ),
               Container(
-                height:50.0,
-                padding: EdgeInsets.fromLTRB(10, 0, 10 ,0),
+                height: 50.0,
+                padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: Row(
                   children: [
-                    Icon(Icons.mail , color: Colors.deepPurple,),
+                    Icon(Icons.mail, color: Colors.deepPurple,),
                     SizedBox(width: 10.0,),
                     Text(
                       'Email: ',
@@ -617,7 +645,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                   ],
                 ),
               ),
-              ],
+            ],
           ),
         ),
         isActive: _currentStep >= 3,
@@ -638,15 +666,15 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
           // color: Colors.white,
           // width: size.width*0.8,
           child: Container(
-            padding: EdgeInsets.fromLTRB(10,5,10,5),
+            padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
             child: TextField(
               onChanged: (value) {
-                setState(() => purpose=value);
+                setState(() => purpose = value);
               },
               style: TextStyle(
                   fontSize: 20.0,
                   fontFamily: 'playfair',
-                fontWeight: FontWeight.bold
+                  fontWeight: FontWeight.bold
               ),
               maxLines: 5,
               autocorrect: false,

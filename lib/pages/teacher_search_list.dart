@@ -14,11 +14,6 @@ class _SearchListState extends State<SearchList> {
   Widget build(BuildContext context) {
 
     final faculties=Provider.of<List<Teacher>>(context)??[];
-    List <String> xyz = [];
-    for(var i=0; i<faculties.length; i++)
-      {
-        xyz.add(faculties[i].name);
-      }
 
     return ListView.builder(
             itemCount: faculties.length,
@@ -30,8 +25,6 @@ class _SearchListState extends State<SearchList> {
                   child: ListTile(
                     onTap: (){
                       print(faculties[index].email);
-                      print(xyz);
-                      // Navigator.of(context).pushNamed('/st_dash');
                       Navigator.push(context, MaterialPageRoute(builder: (context)=> student_bookAppointment(teacher:faculties[index])));
                     },
                     leading: CircleAvatar(

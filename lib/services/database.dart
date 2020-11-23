@@ -1,12 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_appointment_app/model/Request.dart';
 import 'package:flutter_appointment_app/model/Student.dart';
 import 'package:flutter_appointment_app/model/Teacher.dart';
+import 'package:flutter_appointment_app/model/User.dart';
+import 'package:flutter_appointment_app/services/auth.dart';
+import 'package:provider/provider.dart';
 
 class DatabaseService {
 
   final String uid;
   DatabaseService({this.uid});
-
 
   //collection reference
   final CollectionReference facultyCollection =Firestore.instance.collection('faculty');
@@ -42,20 +46,42 @@ class DatabaseService {
 
   Future updateRequests(String name,String rollno,String branch,String year,String email,String purpose,String time, String date, String status, String teacherMail) async
   {
-    return await requestCollection.document(uid).setData({
+    return await requestCollection.document().setData({
       'student_id':uid,
-      'name': name,
-      'roll no':rollno,
-      'branch':branch,
-      'year':year,
-      'email':email,
+      'student_name': name,
+      'student_rollno':rollno,
+      'student_branch':branch,
+      'student_year':year,
+      'student_mail':email,
       'purpose':purpose,
       'time': time,
       'date': date,
       'status':status,
-      'teacherMail':teacherMail,
-      'role':'student',
+      'teacher_mail':teacherMail,
     });
+  }
+//-------------------------------------------------------------------------------------------//
+
+  Stream<List<Request>> get newFacultyRequests  {
+    return requestCollection.where('teacher_mail',isEqualTo: 'anooja.joy@somaiya.edu').snapshots().map(_newFacultyRequestsFromSnapshot);
+  }
+
+  List<Request> _newFacultyRequestsFromSnapshot(QuerySnapshot snapshot)
+  {
+    return snapshot.documents.map((doc){
+      return Request(
+        date: doc.data['date'],
+        purpose: doc.data['purpose'],
+        status: doc.data['status'],
+        student_branch: doc.data['student_branch'],
+        student_mail: doc.data['student_mail'],
+        student_name: doc.data['student_name'],
+        student_rollno: doc.data['student_rollno'],
+        student_year: doc.data['student_year'],
+        teacher_mail: doc.data['teacher_mail'],
+        time: doc.data['time']
+      );
+    }).toList();
   }
 
 //-------------------------------------------------------------------------------------------//
@@ -131,7 +157,7 @@ class DatabaseService {
   }
 //-------------------------------------------------------------------------------------------//
 
-//get faculty doc stream
+  //get faculty doc stream
   Stream<Student> get studentData{
     return studentCollection.document(uid).snapshots().map(_studentDataFromSnapshot);
   }
