@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_appointment_app/model/Request.dart';
 import 'package:flutter_appointment_app/model/Teacher.dart';
 import 'package:flutter_appointment_app/pages/student_bookAppointment.dart';
+import 'package:flutter_appointment_app/pages/teacher_request_details.dart';
 import 'package:provider/provider.dart';
 
 class listofnewFacultyRequests extends StatefulWidget {
@@ -25,7 +26,8 @@ class _listofnewFacultyRequestsState extends State<listofnewFacultyRequests> {
               child: ListTile(
                 onTap: (){
                   print(requests[index].date);
-                  // Navigator.push(context, MaterialPageRoute(builder: (context)=> student_bookAppointment(teacher:faculties[index])));
+                  print(index);
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> teacher_request_details(request:requests[index])));
                 },
                 leading: CircleAvatar(
                   radius: 25.0,

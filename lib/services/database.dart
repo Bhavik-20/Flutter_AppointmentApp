@@ -16,6 +16,8 @@ class DatabaseService {
   final CollectionReference facultyCollection =Firestore.instance.collection('faculty');
   final CollectionReference studentCollection =Firestore.instance.collection('student');
   final CollectionReference requestCollection =Firestore.instance.collection('request');
+  final CollectionReference acceptCollection =Firestore.instance.collection('accepted');
+  final CollectionReference declineCollection =Firestore.instance.collection('declined');
 
   Future updateFacultyData(String name,String initials,String room,String email,String password) async
   {
@@ -57,6 +59,41 @@ class DatabaseService {
       'time': time,
       'date': date,
       'status':status,
+      'teacher_mail':teacherMail,
+    });
+  }
+
+  Future acceptRequests(String name,String rollno,String branch,String year,String email,String purpose,String time, String date, String status, String teacherMail) async
+  {
+    return await acceptCollection.document().setData({
+      'student_id':uid,
+      'student_name': name,
+      'student_rollno':rollno,
+      'student_branch':branch,
+      'student_year':year,
+      'student_mail':email,
+      'purpose':purpose,
+      'time': time,
+      'date': date,
+      'status':'accept',
+      'teacher_mail':teacherMail,
+    });
+  }
+
+
+  Future declineRequests(String name,String rollno,String branch,String year,String email,String purpose,String time, String date, String status, String teacherMail) async
+  {
+    return await declineCollection.document().setData({
+      'student_id':uid,
+      'student_name': name,
+      'student_rollno':rollno,
+      'student_branch':branch,
+      'student_year':year,
+      'student_mail':email,
+      'purpose':purpose,
+      'time': time,
+      'date': date,
+      'status':'decline ',
       'teacher_mail':teacherMail,
     });
   }
