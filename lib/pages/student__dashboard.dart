@@ -19,6 +19,24 @@ class _student_dashboardState extends State<student_dashboard> {
 
   final AuthService _auth=AuthService();
   bool loading=false;
+  int _selectedIndex = 0;
+  static const List<Widget> _widgetOptions = <Widget>[
+    Text(
+      'Index 0: Pending',
+    ),
+    Text(
+      'Index 1: Accepted',
+    ),
+    Text(
+      'Index 2: Rejected',
+    ),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -118,13 +136,34 @@ class _student_dashboardState extends State<student_dashboard> {
               ],
             )
           ),
+          body:  Center(
+            child: _widgetOptions.elementAt(_selectedIndex),
+          ),
           floatingActionButton: FloatingActionButton(
             onPressed: (){
               Navigator.of(context).pushNamed('/st_search_teacher');
             },
             backgroundColor: Colors.deepPurple[600],
             child: Icon(Icons.add, size: 30),
-
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.pending_actions, size: 30,),
+                label: 'Pending',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.playlist_add_check, size: 35,),
+                label: 'Accepted',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.remove_circle, size: 30,),
+                label: 'Rejected',
+              ),
+            ],
+            currentIndex: _selectedIndex,
+            selectedItemColor: Colors.deepPurple[900],
+            onTap: _onItemTapped,
           ),
         ),
       ),

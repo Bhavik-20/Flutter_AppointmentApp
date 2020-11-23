@@ -53,6 +53,7 @@ class _State extends State {
       return 'Password length should be 6 char';
     return 'valid';
   }
+  bool _showPassword = false;
 
   //text field state
   String name="";
@@ -202,10 +203,31 @@ class _State extends State {
                     ),
                   ),
                 ),
-                RoundedPasswordField(
-                  onChanged: (value) {
-                    setState(() => password=value);
-                  },
+                TextFieldContainer(
+                  child: TextField(
+                    obscureText: !this._showPassword,
+                    onChanged: (value) {
+                      setState(() => password=value);
+                    },
+                    cursorColor: kPrimaryColor,
+                    decoration: InputDecoration(
+                      hintText: "Password",
+                      icon: Icon(
+                        Icons.lock,
+                        color: kPrimaryColor,
+                      ),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          this._showPassword ? Icons.visibility_off : Icons.visibility,
+                          color: kPrimaryColor,
+                        ),
+                        onPressed: () {
+                          setState(() => this._showPassword = !this._showPassword);
+                        },
+                      ),
+                      border: InputBorder.none,
+                    ),
+                  ),
                 ),
                 Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
                 RoundedButton(

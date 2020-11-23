@@ -53,6 +53,8 @@ class _teacher_signupState extends State<teacher_signup> {
     return 'valid';
   }
 
+  bool _showPassword = false;
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -140,10 +142,31 @@ class _teacher_signupState extends State<teacher_signup> {
                     ),
                   ),
                 ),
-                RoundedPasswordField(
-                  onChanged: (value) {
-                    setState(() => password=value);
-                  },
+                TextFieldContainer(
+                  child: TextField(
+                    obscureText: !this._showPassword,
+                    onChanged: (value) {
+                      setState(() => password=value);
+                    },
+                    cursorColor: kPrimaryColor,
+                    decoration: InputDecoration(
+                      hintText: "Password",
+                      icon: Icon(
+                        Icons.lock,
+                        color: kPrimaryColor,
+                      ),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          this._showPassword ? Icons.visibility_off : Icons.visibility,
+                          color: kPrimaryColor,
+                        ),
+                        onPressed: () {
+                          setState(() => this._showPassword = !this._showPassword);
+                        },
+                      ),
+                      border: InputBorder.none,
+                    ),
+                  ),
                 ),
                 Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
                 RoundedButton(
