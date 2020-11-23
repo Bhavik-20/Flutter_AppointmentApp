@@ -104,14 +104,21 @@ class _teacher_profileState extends State<teacher_profile> {
                                 children: [
                                   Container(
                                     height:50.0,
+                                      padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                                     child:TextFormField(
                                       initialValue: data.name ,
                                       enabled: true,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18,
+                                          fontFamily: 'playfair',
+                                        ),
                                       onChanged: (value){
                                         setState(() => name=value);
                                       },
                                       decoration: new InputDecoration(
                                           border: InputBorder.none,
+                                        hintText: 'Full Name',
                                       )
                                     )
                                   ),
@@ -121,14 +128,21 @@ class _teacher_profileState extends State<teacher_profile> {
                                   ),
                                   Container(
                                     height:50.0,
+                                      padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                                     child:TextFormField(
                                       initialValue:data.initials,
                                       enabled: true,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18,
+                                          fontFamily: 'playfair',
+                                        ),
                                       onChanged: (value){
                                         setState(() => initials=value);
                                       },
                                       decoration: new InputDecoration(
                                         border: InputBorder.none,
+                                        hintText: 'Initials',
                                       )
                                     )
                                   ),
@@ -138,14 +152,21 @@ class _teacher_profileState extends State<teacher_profile> {
                                   ),
                                   Container(
                                     height:50.0,
+                                      padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                                     child: TextFormField(
                                       initialValue: data.room,
                                       enabled: true,
+                                      style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                      fontFamily: 'playfair',
+                                    ),
                                       onChanged: (value){
                                         setState(() => room=value);
                                       },
                                       decoration: new InputDecoration(
                                         border: InputBorder.none,
+                                        hintText: 'Room',
                                       ),
                                     )
                                   ),
@@ -155,11 +176,20 @@ class _teacher_profileState extends State<teacher_profile> {
                                   ),
                                   Container(
                                     height:50.0,
-                                    child: TextFormField(
-                                      initialValue: data.email,
-                                      enabled: false,
-                                      decoration: new InputDecoration(
-                                        border: InputBorder.none,
+                                    padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                    child: Expanded(
+                                      child: TextFormField(
+                                        initialValue: data.email,
+                                        enabled: false,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18,
+                                          fontFamily: 'playfair',
+                                        ),
+                                        decoration: new InputDecoration(
+                                          border: InputBorder.none,
+                                          hintText: 'E-Mail',
+                                        ),
                                       ),
                                     ),
                                   ),

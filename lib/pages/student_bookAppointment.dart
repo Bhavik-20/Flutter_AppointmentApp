@@ -84,7 +84,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                         this._currentStep=step;
                       });
                     },
-                    onStepContinue: (){
+                    onStepContinue: () async {
                       setState(() {
                         if(this._currentStep < this._mySteps(data).length-1)
                         {
@@ -121,18 +121,38 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                           }
                           if(time != "----Select Time----" && full != null && purpose != null && this._currentStep == 4){
                             Fluttertoast.showToast(
-                              backgroundColor: Colors.red,
+                              backgroundColor: Colors.green,
                               msg: 'Request Sent Successfully',
                               toastLength: Toast.LENGTH_SHORT,
                               gravity: ToastGravity.BOTTOM,
                             );
                             print("Completed");
+
                             // setState(() =>loading=true);
                             loading=true;
                             Navigator.of(context).pushNamed('/st_dash');
                           }
                         }
                       });
+                      try {
+                        await DatabaseService(uid: user.user_id)
+                            .updateRequests(
+                            data.name,
+                            data.roll,
+                            data.branch,
+                            data.year,
+                            data.email,
+                            purpose,
+                            time,
+                            full,
+                            'Pending',
+                            widget.teacher.email);
+                      }
+                      catch(e)
+                      {
+                        print(e.toString());
+                        return null;
+                      }
                     },
                     onStepCancel: (){
                       setState(() {
@@ -181,6 +201,8 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                     padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                     child: Row(
                       children: [
+                        Icon(Icons.person , color: Colors.deepPurple,),
+                        SizedBox(width: 10.0,),
                         Text(
                           'Name: ',
                           overflow: TextOverflow.ellipsis,
@@ -190,13 +212,15 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                             fontFamily: 'playfair',
                           ),
                         ),
-                        Text(
-                          widget.teacher.name,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                            fontFamily: 'playfair',
+                        Expanded(
+                          child: Text(
+                            widget.teacher.name,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              fontFamily: 'playfair',
+                            ),
                           ),
                         ),
                       ],
@@ -211,6 +235,8 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                     padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                     child: Row(
                       children: [
+                        Icon(Icons.sort_by_alpha , color: Colors.deepPurple,),
+                        SizedBox(width: 10.0,),
                         Text(
                           'Initials: ',
                           overflow: TextOverflow.ellipsis,
@@ -241,6 +267,8 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                     padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                     child: Row(
                       children: [
+                        Icon(Icons.mail , color: Colors.deepPurple,),
+                        SizedBox(width: 10.0,),
                         Text(
                           'Email: ',
                           style: TextStyle(
@@ -272,6 +300,8 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                     padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                     child: Row(
                       children: [
+                        Icon(Icons.location_on , color: Colors.deepPurple,),
+                        SizedBox(width: 10.0,),
                         Text(
                           'Room No: ',
                           overflow: TextOverflow.ellipsis,
@@ -338,7 +368,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                       else{
                         Fluttertoast.showToast(
                           backgroundColor: Colors.red,
-                          msg: 'Saturday and Sunday cannot be selected , please select a weekday.',
+                          msg: 'Saturday and Sunday cannot be selected , Please select a Weekday.',
                           toastLength: Toast.LENGTH_SHORT,
                           gravity: ToastGravity.BOTTOM,
                         );
@@ -423,13 +453,32 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
             children: [
               Container(
                 height:50.0,
-                child: TextFormField(
-                    initialValue: data.name ,
-                    enabled: false,
-                    // onChanged: (value){},
-                    decoration: new InputDecoration(
-                      border: InputBorder.none,
-                    )
+                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                child: Row(
+                  children: [
+                    Icon(Icons.person , color: Colors.deepPurple,),
+                    SizedBox(width: 10.0,),
+                    Text(
+                      'Name: ',
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        fontFamily: 'playfair',
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        data.name,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                          fontFamily: 'playfair',
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Divider(
@@ -438,13 +487,32 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
               ),
               Container(
                 height:50.0,
-                child: TextFormField(
-                    initialValue: data.roll ,
-                    enabled: false,
-                    // onChanged: (value){},
-                    decoration: new InputDecoration(
-                      border: InputBorder.none,
-                    )
+                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                child: Row(
+                  children: [
+                    Icon(Icons.perm_identity, color: Colors.deepPurple,),
+                    SizedBox(width: 10.0,),
+                    Text(
+                      'Roll No.: ',
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        fontFamily: 'playfair',
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        data.roll,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                          fontFamily: 'playfair',
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Divider(
@@ -453,13 +521,32 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
               ),
               Container(
                 height:50.0,
-                child:TextFormField(
-                    initialValue: data.branch ,
-                    enabled: false,
-                    // onChanged: (value){},
-                    decoration: new InputDecoration(
-                      border: InputBorder.none,
-                    )
+                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                child: Row(
+                  children: [
+                    Icon(Icons.article_outlined, color: Colors.deepPurple,),
+                    SizedBox(width: 10.0,),
+                    Text(
+                      'Branch : ',
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        fontFamily: 'playfair',
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        data.branch,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                          fontFamily: 'playfair',
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Divider(
@@ -468,13 +555,32 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
               ),
               Container(
                 height:50.0,
-                child: TextFormField(
-                    initialValue: data.year ,
-                    enabled: false,
-                    // onChanged: (value){},
-                    decoration: new InputDecoration(
-                      border: InputBorder.none,
-                    )
+                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                child: Row(
+                  children: [
+                    Icon(Icons.calendar_today_outlined , color: Colors.deepPurple,),
+                    SizedBox(width: 10.0,),
+                    Text(
+                      'Year : ',
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        fontFamily: 'playfair',
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        data.year,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                          fontFamily: 'playfair',
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Divider(
@@ -483,12 +589,32 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
               ),
               Container(
                 height:50.0,
-                child: TextFormField(
-                  initialValue: data.email,
-                  enabled: false,
-                  decoration: new InputDecoration(
-                    border: InputBorder.none,
-                  ),
+                padding: EdgeInsets.fromLTRB(10, 0, 10 ,0),
+                child: Row(
+                  children: [
+                    Icon(Icons.mail , color: Colors.deepPurple,),
+                    SizedBox(width: 10.0,),
+                    Text(
+                      'Email: ',
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        fontFamily: 'playfair',
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        data.email,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                          fontFamily: 'playfair',
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               ],

@@ -11,6 +11,7 @@ class DatabaseService {
   //collection reference
   final CollectionReference facultyCollection =Firestore.instance.collection('faculty');
   final CollectionReference studentCollection =Firestore.instance.collection('student');
+  final CollectionReference requestCollection =Firestore.instance.collection('request');
 
   Future updateFacultyData(String name,String initials,String room,String email,String password) async
   {
@@ -35,6 +36,24 @@ class DatabaseService {
       'year':year,
       'email':email,
       'password':password,
+      'role':'student',
+    });
+  }
+
+  Future updateRequests(String name,String rollno,String branch,String year,String email,String purpose,String time, String date, String status, String teacherMail) async
+  {
+    return await requestCollection.document(uid).setData({
+      'student_id':uid,
+      'name': name,
+      'roll no':rollno,
+      'branch':branch,
+      'year':year,
+      'email':email,
+      'purpose':purpose,
+      'time': time,
+      'date': date,
+      'status':status,
+      'teacherMail':teacherMail,
       'role':'student',
     });
   }

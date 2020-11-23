@@ -170,7 +170,7 @@ class _teacher_signupState extends State<teacher_signup> {
                         else
                         {
                           Fluttertoast.showToast(
-                            backgroundColor: Colors.red,
+                            backgroundColor: Colors.green,
                             msg: 'Successful',
                             toastLength: Toast.LENGTH_SHORT,
                             gravity: ToastGravity.BOTTOM,

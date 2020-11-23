@@ -26,6 +26,10 @@ class _student_profileState  extends State<student_profile> {
   String email="";
   String password="";
   bool loading=false;
+  int b=0;
+  int y=0;
+  List _branch= ['Computer','Information Technology','Mechanical','Electronics','EXTC'];
+  List _year=['FY','SY','TY','LY'];
 
   String validate(String name, String rollno, String branch, String year)
   {
@@ -106,14 +110,21 @@ class _student_profileState  extends State<student_profile> {
                             children: [
                               Container(
                                 height:50.0,
+                                padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                                 child: TextFormField(
                                     initialValue: data.name ,
                                     enabled: true,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                      fontFamily: 'playfair',
+                                    ),
                                     onChanged: (value){
                                       setState(() => name=value);
                                     },
                                     decoration: new InputDecoration(
                                       border: InputBorder.none,
+                                      hintText: 'Full Name',
                                     )
                                 ),
                               ),
@@ -123,14 +134,21 @@ class _student_profileState  extends State<student_profile> {
                               ),
                               Container(
                                 height:50.0,
+                                padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                                 child: TextFormField(
                                     initialValue: data.roll ,
                                     enabled: true,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                      fontFamily: 'playfair',
+                                    ),
                                     onChanged: (value){
                                       setState(() => roll=value);
                                     },
                                     decoration: new InputDecoration(
                                       border: InputBorder.none,
+                                      hintText: 'Roll Number',
                                     )
                                 ),
                               ),
@@ -140,14 +158,21 @@ class _student_profileState  extends State<student_profile> {
                               ),
                               Container(
                                 height:50.0,
+                                padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                                 child:TextFormField(
                                     initialValue: data.branch ,
                                     enabled: true,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                      fontFamily: 'playfair',
+                                    ),
                                     onChanged: (value){
                                       setState(() => branch=value);
                                     },
                                     decoration: new InputDecoration(
                                       border: InputBorder.none,
+                                      hintText: 'Branch',
                                     )
                                 ),
                               ),
@@ -157,14 +182,21 @@ class _student_profileState  extends State<student_profile> {
                               ),
                               Container(
                                 height:50.0,
+                                padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                                 child: TextFormField(
                                     initialValue: data.year ,
                                     enabled: true,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                      fontFamily: 'playfair',
+                                    ),
                                     onChanged: (value){
                                       setState(() => year=value);
                                     },
                                     decoration: new InputDecoration(
                                       border: InputBorder.none,
+                                      hintText: 'Year',
                                     )
                                 ),
                               ),
@@ -174,11 +206,18 @@ class _student_profileState  extends State<student_profile> {
                               ),
                               Container(
                                 height:50.0,
+                                padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                                 child: TextFormField(
                                   initialValue: data.email,
                                   enabled: false,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                    fontFamily: 'playfair',
+                                  ),
                                   decoration: new InputDecoration(
                                     border: InputBorder.none,
+                                    hintText: 'E-Mail',
                                   ),
                                 ),
                               ),
@@ -205,8 +244,32 @@ class _student_profileState  extends State<student_profile> {
                       print(email);
                       print(password);
 
+                      if(_branch.contains(branch))
+                      {
+                        b = 1;
+                      }
+                      else {
+                        Fluttertoast.showToast(
+                            backgroundColor: Colors.red,
+                            msg: 'Please enter a valid branch.',
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM, );
+                      }
+
+                      if(_year.contains(year))
+                      {
+                        y = 1;
+                      }
+                      else {
+                        Fluttertoast.showToast(
+                          backgroundColor: Colors.red,
+                          msg: 'Please enter a valid year.',
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.BOTTOM, );
+                      }
+
                       String result=validate(name,roll,branch,year);
-                      if(result=='valid')
+                      if(result=='valid' && b==1 && y==1)
                       {
                         setState(() => loading=true);
                         await DatabaseService(uid: user.user_id).updateStudentData(name, roll,branch,year,email,password);
@@ -218,7 +281,7 @@ class _student_profileState  extends State<student_profile> {
                         );
                         Navigator.of(context).pushNamed('/st_dash');
                       }
-                      else
+                      else if(result !='valid')
                       {
                         Fluttertoast.showToast(
                           backgroundColor: Colors.red,
