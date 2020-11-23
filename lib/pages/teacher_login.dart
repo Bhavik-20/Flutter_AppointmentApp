@@ -6,6 +6,7 @@ import 'package:flutter_appointment_app/ui_helpers/constants.dart';
 import 'package:flutter_appointment_app/ui_helpers/rounded_button.dart';
 import 'package:flutter_appointment_app/ui_helpers/rounded_input_field.dart';
 import 'package:flutter_appointment_app/ui_helpers/rounded_password_field.dart';
+import 'package:flutter_appointment_app/ui_helpers/text_field_container.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -36,6 +37,8 @@ class _teacher_loginState extends State<teacher_login> {
       return 'Invalid Password';
     return 'valid';
   }
+
+  bool _showPassword = false;
 
   @override
   Widget build(BuildContext context) {
@@ -78,10 +81,31 @@ class _teacher_loginState extends State<teacher_login> {
                     setState(() => email=value);
                   },
                 ),
-                RoundedPasswordField(
-                  onChanged: (value) {
-                    setState(() => password=value);
-                  },
+                TextFieldContainer(
+                  child: TextField(
+                    obscureText: !this._showPassword,
+                    onChanged: (value) {
+                      setState(() => password=value);
+                    },
+                    cursorColor: kPrimaryColor,
+                    decoration: InputDecoration(
+                      hintText: "Password",
+                      icon: Icon(
+                        Icons.lock,
+                        color: kPrimaryColor,
+                      ),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          this._showPassword ? Icons.visibility_off : Icons.visibility,
+                          color: kPrimaryColor,
+                        ),
+                        onPressed: () {
+                          setState(() => this._showPassword = !this._showPassword);
+                        },
+                      ),
+                      border: InputBorder.none,
+                    ),
+                  ),
                 ),
                 Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
                 RoundedButton(
