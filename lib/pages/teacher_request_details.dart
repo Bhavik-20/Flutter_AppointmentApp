@@ -83,7 +83,12 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
             backgroundColor: Colors.deepPurple[50],
                appBar: AppBar(
                  title:Text('Request Details'),
-                 leading: Icon(Icons.arrow_back),
+                 leading:IconButton(
+                   icon: Icon(Icons.arrow_back),
+                   onPressed: (){
+                     Navigator.of(context).pushNamed('/tea_dash');
+                   },
+                 ),
                  backgroundColor: Colors.deepPurple[600],
                ),
                body: SingleChildScrollView(

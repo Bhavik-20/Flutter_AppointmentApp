@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(role());
@@ -11,78 +12,80 @@ class role extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-          backgroundColor: Colors.deepPurple[600],
+        backgroundColor: Colors.deepPurple[50],
           body:Column(
             children: [
-              SizedBox(height: 200.0),
+              SizedBox(height: 150.0),
               Container(
                 //margin: EdgeInsets.only(left: 0.0,top: 200.0),
                 child: Center(
-                  child: Icon(Icons.account_circle,
-                    color: Colors.white,
-                    size: 150.0,),
+                  child: Text('Meet Up',
+                    style: GoogleFonts.pacifico(
+                      textStyle: Theme.of(context).textTheme.display1,
+                      fontSize: 48,
+                      fontWeight: FontWeight.w700,
+                      fontStyle: FontStyle.italic,
+                      color: Colors.deepPurple,
+                    ),
+                  ),
                 ),
               ),
-              SizedBox(height: 60.0,width: 20.0),
-              Container(
-                width: 200.0,
-                child: RaisedButton(
-                  elevation: 20.0,
-                  color: Colors.white,
-                  child:Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+              SizedBox(height: 60.0,width: 10.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Column(
                     children: [
-                      Text('Teacher Login',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 20.0,
-                            fontFamily: 'dosis',
-                            fontWeight: FontWeight.bold,
-                        ) ,
+                      FlatButton(
+                          onPressed: (){
+                            Navigator.of(context).pushNamed('/st_login');
+                          },
+                          child: Image.asset('images/role_student.jpg' ,
+                          width: 150,)
                       ),
-                      SizedBox(width: 10.0),
-                      Icon(Icons.person)
+                      SizedBox(height: 10.0),
+                      Text('I am a Student',
+                        style: GoogleFonts.pacifico(
+                          color: Colors.deepPurple,
+                          fontSize: 20,
+                        ),),
                     ],
                   ),
-                  onPressed: (){
-                    Navigator.of(context).pushNamed('/tea_login');
-                  },
-                  shape:RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50.0),
-                      side: BorderSide(color: Colors.white)
-                  ),
-                ),
-              ) ,
-              SizedBox(height: 20.0,width: 20.0),
-              Container(
-                width: 200.0,
-                child: RaisedButton(
-                  elevation: 20.0,
-                  color: Colors.white,
-                  child:Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  Column(
                     children: [
-                      Text('Student Login',
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          fontFamily: 'dosis',
-                          fontWeight: FontWeight.bold,
-                        ) ,
+                      FlatButton(
+                          onPressed: (){
+                            Navigator.of(context).pushNamed('/tea_login');
+                          },
+                          child: Image.asset('images/role_teacher.jpg',
+                            width: 150,)
                       ),
-                      SizedBox(width: 10.0),
-                      Icon(Icons.psychology_outlined)
+                      SizedBox(height: 10.0),
+                        Text('I am a Teacher',
+                        style: GoogleFonts.pacifico(
+                        color: Colors.deepPurple,
+                        fontSize: 20,
+                        ),),
                     ],
                   ),
-                  onPressed: (){
-                    Navigator.of(context).pushNamed('/st_login');
-                  },
-                  shape:RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50.0),
-                      side: BorderSide(color: Colors.white)
-                  ),
-                ),
+                ],
               ) ,
+              SizedBox(height: 80.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.circle, color: Colors.deepPurple, size: 12,),
+                  Icon(Icons.circle, color: Colors.deepPurple, size: 15,),
+                  SizedBox(width: 10,),
+                  Text("Meetings Made Easy",
+                  style: TextStyle(
+                    fontSize: 18,
+                  )),
+                  SizedBox(width: 10,),
+                  Icon(Icons.circle, color: Colors.deepPurple, size: 15,),
+                  Icon(Icons.circle, color: Colors.deepPurple, size: 12,),
+                ],
+              ),
             ],
           )
       ),
