@@ -369,6 +369,9 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                                 widget.request.time,
                                 widget.request.date,
                                 widget.request.teacher_mail,
+                                widget.request.teacher_name,
+                                widget.request.teacher_ini,
+                                widget.request.teacher_room,
                                 widget.request.request_id);
                             print(widget.request.request_id);
                             Fluttertoast.showToast(
@@ -415,6 +418,9 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                                 widget.request.time,
                                 widget.request.date,
                                 widget.request.teacher_mail,
+                                widget.request.teacher_name,
+                                widget.request.teacher_ini,
+                                widget.request.teacher_room,
                                 widget.request.request_id);
                             print(widget.request.request_id);
 

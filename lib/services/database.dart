@@ -46,7 +46,7 @@ class DatabaseService {
     });
   }
 
-  Future updateRequests(String name,String rollno,String branch,String year,String email,String purpose,String time, String date, String teacherMail) async
+  Future updateRequests(String name,String rollno,String branch,String year,String email,String purpose,String time, String date, String teacherMail,String teacherName,String teacher_ini,String teacher_room) async
   {
     DocumentReference docref=requestCollection.document();
     return await docref.setData({
@@ -61,11 +61,14 @@ class DatabaseService {
       'date': date,
       'status':'Pending',
       'teacher_mail':teacherMail,
+      'teacher_name': teacherName,
+      'teacher_ini': teacher_ini,
+      'teacher_room': teacher_room,
       'request_id':docref.documentID,
     });
   }
 
-  Future acceptRequests(String student_id,String name,String rollno,String branch,String year,String email,String purpose,String time, String date,String teacherMail,String req_id) async
+  Future acceptRequests(String student_id,String name,String rollno,String branch,String year,String email,String purpose,String time, String date,String teacherMail,String teacherName,String teacher_ini,String teacher_room,String req_id) async
   {
     DocumentReference docref=acceptCollection.document();
     return await docref.setData({
@@ -80,12 +83,15 @@ class DatabaseService {
       'date': date,
       'status':'Accepted',
       'teacher_mail':teacherMail,
+      'teacher_name': teacherName,
+      'teacher_ini': teacher_ini,
+      'teacher_room': teacher_room,
       'request_id':req_id,
     });
   }
 
 
-  Future declineRequests(String docid, String student_id,String name,String rollno,String branch,String year,String email,String purpose,String time, String date,String teacherMail,String req_id) async
+  Future declineRequests(String docid, String student_id,String name,String rollno,String branch,String year,String email,String purpose,String time, String date,String teacherMail,String teacherName,String teacher_ini,String teacher_room,String req_id) async
   {
     DocumentReference docref=declineCollection.document(docid);
     return await docref.setData({
@@ -100,6 +106,9 @@ class DatabaseService {
       'date': date,
       'status':'Rejected',
       'teacher_mail':teacherMail,
+      'teacher_name': teacherName,
+      'teacher_ini': teacher_ini,
+      'teacher_room': teacher_room,
       'request_id':req_id,
     });
   }
@@ -134,6 +143,9 @@ class DatabaseService {
         student_rollno: doc.data['student_rollno'],
         student_year: doc.data['student_year'],
         teacher_mail: doc.data['teacher_mail'],
+        teacher_name: doc.data['teacher_name'],
+        teacher_ini: doc.data['teacher_ini'],
+        teacher_room: doc.data['teacher_room'],
         time: doc.data['time'],
         request_id: doc.data['request_id'],
         student_id: doc.data['student_id']
