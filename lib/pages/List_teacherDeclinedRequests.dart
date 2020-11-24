@@ -46,6 +46,7 @@ class _listofRejectedRequestsState extends State<listofRejectedRequests> {
                         Navigator.push(context, MaterialPageRoute(builder: (context)=> teacher_request_status(request:rejected[index])));
                       },
                       leading: CircleAvatar(
+                        backgroundImage: AssetImage('images/role_student.jpg'),
                         radius: 25.0,
                         backgroundColor: Colors.deepPurple[100],
                       ),

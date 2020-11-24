@@ -84,7 +84,7 @@ class _teacher_profileState extends State<teacher_profile> {
                       Center(
                           child: Align(
                             child: CircleAvatar(
-                              backgroundImage: AssetImage('images/google.jpg'),
+                              backgroundImage: AssetImage('images/role_teacher.jpg'),
                               radius: 70.0,
                             ),
                           )

@@ -42,11 +42,10 @@ class _listofStudentAcceptedRequestsState extends State<listofStudentAcceptedReq
                     margin: EdgeInsets.fromLTRB(20, 6, 20, 0),
                     child: ListTile(
                       onTap: (){
-                        print(accepted[index].date);
-                        print(accepted[index]);
                         Navigator.push(context, MaterialPageRoute(builder: (context)=> student_request_status(request:accepted[index])));
                       },
                       leading: CircleAvatar(
+                        backgroundImage: AssetImage('images/role_teacher.jpg'),
                         radius: 25.0,
                         backgroundColor: Colors.deepPurple[100],
                       ),

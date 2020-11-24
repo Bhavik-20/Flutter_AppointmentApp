@@ -46,6 +46,7 @@ class _listofAcceptedRequestsState extends State<listofAcceptedRequests> {
                         Navigator.push(context, MaterialPageRoute(builder: (context)=> teacher_request_status(request:accepted[index])));
                       },
                       leading: CircleAvatar(
+                        backgroundImage: AssetImage('images/role_student.jpg'),
                         radius: 25.0,
                         backgroundColor: Colors.deepPurple[100],
                       ),

@@ -11,14 +11,14 @@ class DatabaseService {
 
   final String uid;
   DatabaseService({this.uid});
-
+//-------------------------------------------------------------------------------------------------------------------------------------//
   //collection reference
   final CollectionReference facultyCollection =Firestore.instance.collection('faculty');
   final CollectionReference studentCollection =Firestore.instance.collection('student');
   final CollectionReference requestCollection =Firestore.instance.collection('request');
   final CollectionReference acceptCollection =Firestore.instance.collection('accepted');
   final CollectionReference declineCollection =Firestore.instance.collection('rejected');
-
+//-------------------------------------------------------------------------------------------------------------------------------------//
   Future updateFacultyData(String name,String initials,String room,String email,String password) async
   {
     return await facultyCollection.document(uid).setData({
@@ -45,8 +45,8 @@ class DatabaseService {
       'role':'student',
     });
   }
-
-  Future updateRequests(String name,String rollno,String branch,String year,String email,String purpose,String time, String date, String teacherMail,String teacherName,String teacher_ini,String teacher_room) async
+//-------------------------------------------------------------------------------------------------------------------------------------//
+  Future updateRequests(String name,String rollno,String branch,String year,String email,String purpose,String time, String date, String teacherMail,String teacherName,String teacher_ini,String teacher_room,String teacher_id) async
   {
     DocumentReference docref=requestCollection.document();
     return await docref.setData({
@@ -60,6 +60,7 @@ class DatabaseService {
       'time': time,
       'date': date,
       'status':'Pending',
+      'teacher_id':teacher_id,
       'teacher_mail':teacherMail,
       'teacher_name': teacherName,
       'teacher_ini': teacher_ini,
@@ -68,9 +69,9 @@ class DatabaseService {
     });
   }
 
-  Future acceptRequests(String student_id,String name,String rollno,String branch,String year,String email,String purpose,String time, String date,String teacherMail,String teacherName,String teacher_ini,String teacher_room,String req_id) async
+  Future acceptRequests(String docid,String student_id,String name,String rollno,String branch,String year,String email,String purpose,String time, String date,String teacherMail,String teacherName,String teacher_ini,String teacher_room,String req_id,String teacher_id) async
   {
-    DocumentReference docref=acceptCollection.document();
+    DocumentReference docref=acceptCollection.document(docid);
     return await docref.setData({
       'student_id':student_id,
       'student_name': name,
@@ -82,6 +83,7 @@ class DatabaseService {
       'time': time,
       'date': date,
       'status':'Accepted',
+      'teacher_id':teacher_id,
       'teacher_mail':teacherMail,
       'teacher_name': teacherName,
       'teacher_ini': teacher_ini,
@@ -91,7 +93,7 @@ class DatabaseService {
   }
 
 
-  Future declineRequests(String docid, String student_id,String name,String rollno,String branch,String year,String email,String purpose,String time, String date,String teacherMail,String teacherName,String teacher_ini,String teacher_room,String req_id) async
+  Future declineRequests(String docid, String student_id,String name,String rollno,String branch,String year,String email,String purpose,String time, String date,String teacherMail,String teacherName,String teacher_ini,String teacher_room,String req_id,String teacher_id) async
   {
     DocumentReference docref=declineCollection.document(docid);
     return await docref.setData({
@@ -110,6 +112,7 @@ class DatabaseService {
       'teacher_ini': teacher_ini,
       'teacher_room': teacher_room,
       'request_id':req_id,
+      'teacher_id':teacher_id,
     });
   }
 
@@ -118,25 +121,34 @@ class DatabaseService {
     DocumentReference docref=requestCollection.document(req_id);
     return await docref.delete();
   }
-//-------------------------------------------------------------------------------------------//
+//-------------------------------------------------------------------------------------------------------------------------------------//
 
-  Stream<List<Request>> get newFacultyRequests  {
-    return requestCollection.where('teacher_mail',isEqualTo: 'anooja.joy@somaiya.edu').snapshots().map(_newFacultyRequestsFromSnapshot);
+  Stream<List<Request>> get teacher_unanswered  {
+    return requestCollection.where('teacher_id',isEqualTo: uid).snapshots().map(_RequestModalSnapshot);
   }
 
-  Stream<List<Request>> get acceptedRequests  {
-    return acceptCollection.where('status',isEqualTo: 'Accepted').snapshots().map(_newFacultyRequestsFromSnapshot);
+  Stream<List<Request>> get teacher_accepted  {
+    return acceptCollection.where('teacher_id',isEqualTo: uid).snapshots().map(_RequestModalSnapshot);
   }
-  Stream<List<Request>> get rejectedRequests  {
-    return declineCollection.where('status',isEqualTo: 'Rejected').snapshots().map(_newFacultyRequestsFromSnapshot);
-  }
-
-  Stream<List<Request>> get newStudentRequests  {
-    return requestCollection.where('student_id',isEqualTo: uid).snapshots().map(_newFacultyRequestsFromSnapshot);
+  Stream<List<Request>> get teacher_rejected  {
+    return declineCollection.where('teacher_id',isEqualTo: uid).snapshots().map(_RequestModalSnapshot);
   }
 
-  List<Request> _newFacultyRequestsFromSnapshot(QuerySnapshot snapshot)
-  {
+  Stream<List<Request>> get student_unanswered {
+    return requestCollection.where('student_id',isEqualTo: uid).snapshots().map(_RequestModalSnapshot);
+  }
+
+  Stream<List<Request>> get student_accepted  {
+    return acceptCollection.where('student_id',isEqualTo: uid).snapshots().map(_RequestModalSnapshot);
+  }
+
+  Stream<List<Request>> get student_rejected  {
+    return declineCollection.where('student_id',isEqualTo: uid).snapshots().map(_RequestModalSnapshot);
+  }
+
+  List<Request> _RequestModalSnapshot(QuerySnapshot snapshot)
+  { print("Uid:");
+    print(uid);
     return snapshot.documents.map((doc){
       return Request(
         date: doc.data['date'],
@@ -147,6 +159,7 @@ class DatabaseService {
         student_name: doc.data['student_name'],
         student_rollno: doc.data['student_rollno'],
         student_year: doc.data['student_year'],
+        teacher_id: doc.data['teacher_id'],
         teacher_mail: doc.data['teacher_mail'],
         teacher_name: doc.data['teacher_name'],
         teacher_ini: doc.data['teacher_ini'],
@@ -175,6 +188,7 @@ class DatabaseService {
         email: doc.data['email'] ?? '',
         room: doc.data['room'] ?? '',
         password: doc.data['password'] ?? '',
+        teacher_id: doc.data['teacher_id'] ?? '',
       );
     }).toList();
   }
@@ -194,6 +208,7 @@ class DatabaseService {
       room: snapshot.data['room'],
       email: snapshot.data['email'],
       password: snapshot.data['password'] ?? '',
+      teacher_id: snapshot.data['teacher_id'] ?? ''
     );
   }
 //-------------------------------------------------------------------------------------------//

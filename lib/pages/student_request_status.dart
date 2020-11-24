@@ -23,7 +23,13 @@ class _student_request_statusState extends State<student_request_status> {
       backgroundColor: Colors.deepPurple[50],
       appBar: AppBar(
         title:Text('Request Details'),
-        leading: Icon(Icons.arrow_back),
+        leading: IconButton(
+            icon:Icon(Icons.arrow_back),
+            onPressed: (){
+              Navigator.pop(context);
+              // Navigator.of(context).pushNamed('/st_dash');
+            },
+        ),
         backgroundColor: Colors.deepPurple[600],
       ),
       body: SingleChildScrollView(

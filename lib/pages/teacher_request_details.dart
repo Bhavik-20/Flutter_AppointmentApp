@@ -8,6 +8,7 @@ import 'package:flutter_appointment_app/services/database.dart';
 import 'package:flutter_appointment_app/ui_helpers/Loading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
 
 void main()
 {
@@ -44,7 +45,8 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                 leading: IconButton(
                   icon: Icon(Icons.arrow_back),
                   onPressed: (){
-                    Navigator.of(context).pushNamed('/tea_dash');
+                    Navigator.pop(context);
+                    // Navigator.of(context).pushNamed('/tea_dash');
                   },
                 ),
                 backgroundColor: Colors.deepPurple[600],
@@ -360,6 +362,7 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                             await DatabaseService().deleteRequests(widget.request.request_id);
                             await DatabaseService().acceptRequests(
                                 widget.request.request_id,
+                                widget.request.student_id,
                                 widget.request.student_name,
                                 widget.request.student_rollno,
                                 widget.request.student_branch,
@@ -372,7 +375,8 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                                 widget.request.teacher_name,
                                 widget.request.teacher_ini,
                                 widget.request.teacher_room,
-                                widget.request.request_id);
+                                widget.request.request_id,
+                                widget.request.teacher_id);
                             print(widget.request.request_id);
                             Fluttertoast.showToast(
                               backgroundColor: Colors.green,
@@ -421,7 +425,8 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                                 widget.request.teacher_name,
                                 widget.request.teacher_ini,
                                 widget.request.teacher_room,
-                                widget.request.request_id);
+                                widget.request.request_id,
+                                widget.request.teacher_id);
                             print(widget.request.request_id);
 
                             Fluttertoast.showToast(

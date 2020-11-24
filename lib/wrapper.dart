@@ -33,7 +33,7 @@ class Wrapper extends StatelessWidget {
       }
       else
       {
-        return teacher_dashboard();
+        return student_dashboard();
       }
     }
   }

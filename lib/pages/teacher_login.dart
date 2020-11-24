@@ -178,21 +178,21 @@ class _teacher_loginState extends State<teacher_login> {
                     ]
                 ),
                 SizedBox(height: 10.0,),
-                FlatButton(
-                  shape:  CircleBorder(
-                      side: BorderSide(
-                          style: BorderStyle.solid,
-                          color: Colors.white
-                      )
-                  ),
-                  onPressed: (){},
-                  child: Image(
-                    image: AssetImage('images/google.jpg'),
-                    height: 70.0,
-                    width: 50.0,
-                  ),
-                  // height: size.height*0.01,
-                ),
+                // FlatButton(
+                //   shape:  CircleBorder(
+                //       side: BorderSide(
+                //           style: BorderStyle.solid,
+                //           color: Colors.white
+                //       )
+                //   ),
+                //   onPressed: (){},
+                //   child: Image(
+                //     image: AssetImage('images/google.jpg'),
+                //     height: 70.0,
+                //     width: 50.0,
+                //   ),
+                //   // height: size.height*0.01,
+                // ),
                 Row(
                     children: <Widget>[
                       Expanded(

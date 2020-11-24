@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_appointment_app/model/Request.dart';
-import 'package:flutter_appointment_app/pages/List_studentAcceptedRequests.dart';
+import 'package:flutter_appointment_app/model/User.dart';
 import 'package:flutter_appointment_app/services/database.dart';
 import "package:google_fonts/google_fonts.dart";
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -12,22 +12,25 @@ import 'List_teacherAcceptedRequests.dart';
 
 void main()
 {
-  runApp(student_accepted_list());
+  runApp(teacher_accepted_requests());
 }
 
-class student_accepted_list extends StatefulWidget {
+class teacher_accepted_requests extends StatefulWidget {
   @override
-  _student_accepted_listState createState() => _student_accepted_listState();
+  _teacher_accepted_requestsState createState() => _teacher_accepted_requestsState();
 }
 
-class _student_accepted_listState extends State<student_accepted_list> {
+class _teacher_accepted_requestsState extends State<teacher_accepted_requests> {
   @override
   Widget build(BuildContext context) {
+
+    final user = Provider.of<User>(context);
+
     return StreamProvider<List<Request>>.value(
-        value: DatabaseService().acceptedRequests,
+        value: DatabaseService(uid: user.user_id).teacher_accepted,
         child: Scaffold(
           backgroundColor: Colors.deepPurple[100],
-          body: listofStudentAcceptedRequests(),
+          body: listofAcceptedRequests(),
         )
     );
   }

@@ -12,17 +12,20 @@ import 'package:provider/provider.dart';
 
 import 'List_teacherNewRequest.dart';
 
-class teacher_new_req extends StatefulWidget {
+class teacher_new_requests extends StatefulWidget {
   @override
-  _teacher_new_reqState createState() => _teacher_new_reqState();
+  _teacher_new_requestsState createState() => _teacher_new_requestsState();
 }
 
-class _teacher_new_reqState extends State<teacher_new_req> {
+class _teacher_new_requestsState extends State<teacher_new_requests> {
 
   @override
   Widget build(BuildContext context) {
-        return  StreamProvider<List<Request>>.value(
-        value: DatabaseService().newFacultyRequests,
+
+    final user = Provider.of<User>(context);
+
+    return  StreamProvider<List<Request>>.value(
+        value: DatabaseService(uid: user.user_id).teacher_unanswered,
         child: Scaffold(
           backgroundColor: Colors.deepPurple[100],
           body: listofnewFacultyRequests(),

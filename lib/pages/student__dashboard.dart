@@ -1,8 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_appointment_app/pages/student_accepted_list.dart';
-import 'package:flutter_appointment_app/pages/student_declined_list.dart';
+import 'package:flutter_appointment_app/pages/student_accepted_requests.dart';
+import 'package:flutter_appointment_app/pages/student_declined_requests.dart';
 import 'package:flutter_appointment_app/pages/student_new_requests.dart';
 import 'package:flutter_appointment_app/services/auth.dart';
 import 'package:flutter_appointment_app/ui_helpers/Loading.dart';
@@ -24,9 +24,9 @@ class _student_dashboardState extends State<student_dashboard> {
   bool loading=false;
   int _selectedIndex = 0;
    List<Widget> _widgetOptions = <Widget>[
-    student_new_req(),
-     student_accepted_list(),
-     student_declined_list(),
+     student_new_requests(),
+     student_accepted_requests(),
+     student_declined_requests(),
   ];
 
   void _onItemTapped(int index) {

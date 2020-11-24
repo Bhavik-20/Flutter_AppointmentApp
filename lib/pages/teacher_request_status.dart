@@ -27,7 +27,8 @@ class _teacher_request_statusState extends State<teacher_request_status> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back ),
           onPressed: (){
-            Navigator.of(context).pushNamed('/tea_dash');
+            Navigator.pop(context);
+            // Navigator.of(context).pushNamed('/tea_dash');
           },
         ),
         backgroundColor: Colors.deepPurple[600],

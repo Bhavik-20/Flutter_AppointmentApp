@@ -3,9 +3,9 @@ import 'package:flutter_appointment_app/pages/role.dart';
 import 'package:flutter_appointment_app/pages/student_login.dart';
 import 'package:flutter_appointment_app/pages/student_request_status.dart';
 import 'package:flutter_appointment_app/pages/student_signup.dart';
-import 'package:flutter_appointment_app/pages/teacher_accepted_list.dart';
+import 'package:flutter_appointment_app/pages/teacher_accepted_requests.dart';
 import 'package:flutter_appointment_app/pages/teacher_dashboard.dart';
-import 'package:flutter_appointment_app/pages/teacher_declined_list.dart';
+import 'package:flutter_appointment_app/pages/teacher_declined_requests.dart';
 import 'package:flutter_appointment_app/pages/teacher_history.dart';
 import 'package:flutter_appointment_app/pages/teacher_login.dart';
 import 'package:flutter_appointment_app/pages/teacher_request_details.dart';
@@ -16,6 +16,11 @@ import 'package:flutter_appointment_app/pages/student_search_teacher.dart';
 import 'package:flutter_appointment_app/pages/student_profile.dart';
 import 'package:flutter_appointment_app/pages/teacher_profile.dart';
 import 'package:flutter_appointment_app/pages/student_bookAppointment.dart';
+import 'package:flutter_appointment_app/pages/student_accepted_requests.dart';
+import 'package:flutter_appointment_app/pages/student_declined_requests.dart';
+import 'package:flutter_appointment_app/pages/student_new_requests.dart';
+import 'package:flutter_appointment_app/pages/teacher_search_list.dart';
+import 'package:flutter_appointment_app/pages/teacher_new_requests.dart';
 
 
 class RouteGenerator {
@@ -40,22 +45,32 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => student_search_teacher());
       case '/st_signup':
         return MaterialPageRoute(builder: (_) => student_signup());
+      case '/st_acc_req':
+        return MaterialPageRoute(builder: (_) => student_accepted_requests());
+      case '/st_dec_req':
+        return MaterialPageRoute(builder: (_) => student_declined_requests());
+      case '/st_new_req':
+        return MaterialPageRoute(builder: (_) => student_new_requests());
       case '/tea_acc_list':
-        return MaterialPageRoute(builder: (_) => teacher_accepted_list());
+        return MaterialPageRoute(builder: (_) => teacher_accepted_requests());
       case '/tea_dash':
         return MaterialPageRoute(builder: (_) => teacher_dashboard());
       case '/tea_dec_list':
-        return MaterialPageRoute(builder: (_) => teacher_declined_list());
+        return MaterialPageRoute(builder: (_) => teacher_declined_requests());
       case '/tea_history':
         return MaterialPageRoute(builder: (_) => teacher_history());
       case '/tea_login':
         return MaterialPageRoute(builder: (_) => teacher_login());
+      case '/tea_new_req':
+        return MaterialPageRoute(builder: (_) => teacher_new_requests());
       case '/tea_profile':
         return MaterialPageRoute(builder: (_) => teacher_profile());
       case '/tea_req_details':
         return MaterialPageRoute(builder: (_) => teacher_request_details());
       case '/tea_req_status':
         return MaterialPageRoute(builder: (_) => teacher_request_status());
+      case '/tea_search_list':
+        return MaterialPageRoute(builder: (_) => SearchList());
       case '/tea_signup':
         return MaterialPageRoute(builder: (_) => teacher_signup());
 

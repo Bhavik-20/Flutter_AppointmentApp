@@ -2,13 +2,13 @@ import 'dart:ui';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_appointment_app/pages/teacher_declined_list.dart';
+import 'package:flutter_appointment_app/pages/teacher_declined_requests.dart';
 import 'package:flutter_appointment_app/pages/teacher_new_requests.dart';
 import 'package:flutter_appointment_app/services/auth.dart';
 import 'package:flutter_appointment_app/ui_helpers/Loading.dart';
 import "package:google_fonts/google_fonts.dart";
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:flutter_appointment_app/pages/teacher_accepted_list.dart';
+import 'package:flutter_appointment_app/pages/teacher_accepted_requests.dart';
 
 void main()
 {
@@ -29,9 +29,9 @@ class _teacher_dashboardState extends State<teacher_dashboard> {
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
   List<Widget> _widgetOptions = <Widget>[
-    teacher_new_req(),
-    teacher_accepted_list(),
-    teacher_declined_list(),
+    teacher_new_requests(),
+    teacher_accepted_requests(),
+    teacher_declined_requests(),
   ];
 
   void _onItemTapped(int index) {
@@ -64,7 +64,7 @@ class _teacher_dashboardState extends State<teacher_dashboard> {
                       children: [
                         Align(
                           child: CircleAvatar(
-                            backgroundImage: AssetImage('images/google.jpg'),
+                            backgroundImage: AssetImage('images/role_teacher.jpg'),
                             radius: 60.0,
                           ),
                         )
@@ -93,24 +93,24 @@ class _teacher_dashboardState extends State<teacher_dashboard> {
                       Divider(
                         color: Colors.black,
                       ),
-                      FlatButton(
-                        onPressed: (){},
-                        child: Row(
-                          children: [
-                            Icon(Icons.calendar_today_outlined),
-                            SizedBox(width: 15.0),
-                            Text('Schedule',
-                              style: GoogleFonts.quicksand(
-                                fontSize: 21,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Divider(
-                          color: Colors.black
-                      ),
+                      // FlatButton(
+                      //   onPressed: (){},
+                      //   child: Row(
+                      //     children: [
+                      //       Icon(Icons.calendar_today_outlined),
+                      //       SizedBox(width: 15.0),
+                      //       Text('Schedule',
+                      //         style: GoogleFonts.quicksand(
+                      //           fontSize: 21,
+                      //           fontWeight: FontWeight.w500,
+                      //         ),
+                      //       )
+                      //     ],
+                      //   ),
+                      // ),
+                      // Divider(
+                      //     color: Colors.black
+                      // ),
                       FlatButton(
                         onPressed: (){
                           Navigator.of(context).pushNamed('/tea_history');
