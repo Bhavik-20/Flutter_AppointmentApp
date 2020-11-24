@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_appointment_app/model/Request.dart';
 
 void main()
 {
@@ -10,6 +11,8 @@ void main()
 class student_request_status extends StatefulWidget {
   @override
   _student_request_statusState createState() => _student_request_statusState();
+  final Request request;
+  student_request_status({this.request});
 }
 
 class _student_request_statusState extends State<student_request_status> {
@@ -43,19 +46,31 @@ class _student_request_statusState extends State<student_request_status> {
                     Container(
                       height:50.0,
                       padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                      child: TextField(
-                        style: TextStyle(
-                            fontSize: 20.0,
-                            fontFamily: 'playfair'
-                        ),
-                        enabled: false,
-                        autocorrect: false,
-                        autofocus: false,
-                        cursorColor: Colors.black,
-                        decoration: new InputDecoration(
-                          labelText: 'Teacher Name',
-                          border: InputBorder.none,
-                        ),
+                      child: Row(
+                        children: [
+                          Icon(Icons.person, color: Colors.deepPurple,),
+                          SizedBox(width: 10.0,),
+                          Text(
+                            'Name: ',
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              fontFamily: 'playfair',
+                            ),
+                          ),
+                          Expanded(
+                            child: Text(
+                              widget.request.teacher_name,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                fontFamily: 'playfair',
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     Divider(
@@ -65,19 +80,31 @@ class _student_request_statusState extends State<student_request_status> {
                     Container(
                       height:50.0,
                       padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                      child: TextField(
-                        style: TextStyle(
-                            fontSize: 20.0,
-                            fontFamily: 'playfair'
-                        ),
-                        enabled: false,
-                        autocorrect: false,
-                        autofocus: false,
-                        cursorColor: Colors.black,
-                        decoration: new InputDecoration(
-                          labelText: 'Initials',
-                          border: InputBorder.none,
-                        ),
+                      child: Row(
+                        children: [
+                          Icon(Icons.sort_by_alpha, color: Colors.deepPurple,),
+                          SizedBox(width: 10.0,),
+                          Text(
+                            'Initials: ',
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              fontFamily: 'playfair',
+                            ),
+                          ),
+                          Expanded(
+                            child: Text(
+                              widget.request.teacher_ini,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                fontFamily: 'playfair',
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     Divider(
@@ -85,21 +112,33 @@ class _student_request_statusState extends State<student_request_status> {
                       thickness: 1,
                     ),
                     Container(
-                      height:40.0,
+                      height:50.0,
                       padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                      child: TextField(
-                        style: TextStyle(
-                            fontSize: 20.0,
-                            fontFamily: 'playfair'
-                        ),
-                        enabled: false,
-                        autocorrect: false,
-                        autofocus: false,
-                        cursorColor: Colors.black,
-                        decoration: new InputDecoration(
-                          labelText: 'Room Number',
-                          border: InputBorder.none,
-                        ),
+                      child: Row(
+                        children: [
+                          Icon(Icons.location_on, color: Colors.deepPurple,),
+                          SizedBox(width: 10.0,),
+                          Text(
+                            'Room No.: ',
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              fontFamily: 'playfair',
+                            ),
+                          ),
+                          Expanded(
+                            child: Text(
+                              widget.request.teacher_room,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                fontFamily: 'playfair',
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     Divider(
@@ -107,21 +146,33 @@ class _student_request_statusState extends State<student_request_status> {
                       thickness: 1.3,
                     ),
                     Container(
-                      height:40.0,
+                      height:50.0,
                       padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                      child: TextField(
-                        style: TextStyle(
-                            fontSize: 20.0,
-                            fontFamily: 'playfair'
-                        ),
-                        enabled: false,
-                        autocorrect: false,
-                        autofocus: false,
-                        cursorColor: Colors.black,
-                        decoration: new InputDecoration(
-                          labelText: 'Somaiya Email',
-                          border: InputBorder.none,
-                        ),
+                      child: Row(
+                        children: [
+                          Icon(Icons.mail, color: Colors.deepPurple,),
+                          SizedBox(width: 10.0,),
+                          Text(
+                            'Mail: ',
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              fontFamily: 'playfair',
+                            ),
+                          ),
+                          Expanded(
+                            child: Text(
+                              widget.request.teacher_mail,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                fontFamily: 'playfair',
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     Divider(
@@ -131,19 +182,31 @@ class _student_request_statusState extends State<student_request_status> {
                     Container(
                       height:40.0,
                       padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                      child: TextField(
-                        style: TextStyle(
-                            fontSize: 20.0,
-                            fontFamily: 'playfair'
-                        ),
-                        enabled: false,
-                        autocorrect: false,
-                        autofocus: false,
-                        cursorColor: Colors.black,
-                        decoration: new InputDecoration(
-                          labelText: 'Date',
-                          border: InputBorder.none,
-                        ),
+                      child: Row(
+                        children: [
+                          Icon(Icons.today, color: Colors.deepPurple,),
+                          SizedBox(width: 10.0,),
+                          Text(
+                            'Date : ',
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              fontFamily: 'playfair',
+                            ),
+                          ),
+                          Expanded(
+                            child: Text(
+                              widget.request.date,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                fontFamily: 'playfair',
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     Divider(
@@ -151,21 +214,33 @@ class _student_request_statusState extends State<student_request_status> {
                       thickness: 1,
                     ),
                     Container(
-                      height:42.0,
+                      height:40.0,
                       padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                      child: TextField(
-                        style: TextStyle(
-                            fontSize: 20.0,
-                            fontFamily: 'playfair'
-                        ),
-                        enabled: false,
-                        autocorrect: false,
-                        autofocus: false,
-                        cursorColor: Colors.black,
-                        decoration: new InputDecoration(
-                          labelText: 'Time',
-                          border: InputBorder.none,
-                        ),
+                      child: Row(
+                        children: [
+                          Icon(Icons.schedule, color: Colors.deepPurple,),
+                          SizedBox(width: 10.0,),
+                          Text(
+                            'Time : ',
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              fontFamily: 'playfair',
+                            ),
+                          ),
+                          Expanded(
+                            child: Text(
+                              widget.request.time,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                fontFamily: 'playfair',
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
@@ -173,6 +248,15 @@ class _student_request_statusState extends State<student_request_status> {
               ),
             ),
             SizedBox(height: 30.0,),
+            Container(
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+              child: Text( 'Purpose of Meet:',
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontFamily: 'playfair',
+                  color: Colors.black,
+                ),),
+            ),
             Center(
                 child: Container(
                   padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
@@ -188,15 +272,20 @@ class _student_request_statusState extends State<student_request_status> {
                   child: Container(
                     child: TextField(
                       style: TextStyle(
-                          fontSize: 20.0,
-                          fontFamily: 'playfair'
+                        fontSize: 20.0,
+                        fontFamily: 'playfair',
+                        color: Colors.black,
                       ),
+                      enabled: false,
                       maxLines: 5,
                       autocorrect: false,
                       autofocus: false,
                       cursorColor: Colors.black,
                       decoration: new InputDecoration(
-                        hintText: 'Purpose of Meet',
+                        hintText: widget.request.purpose,
+                        hintStyle: TextStyle(
+                          color: Colors.black,
+                        ),
                         border: InputBorder.none,
                       ),
                     ),
@@ -217,19 +306,31 @@ class _student_request_statusState extends State<student_request_status> {
                   // color: Colors.white,
                   width: size.width*0.8,
                   child: Container(
-                    child: TextField(
-                      style: TextStyle(
-                          fontSize: 20.0,
-                          fontFamily: 'playfair'
-                      ),
-                      autocorrect: false,
-                      autofocus: false,
-                      cursorColor: Colors.black,
-                      decoration: new InputDecoration(
-                        hintText: 'Approved',
-                        labelText: 'Request Status',
-                        border: InputBorder.none,
-                      ),
+                    height:40.0,
+                    padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Request Status : ',
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            fontFamily: 'playfair',
+                          ),
+                        ),
+                        Expanded(
+                          child: Text(
+                            widget.request.status,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              fontFamily: 'playfair',
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 )

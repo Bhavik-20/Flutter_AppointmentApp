@@ -130,6 +130,11 @@ class DatabaseService {
   Stream<List<Request>> get rejectedRequests  {
     return declineCollection.where('status',isEqualTo: 'Rejected').snapshots().map(_newFacultyRequestsFromSnapshot);
   }
+
+  Stream<List<Request>> get newStudentRequests  {
+    return requestCollection.where('student_id',isEqualTo: uid).snapshots().map(_newFacultyRequestsFromSnapshot);
+  }
+
   List<Request> _newFacultyRequestsFromSnapshot(QuerySnapshot snapshot)
   {
     return snapshot.documents.map((doc){

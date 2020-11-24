@@ -1,6 +1,9 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_appointment_app/pages/student_accepted_list.dart';
+import 'package:flutter_appointment_app/pages/student_declined_list.dart';
+import 'package:flutter_appointment_app/pages/student_new_requests.dart';
 import 'package:flutter_appointment_app/services/auth.dart';
 import 'package:flutter_appointment_app/ui_helpers/Loading.dart';
 import "package:google_fonts/google_fonts.dart";
@@ -20,16 +23,10 @@ class _student_dashboardState extends State<student_dashboard> {
   final AuthService _auth=AuthService();
   bool loading=false;
   int _selectedIndex = 0;
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Pending',
-    ),
-    Text(
-      'Index 1: Accepted',
-    ),
-    Text(
-      'Index 2: Rejected',
-    ),
+   List<Widget> _widgetOptions = <Widget>[
+    student_new_req(),
+     student_accepted_list(),
+     student_declined_list(),
   ];
 
   void _onItemTapped(int index) {
