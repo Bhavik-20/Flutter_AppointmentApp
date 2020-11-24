@@ -1,8 +1,13 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_appointment_app/model/Request.dart';
+import 'package:flutter_appointment_app/services/database.dart';
 import "package:google_fonts/google_fonts.dart";
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:provider/provider.dart';
+
+import 'List_teacherAcceptedRequests.dart';
 
 void main()
 {
@@ -17,27 +22,13 @@ class teacher_accepted_list extends StatefulWidget {
 class _teacher_accepted_listState extends State<teacher_accepted_list> {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      backgroundColor: Colors.deepPurple[100],
-        body: ListView.builder(
-            itemCount: 15,
-            itemBuilder: (context, index){
-              return Card(
-                margin: EdgeInsets.fromLTRB(16, 16, 16,0),
-                child: ListTile(
-                  onTap: (){
-                    // Navigator.of(context).pushNamed('/tea_reqdetails');
-                  },
-                  title: Text('Student'),
-                  leading: CircleAvatar(
-                     backgroundColor: Colors.grey,
-                  ),
-                  trailing: Text('Date-Time'),
-                ),
-              );
-            }
-        ),
+    return StreamProvider<List<Request>>.value(
+        value: DatabaseService().acceptedRequests,
+        child: Scaffold(
+          backgroundColor: Colors.deepPurple[100],
+          body: listofAcceptedRequests(),
+        )
     );
   }
 }
+

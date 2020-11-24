@@ -115,6 +115,12 @@ class DatabaseService {
     return requestCollection.where('teacher_mail',isEqualTo: 'anooja.joy@somaiya.edu').snapshots().map(_newFacultyRequestsFromSnapshot);
   }
 
+  Stream<List<Request>> get acceptedRequests  {
+    return acceptCollection.where('status',isEqualTo: 'Accepted').snapshots().map(_newFacultyRequestsFromSnapshot);
+  }
+  Stream<List<Request>> get rejectedRequests  {
+    return declineCollection.where('status',isEqualTo: 'Rejected').snapshots().map(_newFacultyRequestsFromSnapshot);
+  }
   List<Request> _newFacultyRequestsFromSnapshot(QuerySnapshot snapshot)
   {
     return snapshot.documents.map((doc){

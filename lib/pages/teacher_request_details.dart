@@ -6,6 +6,7 @@ import 'package:flutter_appointment_app/model/Teacher.dart';
 import 'package:flutter_appointment_app/model/User.dart';
 import 'package:flutter_appointment_app/services/database.dart';
 import 'package:flutter_appointment_app/ui_helpers/Loading.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 void main()
@@ -370,6 +371,13 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                                 widget.request.teacher_mail,
                                 widget.request.request_id);
                             print(widget.request.request_id);
+                            Fluttertoast.showToast(
+                              backgroundColor: Colors.green,
+                              msg: 'The request is accepted',
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM,
+                            );
+                            Navigator.of(context).pushNamed('/st_dash');
                           },
                           color: Colors.green,
                           hoverColor: Colors.green[200],
@@ -410,6 +418,13 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                                 widget.request.request_id);
                             print(widget.request.request_id);
 
+                            Fluttertoast.showToast(
+                              backgroundColor: Colors.red,
+                              msg: 'The request is rejected',
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM,
+                            );
+                            Navigator.of(context).pushNamed('/st_dash');
                           },
 
                           color: Colors.red,

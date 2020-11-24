@@ -24,6 +24,7 @@ class _teacher_new_reqState extends State<teacher_new_req> {
         return  StreamProvider<List<Request>>.value(
         value: DatabaseService().newFacultyRequests,
         child: Scaffold(
+          backgroundColor: Colors.deepPurple[100],
           body: listofnewFacultyRequests(),
         )
     );
