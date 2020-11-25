@@ -41,8 +41,9 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
   ];
   final List<String> free_slots = [
     "----Select Time----",
-    "02:30 - 02:45 pm",
-    "03:00 - 03:15 pm"
+    "09:30 - 10:00 am",
+    "10:00 - 10:30 am",
+    "05:30 - 06:00 pm",
   ];
   String time = "----Select Time----";
   bool loading = false;

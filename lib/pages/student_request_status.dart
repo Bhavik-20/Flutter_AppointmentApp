@@ -342,32 +342,32 @@ class _student_request_statusState extends State<student_request_status> {
                 )
             ),
             SizedBox(height: 30.0,),
-            Container(
-              width: 200 ,
-              child: RaisedButton(
-                onPressed: () => {},
-                color: Colors.red,
-                hoverColor: Colors.red[200],
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18.0),
-                  side: BorderSide(color: Colors.red),
-                ),
-                elevation: 5,
-                padding: EdgeInsets.fromLTRB(20.0,10,20,10),
-                child: Row( // Replace with a Row for horizontal icon + text
-                  children: <Widget>[
-                    Icon(Icons.cancel , color: Colors.white,),
-                    SizedBox(width: 10.0,),
-                    Text("Cancel Request",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                      ),)
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(height: 20.0,),
+            // Container(
+            //   width: 200 ,
+            //   child: RaisedButton(
+            //     onPressed: () => {},
+            //     color: Colors.red,
+            //     hoverColor: Colors.red[200],
+            //     shape: RoundedRectangleBorder(
+            //       borderRadius: BorderRadius.circular(18.0),
+            //       side: BorderSide(color: Colors.red),
+            //     ),
+            //     elevation: 5,
+            //     padding: EdgeInsets.fromLTRB(20.0,10,20,10),
+            //     child: Row( // Replace with a Row for horizontal icon + text
+            //       children: <Widget>[
+            //         Icon(Icons.cancel , color: Colors.white,),
+            //         SizedBox(width: 10.0,),
+            //         Text("Cancel Request",
+            //           style: TextStyle(
+            //             color: Colors.white,
+            //             fontSize: 18,
+            //           ),)
+            //       ],
+            //     ),
+            //   ),
+            // ),
+            // SizedBox(height: 20.0,),
           ],
         ),
       ),

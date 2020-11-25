@@ -358,7 +358,9 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                       children: [
                         RaisedButton(
                           onPressed: () async{
+                            setState(() => loading=true);
                             print('accepted');
+
                             await DatabaseService().deleteRequests(widget.request.request_id);
                             await DatabaseService().acceptRequests(
                                 widget.request.request_id,
@@ -386,7 +388,7 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                               toastLength: Toast.LENGTH_SHORT,
                               gravity: ToastGravity.BOTTOM,
                             );
-                            Navigator.of(context).pushNamed('/st_dash');
+                            Navigator.pop(context);
                           },
                           color: Colors.green,
                           hoverColor: Colors.green[200],
@@ -410,6 +412,7 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                         SizedBox(width: 20.0,),
                         RaisedButton(
                           onPressed: () async{
+                            loading=true;
                             print('rejected');
                             await DatabaseService().deleteRequests(widget.request.request_id);
                             await DatabaseService().declineRequests(
@@ -439,7 +442,7 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                               toastLength: Toast.LENGTH_SHORT,
                               gravity: ToastGravity.BOTTOM,
                             );
-                            Navigator.of(context).pushNamed('/st_dash');
+                            Navigator.pop(context);
                           },
 
                           color: Colors.red,
@@ -457,7 +460,8 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 18,
-                                ),)
+                                ),
+                              )
                             ],
                           ),
                         ),
