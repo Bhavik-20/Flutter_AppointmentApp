@@ -30,6 +30,16 @@ class _SearchListState extends State<SearchList> {
                     leading: CircleAvatar(
                       radius: 25.0,
                       backgroundColor: Colors.deepPurple[100],
+                      child: ClipOval(
+                        child: new SizedBox(
+                          height: 180,
+                          width:180,
+                          child:(faculties[index].url == '' || faculties[index].url == null ) ? Image.asset('images/role_teacher.jpg',
+                            fit: BoxFit.fill,) : Image.network(faculties[index].url,
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      ),
                     ),
                     title: Text(faculties[index].name),
                     subtitle: Text(faculties[index].initials),

@@ -19,20 +19,21 @@ class DatabaseService {
   final CollectionReference acceptCollection =Firestore.instance.collection('accepted');
   final CollectionReference declineCollection =Firestore.instance.collection('rejected');
 //-------------------------------------------------------------------------------------------------------------------------------------//
-  Future updateFacultyData(String name,String initials,String room,String email,String password) async
+  Future updateFacultyData(String name,String initials,String room,String email,String password, String downloadUrl) async
   {
     return await facultyCollection.document(uid).setData({
-      'faculty_id':uid,
+      'teacher_id':uid,
       'name': name,
       'initials':initials,
       'room':room,
       'email':email,
       'password':password,
+      'url':downloadUrl,
       'role':'faculty',
     });
   }
 
-  Future updateStudentData(String name,String rollno,String branch,String year,String email,String password) async
+  Future updateStudentData(String name,String rollno,String branch,String year,String email,String password, String downloadUrl) async
   {
     return await studentCollection.document(uid).setData({
       'student_id':uid,
@@ -42,11 +43,12 @@ class DatabaseService {
       'year':year,
       'email':email,
       'password':password,
+      'url':downloadUrl,
       'role':'student',
     });
   }
 //-------------------------------------------------------------------------------------------------------------------------------------//
-  Future updateRequests(String name,String rollno,String branch,String year,String email,String purpose,String time, String date, String teacherMail,String teacherName,String teacher_ini,String teacher_room,String teacher_id) async
+  Future updateRequests(String name,String rollno,String branch,String year,String email,String purpose,String time, String date, String teacherMail,String teacherName,String teacher_ini,String teacher_room,String teacher_id,String t_url, String s_url) async
   {
     DocumentReference docref=requestCollection.document();
     return await docref.setData({
@@ -66,10 +68,12 @@ class DatabaseService {
       'teacher_ini': teacher_ini,
       'teacher_room': teacher_room,
       'request_id':docref.documentID,
+      't_url':t_url,
+      's_url':s_url,
     });
   }
 
-  Future acceptRequests(String docid,String student_id,String name,String rollno,String branch,String year,String email,String purpose,String time, String date,String teacherMail,String teacherName,String teacher_ini,String teacher_room,String req_id,String teacher_id) async
+  Future acceptRequests(String docid,String student_id,String name,String rollno,String branch,String year,String email,String purpose,String time, String date,String teacherMail,String teacherName,String teacher_ini,String teacher_room,String req_id,String teacher_id,String t_url, String s_url) async
   {
     DocumentReference docref=acceptCollection.document(docid);
     return await docref.setData({
@@ -89,11 +93,13 @@ class DatabaseService {
       'teacher_ini': teacher_ini,
       'teacher_room': teacher_room,
       'request_id':req_id,
+      't_url':t_url,
+      's_url':s_url,
     });
   }
 
 
-  Future declineRequests(String docid, String student_id,String name,String rollno,String branch,String year,String email,String purpose,String time, String date,String teacherMail,String teacherName,String teacher_ini,String teacher_room,String req_id,String teacher_id) async
+  Future declineRequests(String docid, String student_id,String name,String rollno,String branch,String year,String email,String purpose,String time, String date,String teacherMail,String teacherName,String teacher_ini,String teacher_room,String req_id,String teacher_id,String t_url, String s_url) async
   {
     DocumentReference docref=declineCollection.document(docid);
     return await docref.setData({
@@ -113,6 +119,8 @@ class DatabaseService {
       'teacher_room': teacher_room,
       'request_id':req_id,
       'teacher_id':teacher_id,
+      't_url':t_url,
+      's_url':s_url,
     });
   }
 
@@ -166,7 +174,9 @@ class DatabaseService {
         teacher_room: doc.data['teacher_room'],
         time: doc.data['time'],
         request_id: doc.data['request_id'],
-        student_id: doc.data['student_id']
+        student_id: doc.data['student_id'],
+        t_url: doc.data['t_url'],
+        s_url: doc.data['s_url'],
       );
     }).toList();
   }
@@ -189,6 +199,7 @@ class DatabaseService {
         room: doc.data['room'] ?? '',
         password: doc.data['password'] ?? '',
         teacher_id: doc.data['teacher_id'] ?? '',
+        url: doc.data['url'] ?? '',
       );
     }).toList();
   }
@@ -208,7 +219,8 @@ class DatabaseService {
       room: snapshot.data['room'],
       email: snapshot.data['email'],
       password: snapshot.data['password'] ?? '',
-      teacher_id: snapshot.data['teacher_id'] ?? ''
+      teacher_id: snapshot.data['teacher_id'] ?? '',
+      url: snapshot.data['url'] ?? '',
     );
   }
 //-------------------------------------------------------------------------------------------//
@@ -241,6 +253,7 @@ class DatabaseService {
         year: doc.data['year'] ?? '',
         email: doc.data['email'] ?? '',
         password: doc.data['password'] ?? '',
+        url: doc.data['url'] ?? '',
       );
     }).toList();
   }
@@ -261,6 +274,7 @@ class DatabaseService {
       year: snapshot.data['year'] ,
       email: snapshot.data['email'],
       password: snapshot.data['password'] ?? '',
+      url: snapshot.data['url'] ?? '',
     );
   }
 //-------------------------------------------------------------------------------------------//

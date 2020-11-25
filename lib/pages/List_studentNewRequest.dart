@@ -46,7 +46,16 @@ class _listofnewStudentRequestsState extends State<listofnewStudentRequests> {
                         Navigator.push(context, MaterialPageRoute(builder: (context)=> student_request_status(request:requests[index])));
                       },
                       leading: CircleAvatar(
-                        backgroundImage: AssetImage('images/role_teacher.jpg'),
+                        child:  ClipOval(
+                          child: new SizedBox(
+                            height: 180,
+                            width:180,
+                            child:(requests[index].t_url == '' || requests[index].t_url == null ) ? Image.asset('images/role_teacher.jpg',
+                              fit: BoxFit.fill,) : Image.network(requests[index].t_url,
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                        ),
                         radius: 25.0,
                         backgroundColor: Colors.deepPurple[100],
                       ),

@@ -237,7 +237,7 @@ class _State extends State {
                     if(result=='valid')
                     {
                       setState(() => loading=true);
-                      dynamic result_auth = await _auth.registerStudent(name, rollno, branch, year, email, password);
+                      dynamic result_auth = await _auth.registerStudent(name, rollno, branch, year, email, password,'');
                       if(result_auth == null)
                       {
                         setState(() {

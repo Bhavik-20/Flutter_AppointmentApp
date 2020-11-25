@@ -6,7 +6,7 @@ class Student{
   final String year;
   final String email;
   final String password;
+  final String url;
 
-
-  Student({this.name, this.roll,this.branch,this.year,this.email,this.password});
+  Student({this.name, this.roll,this.branch,this.year,this.email,this.password,this.url});
 }

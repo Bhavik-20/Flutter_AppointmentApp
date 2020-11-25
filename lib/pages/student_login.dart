@@ -149,31 +149,31 @@ class _student_loginState extends State<student_login> {
                   },
                 ),
                 SizedBox(height: size.height * 0.01),
-                Row(
-                    children: <Widget>[
-                      Expanded(
-                          child: Divider(
-                            thickness: 1.0,
-                            color: Colors.purple[100],
-                          )
-                      ),
-                      SizedBox(width: 5.0,),
-                      Text("OR",
-                        style: TextStyle(
-                            fontFamily: 'dosis',
-                            fontWeight: FontWeight.bold,
-                            fontSize:15.0
-                        ),
-                      ),
-                      SizedBox(width: 5.0,),
-                      Expanded(
-                          child: Divider(
-                            thickness: 1.0,
-                            color: Colors.purple[100],
-                          )
-                      ),
-                    ]
-                ),
+                // Row(
+                //     children: <Widget>[
+                //       Expanded(
+                //           child: Divider(
+                //             thickness: 1.0,
+                //             color: Colors.purple[100],
+                //           )
+                //       ),
+                //       SizedBox(width: 5.0,),
+                //       Text("OR",
+                //         style: TextStyle(
+                //             fontFamily: 'dosis',
+                //             fontWeight: FontWeight.bold,
+                //             fontSize:15.0
+                //         ),
+                //       ),
+                //       SizedBox(width: 5.0,),
+                //       Expanded(
+                //           child: Divider(
+                //             thickness: 1.0,
+                //             color: Colors.purple[100],
+                //           )
+                //       ),
+                //     ]
+                // ),
                 SizedBox(height: 10.0,),
                 // FlatButton(
                 //   shape:  CircleBorder(

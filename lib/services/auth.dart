@@ -20,7 +20,7 @@ class AuthService {
   }
 
   // register faculty
-  Future registerFaculty(String name,String initials,String room,String email, String password) async
+  Future registerFaculty(String name,String initials,String room,String email, String password, String url) async
   {
     try
     {
@@ -28,7 +28,7 @@ class AuthService {
       FirebaseUser user = result.user;
 
       //create a new document for the teacher with the uid
-      await DatabaseService(uid:user.uid).updateFacultyData(name, initials, room, email, password);
+      await DatabaseService(uid:user.uid).updateFacultyData(name, initials, room, email, password,url);
       return _userFromFirebaseUser(user);
     }
     catch(e)
@@ -39,7 +39,7 @@ class AuthService {
   }
 
   // register student
-  Future registerStudent(String name,String rollno,String branch,String year,String email, String password) async
+  Future registerStudent(String name,String rollno,String branch,String year,String email, String password, String url) async
   {
     try
     {
@@ -47,7 +47,7 @@ class AuthService {
       FirebaseUser user = result.user;
 
       //create a new document for the teacher with the uid
-      await DatabaseService(uid:user.uid).updateStudentData(name, rollno, branch, year,email, password);
+      await DatabaseService(uid:user.uid).updateStudentData(name, rollno, branch, year,email, password,url);
       return _userFromFirebaseUser(user);
     }
     catch(e)

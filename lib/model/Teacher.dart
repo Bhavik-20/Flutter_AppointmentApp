@@ -6,7 +6,8 @@ class Teacher{
   final String email;
   final String password;
   final String teacher_id;
+  final String url;
 
 
-  Teacher({this.name, this.initials,this.room,this.email,this.password,this.teacher_id});
+  Teacher({this.name, this.initials,this.room,this.email,this.password,this.teacher_id, this.url});
 }

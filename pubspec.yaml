@@ -37,6 +37,8 @@ dependencies:
   flutter_spinkit: "^4.1.2"
   provider: ^3.1.0
   shared_preferences: ^0.5.12+4
+  image_picker: ^0.6.0+17
+  firebase_storage: ^3.0.3
 
 dev_dependencies:
   flutter_test:

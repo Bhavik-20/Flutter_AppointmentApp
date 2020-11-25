@@ -47,7 +47,16 @@ class _listofStudentDeclinedRequestsState extends State<listofStudentDeclinedReq
                         Navigator.push(context, MaterialPageRoute(builder: (context)=> student_request_status(request:accepted[index])));
                       },
                       leading: CircleAvatar(
-                        backgroundImage: AssetImage('images/role_teacher.jpg'),
+                        child:  ClipOval(
+                          child: new SizedBox(
+                            height: 180,
+                            width:180,
+                            child:(accepted[index].t_url == '' || accepted[index].t_url == null) ? Image.asset('images/role_teacher.jpg',
+                              fit: BoxFit.fill,) : Image.network(accepted[index].t_url,
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                        ),
                         radius: 25.0,
                         backgroundColor: Colors.deepPurple[100],
                       ),

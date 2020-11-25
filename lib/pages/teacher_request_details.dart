@@ -376,7 +376,9 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                                 widget.request.teacher_ini,
                                 widget.request.teacher_room,
                                 widget.request.request_id,
-                                widget.request.teacher_id);
+                                widget.request.teacher_id,
+                                widget.request.t_url,
+                                widget.request.s_url);
                             print(widget.request.request_id);
                             Fluttertoast.showToast(
                               backgroundColor: Colors.green,
@@ -426,7 +428,9 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                                 widget.request.teacher_ini,
                                 widget.request.teacher_room,
                                 widget.request.request_id,
-                                widget.request.teacher_id);
+                                widget.request.teacher_id,
+                                widget.request.t_url,
+                                widget.request.s_url);
                             print(widget.request.request_id);
 
                             Fluttertoast.showToast(
