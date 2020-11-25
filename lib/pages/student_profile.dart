@@ -21,7 +21,7 @@ class student_profile extends StatefulWidget {
 class _student_profileState  extends State<student_profile> {
 
   final _formKey = GlobalKey<FormState>();
-  String downloadUrl;
+  String downloadUrl="";
   String name = "";
   String roll = "";
   String branch = "";
@@ -262,22 +262,25 @@ class _student_profileState  extends State<student_profile> {
                               text: 'Save Changes',
                               press: () async {
                                 //photo upload
-                                String fileName = basename(_image.path);
-                                StorageReference firebaseStorageRef = FirebaseStorage
-                                    .instance.ref()
-                                    .child(fileName);
-                                StorageUploadTask uploadTask = firebaseStorageRef
-                                    .putFile(_image);
-                                StorageTaskSnapshot taskSnapshot = await uploadTask
-                                    .onComplete;
-                                setState(() {
-                                  print("Profile Picture uploaded");
-                                });
+                                if(_image != null) {
+                                  String fileName = basename(_image.path);
+                                  StorageReference firebaseStorageRef = FirebaseStorage
+                                      .instance.ref()
+                                      .child(fileName);
+                                  StorageUploadTask uploadTask = firebaseStorageRef
+                                      .putFile(_image);
+                                  StorageTaskSnapshot taskSnapshot = await uploadTask
+                                      .onComplete;
+                                  setState(() {
+                                    print("Profile Picture uploaded");
+                                  });
 
-                                if (taskSnapshot.error == null) {
-                                  downloadUrl =
-                                  await taskSnapshot.ref.getDownloadURL();
-                                  print(downloadUrl);
+                                  if (taskSnapshot.error == null) {
+                                    downloadUrl =
+                                    await taskSnapshot.ref.getDownloadURL();
+                                    print(downloadUrl);
+                                  }
+                                }
                                   //photo upload ends
                                   name = name.isEmpty ? data.name : name;
                                   roll = roll.isEmpty ? data.roll : roll;
@@ -285,6 +288,7 @@ class _student_profileState  extends State<student_profile> {
                                   year = year.isEmpty ? data.year : year;
                                   email = data.email;
                                   password = data.password;
+                                  downloadUrl = downloadUrl.isEmpty? data.url : downloadUrl;
 
                                   print(name);
                                   print(roll);
@@ -345,7 +349,6 @@ class _student_profileState  extends State<student_profile> {
                                       gravity: ToastGravity.TOP,
                                     );
                                   }
-                                };
                               }
                             ),
                             SizedBox(height: 30.0,),

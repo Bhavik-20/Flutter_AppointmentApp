@@ -23,7 +23,7 @@ class _teacher_profileState extends State<teacher_profile> {
 
 
   final _formKey=GlobalKey<FormState>();
-  String downloadUrl;
+  String downloadUrl="";
   String name="";
   String initials="";
   String room="";
@@ -220,27 +220,31 @@ class _teacher_profileState extends State<teacher_profile> {
                             text: 'Save Changes',
                             press: () async {
                               //photo upload
-                              String fileName = basename(_image.path);
-                              StorageReference firebaseStorageRef = FirebaseStorage
-                                  .instance.ref()
-                                  .child(fileName);
-                              StorageUploadTask uploadTask = firebaseStorageRef
-                                  .putFile(_image);
-                              StorageTaskSnapshot taskSnapshot = await uploadTask
-                                  .onComplete;
-                              setState(() {
-                                print("Profile Picture uploaded");
-                              });
+                              if(_image != null) {
+                                String fileName = basename(_image.path);
+                                StorageReference firebaseStorageRef = FirebaseStorage
+                                    .instance.ref()
+                                    .child(fileName);
+                                StorageUploadTask uploadTask = firebaseStorageRef
+                                    .putFile(_image);
+                                StorageTaskSnapshot taskSnapshot = await uploadTask
+                                    .onComplete;
+                                setState(() {
+                                  print("Profile Picture uploaded");
+                                });
+                                if (taskSnapshot.error == null) {
+                                  downloadUrl =
+                                  await taskSnapshot.ref.getDownloadURL();
+                                  print(downloadUrl);
+                                }
+                              }
                               //photo upload ends
                               name= name.isEmpty ? data.name : name;
                               initials= initials.isEmpty ? data.initials : initials;
                               room= room.isEmpty ? data.room : room;
                               email=data.email;
                               password=data.password;
-                            if (taskSnapshot.error == null) {
-                              downloadUrl =
-                              await taskSnapshot.ref.getDownloadURL();
-                              print(downloadUrl);
+                              downloadUrl = downloadUrl.isEmpty? data.url : downloadUrl;
 
                               print(name);
                               print(initials);
@@ -272,7 +276,6 @@ class _teacher_profileState extends State<teacher_profile> {
                                 );
                               }
                             }
-                            },
                           ),
                           SizedBox(height: 30.0,),
                         ],
