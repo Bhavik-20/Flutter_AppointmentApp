@@ -84,7 +84,7 @@ class _student_profileState  extends State<student_profile> {
                 return Form(
                 key: _formKey,
                 child: Scaffold(
-                  backgroundColor: Colors.deepPurple[100],
+                  backgroundColor: Colors.deepPurple[50],
                   appBar: AppBar(
                     leading: IconButton(
                       onPressed: () {
@@ -105,272 +105,289 @@ class _student_profileState  extends State<student_profile> {
                     ],
                   ),
                   body: SingleChildScrollView(
-                    child: Column(
+                    child: Stack(
+                      alignment: Alignment.center,
                       children: [
-                        SizedBox(height: 40.0,),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        Column(
                           children: [
-                            Center(
-                                child: Align(
-                                  child: CircleAvatar(
-                                    radius: 70,
-                                    backgroundColor: Colors.grey,
-                                    child: ClipOval(
-                                      child: new SizedBox(
-                                        width: 180.0,
-                                        height: 180.0,
-                                        child:(_image == null && data.url == '') ? Image.asset('images/role_student.jpg',
-                                          fit: BoxFit.fill,) : ((_image != null)?Image.file(_image,
-                                          fit: BoxFit.fill,):(data.url != '')?Image.network(data.url,
-                                          fit: BoxFit.fill,):Image.asset('images/role_student.jpg',
-                                          fit: BoxFit.fill,)),
-                                      ),
-                                    ),
-                                  ),
-                                )
-                            ),
                             Padding(
-                              padding: EdgeInsets.only(top: 60.0),
-                              child: IconButton(
-                                icon: Icon(Icons.camera_alt,
-                                  size: 30.0,
-                                ),
-                                onPressed: () {
-                                  getImage();
-                                },
+                              padding: const EdgeInsets.all(8.0),
+                              child: ClipRRect (
+                                borderRadius: BorderRadius.circular(10.0),
+                                child: Container(
+                                    height: 200,
+                                    color: Colors.deepPurple[400],
+                                    child: Image.asset('images/bg2.jpg', fit:BoxFit.fill)
+                                  ),
                               ),
                             ),
+                            SizedBox(height: 40.0,),
+                            Center(
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      border: Border.all(
+                                        color: Colors.white,
+                                      ),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10))
+                                  ),
+                                  width: size.width * 0.8,
+                                  child: Column(
+                                      children: [
+                                        Container(
+                                          height: 50.0,
+                                          padding: EdgeInsets.fromLTRB(
+                                              10, 0, 10, 0),
+                                          child: TextFormField(
+                                              initialValue: data.name,
+                                              enabled: true,
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 18,
+                                                fontFamily: 'playfair',
+                                              ),
+                                              onChanged: (value) {
+                                                setState(() => name = value);
+                                              },
+                                              decoration: new InputDecoration(
+                                                border: InputBorder.none,
+                                                hintText: 'Full Name',
+                                              )
+                                          ),
+                                        ),
+                                        Divider(
+                                          color: Colors.deepPurple[100],
+                                          thickness: 1,
+                                        ),
+                                        Container(
+                                          height: 50.0,
+                                          padding: EdgeInsets.fromLTRB(
+                                              10, 0, 10, 0),
+                                          child: TextFormField(
+                                              initialValue: data.roll,
+                                              enabled: true,
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 18,
+                                                fontFamily: 'playfair',
+                                              ),
+                                              onChanged: (value) {
+                                                setState(() => roll = value);
+                                              },
+                                              decoration: new InputDecoration(
+                                                border: InputBorder.none,
+                                                hintText: 'Roll Number',
+                                              )
+                                          ),
+                                        ),
+                                        Divider(
+                                          color: Colors.deepPurple[100],
+                                          thickness: 1,
+                                        ),
+                                        Container(
+                                          height: 50.0,
+                                          padding: EdgeInsets.fromLTRB(
+                                              10, 0, 10, 0),
+                                          child: TextFormField(
+                                              initialValue: data.branch,
+                                              enabled: true,
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 18,
+                                                fontFamily: 'playfair',
+                                              ),
+                                              onChanged: (value) {
+                                                setState(() => branch = value);
+                                              },
+                                              decoration: new InputDecoration(
+                                                border: InputBorder.none,
+                                                hintText: 'Branch',
+                                              )
+                                          ),
+                                        ),
+                                        Divider(
+                                          color: Colors.deepPurple[100],
+                                          thickness: 1,
+                                        ),
+                                        Container(
+                                          height: 50.0,
+                                          padding: EdgeInsets.fromLTRB(
+                                              10, 0, 10, 0),
+                                          child: TextFormField(
+                                              initialValue: data.year,
+                                              enabled: true,
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 18,
+                                                fontFamily: 'playfair',
+                                              ),
+                                              onChanged: (value) {
+                                                setState(() => year = value);
+                                              },
+                                              decoration: new InputDecoration(
+                                                border: InputBorder.none,
+                                                hintText: 'Year',
+                                              )
+                                          ),
+                                        ),
+                                        Divider(
+                                          color: Colors.deepPurple[100],
+                                          thickness: 1,
+                                        ),
+                                        Container(
+                                          height: 50.0,
+                                          padding: EdgeInsets.fromLTRB(
+                                              10, 0, 10, 0),
+                                          child: TextFormField(
+                                            initialValue: data.email,
+                                            enabled: false,
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18,
+                                              fontFamily: 'playfair',
+                                            ),
+                                            decoration: new InputDecoration(
+                                              border: InputBorder.none,
+                                              hintText: 'E-Mail',
+                                            ),
+                                          ),
+                                        ),
+                                      ]
+                                  )
+                              ),
+                            ),
+                            SizedBox(height: 30.0,),
+                            RoundedButton(
+                              text: 'Save Changes',
+                              press: () async {
+                                //photo upload
+                                String fileName = basename(_image.path);
+                                StorageReference firebaseStorageRef = FirebaseStorage
+                                    .instance.ref()
+                                    .child(fileName);
+                                StorageUploadTask uploadTask = firebaseStorageRef
+                                    .putFile(_image);
+                                StorageTaskSnapshot taskSnapshot = await uploadTask
+                                    .onComplete;
+                                setState(() {
+                                  print("Profile Picture uploaded");
+                                });
+
+                                if (taskSnapshot.error == null) {
+                                  downloadUrl =
+                                  await taskSnapshot.ref.getDownloadURL();
+                                  print(downloadUrl);
+                                  //photo upload ends
+                                  name = name.isEmpty ? data.name : name;
+                                  roll = roll.isEmpty ? data.roll : roll;
+                                  branch = branch.isEmpty ? data.branch : branch;
+                                  year = year.isEmpty ? data.year : year;
+                                  email = data.email;
+                                  password = data.password;
+
+                                  print(name);
+                                  print(roll);
+                                  print(branch);
+                                  print(year);
+                                  print(email);
+                                  print(password);
+
+                                  if (_branch.contains(branch)) {
+                                    b = 1;
+                                  }
+                                  else {
+                                    Fluttertoast.showToast(
+                                      backgroundColor: Colors.red,
+                                      msg: 'Please enter a valid branch.',
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.BOTTOM,);
+                                  }
+
+                                  if (_year.contains(year)) {
+                                    y = 1;
+                                  }
+                                  else {
+                                    Fluttertoast.showToast(
+                                      backgroundColor: Colors.red,
+                                      msg: 'Please enter a valid year.',
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.BOTTOM,);
+                                  }
+
+                                  String result = validate(
+                                      name, roll, branch, year);
+                                  if (result == 'valid' && b == 1 && y == 1) {
+                                    setState(() => loading = true);
+                                    await DatabaseService(uid: user.user_id)
+                                        .updateStudentData(
+                                        name,
+                                        roll,
+                                        branch,
+                                        year,
+                                        email,
+                                        password,
+                                        downloadUrl);
+                                    print('hey');
+                                    Fluttertoast.showToast(
+                                      backgroundColor: Colors.green,
+                                      msg: 'Successfully Updated Data',
+                                      toastLength: Toast.LENGTH_LONG,
+                                      gravity: ToastGravity.BOTTOM,
+                                    );
+                                    Navigator.of(context).pushNamed('/st_dash');
+                                  }
+                                  else if (result != 'valid') {
+                                    Fluttertoast.showToast(
+                                      backgroundColor: Colors.red,
+                                      msg: result,
+                                      toastLength: Toast.LENGTH_LONG,
+                                      gravity: ToastGravity.TOP,
+                                    );
+                                  }
+                                };
+                              }
+                            ),
+                            SizedBox(height: 30.0,),
                           ],
                         ),
-                        SizedBox(height: 20.0,),
-                        Center(
-                          child: Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  border: Border.all(
-                                    color: Colors.white,
+                        Positioned(
+                          top: 100,
+                          child:  Center(
+                              child: Align(
+                                child: CircleAvatar(
+                                  radius: 70,
+                                  backgroundColor: Colors.grey,
+                                  child: ClipOval(
+                                    child: new SizedBox(
+                                      width: 180.0,
+                                      height: 180.0,
+                                      child:(_image == null && data.url == '') ? Image.asset('images/role_student.jpg',
+                                        fit: BoxFit.fill,) : ((_image != null)?Image.file(_image,
+                                        fit: BoxFit.fill,):(data.url != '')?Image.network(data.url,
+                                        fit: BoxFit.fill,):Image.asset('images/role_student.jpg',
+                                        fit: BoxFit.fill,)),
+                                    ),
                                   ),
-                                  borderRadius: BorderRadius.all(
-                                      Radius.circular(10))
-                              ),
-                              width: size.width * 0.8,
-                              child: Column(
-                                  children: [
-                                    Container(
-                                      height: 50.0,
-                                      padding: EdgeInsets.fromLTRB(
-                                          10, 0, 10, 0),
-                                      child: TextFormField(
-                                          initialValue: data.name,
-                                          enabled: true,
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18,
-                                            fontFamily: 'playfair',
-                                          ),
-                                          onChanged: (value) {
-                                            setState(() => name = value);
-                                          },
-                                          decoration: new InputDecoration(
-                                            border: InputBorder.none,
-                                            hintText: 'Full Name',
-                                          )
-                                      ),
-                                    ),
-                                    Divider(
-                                      color: Colors.deepPurple[100],
-                                      thickness: 1,
-                                    ),
-                                    Container(
-                                      height: 50.0,
-                                      padding: EdgeInsets.fromLTRB(
-                                          10, 0, 10, 0),
-                                      child: TextFormField(
-                                          initialValue: data.roll,
-                                          enabled: true,
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18,
-                                            fontFamily: 'playfair',
-                                          ),
-                                          onChanged: (value) {
-                                            setState(() => roll = value);
-                                          },
-                                          decoration: new InputDecoration(
-                                            border: InputBorder.none,
-                                            hintText: 'Roll Number',
-                                          )
-                                      ),
-                                    ),
-                                    Divider(
-                                      color: Colors.deepPurple[100],
-                                      thickness: 1,
-                                    ),
-                                    Container(
-                                      height: 50.0,
-                                      padding: EdgeInsets.fromLTRB(
-                                          10, 0, 10, 0),
-                                      child: TextFormField(
-                                          initialValue: data.branch,
-                                          enabled: true,
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18,
-                                            fontFamily: 'playfair',
-                                          ),
-                                          onChanged: (value) {
-                                            setState(() => branch = value);
-                                          },
-                                          decoration: new InputDecoration(
-                                            border: InputBorder.none,
-                                            hintText: 'Branch',
-                                          )
-                                      ),
-                                    ),
-                                    Divider(
-                                      color: Colors.deepPurple[100],
-                                      thickness: 1,
-                                    ),
-                                    Container(
-                                      height: 50.0,
-                                      padding: EdgeInsets.fromLTRB(
-                                          10, 0, 10, 0),
-                                      child: TextFormField(
-                                          initialValue: data.year,
-                                          enabled: true,
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18,
-                                            fontFamily: 'playfair',
-                                          ),
-                                          onChanged: (value) {
-                                            setState(() => year = value);
-                                          },
-                                          decoration: new InputDecoration(
-                                            border: InputBorder.none,
-                                            hintText: 'Year',
-                                          )
-                                      ),
-                                    ),
-                                    Divider(
-                                      color: Colors.deepPurple[100],
-                                      thickness: 1,
-                                    ),
-                                    Container(
-                                      height: 50.0,
-                                      padding: EdgeInsets.fromLTRB(
-                                          10, 0, 10, 0),
-                                      child: TextFormField(
-                                        initialValue: data.email,
-                                        enabled: false,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18,
-                                          fontFamily: 'playfair',
-                                        ),
-                                        decoration: new InputDecoration(
-                                          border: InputBorder.none,
-                                          hintText: 'E-Mail',
-                                        ),
-                                      ),
-                                    ),
-                                  ]
+                                ),
                               )
                           ),
                         ),
-                        SizedBox(height: 30.0,),
-                        RoundedButton(
-                          text: 'Save Changes',
-                          press: () async {
-                            //photo upload
-                            String fileName = basename(_image.path);
-                            StorageReference firebaseStorageRef = FirebaseStorage
-                                .instance.ref()
-                                .child(fileName);
-                            StorageUploadTask uploadTask = firebaseStorageRef
-                                .putFile(_image);
-                            StorageTaskSnapshot taskSnapshot = await uploadTask
-                                .onComplete;
-                            setState(() {
-                              print("Profile Picture uploaded");
-                            });
-
-                            if (taskSnapshot.error == null) {
-                              downloadUrl =
-                              await taskSnapshot.ref.getDownloadURL();
-                              print(downloadUrl);
-                              //photo upload ends
-                              name = name.isEmpty ? data.name : name;
-                              roll = roll.isEmpty ? data.roll : roll;
-                              branch = branch.isEmpty ? data.branch : branch;
-                              year = year.isEmpty ? data.year : year;
-                              email = data.email;
-                              password = data.password;
-
-                              print(name);
-                              print(roll);
-                              print(branch);
-                              print(year);
-                              print(email);
-                              print(password);
-
-                              if (_branch.contains(branch)) {
-                                b = 1;
-                              }
-                              else {
-                                Fluttertoast.showToast(
-                                  backgroundColor: Colors.red,
-                                  msg: 'Please enter a valid branch.',
-                                  toastLength: Toast.LENGTH_SHORT,
-                                  gravity: ToastGravity.BOTTOM,);
-                              }
-
-                              if (_year.contains(year)) {
-                                y = 1;
-                              }
-                              else {
-                                Fluttertoast.showToast(
-                                  backgroundColor: Colors.red,
-                                  msg: 'Please enter a valid year.',
-                                  toastLength: Toast.LENGTH_SHORT,
-                                  gravity: ToastGravity.BOTTOM,);
-                              }
-
-                              String result = validate(
-                                  name, roll, branch, year);
-                              if (result == 'valid' && b == 1 && y == 1) {
-                                setState(() => loading = true);
-                                await DatabaseService(uid: user.user_id)
-                                    .updateStudentData(
-                                    name,
-                                    roll,
-                                    branch,
-                                    year,
-                                    email,
-                                    password,
-                                    downloadUrl);
-                                print('hey');
-                                Fluttertoast.showToast(
-                                  backgroundColor: Colors.green,
-                                  msg: 'Successfully Updated Data',
-                                  toastLength: Toast.LENGTH_LONG,
-                                  gravity: ToastGravity.BOTTOM,
-                                );
-                                Navigator.of(context).pushNamed('/st_dash');
-                              }
-                              else if (result != 'valid') {
-                                Fluttertoast.showToast(
-                                  backgroundColor: Colors.red,
-                                  msg: result,
-                                  toastLength: Toast.LENGTH_LONG,
-                                  gravity: ToastGravity.TOP,
-                                );
-                              }
-                            };
-                          }
-                        ),
-                        SizedBox(height: 30.0,),
+                        Positioned(
+                          top: 140,
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 60.0),
+                            child: IconButton(
+                              icon: Icon(Icons.camera_alt,
+                                size: 30.0,
+                                color: Colors.white,
+                              ),
+                              onPressed: () {
+                                getImage();
+                              },
+                            ),
+                          ),
+                        )
                       ],
                     ),
                   ),

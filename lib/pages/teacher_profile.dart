@@ -91,212 +91,229 @@ class _teacher_profileState extends State<teacher_profile> {
                   ],
                 ),
                 body: SingleChildScrollView(
-                  child: Column(
+                  child: Stack(
+                    alignment: Alignment.center,
                     children: [
-                      SizedBox(height: 40.0,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                      Column(
                         children: [
-                          Center(
-                              child: Align(
-                                child: CircleAvatar(
-                                  radius: 70,
-                                  backgroundColor: Colors.grey,
-                                  child: ClipOval(
-                                    child: new SizedBox(
-                                      width: 180.0,
-                                      height: 180.0,
-                                      child:(_image == null && data.url == '') ? Image.asset('images/role_teacher.jpg',
-                                        fit: BoxFit.fill,) : ((_image != null)?Image.file(_image,
-                                        fit: BoxFit.fill,):(data.url != '')?Image.network(data.url,
-                                        fit: BoxFit.fill,):Image.asset('images/role_student.jpg',
-                                        fit: BoxFit.fill,)),
-                                    ),
-                                  ),
-                                ),
-                              )
-                          ),
                           Padding(
-                            padding: EdgeInsets.only(top: 60.0),
-                            child: IconButton(
-                              icon: Icon(Icons.camera_alt,
-                                size: 30.0,
+                            padding: const EdgeInsets.all(8.0),
+                            child: ClipRRect (
+                              borderRadius: BorderRadius.circular(10.0),
+                              child: Container(
+                                  height: 200,
+                                  color: Colors.deepPurple[400],
+                                  child: Image.asset('images/bg2.jpg', fit:BoxFit.fill)
                               ),
-                              onPressed: () {
-                                getImage();
-                              },
                             ),
                           ),
+                          SizedBox(height: 40.0,),
+                          Center(
+                            child: Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    border: Border.all(
+                                      color: Colors.white,
+                                    ),
+                                    borderRadius: BorderRadius.all(Radius.circular(10))
+                                ),
+                                width: size.width*0.8,
+                                child: Column(
+                                    children: [
+                                      Container(
+                                        height:50.0,
+                                          padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                        child:TextFormField(
+                                          initialValue: data.name ,
+                                          enabled: true,
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18,
+                                              fontFamily: 'playfair',
+                                            ),
+                                          onChanged: (value){
+                                            setState(() => name=value);
+                                          },
+                                          decoration: new InputDecoration(
+                                              border: InputBorder.none,
+                                            hintText: 'Full Name',
+                                          )
+                                        )
+                                      ),
+                                      Divider(
+                                        color: Colors.deepPurple[100],
+                                        thickness: 1,
+                                      ),
+                                      Container(
+                                        height:50.0,
+                                          padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                        child:TextFormField(
+                                          initialValue:data.initials,
+                                          enabled: true,
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18,
+                                              fontFamily: 'playfair',
+                                            ),
+                                          onChanged: (value){
+                                            setState(() => initials=value);
+                                          },
+                                          decoration: new InputDecoration(
+                                            border: InputBorder.none,
+                                            hintText: 'Initials',
+                                          )
+                                        )
+                                      ),
+                                      Divider(
+                                        color: Colors.deepPurple[100],
+                                        thickness: 1,
+                                      ),
+                                      Container(
+                                        height:50.0,
+                                          padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                        child: TextFormField(
+                                          initialValue: data.room,
+                                          enabled: true,
+                                          style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18,
+                                          fontFamily: 'playfair',
+                                        ),
+                                          onChanged: (value){
+                                            setState(() => room=value);
+                                          },
+                                          decoration: new InputDecoration(
+                                            border: InputBorder.none,
+                                            hintText: 'Room',
+                                          ),
+                                        )
+                                      ),
+                                      Divider(
+                                        color: Colors.deepPurple[100],
+                                        thickness: 1,
+                                      ),
+                                      Container(
+                                        height:50.0,
+                                        padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                        child: Expanded(
+                                          child: TextFormField(
+                                            initialValue: data.email,
+                                            enabled: false,
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18,
+                                              fontFamily: 'playfair',
+                                            ),
+                                            decoration: new InputDecoration(
+                                              border: InputBorder.none,
+                                              hintText: 'E-Mail',
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ]
+                                )
+                            ),
+                          ),
+                          SizedBox(height: 30.0,),
+                          RoundedButton(
+                            text: 'Save Changes',
+                            press: () async {
+                              //photo upload
+                              String fileName = basename(_image.path);
+                              StorageReference firebaseStorageRef = FirebaseStorage
+                                  .instance.ref()
+                                  .child(fileName);
+                              StorageUploadTask uploadTask = firebaseStorageRef
+                                  .putFile(_image);
+                              StorageTaskSnapshot taskSnapshot = await uploadTask
+                                  .onComplete;
+                              setState(() {
+                                print("Profile Picture uploaded");
+                              });
+                              //photo upload ends
+                              name= name.isEmpty ? data.name : name;
+                              initials= initials.isEmpty ? data.initials : initials;
+                              room= room.isEmpty ? data.room : room;
+                              email=data.email;
+                              password=data.password;
+                            if (taskSnapshot.error == null) {
+                              downloadUrl =
+                              await taskSnapshot.ref.getDownloadURL();
+                              print(downloadUrl);
+
+                              print(name);
+                              print(initials);
+                              print(room);
+                              print(email);
+                              print(password);
+
+                              String result = validate(name, initials, room);
+                              if (result == 'valid') {
+                                setState(() => loading = true);
+                                await DatabaseService(uid: user.user_id)
+                                    .updateFacultyData(
+                                    name, initials, room, email, password,
+                                    downloadUrl);
+                                Fluttertoast.showToast(
+                                  backgroundColor: Colors.green,
+                                  msg: 'Successfully Updated Data',
+                                  toastLength: Toast.LENGTH_LONG,
+                                  gravity: ToastGravity.BOTTOM,
+                                );
+                                Navigator.of(context).pushNamed('/tea_dash');
+                              }
+                              else {
+                                Fluttertoast.showToast(
+                                  backgroundColor: Colors.red,
+                                  msg: result,
+                                  toastLength: Toast.LENGTH_LONG,
+                                  gravity: ToastGravity.TOP,
+                                );
+                              }
+                            }
+                            },
+                          ),
+                          SizedBox(height: 30.0,),
                         ],
                       ),
-                      SizedBox(height: 20.0,),
-                      Center(
-                        child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border.all(
-                                  color: Colors.white,
+                      Positioned(
+                        top: 100,
+                        child:  Center(
+                            child: Align(
+                              child: CircleAvatar(
+                                radius: 70,
+                                backgroundColor: Colors.grey,
+                                child: ClipOval(
+                                  child: new SizedBox(
+                                    width: 180.0,
+                                    height: 180.0,
+                                    child:(_image == null && data.url == '') ? Image.asset('images/role_teacher.jpg',
+                                      fit: BoxFit.fill,) : ((_image != null)?Image.file(_image,
+                                      fit: BoxFit.fill,):(data.url != '')?Image.network(data.url,
+                                      fit: BoxFit.fill,):Image.asset('images/role_student.jpg',
+                                      fit: BoxFit.fill,)),
+                                  ),
                                 ),
-                                borderRadius: BorderRadius.all(Radius.circular(10))
-                            ),
-                            width: size.width*0.8,
-                            child: Column(
-                                children: [
-                                  Container(
-                                    height:50.0,
-                                      padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                    child:TextFormField(
-                                      initialValue: data.name ,
-                                      enabled: true,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18,
-                                          fontFamily: 'playfair',
-                                        ),
-                                      onChanged: (value){
-                                        setState(() => name=value);
-                                      },
-                                      decoration: new InputDecoration(
-                                          border: InputBorder.none,
-                                        hintText: 'Full Name',
-                                      )
-                                    )
-                                  ),
-                                  Divider(
-                                    color: Colors.deepPurple[100],
-                                    thickness: 1,
-                                  ),
-                                  Container(
-                                    height:50.0,
-                                      padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                    child:TextFormField(
-                                      initialValue:data.initials,
-                                      enabled: true,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18,
-                                          fontFamily: 'playfair',
-                                        ),
-                                      onChanged: (value){
-                                        setState(() => initials=value);
-                                      },
-                                      decoration: new InputDecoration(
-                                        border: InputBorder.none,
-                                        hintText: 'Initials',
-                                      )
-                                    )
-                                  ),
-                                  Divider(
-                                    color: Colors.deepPurple[100],
-                                    thickness: 1,
-                                  ),
-                                  Container(
-                                    height:50.0,
-                                      padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                    child: TextFormField(
-                                      initialValue: data.room,
-                                      enabled: true,
-                                      style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
-                                      fontFamily: 'playfair',
-                                    ),
-                                      onChanged: (value){
-                                        setState(() => room=value);
-                                      },
-                                      decoration: new InputDecoration(
-                                        border: InputBorder.none,
-                                        hintText: 'Room',
-                                      ),
-                                    )
-                                  ),
-                                  Divider(
-                                    color: Colors.deepPurple[100],
-                                    thickness: 1,
-                                  ),
-                                  Container(
-                                    height:50.0,
-                                    padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                    child: Expanded(
-                                      child: TextFormField(
-                                        initialValue: data.email,
-                                        enabled: false,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18,
-                                          fontFamily: 'playfair',
-                                        ),
-                                        decoration: new InputDecoration(
-                                          border: InputBorder.none,
-                                          hintText: 'E-Mail',
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ]
+                              ),
                             )
                         ),
                       ),
-                      SizedBox(height: 30.0,),
-                      RoundedButton(
-                        text: 'Save Changes',
-                        press: () async {
-                          //photo upload
-                          String fileName = basename(_image.path);
-                          StorageReference firebaseStorageRef = FirebaseStorage
-                              .instance.ref()
-                              .child(fileName);
-                          StorageUploadTask uploadTask = firebaseStorageRef
-                              .putFile(_image);
-                          StorageTaskSnapshot taskSnapshot = await uploadTask
-                              .onComplete;
-                          setState(() {
-                            print("Profile Picture uploaded");
-                          });
-                          //photo upload ends
-                          name= name.isEmpty ? data.name : name;
-                          initials= initials.isEmpty ? data.initials : initials;
-                          room= room.isEmpty ? data.room : room;
-                          email=data.email;
-                          password=data.password;
-                        if (taskSnapshot.error == null) {
-                          downloadUrl =
-                          await taskSnapshot.ref.getDownloadURL();
-                          print(downloadUrl);
-
-                          print(name);
-                          print(initials);
-                          print(room);
-                          print(email);
-                          print(password);
-
-                          String result = validate(name, initials, room);
-                          if (result == 'valid') {
-                            setState(() => loading = true);
-                            await DatabaseService(uid: user.user_id)
-                                .updateFacultyData(
-                                name, initials, room, email, password,
-                                downloadUrl);
-                            Fluttertoast.showToast(
-                              backgroundColor: Colors.green,
-                              msg: 'Successfully Updated Data',
-                              toastLength: Toast.LENGTH_LONG,
-                              gravity: ToastGravity.BOTTOM,
-                            );
-                            Navigator.of(context).pushNamed('/tea_dash');
-                          }
-                          else {
-                            Fluttertoast.showToast(
-                              backgroundColor: Colors.red,
-                              msg: result,
-                              toastLength: Toast.LENGTH_LONG,
-                              gravity: ToastGravity.TOP,
-                            );
-                          }
-                        }
-                        },
-                      ),
-                      SizedBox(height: 30.0,),
+                      Positioned(
+                        top: 140,
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 60.0),
+                          child: IconButton(
+                            icon: Icon(Icons.camera_alt,
+                              size: 30.0,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {
+                              getImage();
+                            },
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ),

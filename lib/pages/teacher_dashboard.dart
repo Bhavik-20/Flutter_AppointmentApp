@@ -25,8 +25,6 @@ class _teacher_dashboardState extends State<teacher_dashboard> {
   int _selectedIndex = 0;
   bool loading=false;
   final AuthService _auth=AuthService();
-  static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
   List<Widget> _widgetOptions = <Widget>[
     teacher_new_requests(),
