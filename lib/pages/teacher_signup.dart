@@ -28,6 +28,7 @@ class _teacher_signupState extends State<teacher_signup> {
 
   //text field state
   String name="";
+  String emp_code="";
   String initials="";
   String room="";
   String email = "";
@@ -35,13 +36,16 @@ class _teacher_signupState extends State<teacher_signup> {
   String error="";
   bool loading=false;
 
-  String validate(String name, String initials, String room, String email, String password) {
+  String validate(String name,String emp_code, String initials, String room, String email, String password) {
     RegExp ofname=new RegExp(r'^[A-Za-z ]*$');
+    RegExp ofcode=new RegExp(r'^[0-9]{1,6}$');
     RegExp ofini=new RegExp(r'^[a-zA-Z_]*$');
     RegExp ofroom=new RegExp(r'^[A-Za-z0-9\-]*$');
     RegExp ofemail=new RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
     if (name.isEmpty || !ofname.hasMatch(name))
       return 'Invalid Name';
+    if (emp_code.isEmpty || !ofcode.hasMatch(emp_code))
+      return 'Invalid Employee Code';
     if (initials.isEmpty || !ofini.hasMatch(initials))
       return 'Invalid Initials';
     if (room.isEmpty || !ofroom.hasMatch(room))
@@ -95,6 +99,21 @@ class _teacher_signupState extends State<teacher_signup> {
                   onChanged: (value) {
                     setState(() => name=value);
                   },
+                ),
+                TextFieldContainer(
+                  child: TextField(
+                    onChanged: (value) {
+                      setState(() => emp_code=value);
+                    },
+                    cursorColor: kPrimaryColor,
+                    decoration: InputDecoration(
+                      icon: Icon(Icons.code,
+                        color: kPrimaryColor,
+                      ),
+                      hintText: 'Teacher Code',
+                      border: InputBorder.none,
+                    ),
+                  ),
                 ),
                 TextFieldContainer(
                   child: TextField(
@@ -172,7 +191,7 @@ class _teacher_signupState extends State<teacher_signup> {
                 RoundedButton(
                   text: "Sign Up",
                   press: () async {
-                    String result=validate(name,initials,room,email,password);
+                    String result=validate(name,emp_code,initials,room,email,password);
                     if(result=='valid')
                       {
                         setState(() => loading=true);
