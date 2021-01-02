@@ -59,7 +59,12 @@ class _listofAcceptedRequestsState extends State<listofAcceptedRequests> {
                         radius: 25.0,
                         backgroundColor: Colors.deepPurple[100],
                       ),
-                      title: Text(accepted[index].student_name),
+                      title: Text(accepted[index].student_name,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 1,
+                        ),),
                       subtitle: Text(accepted[index].date),
                     ),
                   ),

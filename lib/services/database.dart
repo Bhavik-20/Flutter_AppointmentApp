@@ -49,7 +49,7 @@ class DatabaseService {
     });
   }
 //-------------------------------------------------------------------------------------------------------------------------------------//
-  Future updateRequests(String name,String rollno,String branch,String year,String email,String purpose,String time, String date, String teacherMail,String teacherName,String emp_code, String teacher_ini,String teacher_room,String teacher_id,String t_url, String s_url) async
+  Future updateRequests(String name,String rollno,String branch,String year,String email,String purpose, String purpose_details,String time, String date, String teacherMail,String teacherName,String emp_code, String teacher_ini,String teacher_room,String teacher_id,String t_url, String s_url) async
   {
     DocumentReference docref=requestCollection.document();
     return await docref.setData({
@@ -60,6 +60,7 @@ class DatabaseService {
       'student_year':year,
       'student_mail':email,
       'purpose':purpose,
+      'purpose_details':purpose_details,
       'time': time,
       'date': date,
       'status':'Pending',
@@ -75,7 +76,7 @@ class DatabaseService {
     });
   }
 
-  Future acceptRequests(String docid,String student_id,String name,String rollno,String branch,String year,String email,String purpose,String time, String date,String teacherMail,String teacherName,String emp_code, String teacher_ini,String teacher_room,String req_id,String teacher_id,String t_url, String s_url) async
+  Future acceptRequests(String docid,String student_id,String name,String rollno,String branch,String year,String email,String purpose,String purpose_details,String time, String date,String teacherMail,String teacherName,String emp_code, String teacher_ini,String teacher_room,String req_id,String teacher_id,String t_url, String s_url) async
   {
     DocumentReference docref=acceptCollection.document(docid);
     return await docref.setData({
@@ -86,6 +87,7 @@ class DatabaseService {
       'student_year':year,
       'student_mail':email,
       'purpose':purpose,
+      'purpose_details':purpose_details,
       'time': time,
       'date': date,
       'status':'Accepted',
@@ -102,7 +104,7 @@ class DatabaseService {
   }
 
 
-  Future declineRequests(String docid, String student_id,String name,String rollno,String branch,String year,String email,String purpose,String time, String date,String teacherMail,String teacherName,String emp_code, String teacher_ini,String teacher_room,String req_id,String teacher_id,String t_url, String s_url) async
+  Future declineRequests(String docid, String student_id,String name,String rollno,String branch,String year,String email,String purpose,String purpose_details,String time, String date,String teacherMail,String teacherName,String emp_code, String teacher_ini,String teacher_room,String req_id,String teacher_id,String t_url, String s_url) async
   {
     DocumentReference docref=declineCollection.document(docid);
     return await docref.setData({
@@ -113,6 +115,7 @@ class DatabaseService {
       'student_year':year,
       'student_mail':email,
       'purpose':purpose,
+      'purpose_details': purpose_details,
       'time': time,
       'date': date,
       'status':'Rejected',
@@ -165,6 +168,7 @@ class DatabaseService {
       return Request(
         date: doc.data['date'],
         purpose: doc.data['purpose'],
+        purpose_details: doc.data['purpose_details'],
         status: doc.data['status'],
         student_branch: doc.data['student_branch'],
         student_mail: doc.data['student_mail'],

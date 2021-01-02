@@ -59,7 +59,12 @@ class _listofRejectedRequestsState extends State<listofRejectedRequests> {
                         radius: 25.0,
                         backgroundColor: Colors.deepPurple[100],
                       ),
-                      title: Text(rejected[index].student_name),
+                      title: Text(rejected[index].student_name,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 1,
+                        ),),
                       subtitle: Text(rejected[index].date),
                     ),
                   ),

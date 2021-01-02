@@ -30,6 +30,8 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
   var day;
   var full;
   var purpose;
+  var purpose_details;
+
   List days_of_week = [
     'Monday',
     'Tuesday',
@@ -49,7 +51,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
   bool loading = false;
 
   Future<void> sendRequest(String name, String roll, String branch, String year,
-      String st_mail, purpose, String time, date, String email2,String t_name,String initials,String room,String uid, String t_uid, String t_url, String s_url)
+      String st_mail, purpose,purpose_details, String time, date, String email2,String t_name,String initials,String room,String uid, String t_uid, String t_url, String s_url)
   async {
     try {
       await DatabaseService(uid: uid)
@@ -60,6 +62,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
           year,
           st_mail,
           purpose,
+          purpose_details,
           time,
           date,
           widget.teacher.email,
@@ -180,6 +183,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                                 data.year,
                                 data.email,
                                 purpose,
+                                purpose_details,
                                 time,
                                 full,
                                 widget.teacher.email,
@@ -669,21 +673,52 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
           style: TextStyle(
             fontSize: 18,
           ),),
-        content: Container(
-          decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border.all(
-                color: Colors.white,
+        content: Column(
+          children: [
+            Container(
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(
+                      color: Colors.white,
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(20))
+                ),
+                padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
+                child: TextField(
+                  onChanged: (value) {
+                    setState(() => purpose = value);
+                  },
+                  style: TextStyle(
+                      fontSize: 20.0,
+                      fontFamily: 'playfair',
+                      fontWeight: FontWeight.bold
+                  ),
+                  maxLength: 20,
+                  maxLengthEnforced: true,
+                  autocorrect: false,
+                  autofocus: false,
+                  cursorColor: Colors.black,
+                  decoration: new InputDecoration(
+                    hintText: 'Purpose in short',
+                    border: InputBorder.none,
+                  ),
+                ),
               ),
-              borderRadius: BorderRadius.all(Radius.circular(20))
-          ),
-          // color: Colors.white,
-          // width: size.width*0.8,
-          child: Container(
+            SizedBox(
+              height: 15,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(
+                    color: Colors.white,
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(20))
+              ),
             padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
             child: TextField(
               onChanged: (value) {
-                setState(() => purpose = value);
+                setState(() => purpose_details = value);
               },
               style: TextStyle(
                   fontSize: 20.0,
@@ -695,11 +730,12 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
               autofocus: false,
               cursorColor: Colors.black,
               decoration: new InputDecoration(
-                hintText: 'Purpose of Meet',
+                hintText: 'Explain purpose (Optional)',
                 border: InputBorder.none,
               ),
             ),
-          ),
+            ),
+          ],
         ),
         isActive: _currentStep >= 4,
       ),

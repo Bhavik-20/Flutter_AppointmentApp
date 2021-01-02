@@ -12,10 +12,12 @@ class listofnewFacultyRequests extends StatefulWidget {
 }
 
 class _listofnewFacultyRequestsState extends State<listofnewFacultyRequests> {
+  List _branch_ini=['COMP','IT','MECH','ETRX','EXTC'];
+  List _branch= ['Computer','Information Technology','Mechanical','Electronics','EXTC'];
+  int branch_index;
   @override
   Widget build(BuildContext context) {
     final requests=Provider.of<List<Request>>(context)??[];
-
     return Column(
       children: [
         Container(
@@ -40,8 +42,6 @@ class _listofnewFacultyRequestsState extends State<listofnewFacultyRequests> {
                     margin: EdgeInsets.fromLTRB(20, 6, 20, 0),
                     child: ListTile(
                       onTap: (){
-                        print(requests[index].date);
-                        print(requests[index]);
                         Navigator.push(context, MaterialPageRoute(builder: (context)=> teacher_request_details(request:requests[index])));
                       },
                       leading: CircleAvatar(
@@ -58,8 +58,20 @@ class _listofnewFacultyRequestsState extends State<listofnewFacultyRequests> {
                         radius: 25.0,
                         backgroundColor: Colors.deepPurple[100],
                       ),
-                      title: Text(requests[index].student_name),
-                      subtitle: Text(requests[index].date),
+                      title: Text(requests[index].student_name ,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 1,
+                        ),),
+                      isThreeLine: true,
+                      subtitle: Text(
+                          'Purpose :'+ requests[index].purpose + '\n' + requests[index].date,
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                      trailing: branch(requests[index].student_branch),
                     ),
                   ),
                 );
@@ -69,4 +81,13 @@ class _listofnewFacultyRequestsState extends State<listofnewFacultyRequests> {
       ],
     );
   }
+
+  branch(String student_branch) {
+    branch_index = _branch.indexOf(student_branch);
+    return Text(_branch_ini[branch_index] ,style: TextStyle(
+      fontSize: 18,
+    ),);
   }
+}
+
+
