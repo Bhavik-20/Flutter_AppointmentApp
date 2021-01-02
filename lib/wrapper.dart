@@ -25,6 +25,7 @@ class Wrapper extends StatelessWidget {
 
       document.get().then((DocumentSnapshot document) {
         xyz=document.data['role'];
+
       });
 
       if(xyz=="faculty")

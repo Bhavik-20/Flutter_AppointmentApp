@@ -45,9 +45,10 @@ class AuthService {
     {
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
-
-      //create a new document for the teacher with the uid
+      print("1");
+      //create a new document for the student with the uid
       await DatabaseService(uid:user.uid).updateStudentData(name, rollno, branch, year,email, password,url);
+      print("2");
       return _userFromFirebaseUser(user);
     }
     catch(e)
