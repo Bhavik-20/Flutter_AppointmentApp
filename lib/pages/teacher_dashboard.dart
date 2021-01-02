@@ -112,24 +112,24 @@ class _teacher_dashboardState extends State<teacher_dashboard> {
                               Divider(
                                 color: Colors.black,
                               ),
-                              // FlatButton(
-                              //   onPressed: (){},
-                              //   child: Row(
-                              //     children: [
-                              //       Icon(Icons.calendar_today_outlined),
-                              //       SizedBox(width: 15.0),
-                              //       Text('Schedule',
-                              //         style: GoogleFonts.quicksand(
-                              //           fontSize: 21,
-                              //           fontWeight: FontWeight.w500,
-                              //         ),
-                              //       )
-                              //     ],
-                              //   ),
-                              // ),
-                              // Divider(
-                              //     color: Colors.black
-                              // ),
+                              FlatButton(
+                                onPressed: (){},
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.calendar_today_sharp),
+                                    SizedBox(width: 15.0),
+                                    Text('Time Table',
+                                      style: GoogleFonts.quicksand(
+                                        fontSize: 21,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Divider(
+                                  color: Colors.black
+                              ),
                               FlatButton(
                                 onPressed: (){
                                   Navigator.of(context).pushNamed('/tea_history');

@@ -11,6 +11,7 @@ class Request {
   final String student_year;
   final String teacher_mail;
   final String teacher_name;
+  final String employee_code;
   final String teacher_ini;
   final String teacher_room;
   final String teacher_id;
@@ -20,5 +21,5 @@ class Request {
   final String s_url;
 
   Request(
-      {this.date, this.purpose, this.status, this.student_branch, this.student_id,this.student_mail, this.student_name,this.student_rollno,this.student_year,this.teacher_mail,this.teacher_name,this.teacher_ini,this.teacher_room,this.teacher_id,this.time,this.request_id,this.t_url,this.s_url});
+      {this.date, this.purpose, this.status, this.student_branch, this.student_id,this.student_mail, this.student_name,this.student_rollno,this.student_year,this.teacher_mail,this.teacher_name,this.employee_code,this.teacher_ini,this.teacher_room,this.teacher_id,this.time,this.request_id,this.t_url,this.s_url});
 }

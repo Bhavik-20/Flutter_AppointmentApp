@@ -20,7 +20,7 @@ class AuthService {
   }
 
   // register faculty
-  Future registerFaculty(String name,String initials,String room,String email, String password, String url) async
+  Future registerFaculty(String name,String emp_code, String initials,String room,String email, String password, String url) async
   {
     try
     {
@@ -28,7 +28,7 @@ class AuthService {
       FirebaseUser user = result.user;
 
       //create a new document for the teacher with the uid
-      await DatabaseService(uid:user.uid).updateFacultyData(name, initials, room, email, password,url);
+      await DatabaseService(uid:user.uid).updateFacultyData(name, emp_code, initials, room, email, password,url);
       return _userFromFirebaseUser(user);
     }
     catch(e)

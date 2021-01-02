@@ -195,7 +195,7 @@ class _teacher_signupState extends State<teacher_signup> {
                     if(result=='valid')
                       {
                         setState(() => loading=true);
-                        dynamic result_auth = await _auth.registerFaculty(name,initials,room,email,password,'');
+                        dynamic result_auth = await _auth.registerFaculty(name,emp_code,initials,room,email,password,'');
                         if(result_auth == null)
                         {
                           setState(() {

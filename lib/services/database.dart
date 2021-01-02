@@ -19,11 +19,12 @@ class DatabaseService {
   final CollectionReference acceptCollection =Firestore.instance.collection('accepted');
   final CollectionReference declineCollection =Firestore.instance.collection('rejected');
 //-------------------------------------------------------------------------------------------------------------------------------------//
-  Future updateFacultyData(String name,String initials,String room,String email,String password, String downloadUrl) async
+  Future updateFacultyData(String name,String emp_code, String initials,String room,String email,String password, String downloadUrl) async
   {
     return await facultyCollection.document(uid).setData({
       'teacher_id':uid,
       'name': name,
+      'employee_code': emp_code,
       'initials':initials,
       'room':room,
       'email':email,
@@ -48,7 +49,7 @@ class DatabaseService {
     });
   }
 //-------------------------------------------------------------------------------------------------------------------------------------//
-  Future updateRequests(String name,String rollno,String branch,String year,String email,String purpose,String time, String date, String teacherMail,String teacherName,String teacher_ini,String teacher_room,String teacher_id,String t_url, String s_url) async
+  Future updateRequests(String name,String rollno,String branch,String year,String email,String purpose,String time, String date, String teacherMail,String teacherName,String emp_code, String teacher_ini,String teacher_room,String teacher_id,String t_url, String s_url) async
   {
     DocumentReference docref=requestCollection.document();
     return await docref.setData({
@@ -65,6 +66,7 @@ class DatabaseService {
       'teacher_id':teacher_id,
       'teacher_mail':teacherMail,
       'teacher_name': teacherName,
+      'employee_code': emp_code,
       'teacher_ini': teacher_ini,
       'teacher_room': teacher_room,
       'request_id':docref.documentID,
@@ -73,7 +75,7 @@ class DatabaseService {
     });
   }
 
-  Future acceptRequests(String docid,String student_id,String name,String rollno,String branch,String year,String email,String purpose,String time, String date,String teacherMail,String teacherName,String teacher_ini,String teacher_room,String req_id,String teacher_id,String t_url, String s_url) async
+  Future acceptRequests(String docid,String student_id,String name,String rollno,String branch,String year,String email,String purpose,String time, String date,String teacherMail,String teacherName,String emp_code, String teacher_ini,String teacher_room,String req_id,String teacher_id,String t_url, String s_url) async
   {
     DocumentReference docref=acceptCollection.document(docid);
     return await docref.setData({
@@ -90,6 +92,7 @@ class DatabaseService {
       'teacher_id':teacher_id,
       'teacher_mail':teacherMail,
       'teacher_name': teacherName,
+      'employee_code': emp_code,
       'teacher_ini': teacher_ini,
       'teacher_room': teacher_room,
       'request_id':req_id,
@@ -99,7 +102,7 @@ class DatabaseService {
   }
 
 
-  Future declineRequests(String docid, String student_id,String name,String rollno,String branch,String year,String email,String purpose,String time, String date,String teacherMail,String teacherName,String teacher_ini,String teacher_room,String req_id,String teacher_id,String t_url, String s_url) async
+  Future declineRequests(String docid, String student_id,String name,String rollno,String branch,String year,String email,String purpose,String time, String date,String teacherMail,String teacherName,String emp_code, String teacher_ini,String teacher_room,String req_id,String teacher_id,String t_url, String s_url) async
   {
     DocumentReference docref=declineCollection.document(docid);
     return await docref.setData({
@@ -115,6 +118,7 @@ class DatabaseService {
       'status':'Rejected',
       'teacher_mail':teacherMail,
       'teacher_name': teacherName,
+      'employee_code': emp_code,
       'teacher_ini': teacher_ini,
       'teacher_room': teacher_room,
       'request_id':req_id,
@@ -170,6 +174,7 @@ class DatabaseService {
         teacher_id: doc.data['teacher_id'],
         teacher_mail: doc.data['teacher_mail'],
         teacher_name: doc.data['teacher_name'],
+        employee_code:doc.data['employee_code'],
         teacher_ini: doc.data['teacher_ini'],
         teacher_room: doc.data['teacher_room'],
         time: doc.data['time'],
@@ -194,6 +199,7 @@ class DatabaseService {
     return snapshot.documents.map((doc){
       return Teacher(
         name: doc.data['name'] ?? '',
+        employee_code: doc.data['employee_code'] ?? '',
         initials:doc.data['initials'] ?? '',
         email: doc.data['email'] ?? '',
         room: doc.data['room'] ?? '',
@@ -215,6 +221,7 @@ class DatabaseService {
   {
     return Teacher(
       name: snapshot.data['name'],
+      employee_code: snapshot.data['employee_code'] ?? '',
       initials: snapshot.data['initials'],
       room: snapshot.data['room'],
       email: snapshot.data['email'],

@@ -25,19 +25,23 @@ class _teacher_profileState extends State<teacher_profile> {
   final _formKey=GlobalKey<FormState>();
   String downloadUrl="";
   String name="";
+  String emp_code="";
   String initials="";
   String room="";
   String email="";
   String password="";
   bool loading=false;
 
-  String validate(String name, String initials, String room)
+  String validate(String name, String emp_code, String initials, String room)
   {
     RegExp ofname=new RegExp(r'^[A-Za-z ]*$');
+    RegExp ofcode=new RegExp(r'^[0-9]{1,6}$');
     RegExp ofini=new RegExp(r'^[a-zA-Z_]*$');
     RegExp ofroom=new RegExp(r'^[A-Za-z0-9\-]*$');
     if (name.isEmpty || !ofname.hasMatch(name))
       return 'Invalid Name';
+    if (emp_code.isEmpty || !ofcode.hasMatch(emp_code))
+      return 'Invalid Employee Code';
     if (initials.isEmpty || !ofini.hasMatch(initials))
       return 'Invalid Initials';
     if (room.isEmpty || !ofroom.hasMatch(room))
@@ -145,6 +149,30 @@ class _teacher_profileState extends State<teacher_profile> {
                                         thickness: 1,
                                       ),
                                       Container(
+                                          height:50.0,
+                                          padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                          child:TextFormField(
+                                              initialValue: data.employee_code ,
+                                              enabled: true,
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 18,
+                                                fontFamily: 'playfair',
+                                              ),
+                                              onChanged: (value){
+                                                setState(() => emp_code=value);
+                                              },
+                                              decoration: new InputDecoration(
+                                                border: InputBorder.none,
+                                                hintText: 'Employee Code',
+                                              )
+                                          )
+                                      ),
+                                      Divider(
+                                        color: Colors.deepPurple[100],
+                                        thickness: 1,
+                                      ),
+                                      Container(
                                         height:50.0,
                                           padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                                         child:TextFormField(
@@ -240,6 +268,7 @@ class _teacher_profileState extends State<teacher_profile> {
                               }
                               //photo upload ends
                               name= name.isEmpty ? data.name : name;
+                              emp_code=emp_code.isEmpty ? data.employee_code : emp_code;
                               initials= initials.isEmpty ? data.initials : initials;
                               room= room.isEmpty ? data.room : room;
                               email=data.email;
@@ -252,12 +281,12 @@ class _teacher_profileState extends State<teacher_profile> {
                               print(email);
                               print(password);
 
-                              String result = validate(name, initials, room);
+                              String result = validate(name, emp_code, initials, room);
                               if (result == 'valid') {
                                 setState(() => loading = true);
                                 await DatabaseService(uid: user.user_id)
                                     .updateFacultyData(
-                                    name, initials, room, email, password,
+                                    name, emp_code, initials, room, email, password,
                                     downloadUrl);
                                 Fluttertoast.showToast(
                                   backgroundColor: Colors.green,

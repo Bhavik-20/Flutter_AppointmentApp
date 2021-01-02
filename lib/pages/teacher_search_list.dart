@@ -41,7 +41,7 @@ class _SearchListState extends State<SearchList> {
                         ),
                       ),
                     ),
-                    title: Text(faculties[index].name),
+                    title: Text(faculties[index].employee_code+"_"+faculties[index].name),
                     subtitle: Text(faculties[index].initials),
                   ),
                 ),
