@@ -185,9 +185,9 @@ class _teacher_dashboardState extends State<teacher_dashboard> {
                     animationDuration: Duration(milliseconds: 200,),
                     animationCurve: Curves.bounceInOut ,
                     items: <Widget>[
-                      Icon(Icons.notifications, size: 25),
+                      Icon(Icons.pending_actions, size: 25),
                       Icon(Icons.playlist_add_check, size: 30),
-                      Icon(Icons.cancel_presentation_outlined, size: 25),
+                      Icon(Icons.remove_circle, size: 25),
                     ],
                     onTap: _onItemTapped,
                   ),
