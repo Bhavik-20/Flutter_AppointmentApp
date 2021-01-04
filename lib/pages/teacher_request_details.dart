@@ -27,6 +27,13 @@ class teacher_request_details extends StatefulWidget {
 
 class _teacher_request_detailsState extends State<teacher_request_details> {
   bool loading = false;
+  String why_rej="";
+
+  String check_whyrej(String reason) {
+    if(reason.isEmpty)
+      return 'invalid';
+    return 'valid';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -310,8 +317,9 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                     SizedBox(height: 30.0,),
                     Container(
                       padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
-                      child: Text( 'Purpose of Meet:',
+                      child: Text( 'Subject of Meet:',
                         style: TextStyle(
+                          fontWeight: FontWeight.bold,
                           fontSize: 20.0,
                           fontFamily: 'playfair',
                           color: Colors.black,
@@ -333,7 +341,7 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                                 child: TextField(
                                   style: TextStyle(
                                     fontSize: 20.0,
-                                    fontFamily: 'playfair',
+                                    fontFamily: 'kanit',
                                     color: Colors.black,
                                   ),
                                   enabled: false,
@@ -358,8 +366,9 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                               children: [
                                 Container(
                                   padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
-                                  child: Text( 'Purpose Explained:',
+                                  child: Text( 'Subject Explained:',
                                     style: TextStyle(
+                                      fontWeight: FontWeight.bold,
                                       fontSize: 20.0,
                                       fontFamily: 'playfair',
                                       color: Colors.black,
@@ -378,7 +387,7 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                                   child: TextField(
                                     style: TextStyle(
                                       fontSize: 20.0,
-                                      fontFamily: 'playfair',
+                                      fontFamily: 'kanit',
                                       color: Colors.black,
                                     ),
                                     enabled: false,
@@ -396,6 +405,55 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                                   ),
                                 ),
                               ],
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Container(
+                              padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                              child: Text( 'Reason for rejecting the appointment:',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0,
+                                  fontFamily: 'playfair',
+                                  color: Colors.black,
+                                ),),
+                            ),
+                            Container(
+                              padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                              width: size.width*0.8,
+                              height: size.height*0.2,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border: Border.all(
+                                    color: Colors.white,
+                                  ),
+                                  borderRadius: BorderRadius.all(Radius.circular(20))
+                              ),
+                              child: TextField(
+                                style: TextStyle(
+                                  fontSize: 20.0,
+                                  fontFamily: 'kanit',
+                                  color: Colors.black,
+                                ),
+                                // enabled: true,
+                                maxLines: 5,
+                                autocorrect: false,
+                                autofocus: false,
+                                cursorColor: Colors.black,
+                                decoration: new InputDecoration(
+                                  hintText: 'Type here only if rejecting request..',
+                                  hintStyle: TextStyle(
+                                    color: Colors.black,
+                                  ),
+                                  border: InputBorder.none,
+                                ),
+                                onChanged: (value){
+                                  setState(() {
+                                    why_rej=value;
+                                  });
+                                },
+                              ),
                             ),
                           ],
                         )
@@ -461,40 +519,58 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                         ),
                         SizedBox(width: 20.0,),
                         RaisedButton(
-                          onPressed: () async{
-                            loading=true;
-                            print('rejected');
-                            await DatabaseService().deleteRequests(widget.request.request_id);
-                            await DatabaseService().declineRequests(
-                                widget.request.request_id,
-                                widget.request.student_id,
-                                widget.request.student_name,
-                                widget.request.student_rollno,
-                                widget.request.student_branch,
-                                widget.request.student_year,
-                                widget.request.student_mail,
-                                widget.request.purpose,
-                                widget.request.purpose_details,
-                                widget.request.time,
-                                widget.request.date,
-                                widget.request.teacher_mail,
-                                widget.request.teacher_name,
-                                widget.request.employee_code,
-                                widget.request.teacher_ini,
-                                widget.request.teacher_room,
-                                widget.request.request_id,
-                                widget.request.teacher_id,
-                                widget.request.t_url,
-                                widget.request.s_url);
-                            print(widget.request.request_id);
+                          onPressed: () async {
+                            String status = check_whyrej(why_rej);
+                            if (status.trim() == 'valid')
+                            {
+                              // appending reason for rejection to status
+                              status="Rejected.\n"+ why_rej;
 
-                            Fluttertoast.showToast(
-                              backgroundColor: Colors.red,
-                              msg: 'The request is rejected',
-                              toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.BOTTOM,
-                            );
-                            Navigator.pop(context);
+                              loading = true;
+                              print(why_rej);
+                              print('rejected');
+                              await DatabaseService().deleteRequests(
+                                  widget.request.request_id);
+                              await DatabaseService().declineRequests(
+                                  widget.request.request_id,
+                                  widget.request.student_id,
+                                  widget.request.student_name,
+                                  widget.request.student_rollno,
+                                  widget.request.student_branch,
+                                  widget.request.student_year,
+                                  widget.request.student_mail,
+                                  widget.request.purpose,
+                                  widget.request.purpose_details,
+                                  widget.request.time,
+                                  widget.request.date,
+                                  status,
+                                  widget.request.teacher_mail,
+                                  widget.request.teacher_name,
+                                  widget.request.employee_code,
+                                  widget.request.teacher_ini,
+                                  widget.request.teacher_room,
+                                  widget.request.request_id,
+                                  widget.request.teacher_id,
+                                  widget.request.t_url,
+                                  widget.request.s_url);
+                              print(widget.request.request_id);
+
+                              Fluttertoast.showToast(
+                                backgroundColor: Colors.red,
+                                msg: 'The request is rejected',
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                              );
+                              Navigator.pop(context);
+                            }
+                            else{
+                              Fluttertoast.showToast(
+                                backgroundColor: Colors.red,
+                                msg: 'Please Enter Reason For Rejecting Request',
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                              );
+                            }
                           },
 
                           color: Colors.red,

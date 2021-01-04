@@ -66,7 +66,7 @@ class _listofnewFacultyRequestsState extends State<listofnewFacultyRequests> {
                         ),),
                       isThreeLine: true,
                       subtitle: Text(
-                          'Purpose :'+ requests[index].purpose + '\n' + requests[index].date,
+                          'Purpose : '+ requests[index].purpose + '\n' + requests[index].date,
                         style: TextStyle(
                           fontSize: 16,
                         ),

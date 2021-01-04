@@ -158,7 +158,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                             );
                             print("Select Date");
                           }
-                          if (purpose == null) {
+                          if (purpose == null || purpose.toString() == "") {
                             Fluttertoast.showToast(
                               backgroundColor: Colors.red,
                               msg: 'Please Enter Purpose',
@@ -175,6 +175,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                               toastLength: Toast.LENGTH_SHORT,
                               gravity: ToastGravity.BOTTOM,
                             );
+                            print(purpose);
                             print("Completed");
                             sendRequest(
                                 data.name,
@@ -194,7 +195,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                                 widget.teacher.teacher_id,
                                 widget.teacher.url,
                                 data.url,);
-                            // setState(() =>loading=true);
+                            setState(() =>loading=true);
                             loading = true;
                             Navigator.of(context).pushNamed('/st_dash');
                           }
