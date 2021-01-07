@@ -4,6 +4,7 @@ import 'package:flutter_appointment_app/model/Teacher.dart';
 import 'package:flutter_appointment_app/pages/student_bookAppointment.dart';
 import 'package:flutter_appointment_app/ui_helpers/constants.dart';
 import 'package:flutter_appointment_app/ui_helpers/text_field_container.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 class SearchList extends StatefulWidget {
@@ -40,12 +41,20 @@ class _SearchListState extends State<SearchList> {
           items.clear();
           items.addAll(dummyListData);
         });
-        return;
+        if(items.length == 0){
+          Fluttertoast.showToast(
+            backgroundColor: Colors.red,
+            msg: 'No Result Found',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.TOP,
+          );
+        }
       } else {
         setState(() {
           items.clear();
           items.addAll(search_name);
         });
+
       }
     }
 
