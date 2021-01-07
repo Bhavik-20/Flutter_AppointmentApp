@@ -32,7 +32,7 @@ class _SearchListState extends State<SearchList> {
       if(query.isNotEmpty) {
         List<Teacher> dummyListData = List<Teacher>();
         dummySearchList.forEach((item) {
-          if(item.name.contains(query) || item.initials.contains(query) || item.employee_code.contains(query)) {
+          if(item.name.toLowerCase().contains(query.toLowerCase()) || item.initials.toLowerCase().contains(query.toLowerCase()) || item.employee_code.contains(query)) {
             dummyListData.add(item);
           }
         });
