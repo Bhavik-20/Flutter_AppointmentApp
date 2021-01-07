@@ -9,6 +9,7 @@ import 'package:flutter_appointment_app/ui_helpers/rounded_password_field.dart';
 import 'package:flutter_appointment_app/ui_helpers/text_field_container.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main(){
   runApp(teacher_login());
@@ -138,6 +139,10 @@ class _teacher_loginState extends State<teacher_login> {
                           toastLength: Toast.LENGTH_SHORT,
                           gravity: ToastGravity.BOTTOM,
                           );
+                          final SharedPreferences prefs=await SharedPreferences.getInstance();
+                          final key= 'user_role';
+                          final value='faculty';
+                          prefs.setString(key, value);
                           Navigator.of(context).pushNamed('/tea_dash');
                       }
                     }
@@ -152,47 +157,6 @@ class _teacher_loginState extends State<teacher_login> {
                   },
                 ),
                 SizedBox(height: size.height * 0.01),
-                // Row(
-                //     children: <Widget>[
-                //       Expanded(
-                //           child: Divider(
-                //             thickness: 1.0,
-                //             color: Colors.purple[100],
-                //           )
-                //       ),
-                //       SizedBox(width: 5.0,),
-                //       Text("OR",
-                //         style: TextStyle(
-                //             fontFamily: 'dosis',
-                //             fontWeight: FontWeight.bold,
-                //             fontSize:15.0
-                //         ),
-                //       ),
-                //       SizedBox(width: 5.0,),
-                //       Expanded(
-                //           child: Divider(
-                //             thickness: 1.0,
-                //             color: Colors.purple[100],
-                //           )
-                //       ),
-                //     ]
-                // ),
-                // SizedBox(height: 10.0,),
-                // FlatButton(
-                //   shape:  CircleBorder(
-                //       side: BorderSide(
-                //           style: BorderStyle.solid,
-                //           color: Colors.white
-                //       )
-                //   ),
-                //   onPressed: (){},
-                //   child: Image(
-                //     image: AssetImage('images/google.jpg'),
-                //     height: 70.0,
-                //     width: 50.0,
-                //   ),
-                //   // height: size.height*0.01,
-                // ),
                 Row(
                     children: <Widget>[
                       Expanded(
@@ -245,4 +209,45 @@ class _teacher_loginState extends State<teacher_login> {
     );
   }
 }
-
+// -----------Google sign in Code------------
+// Row(
+//     children: <Widget>[
+//       Expanded(
+//           child: Divider(
+//             thickness: 1.0,
+//             color: Colors.purple[100],
+//           )
+//       ),
+//       SizedBox(width: 5.0,),
+//       Text("OR",
+//         style: TextStyle(
+//             fontFamily: 'dosis',
+//             fontWeight: FontWeight.bold,
+//             fontSize:15.0
+//         ),
+//       ),
+//       SizedBox(width: 5.0,),
+//       Expanded(
+//           child: Divider(
+//             thickness: 1.0,
+//             color: Colors.purple[100],
+//           )
+//       ),
+//     ]
+// ),
+// SizedBox(height: 10.0,),
+// FlatButton(
+//   shape:  CircleBorder(
+//       side: BorderSide(
+//           style: BorderStyle.solid,
+//           color: Colors.white
+//       )
+//   ),
+//   onPressed: (){},
+//   child: Image(
+//     image: AssetImage('images/google.jpg'),
+//     height: 70.0,
+//     width: 50.0,
+//   ),
+//   // height: size.height*0.01,
+// ),

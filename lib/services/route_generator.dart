@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_appointment_app/main.dart';
 import 'package:flutter_appointment_app/pages/role.dart';
 import 'package:flutter_appointment_app/pages/student_login.dart';
 import 'package:flutter_appointment_app/pages/student_request_status.dart';
@@ -31,6 +32,8 @@ class RouteGenerator {
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(builder: (_) => role());
+      case '/main':
+        return MaterialPageRoute(builder: (_) => MyApp());
       case '/st_dash':
           return MaterialPageRoute(builder: (_) => student_dashboard());
       case '/st_bookAppo ':

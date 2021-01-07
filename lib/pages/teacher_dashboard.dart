@@ -13,6 +13,7 @@ import "package:google_fonts/google_fonts.dart";
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_appointment_app/pages/teacher_accepted_requests.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main()
 {
@@ -153,6 +154,14 @@ class _teacher_dashboardState extends State<teacher_dashboard> {
                               FlatButton(
                                 onPressed: () async {
                                   setState(() => loading=true);
+
+                                  final prefs = await SharedPreferences.getInstance();
+                                  await prefs.clear();
+                                  // final key = 'user_role';
+                                  // final value = 'null';
+                                  // prefs.setString(key, value);
+                                  // print('read: $value');
+
                                   await Future.delayed(const Duration(milliseconds: 3000));
                                   await _auth.signOut();
                                   Navigator.of(context).pushNamed('/');

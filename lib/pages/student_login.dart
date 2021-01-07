@@ -8,6 +8,7 @@ import 'package:flutter_appointment_app/ui_helpers/rounded_input_field.dart';
 import 'package:flutter_appointment_app/ui_helpers/rounded_password_field.dart';
 import 'package:flutter_appointment_app/ui_helpers/text_field_container.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main(){
   runApp(student_login());
@@ -135,6 +136,10 @@ class _student_loginState extends State<student_login> {
                           toastLength: Toast.LENGTH_SHORT,
                           gravity: ToastGravity.BOTTOM,
                         );
+                        final SharedPreferences prefs=await SharedPreferences.getInstance();
+                        final key= 'user_role';
+                        final value='student';
+                        prefs.setString(key, value);
                         Navigator.of(context).pushNamed('/st_dash');
                       }
                     }
@@ -149,47 +154,7 @@ class _student_loginState extends State<student_login> {
                   },
                 ),
                 SizedBox(height: size.height * 0.01),
-                // Row(
-                //     children: <Widget>[
-                //       Expanded(
-                //           child: Divider(
-                //             thickness: 1.0,
-                //             color: Colors.purple[100],
-                //           )
-                //       ),
-                //       SizedBox(width: 5.0,),
-                //       Text("OR",
-                //         style: TextStyle(
-                //             fontFamily: 'dosis',
-                //             fontWeight: FontWeight.bold,
-                //             fontSize:15.0
-                //         ),
-                //       ),
-                //       SizedBox(width: 5.0,),
-                //       Expanded(
-                //           child: Divider(
-                //             thickness: 1.0,
-                //             color: Colors.purple[100],
-                //           )
-                //       ),
-                //     ]
-                // ),
                 SizedBox(height: 10.0,),
-                // FlatButton(
-                //   shape:  CircleBorder(
-                //       side: BorderSide(
-                //           style: BorderStyle.solid,
-                //           color: Colors.white
-                //       )
-                //   ),
-                //   onPressed: (){},
-                //   child: Image(
-                //     image: AssetImage('images/google.jpg'),
-                //     height: 70.0,
-                //     width: 50.0,
-                //   ),
-                //   // height: size.height*0.01,
-                // ),
                 Row(
                     children: <Widget>[
                       Expanded(
@@ -241,4 +206,46 @@ class _student_loginState extends State<student_login> {
     );
   }
 }
+// -------------- Line 157 ---------------
+// Row(
+//     children: <Widget>[
+//       Expanded(
+//           child: Divider(
+//             thickness: 1.0,
+//             color: Colors.purple[100],
+//           )
+//       ),
+//       SizedBox(width: 5.0,),
+//       Text("OR",
+//         style: TextStyle(
+//             fontFamily: 'dosis',
+//             fontWeight: FontWeight.bold,
+//             fontSize:15.0
+//         ),
+//       ),
+//       SizedBox(width: 5.0,),
+//       Expanded(
+//           child: Divider(
+//             thickness: 1.0,
+//             color: Colors.purple[100],
+//           )
+//       ),
+//     ]
+// ),
 
+// -------------- Line after : SizedBox(height: 10.0,) ---------------
+// FlatButton(
+//   shape:  CircleBorder(
+//       side: BorderSide(
+//           style: BorderStyle.solid,
+//           color: Colors.white
+//       )
+//   ),
+//   onPressed: (){},
+//   child: Image(
+//     image: AssetImage('images/google.jpg'),
+//     height: 70.0,
+//     width: 50.0,
+//   ),
+//   // height: size.height*0.01,
+// ),
