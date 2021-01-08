@@ -47,9 +47,7 @@ class _teacher_dashboardState extends State<teacher_dashboard> {
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
 
-    Size size = MediaQuery
-        .of(context)
-        .size;
+    Size size = MediaQuery.of(context).size;
     return StreamBuilder<Teacher>(
         stream: DatabaseService(uid: user.user_id).facultyData,
         builder: (context, snapshot) {
@@ -154,13 +152,6 @@ class _teacher_dashboardState extends State<teacher_dashboard> {
                               FlatButton(
                                 onPressed: () async {
                                   setState(() => loading=true);
-
-                                  final prefs = await SharedPreferences.getInstance();
-                                  await prefs.clear();
-                                  // final key = 'user_role';
-                                  // final value = 'null';
-                                  // prefs.setString(key, value);
-                                  // print('read: $value');
 
                                   await Future.delayed(const Duration(milliseconds: 3000));
                                   await _auth.signOut();

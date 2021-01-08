@@ -1,6 +1,10 @@
 import 'dart:ui';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_appointment_app/model/User.dart';
 import 'package:flutter_appointment_app/services/auth.dart';
+import 'package:flutter_appointment_app/services/database.dart';
 import 'package:flutter_appointment_app/ui_helpers/Loading.dart';
 import 'package:flutter_appointment_app/ui_helpers/constants.dart';
 import 'package:flutter_appointment_app/ui_helpers/rounded_button.dart';
@@ -23,20 +27,31 @@ class _teacher_loginState extends State<teacher_login> {
 
   final _formKey=GlobalKey<FormState>();
   final AuthService _auth=AuthService();
+  final FirebaseAuth auth2=FirebaseAuth.instance;
+
 
   bool loading=false;
   String email = "";
   String password = "";
   String error="";
 
-  String validate(String email, String password) {
+  Future<String> validate(String email, String password) async {
 
     RegExp ofemail=new RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
     if (email.isEmpty || !ofemail.hasMatch(email))
-      return 'Invalid Email';
+      return 'Invalid Email format';
     if (password.isEmpty || password.length<6)
-      return 'Invalid Password';
+      return 'Password length should be 6 char';
     return 'valid';
+  }
+
+  Future<String> check_role() async {
+    final FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    final docid = user.uid;
+    CollectionReference check=await Firestore.instance.collection('faculty');
+    var doc = await check.document(docid).get();
+    print("CHECK: "+docid+" - "+doc.exists.toString());
+    return doc.exists.toString();
   }
 
   bool _showPassword = false;
@@ -112,38 +127,48 @@ class _teacher_loginState extends State<teacher_login> {
                 RoundedButton(
                   text: "LOGIN",
                   press: () async {
-                    String result=validate(email,password);
+                    String result= await validate(email,password);
                     if(result=='valid')
                     {
                       setState(() => loading=true);
                       dynamic result_auth = await _auth.signInWithEmailAndPassword(email, password);
                       if(result_auth == null)
                       {
-                        setState(()  {
+                          setState(()  {loading=false;});
                           error ='An error occurred, please supply valid input';
-                          loading=false;
                           Fluttertoast.showToast(
                             backgroundColor: Colors.red,
                             msg: error,
                             toastLength: Toast.LENGTH_SHORT,
                             gravity: ToastGravity.BOTTOM,
                           );
-                        });
                       }
                       else
                       {
-                          setState(() => loading=true);
-                          Fluttertoast.showToast(
-                          backgroundColor: Colors.green,
-                          msg: 'Successful',
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
-                          );
-                          final SharedPreferences prefs=await SharedPreferences.getInstance();
-                          final key= 'user_role';
-                          final value='faculty';
-                          prefs.setString(key, value);
-                          Navigator.of(context).pushNamed('/tea_dash');
+                        // setState(() => loading=true);
+                          String result2= await check_role();
+                          if(result2=='true')
+                            {
+                              Fluttertoast.showToast(
+                                backgroundColor: Colors.green,
+                                msg: 'Successful',
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                              );
+                              Navigator.of(context).pushNamed('/tea_dash');
+                            }
+                          else
+                            {
+                              // setState(()  {loading=false;});
+                              Fluttertoast.showToast(
+                                backgroundColor: Colors.red,
+                                msg: 'You do not belong to the Faculty Role.',
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                              );
+                              _auth.signOut();
+                              Navigator.of(context).pushNamed('/');
+                            }
                       }
                     }
                     else {
