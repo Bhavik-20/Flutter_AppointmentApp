@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_appointment_app/ui_helpers/Loading.dart';
@@ -73,6 +74,7 @@ class _State extends State {
 
     );
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -238,6 +240,7 @@ class _State extends State {
                     {
                       setState(() => loading=true);
                       dynamic result_auth = await _auth.registerStudent(name, rollno, branch, year, email, password,'');
+                      print(result_auth);
                       if(result_auth == null)
                       {
                         setState(() {
@@ -250,17 +253,10 @@ class _State extends State {
                           );
                         });
                       }
-                      else
-                      {
-                        Fluttertoast.showToast(
-                          backgroundColor: Colors.green,
-                          msg: 'Successful',
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
-                        );
-                        Navigator.of(context).pushNamed('/st_dash');
+                      else {
+                        Navigator.of(context).pushNamed('/st_login');
                       }
-                    }
+                      }
                     else {
                       Fluttertoast.showToast(
                         backgroundColor: Colors.red,

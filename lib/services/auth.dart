@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_appointment_app/model/User.dart';
 import 'package:flutter_appointment_app/services/database.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 
 class AuthService {
@@ -46,6 +48,14 @@ class AuthService {
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
       print("1");
+      user.sendEmailVerification();
+      Fluttertoast.showToast(
+        backgroundColor: Colors.green,
+        msg: 'A verification email is sent to '+email+'. Please Verify your email and then sign in.',
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+      );
+
       //create a new document for the student with the uid
       await DatabaseService(uid:user.uid).updateStudentData(name, rollno, branch, year,email, password,url);
       print("2");
@@ -65,7 +75,25 @@ class AuthService {
     {
       AuthResult result = await _auth.signInWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
-      return _userFromFirebaseUser(user);
+      if(user.isEmailVerified){
+        Fluttertoast.showToast(
+          backgroundColor: Colors.green,
+          msg: 'Email is Verified',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+        );
+        return _userFromFirebaseUser(user);
+      }
+      else {
+        Fluttertoast.showToast(
+          backgroundColor: Colors.green,
+          msg: 'Please verify your email.',
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+        );
+        return null;
+      }
+
     }
     catch(e)
     {
