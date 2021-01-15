@@ -150,18 +150,32 @@ class _student_loginState extends State<student_login> {
                             toastLength: Toast.LENGTH_SHORT,
                             gravity: ToastGravity.BOTTOM,
                           );
-                          Navigator.of(context).pushNamed('/st_dash');
+                          FirebaseUser user = await FirebaseAuth.instance.currentUser();
+                          if(user.isEmailVerified)
+                            {
+                              print("Email Verified");
+                              Navigator.of(context).pushNamed('/st_dash');
+                            }
+                          else
+                            {
+                              // SharedPreferences prefs=await SharedPreferences.getInstance();
+                              // if(prefs.getInt(user.uid) == null)
+                              // {
+                              //   prefs.setInt(user.uid, 3);
+                              // }
+                              print("Email Not Verified");
+                              Navigator.of(context).pushNamed('/st_verify');
+                            }
                         }
                         else
                         {
-                          // setState(()  {loading=false;});
                           Fluttertoast.showToast(
                             backgroundColor: Colors.red,
                             msg: 'You do not belong to the Student Role.',
                             toastLength: Toast.LENGTH_SHORT,
                             gravity: ToastGravity.BOTTOM,
                           );
-                          _auth.signOut();
+                          await _auth.signOut();
                           Navigator.of(context).pushNamed('/');
                         }
                       }

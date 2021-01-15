@@ -12,6 +12,7 @@ class AuthService {
   //create user obj based on FirebaseUser
   User _userFromFirebaseUser(FirebaseUser user)
   {
+    // return user != null ? User (user_id: user.uid) : null;
     return user != null ? User (user_id: user.uid) : null;
   }
 
@@ -75,25 +76,8 @@ class AuthService {
     {
       AuthResult result = await _auth.signInWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
-      if(user.isEmailVerified){
-        Fluttertoast.showToast(
-          backgroundColor: Colors.green,
-          msg: 'Email is Verified',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-        );
-        return _userFromFirebaseUser(user);
-      }
-      else {
-        Fluttertoast.showToast(
-          backgroundColor: Colors.green,
-          msg: 'Please verify your email.',
-          toastLength: Toast.LENGTH_LONG,
-          gravity: ToastGravity.BOTTOM,
-        );
-        return null;
-      }
-
+      // return _userFromFirebaseUser(user);
+      return user;
     }
     catch(e)
     {
@@ -101,6 +85,7 @@ class AuthService {
       return null;
     }
   }
+
 
 
   // sign out

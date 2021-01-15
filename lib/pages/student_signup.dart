@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:ui';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_appointment_app/ui_helpers/Loading.dart';
 import 'package:flutter_appointment_app/ui_helpers/constants.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_appointment_app/ui_helpers/rounded_password_field.dart';
 import 'package:flutter_appointment_app/ui_helpers/text_field_container.dart';
 import 'package:flutter_appointment_app/services/auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class student_signup extends StatefulWidget {
@@ -253,9 +255,13 @@ class _State extends State {
                           );
                         });
                       }
-                      else {
-                        Navigator.of(context).pushNamed('/st_login');
-                      }
+                      else
+                        {
+                          FirebaseUser user = await FirebaseAuth.instance.currentUser();
+                          SharedPreferences prefs=await SharedPreferences.getInstance();
+                          await prefs.setInt(user.uid, 3);
+                          Navigator.of(context).pushNamed('/st_verify');
+                        }
                       }
                     else {
                       Fluttertoast.showToast(

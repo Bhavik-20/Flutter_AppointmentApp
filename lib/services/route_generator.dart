@@ -41,6 +41,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => student_bookAppointment());
       case '/st_login':
         return MaterialPageRoute(builder: (_) => student_login());
+      case '/st_verify':
+        return MaterialPageRoute(builder: (_) => student_verify());
       case '/st_profile':
         return MaterialPageRoute(builder: (_) => student_profile());
       case '/st_req_status':

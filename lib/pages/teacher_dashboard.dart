@@ -156,7 +156,6 @@ class _teacher_dashboardState extends State<teacher_dashboard> {
                                   await Future.delayed(const Duration(milliseconds: 3000));
                                   await _auth.signOut();
                                   Navigator.of(context).pushNamed('/');
-
                                 },
                                 child: Row(
                                   children: [

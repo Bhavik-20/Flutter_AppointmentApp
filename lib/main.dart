@@ -17,11 +17,10 @@ class MyApp extends StatelessWidget {
     return StreamProvider<User>.value(
       value: AuthService().user,
       child: MaterialApp(
-        home: student_verify(),
-        // Wrapper(),
+        home: Wrapper(),
+        // student_verify()
         // // initialRoute: '/',
-        // onGenerateRoute: RouteGenerator.generateRoute,
-
+        onGenerateRoute: RouteGenerator.generateRoute,
       ),
     );
   }
