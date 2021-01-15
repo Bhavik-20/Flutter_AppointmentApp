@@ -34,6 +34,7 @@ class _student_verifyState extends State<student_verify> {
 
   bool loading=false;
   final AuthService _auth=AuthService();
+  String tries='3';
 
   Future<FirebaseUser> DeleteUser()
   async {
@@ -58,30 +59,22 @@ class _student_verifyState extends State<student_verify> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  Row(
-                    children: [
-                      Padding(padding: EdgeInsets.fromLTRB(0, 60, 0, 0)),
-                      // IconButton(
-                      //   icon: Icon(Icons.arrow_back ),
-                      //   onPressed: (){
-                      //     Navigator.of(context).pushNamed('/st_login');
-                      //   },
-                      // ),
-                      SizedBox(width: 50.0),
-                      Text(
-                        "Email Verification",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'dosis',
-                            fontSize: 40
-                        ),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
+                    child: Text(
+                      "Email Verification",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'dosis',
+                          fontSize: 40,
                       ),
-                    ],
+                    ),
                   ),
                   SizedBox(height: size.height * 0.03),
                   Container(
-                    height: 275,
-                    width: 275,
+                    height: size.height *0.3,
+                    width: size.width *0.6,
                     child: Image(
                       image: AssetImage('images/email_verify.png'),
                     ),
@@ -101,7 +94,7 @@ class _student_verifyState extends State<student_verify> {
                   Container(
                     padding: EdgeInsets.symmetric(vertical: 5,horizontal: 20),
                     child: Text(
-                      'Please note that you have only 3 tries, after which your account and details will be erased from our database.',
+                      'Please note that you have only 3 tries to verify your email.',
                       style: GoogleFonts.lato(
                         fontSize: 18,
                         color: kPrimaryColor,
@@ -109,7 +102,20 @@ class _student_verifyState extends State<student_verify> {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  SizedBox(height: size.height * 0.03),
+                  SizedBox(height: size.height * 0.01),
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 5,horizontal: 20),
+                    child: Text(
+                      'Tries : '+tries,
+                      style: GoogleFonts.lato(
+                        fontSize: 18,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  SizedBox(height: size.height * 0.01),
                   RoundedButton(
                     text: "Verify",
                     press: () async {
@@ -120,7 +126,16 @@ class _student_verifyState extends State<student_verify> {
                       _user =  await FirebaseAuth.instance.currentUser();
                       if(_user.isEmailVerified)
                         {
-                          Navigator.of(context).pushNamed('/st_dash');
+                          SharedPreferences prefs=await SharedPreferences.getInstance();
+                          String role =prefs.getString('role');
+                          if(role == 'Student') {
+                            print(role);
+                            Navigator.of(context).pushNamed('/st_dash');
+                          }
+                          else if(role == 'Teacher') {
+                            print(role);
+                            Navigator.of(context).pushNamed('/tea_dash');
+                          }
                         }
                       else
                         {
@@ -130,7 +145,7 @@ class _student_verifyState extends State<student_verify> {
                           SharedPreferences prefs=await SharedPreferences.getInstance();
                           FirebaseUser user = await FirebaseAuth.instance.currentUser();
                           int chances=prefs.getInt(user.uid);
-                          if(chances>0)
+                          if(chances>1)
                             {
                               print("Chances before: "+chances.toString());
                               chances=chances-1;
@@ -142,6 +157,7 @@ class _student_verifyState extends State<student_verify> {
                                 gravity: ToastGravity.BOTTOM,
                               );
                               print("Chances after: "+chances.toString());
+                              tries = chances.toString();
                             }
                           else
                             {

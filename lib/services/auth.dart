@@ -30,6 +30,14 @@ class AuthService {
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
 
+      user.sendEmailVerification();
+      Fluttertoast.showToast(
+        backgroundColor: Colors.green,
+        msg: 'A verification email is sent to '+email+'. Please Verify your email and then sign in.',
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+      );
+
       //create a new document for the teacher with the uid
       await DatabaseService(uid:user.uid).updateFacultyData(name, emp_code, initials, room, email, password,url);
       return _userFromFirebaseUser(user);
