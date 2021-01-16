@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_appointment_app/model/User.dart';
+import 'package:flutter_appointment_app/pages/student_verify.dart';
 import 'package:flutter_appointment_app/services/auth.dart';
 import 'package:flutter_appointment_app/services/route_generator.dart';
 import 'package:flutter_appointment_app/wrapper.dart';
@@ -17,9 +18,9 @@ class MyApp extends StatelessWidget {
       value: AuthService().user,
       child: MaterialApp(
         home: Wrapper(),
-        // initialRoute: '/',
+        // student_verify()
+        // // initialRoute: '/',
         onGenerateRoute: RouteGenerator.generateRoute,
-
       ),
     );
   }

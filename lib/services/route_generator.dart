@@ -4,6 +4,7 @@ import 'package:flutter_appointment_app/pages/role.dart';
 import 'package:flutter_appointment_app/pages/student_login.dart';
 import 'package:flutter_appointment_app/pages/student_request_status.dart';
 import 'package:flutter_appointment_app/pages/student_signup.dart';
+import 'package:flutter_appointment_app/pages/student_verify.dart';
 import 'package:flutter_appointment_app/pages/teacher_accepted_requests.dart';
 import 'package:flutter_appointment_app/pages/teacher_dashboard.dart';
 import 'package:flutter_appointment_app/pages/teacher_declined_requests.dart';
@@ -40,6 +41,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => student_bookAppointment());
       case '/st_login':
         return MaterialPageRoute(builder: (_) => student_login());
+      case '/st_verify':
+        return MaterialPageRoute(builder: (_) => student_verify());
       case '/st_profile':
         return MaterialPageRoute(builder: (_) => student_profile());
       case '/st_req_status':
@@ -76,6 +79,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => SearchList());
       case '/tea_signup':
         return MaterialPageRoute(builder: (_) => teacher_signup());
+      case '/stu_verify':
+        return MaterialPageRoute(builder: (_) => student_verify());
 
       default:
       // If there is no such named route in the switch statement, e.g. /third

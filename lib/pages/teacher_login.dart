@@ -168,7 +168,7 @@ class _teacher_loginState extends State<teacher_login> {
                                 toastLength: Toast.LENGTH_SHORT,
                                 gravity: ToastGravity.BOTTOM,
                               );
-                              _auth.signOut();
+                              await _auth.signOut();
                               Navigator.of(context).pushNamed('/');
                             }
                       }
