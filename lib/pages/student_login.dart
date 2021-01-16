@@ -11,6 +11,7 @@ import 'package:flutter_appointment_app/ui_helpers/rounded_password_field.dart';
 import 'package:flutter_appointment_app/ui_helpers/text_field_container.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_appointment_app/pages/ForgotScreen.dart';
 
 void main(){
   runApp(student_login());
@@ -175,6 +176,20 @@ class _student_loginState extends State<student_login> {
                       );
                     }
                   },
+                ),
+                Padding(padding: EdgeInsets.only(right:20),
+                    child: Container(
+                      width: double.infinity,
+                      child: InkWell(
+                        onTap:(){
+                          Navigator.pushReplacement(context,MaterialPageRoute(builder:(BuildContext context)=> ForgotScreen()));
+                        },
+                        child:Text("Forgot password ?",style:TextStyle(color:kPrimaryColor),
+                          textAlign: TextAlign.right,),
+
+                      ),
+                    )
+
                 ),
                 SizedBox(height: size.height * 0.01),
                 SizedBox(height: 10.0,),
