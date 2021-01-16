@@ -18,7 +18,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ForgotScreen extends StatefulWidget{
   @override
   State<StatefulWidget>createState() {
-    //TODO: implement createState
+
     return _ForgotScreen();
   }
     }
@@ -42,7 +42,7 @@ class ForgotScreen extends StatefulWidget{
 
      @override
       Widget build(BuildContext context){
-       //TODO: implement build
+
        return Scaffold(
          backgroundColor: Colors.white,
          body: Center(
