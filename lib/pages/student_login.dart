@@ -200,10 +200,8 @@ class _student_loginState extends State<student_login> {
                         },
                         child:Text("Forgot password ?",style:TextStyle(color:kPrimaryColor),
                           textAlign: TextAlign.right,),
-
                       ),
                     )
-
                 ),
                 SizedBox(height: size.height * 0.01),
                 SizedBox(height: 10.0,),
