@@ -10,6 +10,7 @@ class role extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.deepPurple[50],
@@ -41,7 +42,7 @@ class role extends StatelessWidget {
                             Navigator.of(context).pushNamed('/st_login');
                           },
                           child: Image.asset('images/role_student.jpg' ,
-                          width: 150,)
+                          width: size.width*0.3,)
                       ),
                       SizedBox(height: 10.0),
                       Text('I am a Student',
@@ -58,7 +59,7 @@ class role extends StatelessWidget {
                             Navigator.of(context).pushNamed('/tea_login');
                           },
                           child: Image.asset('images/role_teacher.jpg',
-                            width: 150,)
+                            width: size.width*0.3,)
                       ),
                       SizedBox(height: 10.0),
                         Text('I am a Teacher',
