@@ -14,6 +14,7 @@ import 'package:flutter_appointment_app/ui_helpers/rounded_password_field.dart';
 import 'package:flutter_appointment_app/ui_helpers/text_field_container.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ForgotScreen extends StatefulWidget{
@@ -25,6 +26,7 @@ class ForgotScreen extends StatefulWidget{
     }
     class _ForgotScreen extends State<ForgotScreen>{
       String email="";
+      String email_t = "";
       StreamSubscription<DocumentSnapshot> ss;
 
       // var _formKey=GlobalKey<FormState>();
@@ -62,82 +64,159 @@ class ForgotScreen extends StatefulWidget{
 
      @override
       Widget build(BuildContext context){
-
+       Size size = MediaQuery.of(context).size;
        return Scaffold(
          backgroundColor: Colors.white,
-         body: Center(
-           child: Padding(padding: EdgeInsets.only(top: 50,left:20,right:20),
-            child:Form(
-             // key: _formKey,
-              child: Column(
-               children:<Widget> [
-                 Text(
-                   "We will send you a link ... Please click on that link to reset your password",
-                 style: TextStyle(color: Color(0xffffffff),fontSize: 20),
-                 ),
-                 SizedBox(height:20),
-                 RoundedInputField(
-                   hintText: "Your Email",
-                   onChanged: (value) {
-                     setState(() => email=value);
-                   },
-                 ),
-                 Padding(
-                   padding:EdgeInsets.only(left:0,top:15,right:0,bottom:0),
-                   child:RaisedButton(
-                     onPressed:() async {
-                       print("Email : " + email);
-                       String valid= await validate(email);
-                       print("Valid : " + valid);
-                       if(valid=="valid")
-                       {
-                         String result = await checkUserExists(email);
-                         print("Result : " + result);
-                         if(result=="Exists")
-                           {
-                             FirebaseAuth.instance.sendPasswordResetEmail(
-                                 email: email).then((value) =>
-                                 print("Check your mails..."));
-                             Fluttertoast.showToast(
-                               backgroundColor: Colors.green,
-                               msg: 'A password Link has been sent to your Email Id',
-                               toastLength: Toast.LENGTH_SHORT,
-                               gravity: ToastGravity.TOP,
-                             );
-                           }
-                         else
-                           {
-                             Fluttertoast.showToast(
-                               backgroundColor: Colors.red,
-                               msg: 'We have no user with this email Id',
-                               toastLength: Toast.LENGTH_SHORT,
-                               gravity: ToastGravity.TOP,
-                             );
-                           }
-                        }
-                       else
-                         {
-                           Fluttertoast.showToast(
-                             backgroundColor: Colors.red,
-                             msg: 'Invalid Email',
-                             toastLength: Toast.LENGTH_SHORT,
-                             gravity: ToastGravity.TOP
-                           );
-                         }
+         body: SafeArea(
+           child:  SingleChildScrollView(
+             child: Column(
+               children: [
+                 Row(
+                   children: [
+                     Padding(padding: EdgeInsets.fromLTRB(0, 60, 0, 0)),
+                     IconButton(
+                       icon: Icon(Icons.arrow_back ),
+                       onPressed: (){
+                         Navigator.pop(context);
                        },
-                     shape: RoundedRectangleBorder(
-                       borderRadius: BorderRadius.circular(50),
                      ),
-                     color: kPrimaryColor,
-                     child: Text("Send Email",style:TextStyle(color:Colors.white,fontSize:20),),
-                      padding: EdgeInsets.all(10),
+                     SizedBox(width: 30.0),
+                     Text(
+                       "Reset password",
+                       style: TextStyle(
+                           fontWeight: FontWeight.bold,
+                           fontFamily: 'dosis',
+                           fontSize: 40
+                       ),
+                     ),
+                   ],
+                 ),
+                 SizedBox(height: size.height * 0.03),
+                 Container(
+                   height: size.height * 0.3,
+                   width: size.width * 0.7,
+                   child: Image(
+                     image: AssetImage('images/email_verify.png'),
                    ),
                  ),
+                 SizedBox(height: size.height * 0.03),
+                 Form(
+                  // key: _formKey,
+                   child: Column(
+                    children:<Widget> [
+                      RoundedInputField(
+                        hintText: "Your Email",
+                        onChanged: (value) {
+                          setState(() => email=value);
+                        },
+                      ),
+                      Padding(
+                        padding:EdgeInsets.only(left:0,top:15,right:0,bottom:0),
+                        child:RoundedButton(
+                          press:() async {
+                            print("Email : " + email);
+                            String valid= await validate(email);
+                            print("Valid : " + valid);
+                            if(valid=="valid")
+                            {
+                              String result = await checkUserExists(email);
+                              print("Result : " + result);
+                              if(result=="Exists")
+                                {
+                                  FirebaseAuth.instance.sendPasswordResetEmail(
+                                      email: email).then((value) =>
+                                      print("Check your mails..."));
+                                  Fluttertoast.showToast(
+                                    backgroundColor: Colors.green,
+                                    msg: 'A password Link has been sent to your Email Id',
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    gravity: ToastGravity.TOP,
+                                  );
+                                  setState(() {
+                                    email_t = "sent";
+                                  });
+                                }
+                              else
+                                {
+                                  Fluttertoast.showToast(
+                                    backgroundColor: Colors.red,
+                                    msg: 'We have no user with this email Id',
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    gravity: ToastGravity.TOP,
+                                  );
+                                }
+                             }
+                            else
+                              {
+                                Fluttertoast.showToast(
+                                  backgroundColor: Colors.red,
+                                  msg: 'Invalid Email',
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.TOP
+                                );
+                              }
+                            },
+                          text: "Send Reset Link",
+                        ),
+                      ),
+                      SizedBox(height: size.height * 0.03),
+                      if(email_t == "sent")
+                        Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal : 10.0),
+                              child: Text('A link to reset your password has been sent to your email.',
+                                style: GoogleFonts.lato(
+                                  fontSize: 20,
+                                  color: Colors.black,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal : 10.0),
+                              child: Text('You May Login after Resetting your Password',
+                                style: GoogleFonts.lato(
+                                  fontSize: 20,
+                                  color: kPrimaryColor,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Container(
+                              margin: EdgeInsets.symmetric(vertical: 20),
+                              width: size.width * 0.5,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(29),
+                                child: FlatButton(
+                                  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                                  color: kPrimaryLightColor,
+                                  onPressed: (){
+                                    Navigator.of(context).pushNamed('/st_login');
+                                  },
+                                  child: Text(
+                                    'Go To Login',
+                                    style: TextStyle(color: kPrimaryColor, fontSize: 17),
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                          ],
+                        )
+                    ],
+                 )
+                 ),
                ],
-           )
+             ),
            ),
          ),
-       ),
        );
      }
 }

@@ -120,6 +120,24 @@ class _student_loginState extends State<student_login> {
                     ),
                   ),
                 ),
+                Padding(padding: EdgeInsets.symmetric(horizontal: 25,vertical: 5),
+                    child: Container(
+                      width: double.infinity,
+                      child: InkWell(
+                        onTap:(){
+                          Navigator.pushReplacement(context,MaterialPageRoute(builder:(BuildContext context)=> ForgotScreen()));
+                        },
+                        child:Text("Forgot password ?",
+                          style:TextStyle(
+                            color:kPrimaryColor,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign :TextAlign.right ,
+                        ),
+                      ),
+                    )
+                ),
                 Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
                 RoundedButton(
                   text: "LOGIN",
@@ -190,18 +208,6 @@ class _student_loginState extends State<student_login> {
                       );
                     }
                   },
-                ),
-                Padding(padding: EdgeInsets.only(right:20),
-                    child: Container(
-                      width: double.infinity,
-                      child: InkWell(
-                        onTap:(){
-                          Navigator.pushReplacement(context,MaterialPageRoute(builder:(BuildContext context)=> ForgotScreen()));
-                        },
-                        child:Text("Forgot password ?",style:TextStyle(color:kPrimaryColor),
-                          textAlign: TextAlign.right,),
-                      ),
-                    )
                 ),
                 SizedBox(height: size.height * 0.01),
                 SizedBox(height: 10.0,),

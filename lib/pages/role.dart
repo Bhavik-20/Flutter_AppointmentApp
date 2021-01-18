@@ -42,7 +42,7 @@ class role extends StatelessWidget {
                             Navigator.of(context).pushNamed('/st_login');
                           },
                           child: Image.asset('images/role_student.jpg' ,
-                          width: size.width*0.3,)
+                          width: size.width*0.375,)
                       ),
                       SizedBox(height: 10.0),
                       Text('I am a Student',
@@ -59,7 +59,7 @@ class role extends StatelessWidget {
                             Navigator.of(context).pushNamed('/tea_login');
                           },
                           child: Image.asset('images/role_teacher.jpg',
-                            width: size.width*0.3,)
+                            width: size.width*0.375,)
                       ),
                       SizedBox(height: 10.0),
                         Text('I am a Teacher',
