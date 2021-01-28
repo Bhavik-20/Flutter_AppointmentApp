@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_appointment_app/model/Teacher.dart';
 import 'package:flutter_appointment_app/model/User.dart';
+import 'package:flutter_appointment_app/pages/role.dart';
 import 'package:flutter_appointment_app/pages/teacher_declined_requests.dart';
 import 'package:flutter_appointment_app/pages/teacher_new_requests.dart';
 import 'package:flutter_appointment_app/services/auth.dart';
@@ -48,7 +49,7 @@ class _teacher_dashboardState extends State<teacher_dashboard> {
     final user = Provider.of<User>(context);
 
     Size size = MediaQuery.of(context).size;
-    return StreamBuilder<Teacher>(
+    return user==null ? role() : StreamBuilder<Teacher>(
         stream: DatabaseService(uid: user.user_id).facultyData,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
@@ -155,7 +156,7 @@ class _teacher_dashboardState extends State<teacher_dashboard> {
 
                                   await Future.delayed(const Duration(milliseconds: 3000));
                                   await _auth.signOut();
-                                  Navigator.of(context).pushNamed('/');
+                                  // Navigator.of(context).pushNamed('/');
                                 },
                                 child: Row(
                                   children: [

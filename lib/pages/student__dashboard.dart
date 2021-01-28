@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_appointment_app/model/Student.dart';
+import 'package:flutter_appointment_app/pages/role.dart';
 import 'package:flutter_appointment_app/pages/student_accepted_requests.dart';
 import 'package:flutter_appointment_app/pages/student_declined_requests.dart';
 import 'package:flutter_appointment_app/pages/student_new_requests.dart';
@@ -43,7 +44,7 @@ class _student_dashboardState extends State<student_dashboard> {
     final user = Provider.of<User>(context);
     Size size = MediaQuery.of(context).size;
 
-    return StreamBuilder<Student>(
+    return user==null ? role() : StreamBuilder<Student>(
         stream: DatabaseService(uid: user.user_id).studentData,
         builder: (context, snapshot) {
           if (snapshot.hasData)
@@ -67,11 +68,9 @@ class _student_dashboardState extends State<student_dashboard> {
 
                           await Future.delayed(const Duration(milliseconds: 3000));
                           await _auth.signOut();
-                          Navigator.of(context).pushNamed('/');
+                          // Navigator.of(context).pushNamed('/');
                         },
-
                       ),
-
                     ],
                     leading:
                     IconButton(
