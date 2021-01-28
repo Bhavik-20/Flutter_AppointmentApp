@@ -52,6 +52,8 @@ class _State extends State {
       return 'Select Year';
     if (email.isEmpty || !ofemail.hasMatch(email))
       return 'Invalid Email format';
+    if(!email.contains('@somaiya.edu'))
+      return 'Only Somaiya Email IDs are accepted';
     if (password.isEmpty || password.length<6)
       return 'Password length should be 6 char';
     return 'valid';

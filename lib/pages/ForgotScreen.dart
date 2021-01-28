@@ -59,6 +59,8 @@ class ForgotScreen extends StatefulWidget{
         RegExp ofemail=new RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
         if (email.isEmpty || !ofemail.hasMatch(email))
           return 'Invalid Email format';
+        if(!email.contains('@somaiya.edu'))
+          return 'Only Somaiya Email IDs are accepted';
         return 'valid';
       }
 

@@ -38,6 +38,8 @@ class _student_loginState extends State<student_login> {
       return 'Invalid Email format';
     if (password.isEmpty || password.length<6)
       return 'Password length should be 6 char';
+    if(!email.contains('@somaiya.edu'))
+      return 'Only Somaiya Email IDs are accepted';
     return 'valid';
   }
 

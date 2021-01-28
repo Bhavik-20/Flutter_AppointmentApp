@@ -42,6 +42,8 @@ class _teacher_loginState extends State<teacher_login> {
     RegExp ofemail=new RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
     if (email.isEmpty || !ofemail.hasMatch(email))
       return 'Invalid Email format';
+    if(!email.contains('@somaiya.edu'))
+      return 'Only Somaiya Email IDs are accepted';
     if (password.isEmpty || password.length<6)
       return 'Password length should be 6 char';
     return 'valid';
