@@ -113,7 +113,9 @@ class _teacher_dashboardState extends State<teacher_dashboard> {
                                 color: Colors.black,
                               ),
                               FlatButton(
-                                onPressed: (){},
+                                onPressed: (){
+                                  Navigator.of(context).pushNamed('/tea_tt');
+                                },
                                 child: Row(
                                   children: [
                                     Icon(Icons.calendar_today_sharp),
