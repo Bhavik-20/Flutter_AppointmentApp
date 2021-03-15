@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:flutter_appointment_app/services/Api.dart';
 import 'package:flutter_appointment_app/ui_helpers/constants.dart';
 import 'package:flutter_appointment_app/ui_helpers/rounded_button.dart';
 import 'package:http/http.dart' as http;
@@ -17,10 +20,6 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:file_picker/file_picker.dart';
 
-void main()
-{
-  runApp(teacher_tt());
-}
 
 class teacher_tt extends StatefulWidget {
   @override
@@ -32,7 +31,54 @@ class _teacher_ttState extends State<teacher_tt> {
   File file;
   String upload = "Please upload the PDF";
   bool loading=false;
+  var obj;
+  var pdfModel;
   final AuthService _auth=AuthService();
+
+  @override
+  Future<Api> sendFile(File file) async {
+    print("ENTER FUNCTION");
+
+    try
+    {
+      var client = http.Client();
+      print("TRYYYYYYY");
+      var url =Uri.parse('http://10.0.2.2:8000');
+      var request = http.MultipartRequest('POST', url);
+      request.files.add(
+          await http.MultipartFile.fromPath(
+              'file',
+              file.path
+          )
+      );
+      var response2 = await request.send();
+      var response = await http.Response.fromStream(response2);
+      print(response.statusCode);
+      if (response.statusCode == 200 || response.statusCode == 201)
+      {
+        print("IFFFF");
+        print("FETCH ALBUM FOUND");
+        print(response.body);
+        var jsonString = response.body;
+        var jsonMap = json.decode(jsonString);
+        print("jsonMap: "+jsonMap.toString());
+        pdfModel = Api.fromJson(jsonMap);
+
+      }
+      else
+      {
+        print("ELSEEE");
+      }
+    }
+    catch (e)
+    {
+      print("CATCHHHHH");
+      print("ERROR:"+e.toString());
+      return pdfModel;
+    }
+    return pdfModel;
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +118,7 @@ class _teacher_ttState extends State<teacher_tt> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                      Container(
+                        Container(
                         margin: EdgeInsets.symmetric(vertical: 5),
                         width: size.width * 0.25,
                         child: ClipRRect(
@@ -89,8 +135,8 @@ class _teacher_ttState extends State<teacher_tt> {
                               });
                               if(file!=null)
                               {
-                                // print("FUNCTION CALLED");
-                                // sendFile(file);
+                                print("FUNCTION CALLED");
+                                obj= sendFile(file);
                               }
                             },
                             child: Text(
@@ -104,16 +150,31 @@ class _teacher_ttState extends State<teacher_tt> {
                           Text(upload,
                             style: TextStyle(fontSize: 20),
                           ),
+                      SizedBox(height: 150),
+                      if(upload!="Please upload the PDF...")
+
+                          Center(
+                            child: FutureBuilder<Api>(
+                              future: obj,
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  return Text(snapshot.data.tue[1].toString());
+                                }
+                                else if (snapshot.hasError) {
+                                  return Text("${snapshot.error}");
+                                }
+                                print("SNAP NO DATA");
+                                return CircularProgressIndicator();
+                              },
+                            ),
+                          )
                         ],
                       ),
                     ),
                   ),
-
-
                 ),
               ),
               );
-
           }
           else {
             return Loading();
