@@ -21,6 +21,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:file_picker/file_picker.dart';
 
 
+
 class teacher_tt extends StatefulWidget {
   @override
   _teacher_ttState createState() => _teacher_ttState();
@@ -94,7 +95,7 @@ class _teacher_ttState extends State<teacher_tt> {
               key: _formKey,
               child: MaterialApp(
                 home: Scaffold(
-                  backgroundColor: Colors.deepPurple[100],
+                  //backgroundColor: Colors.deepPurple[100],
                   appBar: AppBar(
                     leading: IconButton(
                       onPressed: (){
@@ -110,71 +111,113 @@ class _teacher_ttState extends State<teacher_tt> {
                     title: Text('Upload Time Table'),
                     centerTitle: true,
                   ),
-                  body: SingleChildScrollView(
-                    child: Container(
-                      width: size.width,
-                      height: size.height,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
+                  body: DefaultTabController(
+                    length: 5,
+                    child: Column(
+                      children: [
                         Container(
-                        margin: EdgeInsets.symmetric(vertical: 5),
-                        width: size.width * 0.25,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(29),
-                          child: FlatButton(
-                            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                            color: kPrimaryColor,
-                            onPressed: () async {
-                              file = (await FilePicker.getFile(
-                                  type: FileType.custom, allowedExtensions: ['pdf']));
-                              setState(() {
-                                if(file != null)
-                                  upload = "File uploaded";
-                              });
-                              if(file!=null)
-                              {
-                                print("FUNCTION CALLED");
-                                obj= sendFile(file);
-                              }
-                            },
-                            child: Text(
-                              'Upload',
-                              style: TextStyle(color: Colors.white),
-                            ),
+                          color: Colors.deepPurple[100],
+                          padding: EdgeInsets.symmetric(vertical:20,horizontal: 10),
+                          width: size.width,
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.symmetric(vertical: 5),
+                                    width: 40,
+                                    height: 40,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(50),
+                                      child: FlatButton(
+                                        padding: EdgeInsets.all(5),
+                                        color: kPrimaryColor,
+                                        onPressed: () async {
+                                          file = (await FilePicker.getFile(
+                                              type: FileType.custom, allowedExtensions: ['pdf']));
+                                          setState(() {
+                                            if(file != null)
+                                              upload = "File uploaded";
+                                          });
+                                          if(file!=null)
+                                          {
+                                            print("FUNCTION CALLED");
+                                            obj= sendFile(file);
+                                          }
+                                        },
+                                        child: Icon(
+                                          Icons.add,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(width: 20),
+                                  Text(upload,
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 20),
+                              Text("Note: Please Upload Your TimeTable as a PDF File.",
+                                  style: TextStyle( fontSize: 15)),
+                            ],
                           ),
                         ),
-                      ),
-                          SizedBox(height: 150),
-                          Text(upload,
-                            style: TextStyle(fontSize: 20),
-                          ),
-                      SizedBox(height: 150),
-                      if(upload!="Please upload the PDF...")
+                        Container(
+                          color: Colors.deepPurple[100],
+                          padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
 
-                          Center(
-                            child: FutureBuilder<Api>(
-                              future: obj,
-                              builder: (context, snapshot) {
-                                if (snapshot.hasData) {
-                                  return Text(snapshot.data.tue[1].toString());
-                                }
-                                else if (snapshot.hasError) {
-                                  return Text("${snapshot.error}");
-                                }
-                                print("SNAP NO DATA");
-                                return CircularProgressIndicator();
-                              },
-                            ),
-                          )
-                        ],
+                          child: TabBar(
+                            tabs: [
+                                  Tab(child: Text("Mon", style: TextStyle(fontSize: 16),),),
+                                Tab(child: Text("Tue", style: TextStyle(fontSize: 16),),),
+                                Tab(child: Text("Wed", style: TextStyle(fontSize: 16),),),
+                                Tab(child: Text("Thur", style: TextStyle(fontSize: 16),),),
+                                Tab(child: Text("Fri", style: TextStyle(fontSize: 16),),),
+                          ],
+                          labelColor: kPrimaryColor,
+                          indicator: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100),
+                              border: Border.all(color: kPrimaryColor, width: 3)),
+                          ),
+                        ),
+                        Expanded(
+                            child: TabBarView(
+                                children: [
+                                Center(child: Text("Mon")),
+                                Center(child: Text("Tue")),
+                                Center(child: Text("Wed")),
+                                Center(child: Text("Thurs")),
+                                Center(child: Text("Fri"))
+                                      ],
+                        ),
                       ),
+                    ],
                     ),
+                    //SizedBox(height: 150),
+                    // if(upload!="Please upload the PDF...")
+                    //     Center(
+                    //       child: FutureBuilder<Api>(
+                    //         future: obj,
+                    //         builder: (context, snapshot) {
+                    //           if (snapshot.hasData) {
+                    //             return Text(snapshot.data.tue[1].toString());
+                    //           }
+                    //           else if (snapshot.hasError) {
+                    //             return Text("${snapshot.error}");
+                    //           }
+                    //           print("SNAP NO DATA");
+                    //           return CircularProgressIndicator();
+                    //         },
+                    //       ),
+                    //     )
+
                   ),
                 ),
               ),
-              );
+            );
           }
           else {
             return Loading();
