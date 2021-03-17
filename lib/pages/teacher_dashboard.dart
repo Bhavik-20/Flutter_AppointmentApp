@@ -47,11 +47,12 @@ class _teacher_dashboardState extends State<teacher_dashboard> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
-
+    print("TEACHER DASHBOARD : "+user.user_id.toString());
     Size size = MediaQuery.of(context).size;
     return user==null ? role() : StreamBuilder<Teacher>(
         stream: DatabaseService(uid: user.user_id).facultyData,
         builder: (context, snapshot) {
+          print("SNAPSHOT: "+snapshot.data.toString());
           if (snapshot.hasData) {
             Teacher data = snapshot.data;
             return loading? Loading() : WillPopScope(

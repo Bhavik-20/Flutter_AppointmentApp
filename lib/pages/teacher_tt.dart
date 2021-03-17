@@ -42,16 +42,10 @@ class _teacher_ttState extends State<teacher_tt> {
 
     try
     {
-      var client = http.Client();
       print("TRYYYYYYY");
       var url =Uri.parse('http://10.0.2.2:8000');
       var request = http.MultipartRequest('POST', url);
-      request.files.add(
-          await http.MultipartFile.fromPath(
-              'file',
-              file.path
-          )
-      );
+      request.files.add(await http.MultipartFile.fromPath('file',file.path));
       var response2 = await request.send();
       var response = await http.Response.fromStream(response2);
       print(response.statusCode);
@@ -171,7 +165,7 @@ class _teacher_ttState extends State<teacher_tt> {
 
                           child: TabBar(
                             tabs: [
-                                  Tab(child: Text("Mon", style: TextStyle(fontSize: 16),),),
+                                Tab(child: Text("Mon", style: TextStyle(fontSize: 16),),),
                                 Tab(child: Text("Tue", style: TextStyle(fontSize: 16),),),
                                 Tab(child: Text("Wed", style: TextStyle(fontSize: 16),),),
                                 Tab(child: Text("Thur", style: TextStyle(fontSize: 16),),),

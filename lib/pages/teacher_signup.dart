@@ -35,6 +35,7 @@ class _teacher_signupState extends State<teacher_signup> {
   String email = "";
   String password = "";
   String error="";
+  String timetable='';
   bool loading=false;
 
   String validate(String name,String emp_code, String initials, String room, String email, String password) {
@@ -198,7 +199,7 @@ class _teacher_signupState extends State<teacher_signup> {
                     if(result=='valid')
                       {
                         setState(() => loading=true);
-                        dynamic result_auth = await _auth.registerFaculty(name,emp_code,initials,room,email,password,'');
+                        dynamic result_auth = await _auth.registerFaculty(name,emp_code,initials,room,email,password,'',timetable);
                         if(result_auth == null)
                         {
                           setState(() {
