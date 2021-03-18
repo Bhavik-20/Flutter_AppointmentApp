@@ -20,22 +20,24 @@ class Wrapper extends StatelessWidget {
 
     else
     {
-      String xyz="";
-      var document =  Firestore.instance.collection('faculty').document(user.user_id);
+      // String xyz="";
+      // var document =  Firestore.instance.collection('faculty').document(user.user_id);
+      //
+      // document.get().then((DocumentSnapshot document) {
+      //   xyz=document.data['role'];
 
-      document.get().then((DocumentSnapshot document) {
-        xyz=document.data['role'];
 
-      });
-
-      if(xyz=="faculty")
-      {
-        return teacher_dashboard();
-      }
-      else
-      {
-        return student_dashboard();
-      }
+      // });
+      //
+      // if(xyz=="faculty")
+      // {
+      //   return teacher_dashboard();
+      // }
+      // else
+      // {
+      //   return student_dashboard();
+      // }
+      return teacher_dashboard();
     }
   }
 

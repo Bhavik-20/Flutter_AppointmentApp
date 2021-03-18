@@ -35,6 +35,7 @@ class _teacher_ttState extends State<teacher_tt> {
   var obj;
   var pdfModel;
   final AuthService _auth=AuthService();
+  List tt=['9:00-10:00', '10:00-11:00','11:00-12:00','12:00-1:00','1:00-2:00'];
 
   @override
   Future<Api> sendFile(File file) async {
@@ -180,11 +181,221 @@ class _teacher_ttState extends State<teacher_tt> {
                         Expanded(
                             child: TabBarView(
                                 children: [
-                                Center(child: Text("Mon")),
-                                Center(child: Text("Tue")),
-                                Center(child: Text("Wed")),
-                                Center(child: Text("Thurs")),
-                                Center(child: Text("Fri"))
+                                Padding(
+                                  padding: const EdgeInsets.all(8),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Text(
+                                          'Free slots on Monday:',
+                                          style: TextStyle(
+                                            fontSize: 17,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: size.height *0.01,
+                                      ),
+                                      Wrap(
+                                        alignment: WrapAlignment.start,
+                                        direction: Axis.horizontal,
+                                        children: [
+                                          for ( int i=0;i<tt.length;i++ )
+                                            Padding(
+                                              padding: const EdgeInsets.all(4.0),
+                                              child: Container(
+                                                child: Text(
+                                                  tt[i],
+                                                  style: TextStyle(
+                                                    fontSize: 16,
+                                                  ),
+                                                ),
+                                                padding: EdgeInsets.all(6),
+                                                decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.circular(15),
+                                                    border: Border.all(color: Colors.grey, width: 2)
+                                                ),
+                                              ),
+                                            )
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(10.0),
+                                          child: Text(
+                                            'Free slots on Tuesday:',
+                                            style: TextStyle(
+                                              fontSize: 17,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: size.height *0.01,
+                                        ),
+                                        Wrap(
+                                          alignment: WrapAlignment.start,
+                                          direction: Axis.horizontal,
+                                          children: [
+                                            for ( int i=0;i<tt.length;i++ )
+                                              Padding(
+                                                padding: const EdgeInsets.all(4.0),
+                                                child: Container(
+                                                  child: Text(
+                                                    tt[i],
+                                                    style: TextStyle(
+                                                      fontSize: 16,
+                                                    ),
+                                                  ),
+                                                  padding: EdgeInsets.all(6),
+                                                  decoration: BoxDecoration(
+                                                      borderRadius: BorderRadius.circular(15),
+                                                      border: Border.all(color: Colors.grey, width: 2)
+                                                  ),
+                                                ),
+                                              )
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(10.0),
+                                          child: Text(
+                                            'Free slots on Wednesday:',
+                                            style: TextStyle(
+                                              fontSize: 17,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: size.height *0.01,
+                                        ),
+                                        Wrap(
+                                          alignment: WrapAlignment.start,
+                                          direction: Axis.horizontal,
+                                          children: [
+                                            for ( int i=0;i<tt.length;i++ )
+                                              Padding(
+                                                padding: const EdgeInsets.all(4.0),
+                                                child: Container(
+                                                  child: Text(
+                                                    tt[i],
+                                                    style: TextStyle(
+                                                      fontSize: 16,
+                                                    ),
+                                                  ),
+                                                  padding: EdgeInsets.all(6),
+                                                  decoration: BoxDecoration(
+                                                      borderRadius: BorderRadius.circular(15),
+                                                      border: Border.all(color: Colors.grey, width: 2)
+                                                  ),
+                                                ),
+                                              )
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(10.0),
+                                          child: Text(
+                                            'Free slots on Thursday:',
+                                            style: TextStyle(
+                                              fontSize: 17,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: size.height *0.01,
+                                        ),
+                                        Wrap(
+                                          alignment: WrapAlignment.start,
+                                          direction: Axis.horizontal,
+                                          children: [
+                                            for ( int i=0;i<tt.length;i++ )
+                                              Padding(
+                                                padding: const EdgeInsets.all(4.0),
+                                                child: Container(
+                                                  child: Text(
+                                                    tt[i],
+                                                    style: TextStyle(
+                                                      fontSize: 16,
+                                                    ),
+                                                  ),
+                                                  padding: EdgeInsets.all(6),
+                                                  decoration: BoxDecoration(
+                                                      borderRadius: BorderRadius.circular(15),
+                                                      border: Border.all(color: Colors.grey, width: 2)
+                                                  ),
+                                                ),
+                                              )
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(10.0),
+                                          child: Text(
+                                            'Free slots on Friday:',
+                                            style: TextStyle(
+                                              fontSize: 17,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: size.height *0.01,
+                                        ),
+                                        Wrap(
+                                            alignment: WrapAlignment.start,
+                                            direction: Axis.horizontal,
+                                          children: [
+                                            for ( int i=0;i<tt.length;i++ )
+                                              Padding(
+                                                padding: const EdgeInsets.all(4.0),
+                                                child: Container(
+                                                  child: Text(
+                                                    tt[i],
+                                                    style: TextStyle(
+                                                      fontSize: 16,
+                                                    ),
+                                                  ),
+                                                  padding: EdgeInsets.all(6),
+                                                  decoration: BoxDecoration(
+                                                      borderRadius: BorderRadius.circular(15),
+                                                      border: Border.all(color: Colors.grey, width: 2)
+                                                  ),
+                                                ),
+                                              )
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                       ],
                         ),
                       ),

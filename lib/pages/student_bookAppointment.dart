@@ -12,6 +12,7 @@ import 'package:flutter_appointment_app/ui_helpers/rounded_button.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_appointment_app/ui_helpers/constants.dart';
 
 class student_bookAppointment extends StatefulWidget {
 
@@ -49,6 +50,9 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
   ];
   String time = "----Select Time----";
   bool loading = false;
+  List tt=['9:00-10:00', '10:00-11:00','11:00-12:00','12:00-1:00','1:00-2:00'];
+  int selectedIndex = 0;
+  String selected_time;
 
   Future<void> sendRequest(String name, String roll, String branch, String year,
       String st_mail, purpose,purpose_details, String time, date, String email2,String t_name,String initials,String room,String uid, String t_uid, String t_url, String s_url)
@@ -82,6 +86,40 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
 
   }
 
+  Widget customRadio(String txt,int index){
+    return Container(
+      child: GestureDetector(
+          onTap: () => changeIndex(index),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 5),
+            child: Container(
+              width: 100,
+              padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              border: Border.all(
+              color: selectedIndex == index ? kPrimaryColor : Colors.grey,
+              style: BorderStyle.solid,
+              width: 3.0,
+            ),
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10.0),
+            ),
+              child: Center(
+                child: Text(txt, style: TextStyle(color: selectedIndex == index ?kPrimaryColor : Colors.grey),),
+              ),
+        ),
+          ),
+       ),
+    );
+  }
+
+  void changeIndex(int index){
+    setState(() {
+      selectedIndex = index;
+      selected_time = tt[selectedIndex];
+      print(selected_time);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -444,38 +482,57 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
         content: Column(
           children: [
             Text(
-                'The dropdown consists of free slots for the faculty on selected date ',
+                ' Select from the Available Time:',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 15,
                 )),
             SizedBox(height: 10.0,),
             Container(
-              padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(
-                    color: Colors.deepPurple[600],
-                  ),
-                  borderRadius: BorderRadius.all(Radius.circular(10))
+              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              // decoration: BoxDecoration(
+              //     color: Colors.white,
+              //     border: Border.all(
+              //       color: Colors.white,
+              //     ),
+              //     borderRadius: BorderRadius.all(Radius.circular(10))
+              // ),
+              child: Wrap(
+                alignment: WrapAlignment.spaceEvenly,
+                direction: Axis.horizontal,
+                children: <Widget>[
+                  for(int i=0;i<tt.length;i++)
+                  customRadio(tt[i], i),
+
+                ],
               ),
-              child: DropdownButton<String>(
-                dropdownColor: Colors.white,
-                icon: Icon(Icons.arrow_drop_down),
-                value: time,
-                onChanged: (value) {
-                  setState(() {
-                    time = value;
-                  });
-                },
-                items: free_slots.map<DropdownMenuItem<String>>((value) {
-                  return DropdownMenuItem(
-                    child: Text(value),
-                    value: value,
-                  );
-                }).toList(),
-              ),
-            )
+            ),
+            // Container(
+            //   padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
+            //   decoration: BoxDecoration(
+            //       color: Colors.white,
+            //       border: Border.all(
+            //         color: Colors.deepPurple[600],
+            //       ),
+            //       borderRadius: BorderRadius.all(Radius.circular(10))
+            //   ),
+            //   child: DropdownButton<String>(
+            //     dropdownColor: Colors.white,
+            //     icon: Icon(Icons.arrow_drop_down),
+            //     value: time,
+            //     onChanged: (value) {
+            //       setState(() {
+            //         time = value;
+            //       });
+            //     },
+            //     items: free_slots.map<DropdownMenuItem<String>>((value) {
+            //       return DropdownMenuItem(
+            //         child: Text(value),
+            //         value: value,
+            //       );
+            //     }).toList(),
+            //   ),
+            // )
           ],
         ),
         isActive: _currentStep >= 2,
