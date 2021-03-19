@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -34,7 +35,7 @@ class _student_verifyState extends State<student_verify> {
 
   bool loading=false;
   final AuthService _auth=AuthService();
-  String tries='3';
+  String tries="3";
 
   Future<FirebaseUser> DeleteUser()
   async {
@@ -103,19 +104,19 @@ class _student_verifyState extends State<student_verify> {
                     ),
                   ),
                   SizedBox(height: size.height * 0.01),
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 5,horizontal: 20),
-                    child: Text(
-                      'Tries : '+tries,
-                      style: GoogleFonts.lato(
-                        fontSize: 18,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  SizedBox(height: size.height * 0.01),
+                  // Container(
+                  //   padding: EdgeInsets.symmetric(vertical: 5,horizontal: 20),
+                  //   child: Text(
+                  //     'Tries : '+tries,
+                  //     style: GoogleFonts.lato(
+                  //       fontSize: 18,
+                  //       color: Colors.black,
+                  //       fontWeight: FontWeight.bold,
+                  //     ),
+                  //     textAlign: TextAlign.center,
+                  //   ),
+                  // ),
+                  // SizedBox(height: size.height * 0.01),
                   RoundedButton(
                     text: "Verify",
                     press: () async {
@@ -152,7 +153,7 @@ class _student_verifyState extends State<student_verify> {
                               prefs.setInt(user.uid, chances);
                               Fluttertoast.showToast(
                                 backgroundColor: Colors.red,
-                                msg: 'You Have Not verified your email',
+                                msg: 'You Have Not verified your email.\nATTEMPTS LEFT='+chances.toString(),
                                 toastLength: Toast.LENGTH_SHORT,
                                 gravity: ToastGravity.BOTTOM,
                               );

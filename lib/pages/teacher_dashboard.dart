@@ -16,10 +16,10 @@ import 'package:flutter_appointment_app/pages/teacher_accepted_requests.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-void main()
-{
-  runApp(teacher_dashboard());
-}
+// void main()
+// {
+//   runApp(teacher_dashboard());
+// }
 
 class teacher_dashboard extends StatefulWidget {
   @override
@@ -46,9 +46,10 @@ class _teacher_dashboardState extends State<teacher_dashboard> {
 
   @override
   Widget build(BuildContext context) {
+
     final user = Provider.of<User>(context);
-    print("TEACHER DASHBOARD : "+user.user_id.toString());
     Size size = MediaQuery.of(context).size;
+
     return user==null ? role() : StreamBuilder<Teacher>(
         stream: DatabaseService(uid: user.user_id).facultyData,
         builder: (context, snapshot) {
@@ -156,7 +157,6 @@ class _teacher_dashboardState extends State<teacher_dashboard> {
                               FlatButton(
                                 onPressed: () async {
                                   setState(() => loading=true);
-
                                   await Future.delayed(const Duration(milliseconds: 3000));
                                   await _auth.signOut();
                                   // Navigator.of(context).pushNamed('/');

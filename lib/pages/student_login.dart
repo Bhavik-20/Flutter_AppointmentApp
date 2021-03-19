@@ -175,15 +175,12 @@ class _student_loginState extends State<student_login> {
                           if(user.isEmailVerified)
                             {
                               print("Email Verified");
+                              SharedPreferences prefs=await SharedPreferences.getInstance();
+                              await prefs.setString("role", "Student");
                               Navigator.of(context).pushNamed('/st_dash');
                             }
                           else
                             {
-                              // SharedPreferences prefs=await SharedPreferences.getInstance();
-                              // if(prefs.getInt(user.uid) == null)
-                              // {
-                              //   prefs.setInt(user.uid, 3);
-                              // }
                               print("Email Not Verified");
                               Navigator.of(context).pushNamed('/st_verify');
                             }
@@ -264,46 +261,3 @@ class _student_loginState extends State<student_login> {
     );
   }
 }
-// -------------- Line 157 ---------------
-// Row(
-//     children: <Widget>[
-//       Expanded(
-//           child: Divider(
-//             thickness: 1.0,
-//             color: Colors.purple[100],
-//           )
-//       ),
-//       SizedBox(width: 5.0,),
-//       Text("OR",
-//         style: TextStyle(
-//             fontFamily: 'dosis',
-//             fontWeight: FontWeight.bold,
-//             fontSize:15.0
-//         ),
-//       ),
-//       SizedBox(width: 5.0,),
-//       Expanded(
-//           child: Divider(
-//             thickness: 1.0,
-//             color: Colors.purple[100],
-//           )
-//       ),
-//     ]
-// ),
-
-// -------------- Line after : SizedBox(height: 10.0,) ---------------
-// FlatButton(
-//   shape:  CircleBorder(
-//       side: BorderSide(
-//           style: BorderStyle.solid,
-//           color: Colors.white
-//       )
-//   ),
-//   onPressed: (){},
-//   child: Image(
-//     image: AssetImage('images/google.jpg'),
-//     height: 70.0,
-//     width: 50.0,
-//   ),
-//   // height: size.height*0.01,
-// ),
