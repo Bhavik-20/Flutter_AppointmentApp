@@ -30,8 +30,13 @@ class _teacher_profileState extends State<teacher_profile> {
   String room="";
   String email="";
   String password="";
-  String timetable="";
   bool loading=false;
+
+  // List<String> tt_mon;
+  // List<String> tt_tue;
+  // List<String> tt_wed;
+  // List<String> tt_thurs;
+  // List<String> tt_fri;
 
   String validate(String name, String emp_code, String initials, String room)
   {
@@ -224,19 +229,17 @@ class _teacher_profileState extends State<teacher_profile> {
                                       Container(
                                         height:50.0,
                                         padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                        child: Expanded(
-                                          child: TextFormField(
-                                            initialValue: data.email,
-                                            enabled: false,
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 18,
-                                              fontFamily: 'playfair',
-                                            ),
-                                            decoration: new InputDecoration(
-                                              border: InputBorder.none,
-                                              hintText: 'E-Mail',
-                                            ),
+                                        child: TextFormField(
+                                          initialValue: data.email,
+                                          enabled: false,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18,
+                                            fontFamily: 'playfair',
+                                          ),
+                                          decoration: new InputDecoration(
+                                            border: InputBorder.none,
+                                            hintText: 'E-Mail',
                                           ),
                                         ),
                                       ),
@@ -275,7 +278,6 @@ class _teacher_profileState extends State<teacher_profile> {
                               email=data.email;
                               password=data.password;
                               downloadUrl = downloadUrl.isEmpty? data.url : downloadUrl;
-                              timetable=data.timetable;
 
                               print(name);
                               print(initials);
@@ -287,7 +289,7 @@ class _teacher_profileState extends State<teacher_profile> {
                               if (result == 'valid') {
                                 setState(() => loading = true);
                                 await DatabaseService(uid: user.user_id)
-                                    .updateFacultyData(name, emp_code, initials, room, email, password,downloadUrl,timetable);
+                                    .updateFacultyData(name, emp_code, initials, room, email, password,downloadUrl);
                                 Fluttertoast.showToast(
                                   backgroundColor: Colors.green,
                                   msg: 'Successfully Updated Data',

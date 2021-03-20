@@ -19,7 +19,7 @@ class DatabaseService {
   final CollectionReference acceptCollection =Firestore.instance.collection('accepted');
   final CollectionReference declineCollection =Firestore.instance.collection('rejected');
 //-------------------------------------------------------------------------------------------------------------------------------------//
-  Future updateFacultyData(String name,String emp_code, String initials,String room,String email,String password, String downloadUrl,String timetable) async
+  Future updateFacultyData(String name,String emp_code, String initials,String room,String email,String password, String downloadUrl) async
   {
     return await facultyCollection.document(uid).setData({
       'teacher_id':uid,
@@ -31,7 +31,6 @@ class DatabaseService {
       'password':password,
       'url':downloadUrl,
       'role':'faculty',
-      'timetable':timetable
     });
   }
 
@@ -211,7 +210,6 @@ class DatabaseService {
         password: doc.data['password'] ?? '',
         teacher_id: doc.data['teacher_id'] ?? '',
         url: doc.data['url'] ?? '',
-        timetable: doc.data['timetable'] ?? '',
       );
     }).toList();
   }
@@ -234,7 +232,6 @@ class DatabaseService {
       password: snapshot.data['password'] ?? '',
       teacher_id: snapshot.data['teacher_id'] ?? '',
       url: snapshot.data['url'] ?? '',
-      timetable: snapshot.data['timetable'] ?? '',
     );
   }
 //-------------------------------------------------------------------------------------------//
