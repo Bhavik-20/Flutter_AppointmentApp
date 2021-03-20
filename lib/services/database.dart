@@ -18,6 +18,7 @@ class DatabaseService {
   final CollectionReference requestCollection =Firestore.instance.collection('request');
   final CollectionReference acceptCollection =Firestore.instance.collection('accepted');
   final CollectionReference declineCollection =Firestore.instance.collection('rejected');
+  final CollectionReference timetableCollection =Firestore.instance.collection('timetable');
 //-------------------------------------------------------------------------------------------------------------------------------------//
   Future updateFacultyData(String name,String emp_code, String initials,String room,String email,String password, String downloadUrl) async
   {
@@ -31,6 +32,17 @@ class DatabaseService {
       'password':password,
       'url':downloadUrl,
       'role':'faculty',
+    });
+  }
+
+  Future updateTimeTable(List<String> tt_mon,List<String> tt_tue,List<String> tt_wed,List<String> tt_thurs,List<String> tt_fri) async
+  {
+    return await timetableCollection.document(uid).setData({
+      'tt_mon':tt_mon,
+      'tt_tue':tt_tue,
+      'tt_wed':tt_wed,
+      'tt_thurs':tt_thurs,
+      'tt_fri':tt_fri,
     });
   }
 
