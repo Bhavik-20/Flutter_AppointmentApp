@@ -224,19 +224,17 @@ class _teacher_profileState extends State<teacher_profile> {
                                       Container(
                                         height:50.0,
                                         padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                        child: Expanded(
-                                          child: TextFormField(
-                                            initialValue: data.email,
-                                            enabled: false,
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 18,
-                                              fontFamily: 'playfair',
-                                            ),
-                                            decoration: new InputDecoration(
-                                              border: InputBorder.none,
-                                              hintText: 'E-Mail',
-                                            ),
+                                        child: TextFormField(
+                                          initialValue: data.email,
+                                          enabled: false,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18,
+                                            fontFamily: 'playfair',
+                                          ),
+                                          decoration: new InputDecoration(
+                                            border: InputBorder.none,
+                                            hintText: 'E-Mail',
                                           ),
                                         ),
                                       ),
