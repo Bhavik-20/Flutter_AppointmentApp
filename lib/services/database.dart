@@ -18,8 +18,9 @@ class DatabaseService {
   final CollectionReference requestCollection =Firestore.instance.collection('request');
   final CollectionReference acceptCollection =Firestore.instance.collection('accepted');
   final CollectionReference declineCollection =Firestore.instance.collection('rejected');
+  final CollectionReference timetableCollection =Firestore.instance.collection('timetable');
 //-------------------------------------------------------------------------------------------------------------------------------------//
-  Future updateFacultyData(String name,String emp_code, String initials,String room,String email,String password, String downloadUrl,String timetable) async
+  Future updateFacultyData(String name,String emp_code, String initials,String room,String email,String password, String downloadUrl) async
   {
     return await facultyCollection.document(uid).setData({
       'teacher_id':uid,
@@ -31,7 +32,17 @@ class DatabaseService {
       'password':password,
       'url':downloadUrl,
       'role':'faculty',
-      'timetable':timetable
+    });
+  }
+
+  Future updateTimeTable(List<String> tt_mon,List<String> tt_tue,List<String> tt_wed,List<String> tt_thurs,List<String> tt_fri) async
+  {
+    return await timetableCollection.document(uid).setData({
+      'tt_mon':tt_mon,
+      'tt_tue':tt_tue,
+      'tt_wed':tt_wed,
+      'tt_thurs':tt_thurs,
+      'tt_fri':tt_fri,
     });
   }
 
@@ -211,7 +222,6 @@ class DatabaseService {
         password: doc.data['password'] ?? '',
         teacher_id: doc.data['teacher_id'] ?? '',
         url: doc.data['url'] ?? '',
-        timetable: doc.data['timetable'] ?? '',
       );
     }).toList();
   }
@@ -234,7 +244,6 @@ class DatabaseService {
       password: snapshot.data['password'] ?? '',
       teacher_id: snapshot.data['teacher_id'] ?? '',
       url: snapshot.data['url'] ?? '',
-      timetable: snapshot.data['timetable'] ?? '',
     );
   }
 //-------------------------------------------------------------------------------------------//

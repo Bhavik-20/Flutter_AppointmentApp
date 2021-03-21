@@ -8,8 +8,8 @@ class Teacher{
   final String password;
   final String teacher_id;
   final String url;
-  final String timetable;
 
 
-  Teacher({this.name, this.employee_code, this.initials,this.room,this.email,this.password,this.teacher_id, this.url , this.timetable });
+
+  Teacher({this.name, this.employee_code, this.initials,this.room,this.email,this.password,this.teacher_id, this.url});
 }

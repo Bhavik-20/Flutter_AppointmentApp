@@ -1,8 +1,10 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_appointment_app/services/Api.dart';
 import 'package:flutter_appointment_app/ui_helpers/constants.dart';
 import 'package:flutter_appointment_app/ui_helpers/rounded_button.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'dart:ui';
 import 'dart:io';
@@ -38,12 +40,12 @@ class _teacher_ttState extends State<teacher_tt> {
   List tt=['9:00-10:00', '10:00-11:00','11:00-12:00','12:00-1:00','1:00-2:00'];
 
   @override
-  Future<Api> sendFile(File file) async {
+  Future<Api> sendFile(File file,String uid) async {
     print("ENTER FUNCTION");
-
+    final CollectionReference timetableCollection =Firestore.instance.collection('timetable');
     try
     {
-      print("TRYYYYYYY");
+      print("TRY 1");
       var url =Uri.parse('http://10.0.2.2:8000');
       var request = http.MultipartRequest('POST', url);
       request.files.add(await http.MultipartFile.fromPath('file',file.path));
@@ -52,23 +54,43 @@ class _teacher_ttState extends State<teacher_tt> {
       print(response.statusCode);
       if (response.statusCode == 200 || response.statusCode == 201)
       {
-        print("IFFFF");
+        print("IF");
         print("FETCH ALBUM FOUND");
         print(response.body);
         var jsonString = response.body;
         var jsonMap = json.decode(jsonString);
         print("jsonMap: "+jsonMap.toString());
         pdfModel = Api.fromJson(jsonMap);
-
+        // List<String> str;
+        // str.add(List<dynamic>.from(jsonMap).toString());
+        try
+        {
+          print("TRY 2");
+          await DatabaseService(uid: uid).updateTimeTable(
+              jsonMap['Monday'], jsonMap['Tuesday'], jsonMap['Wednesday'],jsonMap['Thursday'], jsonMap['Fridday']);
+          return pdfModel;
+        }
+        catch(e)
+        {
+          Fluttertoast.showToast(
+            backgroundColor: Colors.red,
+            msg: 'An Error occurred, Please try again',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+          );
+          print("CATCH 2");
+          print("ERROR:"+e.toString());
+          return pdfModel;
+        }
       }
       else
       {
-        print("ELSEEE");
+        print("ELSE");
       }
     }
     catch (e)
     {
-      print("CATCHHHHH");
+      print("CATCH 1");
       print("ERROR:"+e.toString());
       return pdfModel;
     }
@@ -138,7 +160,7 @@ class _teacher_ttState extends State<teacher_tt> {
                                           if(file!=null)
                                           {
                                             print("FUNCTION CALLED");
-                                            obj= sendFile(file);
+                                            obj= sendFile(file,user.user_id);
                                           }
                                         },
                                         child: Icon(
