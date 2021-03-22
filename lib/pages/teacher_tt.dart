@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_appointment_app/model/TimeTable.dart';
 import 'package:flutter_appointment_app/services/Api.dart';
 import 'package:flutter_appointment_app/ui_helpers/constants.dart';
 import 'package:flutter_appointment_app/ui_helpers/rounded_button.dart';
@@ -36,11 +37,12 @@ class _teacher_ttState extends State<teacher_tt> {
   bool loading=false;
   var obj;
   var pdfModel;
+  TimeTable obj_tt;
   final AuthService _auth=AuthService();
   List tt=['9:00-10:00', '10:00-11:00','11:00-12:00','12:00-1:00','1:00-2:00'];
 
   @override
-  Future<Api> sendFile(File file,String uid) async {
+  Future sendFile(File file,String uid) async {
     print("ENTER FUNCTION");
     final CollectionReference timetableCollection =Firestore.instance.collection('timetable');
     try
@@ -61,14 +63,21 @@ class _teacher_ttState extends State<teacher_tt> {
         var jsonMap = json.decode(jsonString);
         print("jsonMap: "+jsonMap.toString());
         pdfModel = Api.fromJson(jsonMap);
-        // List<String> str;
-        // str.add(List<dynamic>.from(jsonMap).toString());
+        Api api_pdf=await new Api.fromJson(jsonMap);
+        List<String> db_mon= api_pdf.mon.cast();
+        List<String> db_tue= api_pdf.tue.cast();
+        List<String> db_wed= api_pdf.wed.cast();
+        List<String> db_thurs= api_pdf.thurs.cast();
+        List<String> db_fri= api_pdf.fri.cast();
+        print("DB:");
+        print(api_pdf.mon.cast());
         try
         {
           print("TRY 2");
           await DatabaseService(uid: uid).updateTimeTable(
-              jsonMap['Monday'], jsonMap['Tuesday'], jsonMap['Wednesday'],jsonMap['Thursday'], jsonMap['Fridday']);
-          return pdfModel;
+              db_mon,db_tue,db_wed,db_thurs,db_fri);
+          print("Success");
+          // return pdfModel;
         }
         catch(e)
         {
@@ -80,7 +89,7 @@ class _teacher_ttState extends State<teacher_tt> {
           );
           print("CATCH 2");
           print("ERROR:"+e.toString());
-          return pdfModel;
+          // return pdfModel;
         }
       }
       else
@@ -92,16 +101,15 @@ class _teacher_ttState extends State<teacher_tt> {
     {
       print("CATCH 1");
       print("ERROR:"+e.toString());
-      return pdfModel;
+      // return pdfModel;
     }
-    return pdfModel;
+    // return pdfModel;
   }
-
 
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
-    final _formKey=GlobalKey<FormState>();
+    // final _formKey=GlobalKey<FormState>();
     Size size = MediaQuery.of(context).size;
     return user==null ? role() : StreamBuilder<Teacher>(
         stream: DatabaseService(uid: user.user_id).facultyData,
@@ -109,7 +117,6 @@ class _teacher_ttState extends State<teacher_tt> {
           if (snapshot.hasData) {
             Teacher data = snapshot.data;
             return loading? Loading() : Form(
-              key: _formKey,
               child: MaterialApp(
                 home: Scaffold(
                   //backgroundColor: Colors.deepPurple[100],
@@ -128,7 +135,7 @@ class _teacher_ttState extends State<teacher_tt> {
                     title: Text('Upload Time Table'),
                     centerTitle: true,
                   ),
-                  body: DefaultTabController(
+                  body:DefaultTabController(
                     length: 5,
                     child: Column(
                       children: [
@@ -160,7 +167,7 @@ class _teacher_ttState extends State<teacher_tt> {
                                           if(file!=null)
                                           {
                                             print("FUNCTION CALLED");
-                                            obj= sendFile(file,user.user_id);
+                                            sendFile(file,user.user_id);
                                           }
                                         },
                                         child: Icon(
@@ -200,247 +207,35 @@ class _teacher_ttState extends State<teacher_tt> {
                               border: Border.all(color: kPrimaryColor, width: 3)),
                           ),
                         ),
-                        Expanded(
-                            child: TabBarView(
-                                children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(10.0),
-                                        child: Text(
-                                          'Free slots on Monday:',
-                                          style: TextStyle(
-                                            fontSize: 17,
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: size.height *0.01,
-                                      ),
-                                      Wrap(
-                                        alignment: WrapAlignment.start,
-                                        direction: Axis.horizontal,
-                                        children: [
-                                          for ( int i=0;i<tt.length;i++ )
-                                            Padding(
-                                              padding: const EdgeInsets.all(4.0),
-                                              child: Container(
-                                                child: Text(
-                                                  tt[i],
-                                                  style: TextStyle(
-                                                    fontSize: 16,
-                                                  ),
-                                                ),
-                                                padding: EdgeInsets.all(6),
-                                                decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(15),
-                                                    border: Border.all(color: Colors.grey, width: 2)
-                                                ),
-                                              ),
-                                            )
-                                        ],
-                                      ),
-                                    ],
-                                  ),
+                        StreamBuilder<TimeTable>(
+                          stream: DatabaseService(uid: user.user_id).tt_slots,
+                          builder: (context,snapshot){
+                            print(user.user_id);
+                            if(snapshot.hasData)
+                            {
+                              TimeTable xyz=snapshot.data;
+                              return Expanded(
+                                child: TabBarView(
+                                  children: [
+                                    printSlots(snapshot.data.tt_mon, size,"Monday"),
+                                    printSlots(snapshot.data.tt_tue, size,"Tuesday"),
+                                    printSlots(snapshot.data.tt_wed, size,"Wednesday"),
+                                    printSlots(snapshot.data.tt_thurs, size,"Thursday"),
+                                    printSlots(snapshot.data.tt_fri, size,"Friday"),
+                                  ],
                                 ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(10.0),
-                                          child: Text(
-                                            'Free slots on Tuesday:',
-                                            style: TextStyle(
-                                              fontSize: 17,
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: size.height *0.01,
-                                        ),
-                                        Wrap(
-                                          alignment: WrapAlignment.start,
-                                          direction: Axis.horizontal,
-                                          children: [
-                                            for ( int i=0;i<tt.length;i++ )
-                                              Padding(
-                                                padding: const EdgeInsets.all(4.0),
-                                                child: Container(
-                                                  child: Text(
-                                                    tt[i],
-                                                    style: TextStyle(
-                                                      fontSize: 16,
-                                                    ),
-                                                  ),
-                                                  padding: EdgeInsets.all(6),
-                                                  decoration: BoxDecoration(
-                                                      borderRadius: BorderRadius.circular(15),
-                                                      border: Border.all(color: Colors.grey, width: 2)
-                                                  ),
-                                                ),
-                                              )
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(10.0),
-                                          child: Text(
-                                            'Free slots on Wednesday:',
-                                            style: TextStyle(
-                                              fontSize: 17,
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: size.height *0.01,
-                                        ),
-                                        Wrap(
-                                          alignment: WrapAlignment.start,
-                                          direction: Axis.horizontal,
-                                          children: [
-                                            for ( int i=0;i<tt.length;i++ )
-                                              Padding(
-                                                padding: const EdgeInsets.all(4.0),
-                                                child: Container(
-                                                  child: Text(
-                                                    tt[i],
-                                                    style: TextStyle(
-                                                      fontSize: 16,
-                                                    ),
-                                                  ),
-                                                  padding: EdgeInsets.all(6),
-                                                  decoration: BoxDecoration(
-                                                      borderRadius: BorderRadius.circular(15),
-                                                      border: Border.all(color: Colors.grey, width: 2)
-                                                  ),
-                                                ),
-                                              )
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(10.0),
-                                          child: Text(
-                                            'Free slots on Thursday:',
-                                            style: TextStyle(
-                                              fontSize: 17,
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: size.height *0.01,
-                                        ),
-                                        Wrap(
-                                          alignment: WrapAlignment.start,
-                                          direction: Axis.horizontal,
-                                          children: [
-                                            for ( int i=0;i<tt.length;i++ )
-                                              Padding(
-                                                padding: const EdgeInsets.all(4.0),
-                                                child: Container(
-                                                  child: Text(
-                                                    tt[i],
-                                                    style: TextStyle(
-                                                      fontSize: 16,
-                                                    ),
-                                                  ),
-                                                  padding: EdgeInsets.all(6),
-                                                  decoration: BoxDecoration(
-                                                      borderRadius: BorderRadius.circular(15),
-                                                      border: Border.all(color: Colors.grey, width: 2)
-                                                  ),
-                                                ),
-                                              )
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(10.0),
-                                          child: Text(
-                                            'Free slots on Friday:',
-                                            style: TextStyle(
-                                              fontSize: 17,
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: size.height *0.01,
-                                        ),
-                                        Wrap(
-                                            alignment: WrapAlignment.start,
-                                            direction: Axis.horizontal,
-                                          children: [
-                                            for ( int i=0;i<tt.length;i++ )
-                                              Padding(
-                                                padding: const EdgeInsets.all(4.0),
-                                                child: Container(
-                                                  child: Text(
-                                                    tt[i],
-                                                    style: TextStyle(
-                                                      fontSize: 16,
-                                                    ),
-                                                  ),
-                                                  padding: EdgeInsets.all(6),
-                                                  decoration: BoxDecoration(
-                                                      borderRadius: BorderRadius.circular(15),
-                                                      border: Border.all(color: Colors.grey, width: 2)
-                                                  ),
-                                                ),
-                                              )
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                      ],
-                        ),
-                      ),
+                              );
+                            }
+                            else
+                            {
+                              return Container(
+                                child: Text("No Free Slots Uploaded"),
+                              );
+                            }
+                          },
+                        )
                     ],
                     ),
-                    //SizedBox(height: 150),
-                    // if(upload!="Please upload the PDF...")
-                    //     Center(
-                    //       child: FutureBuilder<Api>(
-                    //         future: obj,
-                    //         builder: (context, snapshot) {
-                    //           if (snapshot.hasData) {
-                    //             return Text(snapshot.data.tue[1].toString());
-                    //           }
-                    //           else if (snapshot.hasError) {
-                    //             return Text("${snapshot.error}");
-                    //           }
-                    //           print("SNAP NO DATA");
-                    //           return CircularProgressIndicator();
-                    //         },
-                    //       ),
-                    //     )
-
                   ),
                 ),
               ),
@@ -451,4 +246,51 @@ class _teacher_ttState extends State<teacher_tt> {
           }
         });
   }
+}
+
+Widget printSlots(List<String> day,Size size,String dayName)
+{
+  return Padding(
+    padding: const EdgeInsets.all(8),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Text(
+            'Free slots on '+dayName+': ',
+            style: TextStyle(
+              fontSize: 17,
+            ),
+          ),
+        ),
+        SizedBox(
+          height: size.height *0.01,
+        ),
+        Wrap(
+          alignment: WrapAlignment.start,
+          direction: Axis.horizontal,
+          children: [
+            for ( int i=0;i<day.length;i++ )
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Container(
+                  child: Text(
+                    day[i],
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                  padding: EdgeInsets.all(6),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      border: Border.all(color: Colors.grey, width: 2)
+                  ),
+                ),
+              )
+          ],
+        ),
+      ],
+    ),
+  );
 }
