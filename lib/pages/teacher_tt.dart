@@ -111,142 +111,130 @@ class _teacher_ttState extends State<teacher_tt> {
     final user = Provider.of<User>(context);
     // final _formKey=GlobalKey<FormState>();
     Size size = MediaQuery.of(context).size;
-    return user==null ? role() : StreamBuilder<Teacher>(
-        stream: DatabaseService(uid: user.user_id).facultyData,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            Teacher data = snapshot.data;
-            return loading? Loading() : Form(
-              child: MaterialApp(
-                home: Scaffold(
-                  //backgroundColor: Colors.deepPurple[100],
-                  appBar: AppBar(
-                    leading: IconButton(
-                      onPressed: (){
-                        Navigator.of(context).pushNamed('/tea_dash');
-                      },
-                      icon: Icon(
-                        Icons.arrow_back,
-                        color: Colors.white,
-                        size: 30.0,
-                      ),
+    return Scaffold(
+                //backgroundColor: Colors.deepPurple[100],
+                appBar: AppBar(
+                  leading: IconButton(
+                    onPressed: (){
+                      Navigator.of(context).pushNamed('/tea_dash');
+                    },
+                    icon: Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                      size: 30.0,
                     ),
-                    backgroundColor: Colors.deepPurple[600],
-                    title: Text('Upload Time Table'),
-                    centerTitle: true,
                   ),
-                  body:DefaultTabController(
-                    length: 5,
-                    child: Column(
-                      children: [
-                        Container(
-                          color: Colors.deepPurple[100],
-                          padding: EdgeInsets.symmetric(vertical:20,horizontal: 10),
-                          width: size.width,
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.symmetric(vertical: 5),
-                                    width: 40,
-                                    height: 40,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(50),
-                                      child: FlatButton(
-                                        padding: EdgeInsets.all(5),
-                                        color: kPrimaryColor,
-                                        onPressed: () async {
-                                          file = (await FilePicker.getFile(
-                                              type: FileType.custom, allowedExtensions: ['pdf']));
-                                          setState(() {
-                                            if(file != null)
-                                              upload = "File uploaded";
-                                          });
-                                          if(file!=null)
-                                          {
-                                            print("FUNCTION CALLED");
-                                            sendFile(file,user.user_id);
-                                          }
-                                        },
-                                        child: Icon(
-                                          Icons.add,
-                                          color: Colors.white,
-                                        ),
+                  backgroundColor: Colors.deepPurple[600],
+                  title: Text('Upload Time Table'),
+                  centerTitle: true,
+                ),
+                body:DefaultTabController(
+                  length: 5,
+                  child: Column(
+                    children: [
+                      Container(
+                        color: Colors.deepPurple[100],
+                        padding: EdgeInsets.symmetric(vertical:20,horizontal: 10),
+                        width: size.width,
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.symmetric(vertical: 5),
+                                  width: 40,
+                                  height: 40,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(50),
+                                    child: FlatButton(
+                                      padding: EdgeInsets.all(5),
+                                      color: kPrimaryColor,
+                                      onPressed: () async {
+                                        file = (await FilePicker.getFile(
+                                            type: FileType.custom, allowedExtensions: ['pdf']));
+                                        setState(() {
+                                          if(file != null)
+                                            upload = "File uploaded";
+                                        });
+                                        if(file!=null)
+                                        {
+                                          print("FUNCTION CALLED");
+                                          sendFile(file,user.user_id);
+                                        }
+                                      },
+                                      child: Icon(
+                                        Icons.add,
+                                        color: Colors.white,
                                       ),
                                     ),
                                   ),
-                                  SizedBox(width: 20),
-                                  Text(upload,
-                                    style: TextStyle(fontSize: 20),
-                                  ),
+                                ),
+                                SizedBox(width: 20),
+                                Text(upload,
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 20),
+                            Text("Note: Please Upload Your TimeTable as a PDF File.",
+                                style: TextStyle( fontSize: 15)),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        color: Colors.deepPurple[100],
+                        padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+
+                        child: TabBar(
+                          tabs: [
+                              Tab(child: Text("Mon", style: TextStyle(fontSize: 16),),),
+                              Tab(child: Text("Tue", style: TextStyle(fontSize: 16),),),
+                              Tab(child: Text("Wed", style: TextStyle(fontSize: 16),),),
+                              Tab(child: Text("Thur", style: TextStyle(fontSize: 16),),),
+                              Tab(child: Text("Fri", style: TextStyle(fontSize: 16),),),
+                        ],
+                        labelColor: kPrimaryColor,
+                        indicator: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                            border: Border.all(color: kPrimaryColor, width: 3)),
+                        ),
+                      ),
+                      StreamBuilder<TimeTable>(
+                        stream: DatabaseService(uid: user.user_id).tt_slots,
+                        builder: (context,snapshot) {
+                          print(snapshot);
+                          if(snapshot.hasData)
+                          {
+                            print("hey");
+                            TimeTable xyz=snapshot.data;
+                            return Expanded(
+                              child: TabBarView(
+                                children: [
+                                  printSlots(snapshot.data.tt_mon.cast(), size,"Monday"),
+                                  printSlots(snapshot.data.tt_tue.cast(), size,"Tuesday"),
+                                  printSlots(snapshot.data.tt_wed.cast(), size,"Wednesday"),
+                                  printSlots(snapshot.data.tt_thurs.cast(), size,"Thursday"),
+                                  printSlots(snapshot.data.tt_fri.cast(), size,"Friday"),
                                 ],
                               ),
-                              SizedBox(height: 20),
-                              Text("Note: Please Upload Your TimeTable as a PDF File.",
-                                  style: TextStyle( fontSize: 15)),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          color: Colors.deepPurple[100],
-                          padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
-
-                          child: TabBar(
-                            tabs: [
-                                Tab(child: Text("Mon", style: TextStyle(fontSize: 16),),),
-                                Tab(child: Text("Tue", style: TextStyle(fontSize: 16),),),
-                                Tab(child: Text("Wed", style: TextStyle(fontSize: 16),),),
-                                Tab(child: Text("Thur", style: TextStyle(fontSize: 16),),),
-                                Tab(child: Text("Fri", style: TextStyle(fontSize: 16),),),
-                          ],
-                          labelColor: kPrimaryColor,
-                          indicator: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100),
-                              border: Border.all(color: kPrimaryColor, width: 3)),
-                          ),
-                        ),
-                        StreamBuilder<TimeTable>(
-                          stream: DatabaseService(uid: user.user_id).tt_slots,
-                          builder: (context,snapshot){
-                            print(user.user_id);
-                            if(snapshot.hasData)
-                            {
-                              TimeTable xyz=snapshot.data;
-                              return Expanded(
-                                child: TabBarView(
-                                  children: [
-                                    printSlots(snapshot.data.tt_mon, size,"Monday"),
-                                    printSlots(snapshot.data.tt_tue, size,"Tuesday"),
-                                    printSlots(snapshot.data.tt_wed, size,"Wednesday"),
-                                    printSlots(snapshot.data.tt_thurs, size,"Thursday"),
-                                    printSlots(snapshot.data.tt_fri, size,"Friday"),
-                                  ],
-                                ),
-                              );
-                            }
-                            else
-                            {
-                              return Container(
-                                child: Text("No Free Slots Uploaded"),
-                              );
-                            }
-                          },
-                        )
-                    ],
-                    ),
+                            );
+                          }
+                          else
+                          {
+                            return Container(
+                              child: Text("No Free Slots Uploaded"),
+                            );
+                          }
+                        },
+                      )
+                  ],
                   ),
                 ),
-              ),
-            );
+              );
           }
-          else {
-            return Loading();
-          }
-        });
   }
-}
+
 
 Widget printSlots(List<String> day,Size size,String dayName)
 {
