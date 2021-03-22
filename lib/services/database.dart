@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_appointment_app/model/Request.dart';
 import 'package:flutter_appointment_app/model/Student.dart';
 import 'package:flutter_appointment_app/model/Teacher.dart';
+import 'package:flutter_appointment_app/model/TimeTable.dart';
 import 'package:flutter_appointment_app/model/User.dart';
 import 'package:flutter_appointment_app/services/auth.dart';
 import 'package:provider/provider.dart';
@@ -203,10 +204,25 @@ class DatabaseService {
   }
 
 //-------------------------------------------------------------------------------------------//
+  // get TimeTable for logged in Faculty
+  Stream<TimeTable> get tt_slots {
+    return timetableCollection.document(uid).snapshots().map(_slotsFromSnapshot);
+  }
+
+  TimeTable _slotsFromSnapshot(DocumentSnapshot snapshot)
+  {
+    return TimeTable(
+        tt_mon: snapshot.data['tt_mon'] ?? [],
+        tt_tue: snapshot.data['tt_tue'] ?? [],
+        tt_wed: snapshot.data['tt_wed'] ?? [],
+        tt_thurs: snapshot.data['tt_thurs'] ?? [],
+        tt_fri: snapshot.data['tt_fri'] ?? [],
+      );
+  }
+//-------------------------------------------------------------------------------------------//
   //get faculty stream
   Stream<List<Teacher>> get faculties {
-    return facultyCollection.snapshots()
-        .map(_teacherListFromSnapshot);
+    return facultyCollection.snapshots().map(_teacherListFromSnapshot);
   }
 
   // faculty list from snapshot
@@ -259,7 +275,7 @@ class DatabaseService {
   }
 
 //-------------------------------------------------------------------------------------------//
-//get faculty stream
+  //get student stream
   Stream<List<Student>> get students {
     return studentCollection.snapshots()
         .map(_studentListFromSnapshot);
@@ -282,7 +298,7 @@ class DatabaseService {
   }
 //-------------------------------------------------------------------------------------------//
 
-  //get faculty doc stream
+  //get student doc stream
   Stream<Student> get studentData{
     return studentCollection.document(uid).snapshots().map(_studentDataFromSnapshot);
   }
