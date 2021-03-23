@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_appointment_app/model/Student.dart';
 import 'package:flutter_appointment_app/model/Teacher.dart';
+import 'package:flutter_appointment_app/model/TimeTable.dart';
 import 'package:flutter_appointment_app/model/User.dart';
 import 'package:flutter_appointment_app/services/database.dart';
 import 'package:flutter_appointment_app/ui_helpers/Loading.dart';
@@ -26,7 +27,7 @@ List<GlobalKey<FormState>> formKeys = [GlobalKey<FormState>(), GlobalKey<FormSta
 
 class _student_bookAppointmentState extends State<student_bookAppointment> {
   int _currentStep = 0;
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  //GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   DateTime _dateTime;
   var day;
   var full;
@@ -42,15 +43,18 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
     'Saturday',
     'Sunday'
   ];
-  final List<String> free_slots = [
-    "----Select Time----",
-    "09:30 - 10:00 am",
-    "10:00 - 10:30 am",
-    "05:30 - 06:00 pm",
-  ];
+  // final List<String> free_slots = [
+  //   "----Select Time----",
+  //   "09:30 - 10:00 am",
+  //   "10:00 - 10:30 am",
+  //   "05:30 - 06:00 pm",
+  // ];
+
+  List free_slots=["----Select Time----"];
+
   String time = "----Select Time----";
   bool loading = false;
-  List tt=['9:00-10:00', '10:00-11:00','11:00-12:00','12:00-1:00','1:00-2:00'];
+  //List tt=['9:00-10:00', '10:00-11:00','11:00-12:00','12:00-1:00','1:00-2:00'];
   int selectedIndex = 0;
   String selected_time;
 
@@ -86,40 +90,40 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
 
   }
 
-  Widget customRadio(String txt,int index){
-    return Container(
-      child: GestureDetector(
-          onTap: () => changeIndex(index),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 5),
-            child: Container(
-              width: 100,
-              padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              border: Border.all(
-              color: selectedIndex == index ? kPrimaryColor : Colors.grey,
-              style: BorderStyle.solid,
-              width: 3.0,
-            ),
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10.0),
-            ),
-              child: Center(
-                child: Text(txt, style: TextStyle(color: selectedIndex == index ?kPrimaryColor : Colors.grey),),
-              ),
-        ),
-          ),
-       ),
-    );
-  }
+  // Widget customRadio(String txt,int index){
+  //   return Container(
+  //     child: GestureDetector(
+  //         onTap: () => changeIndex(index),
+  //         child: Padding(
+  //           padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 5),
+  //           child: Container(
+  //             width: 100,
+  //             padding: const EdgeInsets.all(8),
+  //           decoration: BoxDecoration(
+  //             border: Border.all(
+  //             color: selectedIndex == index ? kPrimaryColor : Colors.grey,
+  //             style: BorderStyle.solid,
+  //             width: 3.0,
+  //           ),
+  //           color: Colors.white,
+  //           borderRadius: BorderRadius.circular(10.0),
+  //           ),
+  //             child: Center(
+  //               child: Text(txt, style: TextStyle(color: selectedIndex == index ?kPrimaryColor : Colors.grey),),
+  //             ),
+  //       ),
+  //         ),
+  //      ),
+  //   );
+  // }
 
-  void changeIndex(int index){
-    setState(() {
-      selectedIndex = index;
-      selected_time = tt[selectedIndex];
-      print(selected_time);
-    });
-  }
+  // void changeIndex(int index){
+  //   setState(() {
+  //     selectedIndex = index;
+  //     selected_time = tt[selectedIndex];
+  //     print(selected_time);
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -488,51 +492,76 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                   fontSize: 15,
                 )),
             SizedBox(height: 10.0,),
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-              // decoration: BoxDecoration(
-              //     color: Colors.white,
-              //     border: Border.all(
-              //       color: Colors.white,
-              //     ),
-              //     borderRadius: BorderRadius.all(Radius.circular(10))
-              // ),
-              child: Wrap(
-                alignment: WrapAlignment.spaceEvenly,
-                direction: Axis.horizontal,
-                children: <Widget>[
-                  for(int i=0;i<tt.length;i++)
-                  customRadio(tt[i], i),
-
-                ],
-              ),
-            ),
             // Container(
-            //   padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
-            //   decoration: BoxDecoration(
-            //       color: Colors.white,
-            //       border: Border.all(
-            //         color: Colors.deepPurple[600],
-            //       ),
-            //       borderRadius: BorderRadius.all(Radius.circular(10))
+            //   padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+            //   // decoration: BoxDecoration(
+            //   //     color: Colors.white,
+            //   //     border: Border.all(
+            //   //       color: Colors.white,
+            //   //     ),
+            //   //     borderRadius: BorderRadius.all(Radius.circular(10))
+            //   // ),
+            //   child: Wrap(
+            //     alignment: WrapAlignment.spaceEvenly,
+            //     direction: Axis.horizontal,
+            //     children: <Widget>[
+            //       for(int i=0;i<tt.length;i++)
+            //       customRadio(tt[i], i),
+            //
+            //     ],
             //   ),
-            //   child: DropdownButton<String>(
-            //     dropdownColor: Colors.white,
-            //     icon: Icon(Icons.arrow_drop_down),
-            //     value: time,
-            //     onChanged: (value) {
-            //       setState(() {
-            //         time = value;
-            //       });
-            //     },
-            //     items: free_slots.map<DropdownMenuItem<String>>((value) {
-            //       return DropdownMenuItem(
-            //         child: Text(value),
-            //         value: value,
-            //       );
-            //     }).toList(),
-            //   ),
-            // )
+            // ),
+        StreamBuilder<TimeTable>(
+            stream: DatabaseService(uid: widget.teacher.teacher_id).tt_slots,
+            builder: (context,snapshot){
+              print("snap:"+snapshot.toString());
+              if(snapshot.hasData){
+                print("IF");
+                if(day == "Monday") {
+                 free_slots = snapshot.data.tt_mon;
+                } else if(day == "Tuesday") {
+                  free_slots = snapshot.data.tt_tue;
+                }else if(day == "Wednesday") {
+                  free_slots = snapshot.data.tt_wed;
+                }else if(day == "Thursday") {
+                  free_slots = snapshot.data.tt_thurs;
+                }else if(day == "Friday") {
+                  free_slots = snapshot.data.tt_fri;
+                }
+                print(free_slots);
+                  return Container(
+                    padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(
+                          color: Colors.deepPurple[600],
+                        ),
+                        borderRadius: BorderRadius.all(Radius.circular(10))
+                    ),
+                    child: DropdownButton<String>(
+                      dropdownColor: Colors.white,
+                      icon: Icon(Icons.arrow_drop_down),
+                      value: free_slots.isEmpty?time:free_slots.first,
+                      onChanged: (value) {
+                        setState(() {
+                          time = value;
+                        });
+                      },
+                      items: free_slots.map<DropdownMenuItem<String>>((value) {
+                        return DropdownMenuItem(
+                          child: Text(value),
+                          value: value,
+                        );
+                      }).toList(),
+                    ),
+                  );
+              }
+              else{
+                return Center(child: Text("No free slots available"));
+              }
+            }
+        ),
+
           ],
         ),
         isActive: _currentStep >= 2,
