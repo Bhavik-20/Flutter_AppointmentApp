@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_appointment_app/model/User.dart';
+import 'package:flutter_appointment_app/services/SharedPrefHelper.dart';
 import 'package:flutter_appointment_app/services/auth.dart';
 import 'package:flutter_appointment_app/services/database.dart';
 import 'package:flutter_appointment_app/ui_helpers/Loading.dart';
@@ -181,8 +182,9 @@ class _teacher_loginState extends State<teacher_login> {
                               if(user.isEmailVerified)
                               {
                                 print("Email Verified");
-                                SharedPreferences prefs=await SharedPreferences.getInstance();
-                                await prefs.setString("role", "Teacher");
+                                SharedPrefHelper.setStringPref("role", "Teacher");
+                                // SharedPreferences prefs=await SharedPreferences.getInstance();
+                                // await prefs.setString("role", "Teacher");
                                 Navigator.of(context).pushNamed('/tea_dash');
                               }
                               else

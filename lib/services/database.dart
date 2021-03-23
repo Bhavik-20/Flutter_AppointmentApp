@@ -212,11 +212,11 @@ class DatabaseService {
   TimeTable _slotsFromSnapshot(DocumentSnapshot snapshot)
   {
     return TimeTable(
-        tt_mon: snapshot.data['tt_mon'] ?? [],
-        tt_tue: snapshot.data['tt_tue'] ?? [],
-        tt_wed: snapshot.data['tt_wed'] ?? [],
-        tt_thurs: snapshot.data['tt_thurs'] ?? [],
-        tt_fri: snapshot.data['tt_fri'] ?? [],
+        tt_mon: snapshot.data['tt_mon'] ,
+        tt_tue: snapshot.data['tt_tue'] ,
+        tt_wed: snapshot.data['tt_wed'] ,
+        tt_thurs: snapshot.data['tt_thurs'] ,
+        tt_fri: snapshot.data['tt_fri'],
       );
   }
 //-------------------------------------------------------------------------------------------//

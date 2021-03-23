@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_appointment_app/model/User.dart';
+import 'package:flutter_appointment_app/services/SharedPrefHelper.dart';
 import 'package:flutter_appointment_app/services/auth.dart';
 import 'package:flutter_appointment_app/ui_helpers/Loading.dart';
 import 'package:flutter_appointment_app/ui_helpers/constants.dart';
@@ -216,9 +217,8 @@ class _teacher_signupState extends State<teacher_signup> {
                         else
                         {
                           FirebaseUser user = await FirebaseAuth.instance.currentUser();
-                          SharedPreferences prefs=await SharedPreferences.getInstance();
-                          await prefs.setInt(user.uid, 3);
-                          await prefs.setString('role', 'Teacher');
+                          await SharedPrefHelper.setIntPref(user.uid, 3);
+                          await SharedPrefHelper.setStringPref('role', 'Teacher');
                           Navigator.of(context).pushNamed('/st_verify');
                         }
                       }

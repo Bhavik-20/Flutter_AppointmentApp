@@ -8,6 +8,7 @@ import 'package:flutter_appointment_app/model/Request.dart';
 import 'package:flutter_appointment_app/model/Student.dart';
 import 'package:flutter_appointment_app/model/User.dart';
 import 'package:flutter_appointment_app/pages/List_studentAcceptedRequests.dart';
+import 'package:flutter_appointment_app/services/SharedPrefHelper.dart';
 import 'package:flutter_appointment_app/services/auth.dart';
 import 'package:flutter_appointment_app/services/database.dart';
 import 'package:flutter_appointment_app/ui_helpers/Loading.dart';
@@ -127,8 +128,9 @@ class _student_verifyState extends State<student_verify> {
                       _user =  await FirebaseAuth.instance.currentUser();
                       if(_user.isEmailVerified)
                         {
-                          SharedPreferences prefs=await SharedPreferences.getInstance();
-                          String role =prefs.getString('role');
+                          String role= SharedPrefHelper.getStringPref('role');
+                          // SharedPreferences prefs=await SharedPreferences.getInstance();
+                          // String role=prefs.getString('role');
                           if(role == 'Student') {
                             print(role);
                             Navigator.of(context).pushNamed('/st_dash');
@@ -142,15 +144,16 @@ class _student_verifyState extends State<student_verify> {
                         {
                           print('1 : =================================================');
                           setState(() {loading=false;});
-
-                          SharedPreferences prefs=await SharedPreferences.getInstance();
                           FirebaseUser user = await FirebaseAuth.instance.currentUser();
-                          int chances=prefs.getInt(user.uid);
+                          int chances=SharedPrefHelper.getIntPref(user.uid);
+                          // SharedPreferences prefs=await SharedPreferences.getInstance();
+                          // int chances=prefs.getInt(user.uid);
                           if(chances>1)
                             {
                               print("Chances before: "+chances.toString());
                               chances=chances-1;
-                              prefs.setInt(user.uid, chances);
+                              SharedPrefHelper.setIntPref(user.uid, chances);
+                              // prefs.setInt(user.uid, chances);
                               Fluttertoast.showToast(
                                 backgroundColor: Colors.red,
                                 msg: 'You Have Not verified your email.\nATTEMPTS LEFT='+chances.toString(),
@@ -173,7 +176,8 @@ class _student_verifyState extends State<student_verify> {
                                 toastLength: Toast.LENGTH_SHORT,
                                 gravity: ToastGravity.BOTTOM,
                               );
-                              prefs.remove(user.uid);
+                              await SharedPrefHelper.removePref(user.uid);
+                              await SharedPrefHelper.removePref("file_tt");
                               Navigator.of(context).pushNamed('/');
                             }
                         }

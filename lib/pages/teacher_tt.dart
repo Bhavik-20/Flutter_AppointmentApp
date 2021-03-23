@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_appointment_app/model/TimeTable.dart';
 import 'package:flutter_appointment_app/services/Api.dart';
+import 'package:flutter_appointment_app/services/SharedPrefHelper.dart';
 import 'package:flutter_appointment_app/ui_helpers/constants.dart';
 import 'package:flutter_appointment_app/ui_helpers/rounded_button.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -23,8 +24,6 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:file_picker/file_picker.dart';
 
-
-
 class teacher_tt extends StatefulWidget {
   @override
   _teacher_ttState createState() => _teacher_ttState();
@@ -39,10 +38,8 @@ class _teacher_ttState extends State<teacher_tt> {
   var pdfModel;
   TimeTable obj_tt;
   final AuthService _auth=AuthService();
-  List tt=['9:00-10:00', '10:00-11:00','11:00-12:00','12:00-1:00','1:00-2:00'];
 
-  @override
-  Future sendFile(File file,String uid) async {
+  Future<int> sendFile(File file,String uid) async {
     print("ENTER FUNCTION");
     final CollectionReference timetableCollection =Firestore.instance.collection('timetable');
     try
@@ -77,6 +74,7 @@ class _teacher_ttState extends State<teacher_tt> {
           await DatabaseService(uid: uid).updateTimeTable(
               db_mon,db_tue,db_wed,db_thurs,db_fri);
           print("Success");
+          return 1;
           // return pdfModel;
         }
         catch(e)
@@ -89,7 +87,7 @@ class _teacher_ttState extends State<teacher_tt> {
           );
           print("CATCH 2");
           print("ERROR:"+e.toString());
-          // return pdfModel;
+          return 0;
         }
       }
       else
@@ -101,17 +99,16 @@ class _teacher_ttState extends State<teacher_tt> {
     {
       print("CATCH 1");
       print("ERROR:"+e.toString());
-      // return pdfModel;
+      return 0;
     }
-    // return pdfModel;
   }
 
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
-    // final _formKey=GlobalKey<FormState>();
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
+
+    return loading ? Loading() : Scaffold(
                 //backgroundColor: Colors.deepPurple[100],
                 appBar: AppBar(
                   leading: IconButton(
@@ -154,13 +151,17 @@ class _teacher_ttState extends State<teacher_tt> {
                                         file = (await FilePicker.getFile(
                                             type: FileType.custom, allowedExtensions: ['pdf']));
                                         setState(() {
+                                          loading=true;
                                           if(file != null)
                                             upload = "File uploaded";
                                         });
                                         if(file!=null)
                                         {
                                           print("FUNCTION CALLED");
-                                          sendFile(file,user.user_id);
+                                          await sendFile(file,user.user_id);
+                                          setState(() {
+                                            loading=false;
+                                          });
                                         }
                                       },
                                       child: Icon(
@@ -176,16 +177,20 @@ class _teacher_ttState extends State<teacher_tt> {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 20),
+                            // SizedBox(height: 5),
+                            // Text("Previous Uploaded File : None",
+                            //     style: TextStyle( fontSize: 10)
+                            // ),
+                            SizedBox(height: 10),
                             Text("Note: Please Upload Your TimeTable as a PDF File.",
-                                style: TextStyle( fontSize: 15)),
+                                style: TextStyle( fontSize: 15)
+                            ),
                           ],
                         ),
                       ),
                       Container(
                         color: Colors.deepPurple[100],
                         padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
-
                         child: TabBar(
                           tabs: [
                               Tab(child: Text("Mon", style: TextStyle(fontSize: 16),),),
@@ -206,8 +211,7 @@ class _teacher_ttState extends State<teacher_tt> {
                           print(snapshot);
                           if(snapshot.hasData)
                           {
-                            print("hey");
-                            TimeTable xyz=snapshot.data;
+                            print("STREAM TT HAS DATA");
                             return Expanded(
                               child: TabBarView(
                                 children: [
