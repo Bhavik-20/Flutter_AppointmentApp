@@ -261,11 +261,9 @@ class _State extends State {
                       else
                         {
                           FirebaseUser user = await FirebaseAuth.instance.currentUser();
-                          await SharedPrefHelper.setStringPref('role','Student');
-                          await SharedPrefHelper.setIntPref(user.uid, 3);
-                          // SharedPreferences prefs=await SharedPreferences.getInstance();
-                          // await prefs.setInt(user.uid, 3);
-                          // await prefs.setString('role','Student');
+                          SharedPreferences prefs=await SharedPreferences.getInstance();
+                          await prefs.setInt(user.uid, 3);
+                          await prefs.setString('role','Student');
                           Navigator.of(context).pushNamed('/st_verify');
                         }
                       }

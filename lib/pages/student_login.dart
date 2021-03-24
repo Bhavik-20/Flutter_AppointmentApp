@@ -176,9 +176,9 @@ class _student_loginState extends State<student_login> {
                           if(user.isEmailVerified)
                             {
                               print("Email Verified");
-                              await SharedPrefHelper.setStringPref("role", "Student");
-                              // SharedPreferences prefs=await SharedPreferences.getInstance();
-                              // await prefs.setString("role", "Student");
+                              // await SharedPrefHelper.setStringPref("role", "Student");
+                              SharedPreferences prefs=await SharedPreferences.getInstance();
+                              await prefs.setString("role", "Student");
                               Navigator.of(context).pushNamed('/st_dash');
                             }
                           else

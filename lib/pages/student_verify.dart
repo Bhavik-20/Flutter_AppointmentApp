@@ -128,9 +128,8 @@ class _student_verifyState extends State<student_verify> {
                       _user =  await FirebaseAuth.instance.currentUser();
                       if(_user.isEmailVerified)
                         {
-                          String role= SharedPrefHelper.getStringPref('role');
-                          // SharedPreferences prefs=await SharedPreferences.getInstance();
-                          // String role=prefs.getString('role');
+                          SharedPreferences prefs=await SharedPreferences.getInstance();
+                          String role=prefs.getString('role');
                           if(role == 'Student') {
                             print(role);
                             Navigator.of(context).pushNamed('/st_dash');
@@ -145,15 +144,13 @@ class _student_verifyState extends State<student_verify> {
                           print('1 : =================================================');
                           setState(() {loading=false;});
                           FirebaseUser user = await FirebaseAuth.instance.currentUser();
-                          int chances=SharedPrefHelper.getIntPref(user.uid);
-                          // SharedPreferences prefs=await SharedPreferences.getInstance();
-                          // int chances=prefs.getInt(user.uid);
+                          SharedPreferences prefs=await SharedPreferences.getInstance();
+                          int chances=prefs.getInt(user.uid);
                           if(chances>1)
                             {
                               print("Chances before: "+chances.toString());
                               chances=chances-1;
-                              SharedPrefHelper.setIntPref(user.uid, chances);
-                              // prefs.setInt(user.uid, chances);
+                              prefs.setInt(user.uid, chances);
                               Fluttertoast.showToast(
                                 backgroundColor: Colors.red,
                                 msg: 'You Have Not verified your email.\nATTEMPTS LEFT='+chances.toString(),
@@ -176,8 +173,8 @@ class _student_verifyState extends State<student_verify> {
                                 toastLength: Toast.LENGTH_SHORT,
                                 gravity: ToastGravity.BOTTOM,
                               );
-                              await SharedPrefHelper.removePref(user.uid);
-                              await SharedPrefHelper.removePref("file_tt");
+                              prefs.remove(user.uid);
+                              prefs.remove("file_tt");
                               Navigator.of(context).pushNamed('/');
                             }
                         }

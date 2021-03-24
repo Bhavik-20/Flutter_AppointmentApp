@@ -217,8 +217,9 @@ class _teacher_signupState extends State<teacher_signup> {
                         else
                         {
                           FirebaseUser user = await FirebaseAuth.instance.currentUser();
-                          await SharedPrefHelper.setIntPref(user.uid, 3);
-                          await SharedPrefHelper.setStringPref('role', 'Teacher');
+                          SharedPreferences prefs= await SharedPreferences.getInstance();
+                          prefs.setInt(user.uid, 3);
+                          prefs.setString('role', 'Teacher');
                           Navigator.of(context).pushNamed('/st_verify');
                         }
                       }
