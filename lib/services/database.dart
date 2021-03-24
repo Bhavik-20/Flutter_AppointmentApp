@@ -36,15 +36,24 @@ class DatabaseService {
     });
   }
 
-  Future updateTimeTable(List<String> tt_mon,List<String> tt_tue,List<String> tt_wed,List<String> tt_thurs,List<String> tt_fri) async
+  Future updateTimeTable(List<String> static_mon,List<String> dynamic_mon,List<String> static_tue,List<String> dynamic_tue,
+      List<String> static_wed,List<String> dynamic_wed,List<String> static_thurs,List<String> dynamic_thurs,
+      List<String> static_fri,List<String> dynamic_fri) async
   {
-    return await timetableCollection.document(uid).setData({
-      'tt_mon':tt_mon,
-      'tt_tue':tt_tue,
-      'tt_wed':tt_wed,
-      'tt_thurs':tt_thurs,
-      'tt_fri':tt_fri,
-    });
+    return await timetableCollection.document(uid).setData(
+        {
+          'static_mon': static_mon,
+          'dynamic_mon': dynamic_mon,
+          'static_tue': static_tue,
+          'dynamic_tue': dynamic_tue,
+          'static_wed': static_wed,
+          'dynamic_wed': dynamic_wed,
+          'static_thurs': static_thurs,
+          'dynamic_thurs': dynamic_thurs,
+          'static_fri': static_fri,
+          'dynamic_fri': dynamic_fri,
+        }
+    );
   }
 
   Future updateStudentData(String name,String rollno,String branch,String year,String email,String password, String downloadUrl) async
@@ -212,11 +221,16 @@ class DatabaseService {
   TimeTable _slotsFromSnapshot(DocumentSnapshot snapshot)
   {
     return TimeTable(
-        tt_mon: snapshot.data['tt_mon'] ,
-        tt_tue: snapshot.data['tt_tue'] ,
-        tt_wed: snapshot.data['tt_wed'] ,
-        tt_thurs: snapshot.data['tt_thurs'] ,
-        tt_fri: snapshot.data['tt_fri'],
+        static_mon: snapshot.data['static_mon'] ,
+        dynamic_mon: snapshot.data['dynamic_mon'],
+        static_tue: snapshot.data['static_tue'] ,
+        dynamic_tue: snapshot.data['dynamic_tue'],
+        static_wed: snapshot.data['static_wed'] ,
+        dynamic_wed: snapshot.data['dynamic_wed'],
+        static_thurs: snapshot.data['static_thurs'] ,
+        dynamic_thurs: snapshot.data['dynamic_thurs'],
+        static_fri: snapshot.data['static_fri'] ,
+        dynamic_fri: snapshot.data['dynamic_fri'],
       );
   }
 //-------------------------------------------------------------------------------------------//
