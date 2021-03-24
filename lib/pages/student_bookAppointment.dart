@@ -7,6 +7,7 @@ import 'package:flutter_appointment_app/model/Student.dart';
 import 'package:flutter_appointment_app/model/Teacher.dart';
 import 'package:flutter_appointment_app/model/TimeTable.dart';
 import 'package:flutter_appointment_app/model/User.dart';
+import 'package:flutter_appointment_app/pages/role.dart';
 import 'package:flutter_appointment_app/services/database.dart';
 import 'package:flutter_appointment_app/ui_helpers/Loading.dart';
 import 'package:flutter_appointment_app/ui_helpers/rounded_button.dart';
@@ -43,20 +44,11 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
     'Saturday',
     'Sunday'
   ];
-  // final List<String> free_slots = [
-  //   "----Select Time----",
-  //   "09:30 - 10:00 am",
-  //   "10:00 - 10:30 am",
-  //   "05:30 - 06:00 pm",
-  // ];
 
-  List free_slots=["----Select Time----"];
 
-  String time = "----Select Time----";
+  List free_slots=[""];
+  String time='';
   bool loading = false;
-  //List tt=['9:00-10:00', '10:00-11:00','11:00-12:00','12:00-1:00','1:00-2:00'];
-  int selectedIndex = 0;
-  String selected_time;
 
   Future<void> sendRequest(String name, String roll, String branch, String year,
       String st_mail, purpose,purpose_details, String time, date, String email2,String t_name,String initials,String room,String uid, String t_uid, String t_url, String s_url)
@@ -90,41 +82,6 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
 
   }
 
-  // Widget customRadio(String txt,int index){
-  //   return Container(
-  //     child: GestureDetector(
-  //         onTap: () => changeIndex(index),
-  //         child: Padding(
-  //           padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 5),
-  //           child: Container(
-  //             width: 100,
-  //             padding: const EdgeInsets.all(8),
-  //           decoration: BoxDecoration(
-  //             border: Border.all(
-  //             color: selectedIndex == index ? kPrimaryColor : Colors.grey,
-  //             style: BorderStyle.solid,
-  //             width: 3.0,
-  //           ),
-  //           color: Colors.white,
-  //           borderRadius: BorderRadius.circular(10.0),
-  //           ),
-  //             child: Center(
-  //               child: Text(txt, style: TextStyle(color: selectedIndex == index ?kPrimaryColor : Colors.grey),),
-  //             ),
-  //       ),
-  //         ),
-  //      ),
-  //   );
-  // }
-
-  // void changeIndex(int index){
-  //   setState(() {
-  //     selectedIndex = index;
-  //     selected_time = tt[selectedIndex];
-  //     print(selected_time);
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
@@ -137,7 +94,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             Student data = snapshot.data;
-            return loading ? Loading() : Scaffold(
+            return loading ? role() : Scaffold(
                 backgroundColor: Colors.deepPurple[100],
                 appBar: AppBar(
                   leading: IconButton(
@@ -182,7 +139,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                           this._currentStep = this._currentStep + 1;
                         }
                         else {
-                          if (time == "----Select Time----") {
+                          if (time == "") {
                             Fluttertoast.showToast(
                               backgroundColor: Colors.red,
                               msg: 'Please Select Time',
@@ -209,7 +166,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                             );
                             print("Please enter purpose");
                           }
-                          if (time != "----Select Time----" && full != null &&
+                          if (time != "" && full != null &&
                               purpose != null && this._currentStep == 4) {
                             Fluttertoast.showToast(
                               backgroundColor: Colors.green,
@@ -492,25 +449,6 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                   fontSize: 15,
                 )),
             SizedBox(height: 10.0,),
-            // Container(
-            //   padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-            //   // decoration: BoxDecoration(
-            //   //     color: Colors.white,
-            //   //     border: Border.all(
-            //   //       color: Colors.white,
-            //   //     ),
-            //   //     borderRadius: BorderRadius.all(Radius.circular(10))
-            //   // ),
-            //   child: Wrap(
-            //     alignment: WrapAlignment.spaceEvenly,
-            //     direction: Axis.horizontal,
-            //     children: <Widget>[
-            //       for(int i=0;i<tt.length;i++)
-            //       customRadio(tt[i], i),
-            //
-            //     ],
-            //   ),
-            // ),
         StreamBuilder<TimeTable>(
             stream: DatabaseService(uid: widget.teacher.teacher_id).tt_slots,
             builder: (context,snapshot){
@@ -529,6 +467,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                   free_slots = snapshot.data.tt_fri;
                 }
                 print(free_slots);
+
                   return Container(
                     padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
                     decoration: BoxDecoration(
@@ -541,7 +480,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                     child: DropdownButton<String>(
                       dropdownColor: Colors.white,
                       icon: Icon(Icons.arrow_drop_down),
-                      value: free_slots.isEmpty?time:free_slots.first,
+                      value: time.isEmpty?free_slots.first:time,
                       onChanged: (value) {
                         setState(() {
                           time = value;

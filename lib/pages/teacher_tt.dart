@@ -282,6 +282,7 @@ Widget printSlots(List<String> day,Size size,String dayName)
               )
           ],
         ),
+
       ],
     ),
   );
