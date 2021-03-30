@@ -19,7 +19,8 @@ class DatabaseService {
   final CollectionReference requestCollection =Firestore.instance.collection('request');
   final CollectionReference acceptCollection =Firestore.instance.collection('accepted');
   final CollectionReference declineCollection =Firestore.instance.collection('rejected');
-  final CollectionReference timetableCollection =Firestore.instance.collection('timetable');
+  // final CollectionReference timetableCollection =Firestore.instance.collection('timetable');
+
 //-------------------------------------------------------------------------------------------------------------------------------------//
   Future updateFacultyData(String name,String emp_code, String initials,String room,String email,String password, String downloadUrl) async
   {
@@ -40,6 +41,7 @@ class DatabaseService {
       List<String> static_wed,List<String> dynamic_wed,List<String> static_thurs,List<String> dynamic_thurs,
       List<String> static_fri,List<String> dynamic_fri) async
   {
+    CollectionReference  timetableCollection=facultyCollection.document(uid).collection("timetable");
     return await timetableCollection.document(uid).setData(
         {
           'static_mon': static_mon,
@@ -215,6 +217,7 @@ class DatabaseService {
 //-------------------------------------------------------------------------------------------//
   // get TimeTable for logged in Faculty
   Stream<TimeTable> get tt_slots {
+    CollectionReference  timetableCollection=facultyCollection.document(uid).collection("timetable");
     return timetableCollection.document(uid).snapshots().map(_slotsFromSnapshot);
   }
 
