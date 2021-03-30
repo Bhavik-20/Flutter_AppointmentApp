@@ -49,6 +49,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
   List free_slots=[""];
   String time='';
   bool loading = false;
+  // List tt = ['8:30-8:45','8:15-8:30','7:45-8:00'];
 
   Future<void> sendRequest(String name, String roll, String branch, String year,
       String st_mail, purpose,purpose_details, String time, date, String email2,String t_name,String initials,String room,String uid, String t_uid, String t_url, String s_url)
@@ -176,6 +177,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                             );
                             print(purpose);
                             print("Completed");
+
                             sendRequest(
                                 data.name,
                                 data.roll,
@@ -467,6 +469,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                   free_slots = snapshot.data.tt_fri;
                 }
                 print(free_slots);
+                free_slots.sort((a,b)=>a.compareTo(b));
 
                   return Container(
                     padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
