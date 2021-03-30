@@ -242,48 +242,72 @@ class _teacher_ttState extends State<teacher_tt> {
 
 Widget printSlots(List<String> day,Size size,String dayName)
 {
-  return Padding(
-    padding: const EdgeInsets.all(8),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Text(
-            'Free slots on '+dayName+': ',
+  if(day.isEmpty)
+    return Center(
+      child: Column(
+        children: [
+          Image(
+            image: AssetImage('images/timetable.jpg'),
+            height: size.height * 0.5,
+          ),
+          SizedBox(height: size.height * 0.01),
+          Text(
+            'Please Upload Your TimeTable',
             style: TextStyle(
-              fontSize: 17,
+              fontSize: 18,
             ),
           ),
-        ),
-        SizedBox(
-          height: size.height *0.01,
-        ),
-        Wrap(
-          alignment: WrapAlignment.start,
-          direction: Axis.horizontal,
+        ],
+      ),
+    );
+  else {
+    //day.sort((a,b)=> a.compareTo(b));
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child:
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            for ( int i=0;i<day.length;i++ )
-              Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Container(
-                  child: Text(
-                    day[i],
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                  padding: EdgeInsets.all(6),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: Colors.grey, width: 2)
-                  ),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Text(
+                'Free slots on ' + dayName + ': ',
+                style: TextStyle(
+                  fontSize: 17,
                 ),
-              )
+              ),
+            ),
+            SizedBox(
+              height: size.height * 0.01,
+            ),
+            Wrap(
+              alignment: WrapAlignment.start,
+              direction: Axis.horizontal,
+              children: [
+                for ( int i = 0; i < day.length; i++ )
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Container(
+                      child: Text(
+                        day[i],
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                      padding: EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          border: Border.all(color: Colors.grey, width: 2)
+                      ),
+                    ),
+                  )
+              ],
+            ),
+
           ],
         ),
-
-      ],
-    ),
-  );
+      ),
+    );
+  }
 }

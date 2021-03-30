@@ -21,6 +21,7 @@ class _SearchListState extends State<SearchList> {
   Widget build(BuildContext context) {
 
     final faculties=Provider.of<List<Teacher>>(context)??[];
+    faculties.sort((a,b)=>a.name.compareTo(b.name));
     List<Teacher> search_name=[];
     faculties.asMap().forEach((key, value) {
     //  String format_name=value.employee_code+"_"+value.name;
