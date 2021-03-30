@@ -262,51 +262,53 @@ Widget printSlots(List<String> day,Size size,String dayName)
       ),
     );
   else {
-    //day.sort((a,b)=> a.compareTo(b));
+    day.sort((a,b)=> a.compareTo(b));
     return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(8),
-        child:
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Text(
-                'Free slots on ' + dayName + ': ',
-                style: TextStyle(
-                  fontSize: 17,
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(8),
+          child:
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
+                  'Free slots on ' + dayName + ': ',
+                  style: TextStyle(
+                    fontSize: 17,
+                  ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: size.height * 0.01,
-            ),
-            Wrap(
-              alignment: WrapAlignment.start,
-              direction: Axis.horizontal,
-              children: [
-                for ( int i = 0; i < day.length; i++ )
-                  Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: Container(
-                      child: Text(
-                        day[i],
-                        style: TextStyle(
-                          fontSize: 16,
+              SizedBox(
+                height: size.height * 0.01,
+              ),
+              Wrap(
+                alignment: WrapAlignment.start,
+                direction: Axis.horizontal,
+                children: [
+                  for ( int i = 0; i < day.length; i++ )
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Container(
+                        child: Text(
+                          day[i],
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                        padding: EdgeInsets.all(6),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all(color: Colors.grey, width: 2)
                         ),
                       ),
-                      padding: EdgeInsets.all(6),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          border: Border.all(color: Colors.grey, width: 2)
-                      ),
-                    ),
-                  )
-              ],
-            ),
+                    )
+                ],
+              ),
 
-          ],
+            ],
+          ),
         ),
       ),
     );

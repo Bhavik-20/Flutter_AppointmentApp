@@ -472,7 +472,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                   free_slots = snapshot.data.dynamic_fri;
                 }
                 print(free_slots);
-                // free_slots.sort((a,b)=>a.compareTo(b));
+                free_slots.sort((a,b)=>a.compareTo(b));
 
                   return Container(
                     padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
