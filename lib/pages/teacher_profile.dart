@@ -84,7 +84,8 @@ class _teacher_profileState extends State<teacher_profile> {
                 appBar: AppBar(
                   leading: IconButton(
                     onPressed: (){
-                      Navigator.of(context).pushNamed('/tea_dash');
+                      Navigator.pop(context);
+                      // Navigator.of(context).pushNamed('/tea_dash');
                     },
                     icon: Icon(
                       Icons.arrow_back,
@@ -296,7 +297,8 @@ class _teacher_profileState extends State<teacher_profile> {
                                   toastLength: Toast.LENGTH_LONG,
                                   gravity: ToastGravity.BOTTOM,
                                 );
-                                Navigator.of(context).pushNamed('/tea_dash');
+                                Navigator.pop(context);
+                                // Navigator.of(context).pushNamed('/tea_dash');
                               }
                               else {
                                 Fluttertoast.showToast(

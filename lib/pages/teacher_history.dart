@@ -40,7 +40,8 @@ class teacher_history extends StatelessWidget {
             leading: IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: (){
-                Navigator.of(context).pushNamed('/tea_dash');
+                Navigator.pop(context);
+                // Navigator.of(context).pushNamed('/tea_dash');
               },
             ),
           ),

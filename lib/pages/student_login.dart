@@ -72,7 +72,8 @@ class _student_loginState extends State<student_login> {
                     IconButton(
                       icon: Icon(Icons.arrow_back ),
                       onPressed: (){
-                        Navigator.of(context).pushNamed('/');
+                        Navigator.pop(context);
+                        // Navigator.of(context).pushNamed('/');
                       },
                     ),
                     SizedBox(width: 50.0),
@@ -196,6 +197,7 @@ class _student_loginState extends State<student_login> {
                             gravity: ToastGravity.BOTTOM,
                           );
                           await _auth.signOut();
+                          Navigator.pop(context);
                           Navigator.of(context).pushNamed('/');
                         }
                       }

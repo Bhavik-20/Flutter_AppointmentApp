@@ -88,7 +88,8 @@ class _student_profileState  extends State<student_profile> {
                   appBar: AppBar(
                     leading: IconButton(
                       onPressed: () {
-                        Navigator.of(context).pushNamed('/st_dash');
+                        Navigator.pop(context);
+                        // Navigator.of(context).pushNamed('/st_dash');
                       },
                       icon: Icon(
                         Icons.arrow_back,
@@ -339,7 +340,8 @@ class _student_profileState  extends State<student_profile> {
                                       toastLength: Toast.LENGTH_LONG,
                                       gravity: ToastGravity.BOTTOM,
                                     );
-                                    Navigator.of(context).pushNamed('/st_dash');
+                                    Navigator.pop(context);
+                                    // Navigator.of(context).pushNamed('/st_dash');
                                   }
                                   else if (result != 'valid') {
                                     Fluttertoast.showToast(

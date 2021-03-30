@@ -70,7 +70,6 @@ class _student_dashboardState extends State<student_dashboard> {
                         icon: Icon(Icons.logout),
                         onPressed: () async {
                           setState(() => loading=true);
-
                           await Future.delayed(const Duration(milliseconds: 3000));
                           await _auth.signOut();
                           // Navigator.of(context).pushNamed('/');

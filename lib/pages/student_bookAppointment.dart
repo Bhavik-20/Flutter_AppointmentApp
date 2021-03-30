@@ -95,12 +95,13 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             Student data = snapshot.data;
-            return loading ? role() : Scaffold(
+            return loading ? Loading() : Scaffold(
                 backgroundColor: Colors.deepPurple[100],
                 appBar: AppBar(
                   leading: IconButton(
                     onPressed: () {
-                      Navigator.of(context).pushNamed('/st_search_teacher');
+                      Navigator.pop(context);
+                      // Navigator.of(context).pushNamed('/st_search_teacher');
                     },
                     icon: Icon(
                       Icons.arrow_back,
@@ -133,11 +134,13 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                       });
                     },
                     onStepContinue: () async {
-                      setState(() {
-                        if (this._currentStep < this
-                            ._mySteps(data)
-                            .length - 1) {
-                          this._currentStep = this._currentStep + 1;
+                        // setState(() {loading=true;});
+                        if (this._currentStep < this._mySteps(data).length - 1)
+                        {
+                          setState(() {
+                            // loading=false;
+                            this._currentStep = this._currentStep + 1;
+                          });
                         }
                         else {
                           if (time == "") {
@@ -177,8 +180,9 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                             );
                             print(purpose);
                             print("Completed");
-
-                            sendRequest(
+                            setState(() =>loading=true);
+                            await Future.delayed(const Duration(milliseconds: 3000));
+                            await sendRequest(
                                 data.name,
                                 data.roll,
                                 data.branch,
@@ -196,12 +200,11 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                                 widget.teacher.teacher_id,
                                 widget.teacher.url,
                                 data.url,);
-                            setState(() =>loading=true);
-                            loading = true;
+                            // loading = true;
+                            Navigator.pop(context);
                             Navigator.of(context).pushNamed('/st_dash');
                           }
                         }
-                      });
                     },
                     onStepCancel: () {
                       setState(() {
