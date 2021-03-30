@@ -458,15 +458,15 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
               if(snapshot.hasData){
                 print("IF");
                 if(day == "Monday") {
-                 free_slots = snapshot.data.tt_mon;
+                 free_slots = snapshot.data.dynamic_mon;
                 } else if(day == "Tuesday") {
-                  free_slots = snapshot.data.tt_tue;
+                  free_slots = snapshot.data.dynamic_tue;
                 }else if(day == "Wednesday") {
-                  free_slots = snapshot.data.tt_wed;
+                  free_slots = snapshot.data.dynamic_wed;
                 }else if(day == "Thursday") {
-                  free_slots = snapshot.data.tt_thurs;
+                  free_slots = snapshot.data.dynamic_thurs;
                 }else if(day == "Friday") {
-                  free_slots = snapshot.data.tt_fri;
+                  free_slots = snapshot.data.dynamic_fri;
                 }
                 print(free_slots);
                 free_slots.sort((a,b)=>a.compareTo(b));

@@ -72,7 +72,7 @@ class _teacher_ttState extends State<teacher_tt> {
         {
           print("TRY 2");
           await DatabaseService(uid: uid).updateTimeTable(
-              db_mon,db_tue,db_wed,db_thurs,db_fri);
+              db_mon,db_mon,db_tue,db_tue,db_wed,db_wed,db_thurs,db_thurs,db_fri,db_fri);
           print("Success");
           return 1;
           // return pdfModel;
@@ -215,11 +215,11 @@ class _teacher_ttState extends State<teacher_tt> {
                             return Expanded(
                               child: TabBarView(
                                 children: [
-                                  printSlots(snapshot.data.tt_mon.cast(), size,"Monday"),
-                                  printSlots(snapshot.data.tt_tue.cast(), size,"Tuesday"),
-                                  printSlots(snapshot.data.tt_wed.cast(), size,"Wednesday"),
-                                  printSlots(snapshot.data.tt_thurs.cast(), size,"Thursday"),
-                                  printSlots(snapshot.data.tt_fri.cast(), size,"Friday"),
+                                  printSlots(snapshot.data.static_mon.cast(), size,"Monday"),
+                                  printSlots(snapshot.data.static_tue.cast(), size,"Tuesday"),
+                                  printSlots(snapshot.data.static_wed.cast(), size,"Wednesday"),
+                                  printSlots(snapshot.data.static_thurs.cast(), size,"Thursday"),
+                                  printSlots(snapshot.data.static_fri.cast(), size,"Friday"),
                                 ],
                               ),
                             );
