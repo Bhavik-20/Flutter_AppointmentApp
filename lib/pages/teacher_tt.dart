@@ -113,7 +113,8 @@ class _teacher_ttState extends State<teacher_tt> {
                 appBar: AppBar(
                   leading: IconButton(
                     onPressed: (){
-                      Navigator.of(context).pushNamed('/tea_dash');
+                      Navigator.pop(context);
+                      // Navigator.of(context).pushNamed('/tea_dash');
                     },
                     icon: Icon(
                       Icons.arrow_back,

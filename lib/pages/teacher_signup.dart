@@ -15,9 +15,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// void main(){
-//   runApp(teacher_signup());
-// }
+
 class teacher_signup extends StatefulWidget {
   @override
   _teacher_signupState createState() => _teacher_signupState();
@@ -82,7 +80,8 @@ class _teacher_signupState extends State<teacher_signup> {
                     IconButton(
                       icon: Icon(Icons.arrow_back ),
                       onPressed: (){
-                        Navigator.of(context).pushNamed('/tea_login');
+                        Navigator.pop(context);
+                        // Navigator.of(context).pushNamed('/tea_login');
                       },
                     ),
                     SizedBox(width: 50.0),
@@ -268,7 +267,8 @@ class _teacher_signupState extends State<teacher_signup> {
                       padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
                       color: kPrimaryLightColor,
                       onPressed: (){
-                        Navigator.of(context).pushNamed('/tea_login');
+                        Navigator.pop(context);
+                        // Navigator.of(context).pushNamed('/tea_login');
                       },
                       child: Text(
                         'Sign In here',

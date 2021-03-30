@@ -79,7 +79,8 @@ class _teacher_loginState extends State<teacher_login> {
                     IconButton(
                       icon: Icon(Icons.arrow_back ),
                       onPressed: (){
-                        Navigator.of(context).pushNamed('/');
+                        Navigator.pop(context);
+                        // Navigator.of(context).pushNamed('/');
                       },
                     ),
                     SizedBox(width: 50.0),
@@ -202,7 +203,8 @@ class _teacher_loginState extends State<teacher_login> {
                                 gravity: ToastGravity.BOTTOM,
                               );
                               await _auth.signOut();
-                              Navigator.of(context).pushNamed('/');
+                              Navigator.pop(context);
+                              // Navigator.of(context).pushNamed('/');
                             }
                       }
                     }

@@ -24,7 +24,8 @@ class _student_search_teacherState extends State<student_search_teacher> {
         appBar: AppBar(
           leading: IconButton(
             onPressed: (){
-              Navigator.of(context).pushNamed('/st_dash');
+              Navigator.pop(context);
+              // Navigator.of(context).pushNamed('/st_dash');
             },
             icon: Icon(
               Icons.arrow_back,

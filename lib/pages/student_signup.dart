@@ -99,7 +99,8 @@ class _State extends State {
                     IconButton(
                       icon: Icon(Icons.arrow_back ),
                       onPressed: (){
-                        Navigator.of(context).pushNamed('/st_login');
+                        Navigator.pop(context);
+                        // Navigator.of(context).pushNamed('/st_login');
                       },
                     ),
                     SizedBox(width: 50.0),
@@ -312,7 +313,8 @@ class _State extends State {
                     padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
                     color: kPrimaryLightColor,
                     onPressed: (){
-                      Navigator.of(context).pushNamed('/st_login');
+                      Navigator.pop(context);
+                      // Navigator.of(context).pushNamed('/st_login');
                     },
                     child: Text(
                       'Sign In here',
