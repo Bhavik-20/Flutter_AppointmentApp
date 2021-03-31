@@ -155,6 +155,51 @@ class DatabaseService {
     });
   }
 
+  Future removeSlot(String time,String remove_from) async
+  {
+    DocumentReference timetableDocument=facultyCollection.document(uid).collection("timetable").document(uid);
+    print("REMOVE SLOT , TIME: "+time);
+    print("REMOVE SLOT , FROM: "+remove_from);
+    return await timetableDocument.updateData({
+      remove_from : FieldValue.arrayRemove([time])
+    });
+  }
+
+  Future addSlot(String time,String add_to) async
+  {
+    add_to = add_to.split(":").first.trim();
+    String field="";
+    if(add_to=="Monday")
+    {
+      field="dynamic_mon";
+    }
+    else if(add_to=="Tuesday")
+    {
+      field="dynamic_tue";
+    }
+    else if(add_to=="Wednesday")
+    {
+      field="dynamic_wed";
+    }
+    else if(add_to=="Thursday")
+    {
+      field="dynamic_thurs";
+    }
+    else if(add_to=="Friday")
+    {
+      field="dynamic_fri";
+    }
+
+    print("ADD SLOT , TIME: "+time);
+    print("ADD SLOT , FROM: "+field);
+    DocumentReference timetableDocument=facultyCollection.document(uid).collection("timetable").document(uid);
+    print("REMOVE SLOT , TIME: "+time);
+    print("REMOVE SLOT , FROM: "+add_to);
+    return await timetableDocument.updateData({
+      field : FieldValue.arrayUnion([time])
+    });
+  }
+
   Future deleteRequests(String req_id) async
   {
     DocumentReference docref=requestCollection.document(req_id);

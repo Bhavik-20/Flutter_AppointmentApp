@@ -34,6 +34,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
   var full;
   var purpose;
   var purpose_details;
+  String remove_from="";
 
   List days_of_week = [
     'Monday',
@@ -50,6 +51,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
   String time='';
   bool loading = false;
   // List tt = ['8:30-8:45','8:15-8:30','7:45-8:00'];
+
 
   Future<void> sendRequest(String name, String roll, String branch, String year,
       String st_mail, purpose,purpose_details, String time, date, String email2,String t_name,String initials,String room,String uid, String t_uid, String t_url, String s_url)
@@ -182,6 +184,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                             print("Completed");
                             setState(() =>loading=true);
                             await Future.delayed(const Duration(milliseconds: 3000));
+                            await DatabaseService(uid: widget.teacher.teacher_id).removeSlot(time,remove_from);
                             await sendRequest(
                                 data.name,
                                 data.roll,
@@ -454,7 +457,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                   fontSize: 15,
                 )),
             SizedBox(height: 10.0,),
-        StreamBuilder<TimeTable>(
+          StreamBuilder<TimeTable>(
             stream: DatabaseService(uid: widget.teacher.teacher_id).tt_slots,
             builder: (context,snapshot){
               print("snap:"+snapshot.toString());
@@ -462,14 +465,23 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                 print("IF");
                 if(day == "Monday") {
                  free_slots = snapshot.data.dynamic_mon;
-                } else if(day == "Tuesday") {
+                 remove_from="dynamic_mon";
+                }
+                else if(day == "Tuesday") {
                   free_slots = snapshot.data.dynamic_tue;
-                }else if(day == "Wednesday") {
+                  remove_from="dynamic_tue";
+                }
+                else if(day == "Wednesday") {
                   free_slots = snapshot.data.dynamic_wed;
-                }else if(day == "Thursday") {
+                  remove_from="dynamic_wed";
+                }
+                else if(day == "Thursday") {
                   free_slots = snapshot.data.dynamic_thurs;
-                }else if(day == "Friday") {
+                  remove_from="dynamic_thurs";
+                }
+                else if(day == "Friday") {
                   free_slots = snapshot.data.dynamic_fri;
+                  remove_from="dynamic_fri";
                 }
                 print(free_slots);
                 free_slots.sort((a,b)=>a.compareTo(b));

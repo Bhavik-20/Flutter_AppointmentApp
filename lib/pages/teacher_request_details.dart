@@ -531,6 +531,7 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                               print('rejected');
                               await DatabaseService().deleteRequests(
                                   widget.request.request_id);
+                              await DatabaseService(uid: widget.request.teacher_id).addSlot(widget.request.time, widget.request.date);
                               await DatabaseService().declineRequests(
                                   widget.request.request_id,
                                   widget.request.student_id,
