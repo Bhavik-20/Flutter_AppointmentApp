@@ -1,3 +1,6 @@
+import 'package:flutter_appointment_app/model/Request.dart';
+import 'package:intl/intl.dart';
+
 class SortRequest
 {
 
@@ -27,4 +30,5 @@ class SortRequest
         else
           return dt2.compareTo(dt1);
       }
+
 }

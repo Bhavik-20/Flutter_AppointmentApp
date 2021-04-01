@@ -18,7 +18,7 @@ class _listofStudentDeclinedRequestsState extends State<listofStudentDeclinedReq
   @override
   Widget build(BuildContext context) {
     final accepted=Provider.of<List<Request>>(context)??[];
-    accepted.sort((a,b)=> SortRequest().check(a.date,b.date,a.time,b.time,'a'));
+    accepted.sort((a,b)=> SortRequest().check(a.date,b.date,a.time,b.time,'d'));
     return Column(
       children: [
         Container(

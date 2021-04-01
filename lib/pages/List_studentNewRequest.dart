@@ -17,7 +17,7 @@ class _listofnewStudentRequestsState extends State<listofnewStudentRequests> {
   @override
   Widget build(BuildContext context) {
     final requests=Provider.of<List<Request>>(context)??[];
-    requests.sort((a,b)=> SortRequest().check(a.date,b.date,a.time,b.time,'a'));
+    requests.sort((a,b)=> SortRequest().check(a.date,b.date,a.time,b.time,'d'));
     return Column(
       children: [
         Container(

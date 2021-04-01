@@ -21,7 +21,7 @@ class _listofnewFacultyRequestsState extends State<listofnewFacultyRequests> {
     final requests=Provider.of<List<Request>>(context)??[];
 
     requests.sort((a,b)=> SortRequest().check(a.date,b.date,a.time,b.time,'a'));
-    // requests.sort((a,b)=>check(a.date,b.date,a.time,b.time));
+
     return Column(
       children: [
         Container(
@@ -46,6 +46,7 @@ class _listofnewFacultyRequestsState extends State<listofnewFacultyRequests> {
                     margin: EdgeInsets.fromLTRB(20, 6, 20, 0),
                     child: ListTile(
                       onTap: (){
+
                         Navigator.push(context, MaterialPageRoute(builder: (context)=> teacher_request_details(request:requests[index])));
                       },
                       leading: CircleAvatar(
