@@ -348,7 +348,7 @@ class _teacher_request_statusState extends State<teacher_request_status> {
                   // color: Colors.white,
                   width: size.width*0.8,
                   child: Container(
-                    height:40.0,
+                    height:size.height * 0.1,
                     padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
                     child: Row(
                       children: [

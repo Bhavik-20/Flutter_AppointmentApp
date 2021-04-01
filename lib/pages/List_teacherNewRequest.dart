@@ -4,6 +4,7 @@ import 'package:flutter_appointment_app/model/Request.dart';
 import 'package:flutter_appointment_app/model/Teacher.dart';
 import 'package:flutter_appointment_app/pages/student_bookAppointment.dart';
 import 'package:flutter_appointment_app/pages/teacher_request_details.dart';
+import 'package:flutter_appointment_app/services/SortRequest.dart';
 import 'package:provider/provider.dart';
 
 class listofnewFacultyRequests extends StatefulWidget {
@@ -18,6 +19,9 @@ class _listofnewFacultyRequestsState extends State<listofnewFacultyRequests> {
   @override
   Widget build(BuildContext context) {
     final requests=Provider.of<List<Request>>(context)??[];
+
+    requests.sort((a,b)=> SortRequest().check(a.date,b.date,a.time,b.time,'a'));
+    // requests.sort((a,b)=>check(a.date,b.date,a.time,b.time));
     return Column(
       children: [
         Container(
@@ -88,6 +92,8 @@ class _listofnewFacultyRequestsState extends State<listofnewFacultyRequests> {
       fontSize: 18,
     ),);
   }
+
+
 }
 
 

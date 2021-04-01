@@ -68,6 +68,7 @@ class _student_dashboardState extends State<student_dashboard> {
 
                       IconButton(
                         icon: Icon(Icons.logout),
+                        tooltip: 'Sign Out',
                         onPressed: () async {
                           setState(() => loading=true);
                           await Future.delayed(const Duration(milliseconds: 3000));
@@ -79,10 +80,10 @@ class _student_dashboardState extends State<student_dashboard> {
                     leading:
                     IconButton(
                       icon: Icon(Icons.account_circle_rounded),
+                      tooltip: 'Profile',
                       onPressed: (){
                         Navigator.of(context).pushNamed('/st_profile');
                       },
-
                     ),
 
                   ),
@@ -91,6 +92,7 @@ class _student_dashboardState extends State<student_dashboard> {
                     child: _widgetOptions.elementAt(_selectedIndex),
                   ),
                   floatingActionButton: FloatingActionButton(
+                    tooltip: 'Book Appointment',
                     onPressed: (){
                       Navigator.of(context).pushNamed('/st_search_teacher');
                     },

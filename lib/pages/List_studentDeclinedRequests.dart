@@ -6,6 +6,7 @@ import 'package:flutter_appointment_app/pages/student_bookAppointment.dart';
 import 'package:flutter_appointment_app/pages/student_request_status.dart';
 import 'package:flutter_appointment_app/pages/teacher_request_details.dart';
 import 'package:flutter_appointment_app/pages/teacher_request_status.dart';
+import 'package:flutter_appointment_app/services/SortRequest.dart';
 import 'package:provider/provider.dart';
 
 class listofStudentDeclinedRequests extends StatefulWidget {
@@ -17,7 +18,7 @@ class _listofStudentDeclinedRequestsState extends State<listofStudentDeclinedReq
   @override
   Widget build(BuildContext context) {
     final accepted=Provider.of<List<Request>>(context)??[];
-
+    accepted.sort((a,b)=> SortRequest().check(a.date,b.date,a.time,b.time,'a'));
     return Column(
       children: [
         Container(

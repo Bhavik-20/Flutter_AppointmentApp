@@ -412,7 +412,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                         // ---------- Extracting day and Date from DateTime date------------
                         day = days_of_week[date.weekday - 1];
                         if (day != 'Saturday' && day != 'Sunday') {
-                          var formatter = new DateFormat('dd-MM-yyyy');
+                          var formatter = new DateFormat('yyyy-MM-dd');
                           String formatted = formatter.format(date);
                           full = day + " : " + formatted;
                           print(full);

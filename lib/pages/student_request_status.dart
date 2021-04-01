@@ -304,15 +304,15 @@ class _student_request_statusState extends State<student_request_status> {
                      Column(
                        children: [
                          Container(
-                           padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
-                           child: Text( 'Purpose Explained:',
-                             style: TextStyle(
-                               fontWeight: FontWeight.bold,
-                               fontSize: 20.0,
-                               fontFamily: 'playfair',
-                               color: Colors.black,
-                             ),),
-                         ),
+                             padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                             child: Text( 'Purpose Explained:',
+                               style: TextStyle(
+                                 fontWeight: FontWeight.bold,
+                                 fontSize: 20.0,
+                                 fontFamily: 'playfair',
+                                 color: Colors.black,
+                               ),),
+                           ),
                          Container(
                            padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                            width: size.width*0.8,
@@ -343,53 +343,54 @@ class _student_request_statusState extends State<student_request_status> {
                              ),
                            ),
                          ),
-                         SizedBox(height: 15.0,),
-                         Container(
-                           padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
-                           child: Text( 'Request Status:',
-                             style: TextStyle(
-                               fontWeight: FontWeight.bold,
-                               fontSize: 20.0,
-                               fontFamily: 'playfair',
-                               color: Colors.black,
-                             ),),
-                         ),
-                         Container(
-                           padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                           width: size.width*0.8,
-                           decoration: BoxDecoration(
-                               color: Colors.white,
-                               border: Border.all(
-                                 color: Colors.white,
-                               ),
-                               borderRadius: BorderRadius.all(Radius.circular(20))
-                           ),
-                           child: TextField(
-                             style: TextStyle(
-                               fontSize: 20.0,
-                               fontFamily: 'playfair',
-                               color: Colors.black,
-                             ),
-                             enabled: false,
-                             maxLines: 5,
-                             autocorrect: false,
-                             autofocus: false,
-                             cursorColor: Colors.black,
-                             decoration: new InputDecoration(
-                               hintText: widget.request.status,
-                               hintStyle: TextStyle(
-                                 color: Colors.black,
-                               ),
-                               border: InputBorder.none,
-                             ),
-                           ),
-                         ),
                        ],
                      ),
-                  ],
-                ),
-                ),
-            SizedBox(height: 30.0,),
+                       SizedBox(height: 15.0,),
+                       Container(
+                         padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                         child: Text( 'Request Status:',
+                           style: TextStyle(
+                             fontWeight: FontWeight.bold,
+                             fontSize: 20.0,
+                             fontFamily: 'playfair',
+                             color: Colors.black,
+                           ),),
+                       ),
+                       Container(
+                         padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                         width: size.width*0.8,
+                         decoration: BoxDecoration(
+                             color: Colors.white,
+                             border: Border.all(
+                               color: Colors.white,
+                             ),
+                             borderRadius: BorderRadius.all(Radius.circular(20))
+                         ),
+                         child: TextField(
+                           style: TextStyle(
+                             fontSize: 20.0,
+                             fontFamily: 'playfair',
+                             color: Colors.black,
+                           ),
+                           enabled: false,
+                           maxLines: 5,
+                           autocorrect: false,
+                           autofocus: false,
+                           cursorColor: Colors.black,
+                           decoration: new InputDecoration(
+                             hintText: widget.request.status,
+                             hintStyle: TextStyle(
+                               color: Colors.black,
+                             ),
+                             border: InputBorder.none,
+                           ),
+                         ),
+                       ),
+
+                ],
+              ),
+              ),
+          SizedBox(height: 30.0,),
 
           ],
         ),
