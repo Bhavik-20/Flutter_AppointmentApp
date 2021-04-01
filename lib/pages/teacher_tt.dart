@@ -216,11 +216,11 @@ class _teacher_ttState extends State<teacher_tt> {
                             return Expanded(
                               child: TabBarView(
                                 children: [
-                                  printSlots(snapshot.data.static_mon.cast(), size,"Monday"),
-                                  printSlots(snapshot.data.static_tue.cast(), size,"Tuesday"),
-                                  printSlots(snapshot.data.static_wed.cast(), size,"Wednesday"),
-                                  printSlots(snapshot.data.static_thurs.cast(), size,"Thursday"),
-                                  printSlots(snapshot.data.static_fri.cast(), size,"Friday"),
+                                  printSlots(snapshot.data.static_mon.cast(),snapshot.data.dynamic_mon.cast(), size,"Monday"),
+                                  printSlots(snapshot.data.static_tue.cast(),snapshot.data.dynamic_tue.cast(), size,"Tuesday"),
+                                  printSlots(snapshot.data.static_wed.cast(),snapshot.data.dynamic_wed.cast(), size,"Wednesday"),
+                                  printSlots(snapshot.data.static_thurs.cast(),snapshot.data.dynamic_thurs.cast(), size,"Thursday"),
+                                  printSlots(snapshot.data.static_fri.cast(),snapshot.data.dynamic_fri.cast(), size,"Friday"),
                                 ],
                               ),
                             );
@@ -241,9 +241,9 @@ class _teacher_ttState extends State<teacher_tt> {
   }
 
 
-Widget printSlots(List<String> day,Size size,String dayName)
+Widget printSlots(List<String> static_day,List<String> dynamic_day,Size size,String dayName)
 {
-  if(day.isEmpty)
+  if(static_day.isEmpty)
     return Center(
       child: Column(
         children: [
@@ -262,7 +262,7 @@ Widget printSlots(List<String> day,Size size,String dayName)
       ),
     );
   else {
-    day.sort((a,b)=> a.compareTo(b));
+    static_day.sort((a,b)=> a.compareTo(b));
     return SingleChildScrollView(
       child: Center(
         child: Padding(
@@ -287,20 +287,40 @@ Widget printSlots(List<String> day,Size size,String dayName)
                 alignment: WrapAlignment.start,
                 direction: Axis.horizontal,
                 children: [
-                  for ( int i = 0; i < day.length; i++ )
+                  for ( int i = 0; i < static_day.length; i++ )
+                    if(dynamic_day.contains(static_day[i]))
                     Padding(
                       padding: const EdgeInsets.all(4.0),
                       child: Container(
                         child: Text(
-                          day[i],
+                          static_day[i],
                           style: TextStyle(
                             fontSize: 16,
                           ),
                         ),
                         padding: EdgeInsets.all(6),
                         decoration: BoxDecoration(
+                            // color: Colors.green,
                             borderRadius: BorderRadius.circular(15),
-                            border: Border.all(color: Colors.grey, width: 2)
+                            border: Border.all(color: Colors.green, width: 2)
+                        ),
+                      ),
+                    )
+                  else
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Container(
+                        child: Text(
+                          static_day[i],
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                        padding: EdgeInsets.all(6),
+                        decoration: BoxDecoration(
+                            color: Colors.grey[300],
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all(color: Colors.grey[700], width: 2)
                         ),
                       ),
                     )
