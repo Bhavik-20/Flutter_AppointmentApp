@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_appointment_app/model/Request.dart';
 import 'package:flutter_appointment_app/model/User.dart';
-import 'package:flutter_appointment_app/pages/List_teacherDeclinedRequests.dart';
+import 'package:flutter_appointment_app/pages/teacher_dashboard_declined.dart';
 import 'package:flutter_appointment_app/services/database.dart';
 import "package:google_fonts/google_fonts.dart";
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';

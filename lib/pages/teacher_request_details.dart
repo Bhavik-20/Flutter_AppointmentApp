@@ -40,6 +40,11 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
     Size size = MediaQuery.of(context).size;
     final user = Provider.of<User>(context);
 
+    DateTime now = new DateTime.now();
+    DateTime today_date = new DateTime(now.year, now.month, now.day);
+    DateTime req_date = DateTime.parse(widget.request.date.split(":").last.trim());
+
+    bool show_options = req_date.compareTo(today_date)<0 ? false : true;
     return StreamBuilder<Teacher>(
         stream: DatabaseService(uid: user.user_id).facultyData,
         builder: (context, snapshot) {
@@ -411,14 +416,22 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                             ),
                             Container(
                               padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
-                              child: Text( 'Reason for rejecting the appointment:',
+                              child: show_options ? Text( 'Reason for rejecting the appointment:',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20.0,
                                   fontFamily: 'playfair',
                                   color: Colors.black,
+                                ),) :
+                                Text( 'The Request Date has passed.',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 22.0,
+                                  fontFamily: 'playfair',
+                                  color: Colors.black,
                                 ),),
                             ),
+                            if(show_options)
                             Container(
                               padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                               width: size.width*0.8,
@@ -459,6 +472,7 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                         )
                     ),
                     SizedBox(height: 30.0,),
+                    if(show_options)
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

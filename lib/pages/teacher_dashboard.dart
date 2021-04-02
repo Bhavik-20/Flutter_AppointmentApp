@@ -33,7 +33,7 @@ class _teacher_dashboardState extends State<teacher_dashboard> {
   final AuthService _auth=AuthService();
 
   List<Widget> _widgetOptions = <Widget>[
-    teacher_new_requests(),
+    teacher_new_requests(i: true),
     teacher_accepted_requests(),
     teacher_declined_requests(),
   ];
@@ -158,6 +158,8 @@ class _teacher_dashboardState extends State<teacher_dashboard> {
                                 onPressed: () async {
                                   setState(() => loading=true);
                                   await Future.delayed(const Duration(milliseconds: 3000));
+                                  SharedPreferences prefs= await SharedPreferences.getInstance();
+                                  prefs.remove("role");
                                   await _auth.signOut();
                                   // Navigator.of(context).pushNamed('/');
                                 },

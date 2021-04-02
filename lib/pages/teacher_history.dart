@@ -24,7 +24,7 @@ class teacher_history extends StatelessWidget {
           appBar: AppBar(
             bottom: TabBar(
                 tabs:[
-                  Tab(icon: Icon(Icons.list), text: "All"),
+                  Tab(icon: Icon(Icons.list), text: "Unanswered"),
                   Tab(icon: Icon(Icons.check_circle), text: "Accepted"),
                   Tab(icon: Icon(Icons.remove_circle), text: "Rejected"),
                 ],
@@ -47,7 +47,7 @@ class teacher_history extends StatelessWidget {
           ),
           body: TabBarView(
             children: [
-              teacher_new_requests(),
+              teacher_new_requests(i: false),
               teacher_accepted_requests(),
               teacher_declined_requests(),
             ],

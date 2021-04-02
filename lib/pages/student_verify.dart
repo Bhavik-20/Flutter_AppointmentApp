@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_appointment_app/model/Request.dart';
 import 'package:flutter_appointment_app/model/Student.dart';
 import 'package:flutter_appointment_app/model/User.dart';
-import 'package:flutter_appointment_app/pages/List_studentAcceptedRequests.dart';
+import 'package:flutter_appointment_app/pages/student_dashboard_accepted.dart';
 import 'package:flutter_appointment_app/services/SharedPrefHelper.dart';
 import 'package:flutter_appointment_app/services/auth.dart';
 import 'package:flutter_appointment_app/services/database.dart';
@@ -20,7 +20,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'List_teacherAcceptedRequests.dart';
+import 'teacher_dashboard_accepted.dart';
 
 void main()
 {

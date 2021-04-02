@@ -6,13 +6,13 @@ import 'package:flutter_appointment_app/model/Request.dart';
 import 'package:flutter_appointment_app/model/Student.dart';
 import 'package:flutter_appointment_app/model/Teacher.dart';
 import 'package:flutter_appointment_app/model/User.dart';
-import 'package:flutter_appointment_app/pages/List_studentNewRequest.dart';
+import 'package:flutter_appointment_app/pages/student_dashboard_new.dart';
 import 'package:flutter_appointment_app/pages/student_request_status.dart';
 import 'package:flutter_appointment_app/services/database.dart';
 import 'package:flutter_appointment_app/ui_helpers/Loading.dart';
 import 'package:provider/provider.dart';
 
-import 'List_teacherNewRequest.dart';
+import 'teacher_dashboard_new.dart';
 
 class student_new_requests extends StatefulWidget {
   @override

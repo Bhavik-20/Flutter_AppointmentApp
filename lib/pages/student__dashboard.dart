@@ -72,6 +72,8 @@ class _student_dashboardState extends State<student_dashboard> {
                         onPressed: () async {
                           setState(() => loading=true);
                           await Future.delayed(const Duration(milliseconds: 3000));
+                          SharedPreferences prefs= await SharedPreferences.getInstance();
+                          prefs.remove("role");
                           await _auth.signOut();
                           // Navigator.of(context).pushNamed('/');
                         },

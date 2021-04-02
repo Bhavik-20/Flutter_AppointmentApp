@@ -8,7 +8,7 @@ import "package:google_fonts/google_fonts.dart";
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:provider/provider.dart';
 
-import 'List_teacherAcceptedRequests.dart';
+import 'teacher_dashboard_accepted.dart';
 
 void main()
 {

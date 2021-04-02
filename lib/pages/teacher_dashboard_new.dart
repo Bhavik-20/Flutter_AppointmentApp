@@ -19,8 +19,19 @@ class _listofnewFacultyRequestsState extends State<listofnewFacultyRequests> {
   @override
   Widget build(BuildContext context) {
     final requests=Provider.of<List<Request>>(context)??[];
-
-    requests.sort((a,b)=> SortRequest().check(a.date,b.date,a.time,b.time,'a'));
+    List<Request> limited_req=[];
+    for(int i=0;i<requests.length;i++)
+      {
+        String req_date= requests[i].date.split(":").last.trim();
+        DateTime req_date2=DateTime.parse(req_date);
+        DateTime now = new DateTime.now();
+        DateTime today_date = new DateTime(now.year, now.month, now.day);
+        if(req_date2.compareTo(today_date)>=0)
+          {
+            limited_req.add(requests[i]);
+          }
+      }
+    limited_req.sort((a,b)=> SortRequest().check(a.date,b.date,a.time,b.time,'a'));
 
     return Column(
       children: [
@@ -38,7 +49,7 @@ class _listofnewFacultyRequestsState extends State<listofnewFacultyRequests> {
         ),
         Expanded(
           child: ListView.builder(
-              itemCount: requests.length,
+              itemCount: limited_req.length,
               itemBuilder: (context,index){
                 return Padding(
                   padding: EdgeInsets.only(top:8.0),
@@ -47,15 +58,15 @@ class _listofnewFacultyRequestsState extends State<listofnewFacultyRequests> {
                     child: ListTile(
                       onTap: (){
 
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> teacher_request_details(request:requests[index])));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> teacher_request_details(request:limited_req[index])));
                       },
                       leading: CircleAvatar(
                         child:  ClipOval(
                           child: new SizedBox(
                             height: 180,
                             width:180,
-                            child:(requests[index].s_url == '' || requests[index].s_url == null) ? Image.asset('images/role_student.jpg',
-                              fit: BoxFit.fill,) : Image.network(requests[index].s_url,
+                            child:(limited_req[index].s_url == '' || limited_req[index].s_url == null) ? Image.asset('images/role_student.jpg',
+                              fit: BoxFit.fill,) : Image.network(limited_req[index].s_url,
                               fit: BoxFit.fill,
                             ),
                           ),
@@ -63,7 +74,7 @@ class _listofnewFacultyRequestsState extends State<listofnewFacultyRequests> {
                         radius: 25.0,
                         backgroundColor: Colors.deepPurple[100],
                       ),
-                      title: Text(requests[index].student_name ,
+                      title: Text(limited_req[index].student_name ,
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -71,12 +82,12 @@ class _listofnewFacultyRequestsState extends State<listofnewFacultyRequests> {
                         ),),
                       isThreeLine: true,
                       subtitle: Text(
-                          'Purpose : '+ requests[index].purpose + '\n' + requests[index].date,
+                          'Purpose : '+ limited_req[index].purpose + '\n' + limited_req[index].date,
                         style: TextStyle(
                           fontSize: 16,
                         ),
                       ),
-                      trailing: branch(requests[index].student_branch),
+                      trailing: branch(limited_req[index].student_branch),
                     ),
                   ),
                 );
