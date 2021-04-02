@@ -34,8 +34,8 @@ class _teacher_dashboardState extends State<teacher_dashboard> {
 
   List<Widget> _widgetOptions = <Widget>[
     teacher_new_requests(i: true),
-    teacher_accepted_requests(),
-    teacher_declined_requests(),
+    teacher_accepted_requests(i: true),
+    teacher_declined_requests(i: true),
   ];
 
   void _onItemTapped(int index) {

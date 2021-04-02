@@ -48,8 +48,8 @@ class teacher_history extends StatelessWidget {
           body: TabBarView(
             children: [
               teacher_new_requests(i: false),
-              teacher_accepted_requests(),
-              teacher_declined_requests(),
+              teacher_accepted_requests(i: false),
+              teacher_declined_requests(i: false),
             ],
           ),
         ),

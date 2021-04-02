@@ -6,38 +6,23 @@ import 'package:flutter_appointment_app/pages/student_bookAppointment.dart';
 import 'package:flutter_appointment_app/pages/teacher_request_details.dart';
 import 'package:flutter_appointment_app/pages/teacher_request_status.dart';
 import 'package:flutter_appointment_app/services/SortRequest.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-class listofRejectedRequests extends StatefulWidget {
+class teacher_history_accepted extends StatefulWidget {
   @override
-  _listofRejectedRequestsState createState() => _listofRejectedRequestsState();
+  _teacher_history_acceptedState createState() => _teacher_history_acceptedState();
 }
 
-class _listofRejectedRequestsState extends State<listofRejectedRequests> {
+class _teacher_history_acceptedState extends State<teacher_history_accepted> {
   @override
   Widget build(BuildContext context) {
-
-    final rejected=Provider.of<List<Request>>(context)??[];
-    List<Request> limited_req=[];
-    for(int i=0;i<rejected.length;i++)
-    {
-      String req_date= rejected[i].date.split(":").last.trim();
-      DateTime req_date2=DateTime.parse(req_date);
-      DateTime now = new DateTime.now();
-      DateTime today_date = new DateTime(now.year, now.month, now.day);
-      if(req_date2.compareTo(today_date)>=0)
-      {
-        limited_req.add(rejected[i]);
-      }
-    }
-    limited_req.sort((a,b)=> SortRequest().check(a.date,b.date,a.time,b.time,'a'));
-
+    final accepted=Provider.of<List<Request>>(context)??[];
+    accepted.sort((a,b)=> SortRequest().check(a.date,b.date,a.time,b.time,'d'));
     return Column(
       children: [
         Container(
           child: Center(
-            child: Text("Rejected Requests",
+            child: Text("Accepted Requests",
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -49,7 +34,7 @@ class _listofRejectedRequestsState extends State<listofRejectedRequests> {
         ),
         Expanded(
           child: ListView.builder(
-              itemCount: limited_req.length,
+              itemCount: accepted.length,
               itemBuilder: (context,index){
                 return Padding(
                   padding: EdgeInsets.only(top:8.0),
@@ -57,17 +42,17 @@ class _listofRejectedRequestsState extends State<listofRejectedRequests> {
                     margin: EdgeInsets.fromLTRB(20, 6, 20, 0),
                     child: ListTile(
                       onTap: (){
-                        print(limited_req[index].date);
-                        print(limited_req[index]);
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> teacher_request_status(request:limited_req[index])));
+                        print(accepted[index].date);
+                        print(accepted[index]);
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> teacher_request_status(request:accepted[index])));
                       },
                       leading: CircleAvatar(
                         child:  ClipOval(
                           child: new SizedBox(
                             height: 180,
                             width:180,
-                            child:(limited_req[index].s_url == '' || limited_req[index].s_url == null) ? Image.asset('images/role_student.jpg',
-                              fit: BoxFit.fill,) : Image.network(limited_req[index].s_url,
+                            child:(accepted[index].s_url == '' || accepted[index].s_url == null) ? Image.asset('images/role_student.jpg',
+                              fit: BoxFit.fill,) : Image.network(accepted[index].s_url,
                               fit: BoxFit.fill,
                             ),
                           ),
@@ -75,13 +60,13 @@ class _listofRejectedRequestsState extends State<listofRejectedRequests> {
                         radius: 25.0,
                         backgroundColor: Colors.deepPurple[100],
                       ),
-                      title: Text(limited_req[index].student_name,
+                      title: Text(accepted[index].student_name,
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 1,
                         ),),
-                      subtitle: Text(limited_req[index].date),
+                      subtitle: Text(accepted[index].date),
                     ),
                   ),
                 );
