@@ -6,6 +6,7 @@ import 'package:flutter_appointment_app/pages/student_bookAppointment.dart';
 import 'package:flutter_appointment_app/pages/teacher_request_details.dart';
 import 'package:flutter_appointment_app/pages/teacher_request_status.dart';
 import 'package:flutter_appointment_app/services/SortRequest.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -38,10 +39,10 @@ class _listofRejectedRequestsState extends State<listofRejectedRequests> {
         Container(
           child: Center(
             child: Text("Rejected Requests",
-              style: TextStyle(
+              style: GoogleFonts.merriweather(
                 fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
+                // fontWeight: FontWeight.bold,
+                color: Colors.deepPurple[500],
               ),),
           ),
           color: Colors.deepPurple[100],

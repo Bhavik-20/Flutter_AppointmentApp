@@ -7,6 +7,7 @@ import 'package:flutter_appointment_app/pages/student_request_status.dart';
 import 'package:flutter_appointment_app/pages/teacher_request_details.dart';
 import 'package:flutter_appointment_app/pages/teacher_request_status.dart';
 import 'package:flutter_appointment_app/services/SortRequest.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class listofStudentDeclinedRequests extends StatefulWidget {
@@ -24,10 +25,10 @@ class _listofStudentDeclinedRequestsState extends State<listofStudentDeclinedReq
         Container(
           child: Center(
             child: Text("Declined Requests",
-              style: TextStyle(
+              style: GoogleFonts.merriweather(
                 fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
+                // fontWeight: FontWeight.bold,
+                color: Colors.deepPurple[500],
               ),),
           ),
           color: Colors.deepPurple[100],

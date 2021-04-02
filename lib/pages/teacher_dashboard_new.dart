@@ -5,6 +5,7 @@ import 'package:flutter_appointment_app/model/Teacher.dart';
 import 'package:flutter_appointment_app/pages/student_bookAppointment.dart';
 import 'package:flutter_appointment_app/pages/teacher_request_details.dart';
 import 'package:flutter_appointment_app/services/SortRequest.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class listofnewFacultyRequests extends StatefulWidget {
@@ -38,10 +39,10 @@ class _listofnewFacultyRequestsState extends State<listofnewFacultyRequests> {
         Container(
           child: Center(
             child: Text("Pending Requests",
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
+              style: GoogleFonts.merriweather(
+                fontSize: 20,
+                // fontWeight: FontWeight.bold,
+                color: Colors.deepPurple[500],
             ),),
           ),
           color: Colors.deepPurple[100],

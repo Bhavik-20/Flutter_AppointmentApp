@@ -7,6 +7,7 @@ import 'package:flutter_appointment_app/pages/student_request_status.dart';
 import 'package:flutter_appointment_app/pages/teacher_request_details.dart';
 import 'package:flutter_appointment_app/pages/teacher_request_status.dart';
 import 'package:flutter_appointment_app/services/SortRequest.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class listofStudentAcceptedRequests extends StatefulWidget {
@@ -24,14 +25,15 @@ class _listofStudentAcceptedRequestsState extends State<listofStudentAcceptedReq
         Container(
           child: Center(
             child: Text("Accepted Requests",
-              style: TextStyle(
+              style: GoogleFonts.merriweather(
                 fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),),
+                // fontWeight: FontWeight.bold,
+                color: Colors.deepPurple[500],
+              ),)
           ),
           color: Colors.deepPurple[100],
-          height: 50,
+          height: 38,
+          margin: new EdgeInsets.symmetric(vertical: 15),
         ),
         Expanded(
           child: ListView.builder(
