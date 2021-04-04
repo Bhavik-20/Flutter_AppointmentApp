@@ -23,8 +23,9 @@ import 'package:flutter_appointment_app/pages/student_declined_requests.dart';
 import 'package:flutter_appointment_app/pages/student_new_requests.dart';
 import 'package:flutter_appointment_app/pages/teacher_search_list.dart';
 import 'package:flutter_appointment_app/pages/teacher_new_requests.dart';
+import 'package:flutter_appointment_app/pages/teacher_tips.dart';
 import 'package:flutter_appointment_app/pages/teacher_tt.dart';
-
+import 'package:flutter_appointment_app/pages/student_tips.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -84,6 +85,10 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => student_verify());
       case '/tea_tt':
         return MaterialPageRoute(builder: (_) => teacher_tt());
+      case '/stu_tips':
+        return MaterialPageRoute(builder: (_) => student_tips());
+      case '/tea_tips':
+        return MaterialPageRoute(builder: (_) => teacher_tips());
 
       default:
       // If there is no such named route in the switch statement, e.g. /third

@@ -132,11 +132,11 @@ class _student_verifyState extends State<student_verify> {
                           String role=prefs.getString('role');
                           if(role == 'Student') {
                             print(role);
-                            Navigator.of(context).pushNamed('/st_dash');
+                            Navigator.of(context).pushNamed('/stu_tips');
                           }
                           else if(role == 'Teacher') {
                             print(role);
-                            Navigator.of(context).pushNamed('/tea_dash');
+                            Navigator.of(context).pushNamed('/tea_tips');
                           }
                         }
                       else

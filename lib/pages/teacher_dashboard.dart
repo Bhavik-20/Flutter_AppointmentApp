@@ -65,6 +65,15 @@ class _teacher_dashboardState extends State<teacher_dashboard> {
                     backgroundColor: Colors.deepPurple[600],
                     title: Text('Teacher Dashboard'),
                     centerTitle: true,
+                    actions: [
+                      IconButton(
+                        icon: Icon(Icons.help_outline),
+                        tooltip: 'Help',
+                        onPressed: (){
+                          Navigator.of(context).pushNamed('/tea_tips');
+                        },
+                      ),
+                    ],
                   ),
                   drawer: Drawer(
                       child: ListView(

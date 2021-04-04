@@ -65,7 +65,13 @@ class _student_dashboardState extends State<student_dashboard> {
                     title: Text('Student Dashboard'),
                     centerTitle: true,
                     actions: [
-
+                      IconButton(
+                        icon: Icon(Icons.help_outline),
+                        tooltip: 'Help',
+                        onPressed: (){
+                          Navigator.of(context).pushNamed('/stu_tips');
+                        },
+                      ),
                       IconButton(
                         icon: Icon(Icons.logout),
                         tooltip: 'Sign Out',
