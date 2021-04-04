@@ -46,6 +46,7 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
     DateTime req_date = DateTime.parse(widget.request.date.split(":").last.trim());
 
     bool show_options = req_date.compareTo(today_date)<0 ? false : true;
+
     return StreamBuilder<Teacher>(
         stream: DatabaseService(uid: user.user_id).facultyData,
         builder: (context, snapshot) {
@@ -552,7 +553,7 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                               // appending reason for rejection to status
                               status="Rejected.\n"+ why_rej;
 
-                              loading = true;
+                              setState(() => loading=true);
                               print(why_rej);
                               print('rejected');
                               await DatabaseService().deleteRequests(

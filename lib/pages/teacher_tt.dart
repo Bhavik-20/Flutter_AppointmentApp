@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_appointment_app/model/TimeTable.dart';
 import 'package:flutter_appointment_app/services/Api.dart';
-import 'package:flutter_appointment_app/services/SharedPrefHelper.dart';
 import 'package:flutter_appointment_app/ui_helpers/constants.dart';
 import 'package:flutter_appointment_app/ui_helpers/rounded_button.dart';
 import 'package:fluttertoast/fluttertoast.dart';
