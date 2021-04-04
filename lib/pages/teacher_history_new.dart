@@ -47,7 +47,6 @@ class _teacher_history_newState extends State<teacher_history_new> {
                     margin: EdgeInsets.fromLTRB(20, 6, 20, 0),
                     child: ListTile(
                       onTap: (){
-
                         Navigator.push(context, MaterialPageRoute(builder: (context)=> teacher_request_details(request:requests[index])));
                       },
                       leading: CircleAvatar(

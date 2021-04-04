@@ -2,6 +2,9 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_appointment_app/model/Request.dart';
+import 'package:flutter_appointment_app/services/database.dart';
+import 'package:flutter_appointment_app/ui_helpers/Loading.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 void main()
 {
@@ -16,10 +19,18 @@ class student_request_status extends StatefulWidget {
 }
 
 class _student_request_statusState extends State<student_request_status> {
+  bool loading = false;
+
   @override
   Widget build(BuildContext context) {
+    DateTime now = new DateTime.now();
+    DateTime today_date = new DateTime(now.year, now.month, now.day);
+    DateTime req_date = DateTime.parse(widget.request.date.split(":").last.trim());
+    bool show_options = req_date.compareTo(today_date)<0 ? false : true;
+
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
+
+    return loading ? Loading() : Scaffold(
       backgroundColor: Colors.deepPurple[50],
       appBar: AppBar(
         title:Text('Request Details'),
@@ -390,8 +401,52 @@ class _student_request_statusState extends State<student_request_status> {
                 ],
               ),
               ),
-          SizedBox(height: 30.0,),
+            SizedBox(height: 30.0,),
+            if(show_options)
+            Center(
+              child: Column(
+                children: [
+                  Container(
+                    width: size.width*0.5,
+                    child: RaisedButton(
+                      onPressed: () async{
+                        setState(() => loading=true);
+                        print('Delete');
+                        await DatabaseService(uid: widget.request.teacher_id).addSlot(widget.request.time, widget.request.date.split(":").first);
+                        await DatabaseService(uid: widget.request.teacher_id).deleteRequests(widget.request.request_id);
 
+                        Fluttertoast.showToast(
+                          backgroundColor: Colors.green,
+                          msg: 'The request is deleted',
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.BOTTOM,
+                        );
+                        Navigator.pop(context);
+                      },
+                      color: Colors.red,
+                      hoverColor: Colors.red[200],
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          side: BorderSide(color: Colors.red)),
+                      elevation: 5,
+                      padding: EdgeInsets.fromLTRB(20.0,10,20,10),
+                      child: Row(
+                        children: <Widget>[
+                          Icon(Icons.delete , color: Colors.white,),
+                          SizedBox(width: 10.0,),
+                          Text("Cancel Request",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                            ),)
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 30.0,),
+                ],
+              ),
+            )
           ],
         ),
       ),
