@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_appointment_app/model/Request.dart';
 import 'package:flutter_appointment_app/model/Teacher.dart';
 import 'package:flutter_appointment_app/model/User.dart';
+import 'package:flutter_appointment_app/services/EmailSender.dart';
 import 'package:flutter_appointment_app/services/database.dart';
 import 'package:flutter_appointment_app/ui_helpers/Loading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -503,7 +504,18 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                                 widget.request.teacher_id,
                                 widget.request.t_url,
                                 widget.request.s_url);
-                            print(widget.request.request_id);
+
+                            await EmailSender().sendMailToStudent(
+                                widget.request.student_mail,
+                                widget.request.teacher_name,
+                                widget.request.teacher_mail,
+                                widget.request.teacher_ini,
+                                widget.request.teacher_room,
+                                widget.request.purpose,
+                                widget.request.date,
+                                widget.request.time,
+                                "Accepted");
+
                             Fluttertoast.showToast(
                               backgroundColor: Colors.green,
                               msg: 'The request is accepted',
@@ -568,7 +580,16 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                                   widget.request.teacher_id,
                                   widget.request.t_url,
                                   widget.request.s_url);
-                              print(widget.request.request_id);
+                              await EmailSender().sendMailToStudent(
+                                  widget.request.student_mail,
+                                  widget.request.teacher_name,
+                                  widget.request.teacher_mail,
+                                  widget.request.teacher_ini,
+                                  widget.request.teacher_room,
+                                  widget.request.purpose,
+                                  widget.request.date,
+                                  widget.request.time,
+                                  status);
 
                               Fluttertoast.showToast(
                                 backgroundColor: Colors.red,

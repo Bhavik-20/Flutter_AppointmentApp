@@ -8,6 +8,7 @@ import 'package:flutter_appointment_app/model/Teacher.dart';
 import 'package:flutter_appointment_app/model/TimeTable.dart';
 import 'package:flutter_appointment_app/model/User.dart';
 import 'package:flutter_appointment_app/pages/role.dart';
+import 'package:flutter_appointment_app/services/EmailSender.dart';
 import 'package:flutter_appointment_app/services/database.dart';
 import 'package:flutter_appointment_app/ui_helpers/Loading.dart';
 import 'package:flutter_appointment_app/ui_helpers/rounded_button.dart';
@@ -204,6 +205,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                                 widget.teacher.url,
                                 data.url,);
                             // loading = true;
+                            await EmailSender().sendMailToTeacher(widget.teacher.email, data.name, data.email, data.year, data.branch, data.roll, purpose, full, time);
                             Navigator.pop(context);
                             Navigator.of(context).pushNamed('/st_dash');
                           }

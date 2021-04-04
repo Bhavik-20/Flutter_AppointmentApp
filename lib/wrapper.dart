@@ -14,6 +14,8 @@ class Wrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String xyz="";
+    var inst =  Firestore.instance;
     final user = Provider.of<User>(context);
 
       return user==null ? role() : StreamBuilder<Teacher>(
@@ -37,24 +39,18 @@ class Wrapper extends StatelessWidget {
     //
     // else
     // {
-    //   String xyz="";
-    //   var document =  Firestore.instance.collection('faculty').document(user.user_id);
-    //
-    //   document.get().then((DocumentSnapshot document) {
+    //   var doc = inst.collection('faculty').document(user.user_id);
+    //   doc.get().then((DocumentSnapshot document) {
     //     xyz=document.data['role'];
-    //
-    //
     //   });
     //
     //   if(xyz=="faculty")
     //   {
     //     return teacher_dashboard();
     //   }
-    //   else
-    //   {
-    //     return student_dashboard();
-    //   }
-    //   return teacher_dashboard();
+    //
+    //   return student_dashboard();
+    //
     // }
   }
 

@@ -13,18 +13,6 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
-// void main() async
-// {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   SharedPreferences prefs= await SharedPreferences.getInstance();
-//   // print("MAIN: "+prefs.getString("role"));
-//   var loggedIn_user = prefs.getString("role");
-//   runApp(MaterialApp(
-//     home: loggedIn_user == null ? role() : Loading(),
-//     onGenerateRoute: RouteGenerator.generateRoute,
-//   ));
-// }
-
 void main()
 {
   runApp(MyApp());
