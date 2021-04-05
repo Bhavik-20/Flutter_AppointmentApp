@@ -297,6 +297,7 @@ class _teacher_request_statusState extends State<teacher_request_status> {
                   fontSize: 20.0,
                   fontFamily: 'playfair',
                   color: Colors.black,
+                  fontWeight: FontWeight.bold,
                 ),),
             ),
             Center(
@@ -314,7 +315,54 @@ class _teacher_request_statusState extends State<teacher_request_status> {
                   child: Container(
                     child: TextField(
                       style: TextStyle(
+                        fontSize: 18.0,
+                        fontFamily: 'playfair',
+                        color: Colors.black,
+                      ),
+                      enabled: false,
+                      maxLines: 1,
+                      autocorrect: false,
+                      autofocus: false,
+                      cursorColor: Colors.black,
+                      decoration: new InputDecoration(
+                        hintText: widget.request.purpose,
+                        hintStyle: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                )
+            ),
+            SizedBox(height: 30.0,),
+            if(widget.request.purpose_details != null)
+              Column(
+                children: [
+                  Container(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                    child: Text( 'Purpose Explained:',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
                         fontSize: 20.0,
+                        fontFamily: 'playfair',
+                        color: Colors.black,
+                      ),),
+                  ),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                    width: size.width*0.8,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(
+                          color: Colors.white,
+                        ),
+                        borderRadius: BorderRadius.all(Radius.circular(20))
+                    ),
+                    child: TextField(
+                      style: TextStyle(
+                        fontSize: 18.0,
                         fontFamily: 'playfair',
                         color: Colors.black,
                       ),
@@ -324,17 +372,28 @@ class _teacher_request_statusState extends State<teacher_request_status> {
                       autofocus: false,
                       cursorColor: Colors.black,
                       decoration: new InputDecoration(
-                        hintText: widget.request.purpose,
+                        hintText: widget.request.purpose_details,
                         hintStyle: TextStyle(
                           color: Colors.black,
+                          fontWeight: FontWeight.bold,
                         ),
                         border: InputBorder.none,
                       ),
                     ),
                   ),
-                )
+                  SizedBox(height: 30.0,),
+                ],
+              ),
+            Container(
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+              child: Text( 'Request Status :',
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontFamily: 'playfair',
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),),
             ),
-            SizedBox(height: 30.0,),
             Center(
                 child: Container(
                   padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
@@ -348,31 +407,25 @@ class _teacher_request_statusState extends State<teacher_request_status> {
                   // color: Colors.white,
                   width: size.width*0.8,
                   child: Container(
-                    height:size.height * 0.1,
-                    padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
-                    child: Row(
-                      children: [
-                        Text(
-                          'Request Status : ',
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                            fontFamily: 'playfair',
-                          ),
+                    child: TextField(
+                      style: TextStyle(
+                        fontSize: 18.0,
+                        fontFamily: 'playfair',
+                        color: Colors.black,
+                      ),
+                      enabled: false,
+                      maxLines: 5,
+                      autocorrect: false,
+                      autofocus: false,
+                      cursorColor: Colors.black,
+                      decoration: new InputDecoration(
+                        hintText: widget.request.status,
+                        hintStyle: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
                         ),
-                        Expanded(
-                          child: Text(
-                            widget.request.status,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                              fontFamily: 'playfair',
-                            ),
-                          ),
-                        ),
-                      ],
+                        border: InputBorder.none,
+                      ),
                     ),
                   ),
                 )

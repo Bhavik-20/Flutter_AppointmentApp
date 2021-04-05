@@ -290,7 +290,7 @@ class _student_request_statusState extends State<student_request_status> {
                         ),
                         child: TextField(
                           style: TextStyle(
-                            fontSize: 20.0,
+                            fontSize: 18.0,
                             fontFamily: 'playfair',
                             color: Colors.black,
                           ),
@@ -303,6 +303,7 @@ class _student_request_statusState extends State<student_request_status> {
                             hintText: widget.request.purpose,
                             hintStyle: TextStyle(
                               color: Colors.black,
+                              fontWeight: FontWeight.bold,
                             ),
                             border: InputBorder.none,
                           ),
@@ -336,7 +337,7 @@ class _student_request_statusState extends State<student_request_status> {
                            ),
                            child: TextField(
                              style: TextStyle(
-                               fontSize: 20.0,
+                               fontSize: 18.0,
                                fontFamily: 'playfair',
                                color: Colors.black,
                              ),
@@ -349,6 +350,7 @@ class _student_request_statusState extends State<student_request_status> {
                                hintText: widget.request.purpose_details,
                                hintStyle: TextStyle(
                                  color: Colors.black,
+                                 fontWeight: FontWeight.bold,
                                ),
                                border: InputBorder.none,
                              ),
@@ -379,7 +381,7 @@ class _student_request_statusState extends State<student_request_status> {
                          ),
                          child: TextField(
                            style: TextStyle(
-                             fontSize: 20.0,
+                             fontSize: 18.0,
                              fontFamily: 'playfair',
                              color: Colors.black,
                            ),
@@ -392,6 +394,7 @@ class _student_request_statusState extends State<student_request_status> {
                              hintText: widget.request.status,
                              hintStyle: TextStyle(
                                color: Colors.black,
+                               fontWeight: FontWeight.bold,
                              ),
                              border: InputBorder.none,
                            ),
@@ -433,7 +436,7 @@ class _student_request_statusState extends State<student_request_status> {
                       child: Row(
                         children: <Widget>[
                           Icon(Icons.delete , color: Colors.white,),
-                          SizedBox(width: 10.0,),
+                          SizedBox(width: size.width * 0.01,),
                           Text("Cancel Request",
                             style: TextStyle(
                               color: Colors.white,

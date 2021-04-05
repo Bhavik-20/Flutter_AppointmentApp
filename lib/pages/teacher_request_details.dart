@@ -324,7 +324,7 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                     SizedBox(height: 30.0,),
                     Container(
                       padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
-                      child: Text( 'Subject of Meet:',
+                      child: Text( 'Purpose of Meet:',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20.0,
@@ -347,8 +347,8 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                                 ),
                                 child: TextField(
                                   style: TextStyle(
-                                    fontSize: 20.0,
-                                    fontFamily: 'kanit',
+                                    fontSize: 18.0,
+                                    fontFamily: 'playfair',
                                     color: Colors.black,
                                   ),
                                   enabled: false,
@@ -360,6 +360,7 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                                     hintText: widget.request.purpose,
                                     hintStyle: TextStyle(
                                       color: Colors.black,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                     border: InputBorder.none,
                                   ),
@@ -373,7 +374,7 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                               children: [
                                 Container(
                                   padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
-                                  child: Text( 'Subject Explained:',
+                                  child: Text( 'Purpose Explained:',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20.0,
@@ -393,8 +394,8 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                                   ),
                                   child: TextField(
                                     style: TextStyle(
-                                      fontSize: 20.0,
-                                      fontFamily: 'kanit',
+                                      fontSize: 18.0,
+                                      fontFamily: 'playfair',
                                       color: Colors.black,
                                     ),
                                     enabled: false,
@@ -406,6 +407,7 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                                       hintText: widget.request.purpose_details,
                                       hintStyle: TextStyle(
                                         color: Colors.black,
+                                        fontWeight: FontWeight.bold,
                                       ),
                                       border: InputBorder.none,
                                     ),
@@ -414,7 +416,7 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                               ],
                             ),
                             SizedBox(
-                              height: 15,
+                              height: 20,
                             ),
                             Container(
                               padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
@@ -447,9 +449,10 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                               ),
                               child: TextField(
                                 style: TextStyle(
-                                  fontSize: 20.0,
-                                  fontFamily: 'kanit',
+                                  fontSize: 18.0,
+                                  fontFamily: 'playfair',
                                   color: Colors.black,
+                                  fontWeight: FontWeight.bold,
                                 ),
                                 // enabled: true,
                                 maxLines: 5,
@@ -459,7 +462,7 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                                 decoration: new InputDecoration(
                                   hintText: 'Type here only if rejecting request..',
                                   hintStyle: TextStyle(
-                                    color: Colors.black,
+                                    color: Colors.grey[600],
                                   ),
                                   border: InputBorder.none,
                                 ),
@@ -632,7 +635,7 @@ class _teacher_request_detailsState extends State<teacher_request_details> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 20.0,),
+                    SizedBox(height: 30.0,),
                   ],
                 ),
               ),
