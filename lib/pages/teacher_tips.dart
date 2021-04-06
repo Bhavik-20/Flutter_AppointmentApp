@@ -38,7 +38,7 @@ class teacher_tipsState extends State<teacher_tips> {
       new Slide(
           title: "",
           description: "",
-          backgroundImage: "images/Teacher_requests.jpg",
+          backgroundImage: "images/teacher_req.jpg",
           backgroundOpacity: 0
       ),
     );
@@ -46,7 +46,7 @@ class teacher_tipsState extends State<teacher_tips> {
       new Slide(
           title: "",
           description: "",
-          backgroundImage: "images/Req_details_teacher.jpg",
+          backgroundImage: "images/teacher_req_details.png",
           backgroundOpacity: 0
       ),
     );
@@ -54,7 +54,7 @@ class teacher_tipsState extends State<teacher_tips> {
       new Slide(
           title: "",
           description: "",
-          backgroundImage: "images/Teacher_history.jpg",
+          backgroundImage: "images/teacher_history.png",
           backgroundOpacity: 0
       ),
     );

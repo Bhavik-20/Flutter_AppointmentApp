@@ -22,7 +22,7 @@ class student_tipsState extends State<student_tips> {
       new Slide(
           title: "",
           description: "",
-          backgroundImage: 'images/Student Profile.jpg',
+          backgroundImage: 'images/student_profile.jpg',
           backgroundOpacity: 0
       ),
     );
@@ -30,7 +30,7 @@ class student_tipsState extends State<student_tips> {
       new Slide(
           title: "",
           description: "",
-          backgroundImage: "images/Book Appointment.jpg",
+          backgroundImage: "images/book_appointment.jpg",
           backgroundOpacity: 0
       ),
     );
@@ -38,7 +38,7 @@ class student_tipsState extends State<student_tips> {
       new Slide(
           title: "",
           description: "",
-          backgroundImage: "images/Student_requests.jpg",
+          backgroundImage: "images/student_req.jpg",
           backgroundOpacity: 0
       ),
     );
@@ -46,7 +46,7 @@ class student_tipsState extends State<student_tips> {
       new Slide(
           title: "",
           description: "",
-          backgroundImage: "images/Req_Details.jpg",
+          backgroundImage: "images/student_req_det.jpg",
           backgroundOpacity: 0
       ),
     );
