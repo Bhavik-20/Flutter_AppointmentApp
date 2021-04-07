@@ -411,38 +411,44 @@ class _student_request_statusState extends State<student_request_status> {
                 children: [
                   Container(
                     width: size.width*0.5,
-                    child: RaisedButton(
-                      onPressed: () async{
-                        setState(() => loading=true);
-                        print('Delete');
-                        await DatabaseService(uid: widget.request.teacher_id).addSlot(widget.request.time, widget.request.date.split(":").first);
-                        await DatabaseService(uid: widget.request.teacher_id).deleteRequests(widget.request.request_id);
+                    child: Tooltip(
+                      message: 'Cancel Request',
+                      child: RaisedButton(
+                        onPressed: () async{
+                          setState(() => loading=true);
+                          print('Delete');
+                          await DatabaseService(uid: widget.request.teacher_id).addSlot(widget.request.time, widget.request.date.split(":").first);
+                          await DatabaseService(uid: widget.request.teacher_id).deleteRequests(widget.request.request_id);
 
-                        Fluttertoast.showToast(
-                          backgroundColor: Colors.green,
-                          msg: 'The request is deleted',
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
-                        );
-                        Navigator.pop(context);
-                      },
-                      color: Colors.red,
-                      hoverColor: Colors.red[200],
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18.0),
-                          side: BorderSide(color: Colors.red)),
-                      elevation: 5,
-                      padding: EdgeInsets.fromLTRB(20.0,10,20,10),
-                      child: Row(
-                        children: <Widget>[
-                          Icon(Icons.delete , color: Colors.white,),
-                          SizedBox(width: size.width * 0.01,),
-                          Text("Cancel Request",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                            ),)
-                        ],
+                          Fluttertoast.showToast(
+                            backgroundColor: Colors.green,
+                            msg: 'The request is deleted',
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                          );
+                          Navigator.pop(context);
+                        },
+                        color: Colors.red,
+                        hoverColor: Colors.red[200],
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18.0),
+                            side: BorderSide(color: Colors.red)),
+                        elevation: 5,
+                        padding: EdgeInsets.fromLTRB(20.0,10,20,10),
+                        child: Row(
+                          children: <Widget>[
+                            Icon(Icons.delete , color: Colors.white,),
+                            SizedBox(width: size.width * 0.01,),
+                            Expanded(
+                              child: Text("Cancel Request",
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: size.height*0.023,
+                                ),),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
