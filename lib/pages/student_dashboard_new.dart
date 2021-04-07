@@ -17,6 +17,7 @@ class listofnewStudentRequests extends StatefulWidget {
 class _listofnewStudentRequestsState extends State<listofnewStudentRequests> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     final requests=Provider.of<List<Request>>(context)??[];
     requests.sort((a,b)=> SortRequest().check(a.date,b.date,a.time,b.time,'d'));
     return Column(
@@ -25,13 +26,14 @@ class _listofnewStudentRequestsState extends State<listofnewStudentRequests> {
           child: Center(
             child: Text("Pending Requests",
               style: GoogleFonts.merriweather(
-                fontSize: 20,
+                fontSize: size.height * 0.029,
                 // fontWeight: FontWeight.bold,
                 color: Colors.deepPurple[500],
               ),),
           ),
           color: Colors.deepPurple[100],
-          height: 50,
+          height: size.height * 0.05,
+          margin: new EdgeInsets.fromLTRB(0,10,0,0),
         ),
         Expanded(
           child: ListView.builder(
@@ -61,9 +63,21 @@ class _listofnewStudentRequestsState extends State<listofnewStudentRequests> {
                         radius: 25.0,
                         backgroundColor: Colors.deepPurple[100],
                       ),
-                      title: Text(requests[index].teacher_name),
-                      subtitle: Text(requests[index].date),
-                      trailing: Text(requests[index].teacher_ini) ,
+                      title: Text(requests[index].teacher_name,
+                        style: TextStyle(
+                          fontSize: size.height * 0.024,
+                        ),
+                      ),
+                      subtitle: Text(requests[index].date,
+                        style: TextStyle(
+                          fontSize: size.height * 0.022,
+                        ),
+                      ),
+                      trailing: Text(requests[index].teacher_ini,
+                        style: TextStyle(
+                          fontSize: size.height * 0.022,
+                        ),
+                      ) ,
                     ),
                   ),
                 );

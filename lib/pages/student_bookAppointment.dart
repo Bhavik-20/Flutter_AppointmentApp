@@ -129,7 +129,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                       )
                   ),
                   child: Stepper(
-                    steps: _mySteps(data),
+                    steps: _mySteps(data,size),
                     currentStep: this._currentStep,
                     onStepTapped: (step) {
                       setState(() {
@@ -138,7 +138,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                     },
                     onStepContinue: () async {
                         // setState(() {loading=true;});
-                        if (this._currentStep < this._mySteps(data).length - 1)
+                        if (this._currentStep < this._mySteps(data,size).length - 1)
                         {
                           setState(() {
                             // loading=false;
@@ -232,12 +232,12 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
     );
   }
 
-  List<Step> _mySteps(Student data) {
+  List<Step> _mySteps(Student data, size) {
     List<Step> _steps = [
       Step(
         title: Text('Selected Teacher Info',
           style: TextStyle(
-            fontSize: 18,
+            fontSize: size.height * 0.025,
           ),),
         content: Container(
             decoration: BoxDecoration(
@@ -262,7 +262,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 18,
+                            fontSize: size.height * 0.024,
                             fontFamily: 'playfair',
                           ),
                         ),
@@ -272,7 +272,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 18,
+                              fontSize:  size.height * 0.024,
                               fontFamily: 'playfair',
                             ),
                           ),
@@ -296,7 +296,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 18,
+                            fontSize: size.height * 0.024,
                             fontFamily: 'playfair',
                           ),
                         ),
@@ -305,7 +305,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 18,
+                            fontSize: size.height * 0.024,
                             fontFamily: 'playfair',
                           ),
                         ),
@@ -327,7 +327,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                           'Email: ',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 18,
+                            fontSize: size.height * 0.024,
                             fontFamily: 'playfair',
                           ),
                         ),
@@ -337,7 +337,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 18,
+                              fontSize: size.height * 0.023,
                               fontFamily: 'playfair',
                             ),
                           ),
@@ -361,7 +361,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 18,
+                            fontSize: size.height * 0.024,
                             fontFamily: 'playfair',
                           ),
                         ),
@@ -370,7 +370,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 18,
+                            fontSize: size.height * 0.024,
                             fontFamily: 'playfair',
                           ),
                         ),
@@ -385,7 +385,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
       Step(
         title: Text('Pick a Date',
           style: TextStyle(
-            fontSize: 18,
+            fontSize: size.height * 0.025,
           ),
         ),
         content: Row(
@@ -437,7 +437,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
             Text(full == null ? 'Select Date' : full.toString(),
               style: TextStyle(
                   fontFamily: 'playfair',
-                  fontSize: 17.0,
+                  fontSize: size.height * 0.024,
                   fontWeight: FontWeight.bold
               ),
             ),
@@ -448,7 +448,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
       Step(
         title: Text('Select Time',
           style: TextStyle(
-            fontSize: 18,
+            fontSize: size.height * 0.025,
           ),),
         content: Column(
           children: [
@@ -456,7 +456,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                 ' Select from the Available Time:',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 15,
+                  fontSize: size.height * 0.022,
                 )),
             SizedBox(height: 10.0,),
           StreamBuilder<TimeTable>(
@@ -516,7 +516,12 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                   );
               }
               else{
-                return Center(child: Text("No free slots available"));
+                return Center(child:
+                Text("No free slots available",
+                style: TextStyle(
+                  fontSize: size.height * 0.022,
+                ),
+                ));
               }
             }
         ),
@@ -528,7 +533,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
       Step(
         title: Text('Your Info',
           style: TextStyle(
-            fontSize: 18,
+            fontSize: size.height * 0.025,
           ),),
         content: Container(
           decoration: BoxDecoration(
@@ -554,7 +559,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                        fontSize: size.height * 0.024,
                         fontFamily: 'playfair',
                       ),
                     ),
@@ -564,7 +569,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 18,
+                          fontSize: size.height * 0.024,
                           fontFamily: 'playfair',
                         ),
                       ),
@@ -588,7 +593,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                        fontSize: size.height * 0.024,
                         fontFamily: 'playfair',
                       ),
                     ),
@@ -598,7 +603,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 18,
+                          fontSize: size.height * 0.024,
                           fontFamily: 'playfair',
                         ),
                       ),
@@ -622,7 +627,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                        fontSize: size.height * 0.024,
                         fontFamily: 'playfair',
                       ),
                     ),
@@ -632,7 +637,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 18,
+                          fontSize: size.height * 0.023,
                           fontFamily: 'playfair',
                         ),
                       ),
@@ -667,7 +672,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 18,
+                          fontSize: size.height * 0.024,
                           fontFamily: 'playfair',
                         ),
                       ),
@@ -691,7 +696,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                        fontSize: size.height * 0.023,
                         fontFamily: 'playfair',
                       ),
                     ),
@@ -701,7 +706,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 18,
+                          fontSize: size.height * 0.023,
                           fontFamily: 'playfair',
                         ),
                       ),
@@ -717,7 +722,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
       Step(
         title: Text('Purpose Of Meet',
           style: TextStyle(
-            fontSize: 18,
+            fontSize: size.height * 0.025,
           ),),
         content: Column(
           children: [
@@ -735,7 +740,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                     setState(() => purpose = value);
                   },
                   style: TextStyle(
-                      fontSize: 20.0,
+                      fontSize: size.height * 0.024,
                       fontFamily: 'playfair',
                       fontWeight: FontWeight.bold
                   ),
@@ -767,7 +772,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                 setState(() => purpose_details = value);
               },
               style: TextStyle(
-                  fontSize: 20.0,
+                  fontSize: size.height * 0.024,
                   fontFamily: 'playfair',
                   fontWeight: FontWeight.bold
               ),

@@ -16,14 +16,14 @@ class role extends StatelessWidget {
         backgroundColor: Colors.deepPurple[50],
           body:Column(
             children: [
-              SizedBox(height: 150.0),
+              SizedBox(height: size.height * 0.2),
               Container(
                 //margin: EdgeInsets.only(left: 0.0,top: 200.0),
                 child: Center(
                   child: Text('Meet Up',
                     style: GoogleFonts.pacifico(
                       textStyle: Theme.of(context).textTheme.display1,
-                      fontSize: 48,
+                      fontSize: size.height * 0.065,
                       fontWeight: FontWeight.w700,
                       fontStyle: FontStyle.italic,
                       color: Colors.deepPurple,
@@ -31,7 +31,7 @@ class role extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 60.0,width: 10.0),
+              SizedBox(height: size.height * 0.05,width: size.width*0.05),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -44,7 +44,7 @@ class role extends StatelessWidget {
                           child: Image.asset('images/role_student.jpg' ,
                           width: size.width*0.375,)
                       ),
-                      SizedBox(height: 10.0),
+                      SizedBox(height: size.height * 0.01),
                       Text('I am a Student',
                         style: GoogleFonts.pacifico(
                           color: Colors.deepPurple,
@@ -61,7 +61,7 @@ class role extends StatelessWidget {
                           child: Image.asset('images/role_teacher.jpg',
                             width: size.width*0.375,)
                       ),
-                      SizedBox(height: 10.0),
+                      SizedBox(height: size.height * 0.01),
                         Text('I am a Teacher',
                         style: GoogleFonts.pacifico(
                         color: Colors.deepPurple,

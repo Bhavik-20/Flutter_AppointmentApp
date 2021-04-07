@@ -18,6 +18,7 @@ class listofStudentDeclinedRequests extends StatefulWidget {
 class _listofStudentDeclinedRequestsState extends State<listofStudentDeclinedRequests> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     final accepted=Provider.of<List<Request>>(context)??[];
     accepted.sort((a,b)=> SortRequest().check(a.date,b.date,a.time,b.time,'d'));
     return Column(
@@ -26,13 +27,14 @@ class _listofStudentDeclinedRequestsState extends State<listofStudentDeclinedReq
           child: Center(
             child: Text("Declined Requests",
               style: GoogleFonts.merriweather(
-                fontSize: 20,
+                fontSize: size.height * 0.029,
                 // fontWeight: FontWeight.bold,
                 color: Colors.deepPurple[500],
               ),),
           ),
           color: Colors.deepPurple[100],
-          height: 50,
+          height: size.height * 0.05,
+          margin: new EdgeInsets.fromLTRB(0,10,0,0),
         ),
         Expanded(
           child: ListView.builder(
@@ -62,9 +64,21 @@ class _listofStudentDeclinedRequestsState extends State<listofStudentDeclinedReq
                         radius: 25.0,
                         backgroundColor: Colors.deepPurple[100],
                       ),
-                      title: Text(accepted[index].teacher_name),
-                      subtitle: Text(accepted[index].date),
-                      trailing: Text(accepted[index].teacher_ini),
+                      title: Text(accepted[index].teacher_name,
+                        style: TextStyle(
+                          fontSize: size.height * 0.024,
+                        ),
+                      ),
+                      subtitle: Text(accepted[index].date,
+                        style: TextStyle(
+                          fontSize: size.height * 0.022,
+                        ),
+                      ),
+                      trailing: Text(accepted[index].teacher_ini,
+                        style: TextStyle(
+                          fontSize: size.height * 0.022,
+                        ),
+                      ),
                     ),
                   ),
                 );

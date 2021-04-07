@@ -62,7 +62,7 @@ class _teacher_request_statusState extends State<teacher_request_status> {
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 18,
+                              fontSize: size.height * 0.024,
                               fontFamily: 'playfair',
                             ),
                           ),
@@ -72,7 +72,7 @@ class _teacher_request_statusState extends State<teacher_request_status> {
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 18,
+                                fontSize: size.height * 0.024,
                                 fontFamily: 'playfair',
                               ),
                             ),
@@ -96,7 +96,7 @@ class _teacher_request_statusState extends State<teacher_request_status> {
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 18,
+                              fontSize: size.height * 0.024,
                               fontFamily: 'playfair',
                             ),
                           ),
@@ -106,7 +106,7 @@ class _teacher_request_statusState extends State<teacher_request_status> {
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 18,
+                                fontSize: size.height * 0.024,
                                 fontFamily: 'playfair',
                               ),
                             ),
@@ -130,7 +130,7 @@ class _teacher_request_statusState extends State<teacher_request_status> {
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 18,
+                              fontSize: size.height * 0.024,
                               fontFamily: 'playfair',
                             ),
                           ),
@@ -140,7 +140,7 @@ class _teacher_request_statusState extends State<teacher_request_status> {
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 18,
+                                fontSize: size.height * 0.023,
                                 fontFamily: 'playfair',
                               ),
                             ),
@@ -165,7 +165,7 @@ class _teacher_request_statusState extends State<teacher_request_status> {
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 18,
+                              fontSize: size.height * 0.024,
                               fontFamily: 'playfair',
                             ),
                           ),
@@ -175,7 +175,7 @@ class _teacher_request_statusState extends State<teacher_request_status> {
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 18,
+                                fontSize: size.height * 0.024,
                                 fontFamily: 'playfair',
                               ),
                             ),
@@ -199,7 +199,7 @@ class _teacher_request_statusState extends State<teacher_request_status> {
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 18,
+                              fontSize: size.height * 0.023,
                               fontFamily: 'playfair',
                             ),
                           ),
@@ -209,7 +209,7 @@ class _teacher_request_statusState extends State<teacher_request_status> {
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 18,
+                                fontSize: size.height * 0.023,
                                 fontFamily: 'playfair',
                               ),
                             ),
@@ -233,7 +233,7 @@ class _teacher_request_statusState extends State<teacher_request_status> {
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 18,
+                              fontSize: size.height * 0.023,
                               fontFamily: 'playfair',
                             ),
                           ),
@@ -243,7 +243,7 @@ class _teacher_request_statusState extends State<teacher_request_status> {
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 18,
+                                fontSize: size.height * 0.023,
                                 fontFamily: 'playfair',
                               ),
                             ),
@@ -267,7 +267,7 @@ class _teacher_request_statusState extends State<teacher_request_status> {
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 18,
+                              fontSize: size.height * 0.024,
                               fontFamily: 'playfair',
                             ),
                           ),
@@ -277,7 +277,7 @@ class _teacher_request_statusState extends State<teacher_request_status> {
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 18,
+                                fontSize: size.height * 0.024,
                                 fontFamily: 'playfair',
                               ),
                             ),
@@ -294,7 +294,7 @@ class _teacher_request_statusState extends State<teacher_request_status> {
               padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
               child: Text( 'Purpose of Meet:',
                 style: TextStyle(
-                  fontSize: 20.0,
+                  fontSize: size.height * 0.026,
                   fontFamily: 'playfair',
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
@@ -315,7 +315,7 @@ class _teacher_request_statusState extends State<teacher_request_status> {
                   child: Container(
                     child: TextField(
                       style: TextStyle(
-                        fontSize: 18.0,
+                        fontSize: size.height * 0.025,
                         fontFamily: 'playfair',
                         color: Colors.black,
                       ),
@@ -345,7 +345,7 @@ class _teacher_request_statusState extends State<teacher_request_status> {
                     child: Text( 'Purpose Explained:',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 20.0,
+                        fontSize: size.height * 0.026,
                         fontFamily: 'playfair',
                         color: Colors.black,
                       ),),
@@ -362,7 +362,7 @@ class _teacher_request_statusState extends State<teacher_request_status> {
                     ),
                     child: TextField(
                       style: TextStyle(
-                        fontSize: 18.0,
+                        fontSize: size.height * 0.025,
                         fontFamily: 'playfair',
                         color: Colors.black,
                       ),
@@ -388,7 +388,7 @@ class _teacher_request_statusState extends State<teacher_request_status> {
               padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
               child: Text( 'Request Status :',
                 style: TextStyle(
-                  fontSize: 20.0,
+                  fontSize: size.height * 0.026,
                   fontFamily: 'playfair',
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
@@ -409,7 +409,7 @@ class _teacher_request_statusState extends State<teacher_request_status> {
                   child: Container(
                     child: TextField(
                       style: TextStyle(
-                        fontSize: 18.0,
+                        fontSize: size.height * 0.025,
                         fontFamily: 'playfair',
                         color: Colors.black,
                       ),
