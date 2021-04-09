@@ -80,6 +80,7 @@ class _student_dashboardState extends State<student_dashboard> {
                           await Future.delayed(const Duration(milliseconds: 3000));
                           SharedPreferences prefs= await SharedPreferences.getInstance();
                           prefs.remove("role");
+                          prefs.remove("id_user");
                           await _auth.signOut();
                           // Navigator.of(context).pushNamed('/');
                         },
@@ -138,97 +139,3 @@ class _student_dashboardState extends State<student_dashboard> {
     );
   }
 }
-
-// drawer: Drawer(
-//     child: ListView(
-//       children: [
-//         DrawerHeader(
-//           decoration:BoxDecoration(
-//               color: Colors.deepPurple[600]
-//           ) ,
-//           child: Stack(
-//             children: [
-//               Align(
-//                 child: CircleAvatar(
-//                   child:  ClipOval(
-//                     child: new SizedBox(
-//                       height: 180,
-//                       width:180,
-//                       child: (data.url == '' || data.url == null) ? Image.asset('images/role_student.jpg',
-//                     fit: BoxFit.fill,) : Image.network(data.url, fit: BoxFit.fill,),
-//                     ),
-//                   ),
-//                   radius: 60.0,
-//
-//                 ),
-//               )
-//             ],
-//           ),
-//         ),
-//         Column(
-//           children: [
-//             FlatButton(
-//               onPressed: (){
-//                 Navigator.of(context).pushNamed('/st_profile');
-//               },
-//               child: Row(
-//                 children: [
-//                   Icon(Icons.account_circle_rounded),
-//                   SizedBox(width: 15.0,),
-//                   Text('Profile',
-//                     style: GoogleFonts.quicksand(
-//                       fontSize: 21,
-//                       fontWeight: FontWeight.w500,
-//                     ),
-//                   )
-//                 ],
-//               ),
-//             ),
-//             Divider(
-//               color: Colors.black,
-//             ),
-//             FlatButton(
-//               onPressed: (){
-//                 Navigator.of(context).pushNamed('/st_search_teacher');
-//               },
-//               child: Row(
-//                 children: [
-//                   Icon(Icons.calendar_today_outlined),
-//                   SizedBox(width: 15.0,),
-//                   Text('Book An Appointment',
-//                     style: GoogleFonts.quicksand(
-//                       fontSize: 21,
-//                       fontWeight: FontWeight.w500,
-//                     ),
-//                   )
-//                 ],
-//               ),
-//             ),
-//             Divider(
-//                 color: Colors.black
-//             ),
-//             FlatButton(
-//               onPressed: () async {
-//                 setState(() => loading=true);
-//                 await Future.delayed(const Duration(milliseconds: 3000));
-//                 await _auth.signOut();
-//                 Navigator.of(context).pushNamed('/');
-//               },
-//               child: Row(
-//                 children: [
-//                   Icon(Icons.logout),
-//                   SizedBox(width: 15.0,),
-//                   Text('Sign Out',
-//                     style: GoogleFonts.quicksand(
-//                       fontSize: 21,
-//                       fontWeight: FontWeight.w500,
-//                     ),
-//                   )
-//                 ],
-//               ),
-//             )
-//           ],
-//         )
-//       ],
-//     )
-// ),

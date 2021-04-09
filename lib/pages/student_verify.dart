@@ -134,6 +134,7 @@ class _student_verifyState extends State<student_verify> {
                             Navigator.of(context).pushNamed('/stu_tips');
                           }
                           else if(role == 'Teacher') {
+                            await prefs.setString("id_user", _user.uid);
                             print(role);
                             Navigator.of(context).pushNamed('/tea_tips');
                           }

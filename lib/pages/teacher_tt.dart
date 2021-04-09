@@ -73,6 +73,17 @@ class _teacher_ttState extends State<teacher_tt> {
           await DatabaseService(uid: uid).updateTimeTable(
               db_mon,db_mon,db_tue,db_tue,db_wed,db_wed,db_thurs,db_thurs,db_fri,db_fri);
           print("Success");
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          var stored_static_mon = json.encode(db_mon);
+          var stored_static_tue = json.encode(db_tue);
+          var stored_static_wed = json.encode(db_wed);
+          var stored_static_thurs = json.encode(db_thurs);
+          var stored_static_fri = json.encode(db_fri);
+          await prefs.setString("stored_static_mon", stored_static_mon);
+          await prefs.setString("stored_static_tue", stored_static_tue);
+          await prefs.setString("stored_static_wed", stored_static_wed);
+          await prefs.setString("stored_static_thurs", stored_static_thurs);
+          await prefs.setString("stored_static_fri", stored_static_fri);
           return 1;
           // return pdfModel;
         }

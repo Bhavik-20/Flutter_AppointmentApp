@@ -182,8 +182,10 @@ class _teacher_loginState extends State<teacher_login> {
                               if(user.isEmailVerified)
                               {
                                 print("Email Verified");
+                                FirebaseUser _user =  await FirebaseAuth.instance.currentUser();
                                 SharedPreferences prefs=await SharedPreferences.getInstance();
                                 await prefs.setString("role", "Teacher");
+                                await prefs.setString("id_user", _user.uid);
                                 Navigator.of(context).pushNamed('/tea_dash');
                               }
                               else
