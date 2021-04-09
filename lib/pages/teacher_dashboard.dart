@@ -63,7 +63,10 @@ class _teacher_dashboardState extends State<teacher_dashboard> {
                   backgroundColor: Colors.deepPurple[100],
                   appBar: AppBar(
                     backgroundColor: Colors.deepPurple[600],
-                    title: Text('Teacher Dashboard'),
+                    title: Text('Teacher Dashboard',
+                      style:TextStyle(
+                        fontSize: size.width * 0.05,
+                      ) ,),
                     centerTitle: true,
                     actions: [
                       IconButton(

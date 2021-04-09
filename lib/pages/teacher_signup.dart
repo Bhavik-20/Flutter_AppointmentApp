@@ -89,7 +89,7 @@ class _teacher_signupState extends State<teacher_signup> {
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontFamily: 'dosis',
-                          fontSize: 40
+                          fontSize: size.height*0.04,
                       ),
                     ),
                   ],

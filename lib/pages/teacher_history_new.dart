@@ -73,7 +73,7 @@ class _teacher_history_newState extends State<teacher_history_new> {
                       subtitle: Text(
                         'Purpose : '+ requests[index].purpose + '\n' + requests[index].date,
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 15,
                         ),
                       ),
                       trailing: branch(requests[index].student_branch),

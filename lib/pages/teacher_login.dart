@@ -88,7 +88,7 @@ class _teacher_loginState extends State<teacher_login> {
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontFamily: 'dosis',
-                          fontSize: 40
+                          fontSize: size.height *0.04,
                       ),
                     ),
                   ],
@@ -138,7 +138,7 @@ class _teacher_loginState extends State<teacher_login> {
                         child:Text("Forgot password ?",
                           style:TextStyle(
                             color:kPrimaryColor,
-                            fontSize: 16,
+                            fontSize: size.width*0.045,
                             fontWeight: FontWeight.bold,
                           ),
                           textAlign :TextAlign.right ,
@@ -233,7 +233,7 @@ class _teacher_loginState extends State<teacher_login> {
                         style: TextStyle(
                             fontFamily: 'dosis',
                             fontWeight: FontWeight.bold,
-                            fontSize:15.0
+                            fontSize: size.width*0.04,
                         ),
                       ),
                       SizedBox(width: 5.0,),
@@ -247,7 +247,7 @@ class _teacher_loginState extends State<teacher_login> {
                 ),
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 20),
-                  width: size.width * 0.5,
+                  //width: size.width * 0.5,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(29),
                     child: FlatButton(
@@ -257,7 +257,7 @@ class _teacher_loginState extends State<teacher_login> {
                         Navigator.of(context).pushNamed('/tea_signup');
                       },
                       child: Text(
-                        'Sign Up here',
+                        'Sign Up Here',
                         style: TextStyle(color: kPrimaryColor),
                       ),
                     ),

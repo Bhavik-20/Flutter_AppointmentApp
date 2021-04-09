@@ -85,7 +85,7 @@ class _listofnewFacultyRequestsState extends State<listofnewFacultyRequests> {
                       subtitle: Text(
                           'Purpose : '+ limited_req[index].purpose + '\n' + limited_req[index].date,
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 15,
                         ),
                       ),
                       trailing: branch(limited_req[index].student_branch),

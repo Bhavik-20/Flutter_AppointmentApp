@@ -68,7 +68,7 @@ class _student_verifyState extends State<student_verify> {
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontFamily: 'dosis',
-                          fontSize: 40,
+                        fontSize: size.width*0.1,
                       ),
                     ),
                   ),

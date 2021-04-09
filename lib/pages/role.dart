@@ -48,10 +48,11 @@ class role extends StatelessWidget {
                       Text('I am a Student',
                         style: GoogleFonts.pacifico(
                           color: Colors.deepPurple,
-                          fontSize: 20,
+                          fontSize: size.width * 0.05,
                         ),),
                     ],
                   ),
+                  SizedBox(width: size.width * 0.001),
                   Column(
                     children: [
                       FlatButton(
@@ -65,7 +66,7 @@ class role extends StatelessWidget {
                         Text('I am a Teacher',
                         style: GoogleFonts.pacifico(
                         color: Colors.deepPurple,
-                        fontSize: 20,
+                          fontSize: size.width * 0.05,
                         ),),
                     ],
                   ),

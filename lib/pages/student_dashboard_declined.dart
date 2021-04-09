@@ -66,17 +66,17 @@ class _listofStudentDeclinedRequestsState extends State<listofStudentDeclinedReq
                       ),
                       title: Text(accepted[index].teacher_name,
                         style: TextStyle(
-                          fontSize: size.height * 0.024,
+                          fontSize: size.height * 0.023,
                         ),
                       ),
                       subtitle: Text(accepted[index].date,
                         style: TextStyle(
-                          fontSize: size.height * 0.022,
+                          fontSize: size.height * 0.02,
                         ),
                       ),
                       trailing: Text(accepted[index].teacher_ini,
                         style: TextStyle(
-                          fontSize: size.height * 0.022,
+                          fontSize: size.height * 0.02,
                         ),
                       ),
                     ),

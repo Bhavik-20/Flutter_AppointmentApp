@@ -98,7 +98,10 @@ class _student_profileState  extends State<student_profile> {
                       ),
                     ),
                     backgroundColor: Colors.deepPurple[600],
-                    title: Text('Student Profile'),
+                    title: Text('Student Profile',
+                      style:TextStyle(
+                        fontSize: size.width*0.05,
+                      ) ,),
                     centerTitle: true,
                     actions: [
                       Icon(Icons.person_pin_rounded,
@@ -145,7 +148,7 @@ class _student_profileState  extends State<student_profile> {
                                               enabled: true,
                                               style: TextStyle(
                                                 fontWeight: FontWeight.bold,
-                                                fontSize: 18,
+                                                fontSize: size.width * 0.05,
                                                 fontFamily: 'playfair',
                                               ),
                                               onChanged: (value) {
@@ -170,7 +173,7 @@ class _student_profileState  extends State<student_profile> {
                                               enabled: true,
                                               style: TextStyle(
                                                 fontWeight: FontWeight.bold,
-                                                fontSize: 18,
+                                                fontSize: size.width * 0.05,
                                                 fontFamily: 'playfair',
                                               ),
                                               onChanged: (value) {
@@ -195,7 +198,7 @@ class _student_profileState  extends State<student_profile> {
                                               enabled: true,
                                               style: TextStyle(
                                                 fontWeight: FontWeight.bold,
-                                                fontSize: 18,
+                                                fontSize: size.width * 0.05,
                                                 fontFamily: 'playfair',
                                               ),
                                               onChanged: (value) {
@@ -220,7 +223,7 @@ class _student_profileState  extends State<student_profile> {
                                               enabled: true,
                                               style: TextStyle(
                                                 fontWeight: FontWeight.bold,
-                                                fontSize: 18,
+                                                fontSize: size.width * 0.05,
                                                 fontFamily: 'playfair',
                                               ),
                                               onChanged: (value) {
@@ -245,7 +248,7 @@ class _student_profileState  extends State<student_profile> {
                                             enabled: false,
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
-                                              fontSize: 18,
+                                              fontSize: size.width * 0.05,
                                               fontFamily: 'playfair',
                                             ),
                                             decoration: new InputDecoration(
@@ -385,7 +388,7 @@ class _student_profileState  extends State<student_profile> {
                             child: IconButton(
                               icon: Icon(Icons.camera_alt,
                                 size: 30.0,
-                                color: Colors.white,
+                                color: Colors.grey,
                               ),
                               onPressed: () {
                                 getImage();

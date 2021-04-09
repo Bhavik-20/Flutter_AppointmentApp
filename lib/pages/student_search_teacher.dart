@@ -40,7 +40,10 @@ class _student_search_teacherState extends State<student_search_teacher> {
                 } )
           ],
           backgroundColor: Colors.deepPurple[600],
-          title: Text('List Of Teachers'),
+          title: Text('List Of Teachers',
+            style:TextStyle(
+              fontSize: size.width*0.05,
+            ) ,),
           centerTitle: true,
         ),
         body: SearchList(),

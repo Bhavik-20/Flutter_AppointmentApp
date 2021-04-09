@@ -65,17 +65,17 @@ class _listofnewStudentRequestsState extends State<listofnewStudentRequests> {
                       ),
                       title: Text(requests[index].teacher_name,
                         style: TextStyle(
-                          fontSize: size.height * 0.024,
+                          fontSize: size.height * 0.023,
                         ),
                       ),
                       subtitle: Text(requests[index].date,
                         style: TextStyle(
-                          fontSize: size.height * 0.022,
+                          fontSize: size.height * 0.02,
                         ),
                       ),
                       trailing: Text(requests[index].teacher_ini,
                         style: TextStyle(
-                          fontSize: size.height * 0.022,
+                          fontSize: size.height * 0.02,
                         ),
                       ) ,
                     ),

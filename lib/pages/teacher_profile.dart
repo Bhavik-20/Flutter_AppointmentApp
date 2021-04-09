@@ -139,7 +139,7 @@ class _teacher_profileState extends State<teacher_profile> {
                                           enabled: true,
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
-                                              fontSize: 18,
+                                              fontSize: size.width * 0.045,
                                               fontFamily: 'playfair',
                                             ),
                                           onChanged: (value){
@@ -163,7 +163,7 @@ class _teacher_profileState extends State<teacher_profile> {
                                               enabled: true,
                                               style: TextStyle(
                                                 fontWeight: FontWeight.bold,
-                                                fontSize: 18,
+                                                fontSize: size.width * 0.045,
                                                 fontFamily: 'playfair',
                                               ),
                                               onChanged: (value){
@@ -187,7 +187,7 @@ class _teacher_profileState extends State<teacher_profile> {
                                           enabled: true,
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
-                                              fontSize: 18,
+                                              fontSize: size.width * 0.045,
                                               fontFamily: 'playfair',
                                             ),
                                           onChanged: (value){
@@ -211,7 +211,7 @@ class _teacher_profileState extends State<teacher_profile> {
                                           enabled: true,
                                           style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 18,
+                                            fontSize: size.width * 0.045,
                                           fontFamily: 'playfair',
                                         ),
                                           onChanged: (value){
@@ -235,7 +235,7 @@ class _teacher_profileState extends State<teacher_profile> {
                                           enabled: false,
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 18,
+                                            fontSize: size.width * 0.045,
                                             fontFamily: 'playfair',
                                           ),
                                           decoration: new InputDecoration(
@@ -342,7 +342,7 @@ class _teacher_profileState extends State<teacher_profile> {
                           child: IconButton(
                             icon: Icon(Icons.camera_alt,
                               size: 30.0,
-                              color: Colors.white,
+                              color: Colors.grey,
                             ),
                             onPressed: () {
                               getImage();

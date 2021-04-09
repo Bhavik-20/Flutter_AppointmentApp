@@ -70,12 +70,15 @@ class _State extends State {
   bool loading=false;
 
   Widget customRadio(String txt,int index){
-    return OutlineButton(
-      onPressed: () => changeIndex(index),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-      borderSide: BorderSide(color: selectedIndex == index ? kPrimaryColor : Colors.grey, width: 3),
-      child: Text(txt,style: TextStyle(color: selectedIndex == index ?kPrimaryColor : Colors.grey),),
+    return Container(
+      margin:EdgeInsets.all(5),
+      child: OutlineButton(
+        onPressed: () => changeIndex(index),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+        borderSide: BorderSide(color: selectedIndex == index ? kPrimaryColor : Colors.grey, width: 3),
+        child: Text(txt,style: TextStyle(color: selectedIndex == index ?kPrimaryColor : Colors.grey),),
 
+      ),
     );
   }
 
@@ -108,7 +111,7 @@ class _State extends State {
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontFamily: 'dosis',
-                          fontSize: 40
+                        fontSize: size.width*0.1,
                       ),
                     ),
                   ],
@@ -145,37 +148,40 @@ class _State extends State {
                     child: Row(
                       children: [
                       Text( 'Branch:',
-                        style: TextStyle(fontSize: 16),
+                        style: TextStyle(fontSize: size.width*0.05),
                       ),
-                       Container(
-                          decoration: BoxDecoration(
-                            color: kPrimaryLightColor,
-                            borderRadius: BorderRadius.circular(29),
+                       Expanded(
+                         child: Container(
+                           width: size.width *0.5,
+                            decoration: BoxDecoration(
+                              color: kPrimaryLightColor,
+                              borderRadius: BorderRadius.circular(29),
+                            ),
+                            margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                            padding: EdgeInsets.fromLTRB(15,5,0,5),
+                          child: DropdownButton(
+                              hint: Text('Branch',style: TextStyle(fontSize: size.width*0.045,),),
+                              dropdownColor: kPrimaryLightColor,
+                              elevation: 5,
+                              icon: Icon(Icons.arrow_drop_down),
+                              iconSize: 24,
+                              value: _branchVal,
+                              style: TextStyle(color: Colors.black , fontSize: size.width*0.045),
+                              onChanged: (value){
+                                setState(() {
+                                  _branchVal = value;
+                                  branch=value;
+                              });
+                            },
+                            items: _branch.map((value){
+                            return DropdownMenuItem(
+                                  value: value,
+                                  child: Text(value),
+                              );
+                            }).toList(),
                           ),
-                          margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                          padding: EdgeInsets.fromLTRB(20,5,10,5),
-                        child: DropdownButton(
-                            hint: Text('Branch'),
-                            dropdownColor: kPrimaryLightColor,
-                            elevation: 5,
-                            icon: Icon(Icons.arrow_drop_down),
-                            iconSize: 36,
-                            value: _branchVal,
-                            style: TextStyle(color: Colors.black , fontSize: 16.0),
-                            onChanged: (value){
-                              setState(() {
-                                _branchVal = value;
-                                branch=value;
-                            });
-                          },
-                          items: _branch.map((value){
-                          return DropdownMenuItem(
-                                value: value,
-                                child: Text(value),
-                            );
-                          }).toList(),
-                        ),
                       ),
+                       ),
                       ],),
                       ),
                 Container(
@@ -183,9 +189,10 @@ class _State extends State {
                     style: TextStyle(color: Colors.black , fontSize: 16.0), ),
                   margin: EdgeInsets.fromLTRB(0,20,0,5),),
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  padding: EdgeInsets.symmetric(vertical: 5, horizontal: 0),
+                 child: Wrap(
+                   alignment: WrapAlignment.spaceEvenly,
+                   direction: Axis.horizontal,
                   children: <Widget>[
                     customRadio(_year[0], 0),
                     customRadio(_year[1], 1),

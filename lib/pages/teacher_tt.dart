@@ -31,7 +31,7 @@ class teacher_tt extends StatefulWidget {
 class _teacher_ttState extends State<teacher_tt> {
 
   File file;
-  String upload = "Please upload the PDF";
+  String upload = "Upload/Update PDF";
   bool loading=false;
   var obj;
   var pdfModel;
@@ -194,7 +194,7 @@ class _teacher_ttState extends State<teacher_tt> {
                             // ),
                             SizedBox(height: 10),
                             Text("Note: Please Upload Your TimeTable as a PDF File.",
-                                style: TextStyle( fontSize: 15)
+                                style: TextStyle( fontSize: size.width * 0.042,)
                             ),
                           ],
                         ),
@@ -204,11 +204,11 @@ class _teacher_ttState extends State<teacher_tt> {
                         padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
                         child: TabBar(
                           tabs: [
-                              Tab(child: Text("Mon", style: TextStyle(fontSize: 16),),),
-                              Tab(child: Text("Tue", style: TextStyle(fontSize: 16),),),
-                              Tab(child: Text("Wed", style: TextStyle(fontSize: 16),),),
-                              Tab(child: Text("Thur", style: TextStyle(fontSize: 16),),),
-                              Tab(child: Text("Fri", style: TextStyle(fontSize: 16),),),
+                              Tab(child: Text("Mon", style: TextStyle(fontSize: size.width * 0.035,),),),
+                              Tab(child: Text("Tue", style: TextStyle(fontSize: size.width * 0.035,),),),
+                              Tab(child: Text("Wed", style: TextStyle(fontSize: size.width * 0.035,),),),
+                              Tab(child: Text("Thur", style: TextStyle(fontSize: size.width * 0.035,),),),
+                              Tab(child: Text("Fri", style: TextStyle(fontSize: size.width * 0.035,),),),
                         ],
                         labelColor: kPrimaryColor,
                         indicator: BoxDecoration(
@@ -305,7 +305,7 @@ Widget printSlots(List<String> static_day,List<String> dynamic_day,Size size,Str
                         child: Text(
                           static_day[i],
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: size.width * 0.045,
                           ),
                         ),
                         padding: EdgeInsets.all(6),
@@ -323,7 +323,7 @@ Widget printSlots(List<String> static_day,List<String> dynamic_day,Size size,Str
                         child: Text(
                           static_day[i],
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: size.width * 0.045,
                           ),
                         ),
                         padding: EdgeInsets.all(6),
