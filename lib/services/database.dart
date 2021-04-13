@@ -22,7 +22,7 @@ class DatabaseService {
   // final CollectionReference timetableCollection =Firestore.instance.collection('timetable');
 
 //-------------------------------------------------------------------------------------------------------------------------------------//
-  Future updateFacultyData(String name,String emp_code, String initials,String room,String email,String password, String downloadUrl) async
+  Future updateFacultyData(String name,String emp_code, String initials,String room,String email,String tt_status, String downloadUrl) async
   {
     return await facultyCollection.document(uid).setData({
       'teacher_id':uid,
@@ -31,7 +31,7 @@ class DatabaseService {
       'initials':initials,
       'room':room,
       'email':email,
-      'password':password,
+      'tt_status':tt_status,
       'url':downloadUrl,
       'role':'faculty',
     });
@@ -58,7 +58,7 @@ class DatabaseService {
     );
   }
 
-  Future updateStudentData(String name,String rollno,String branch,String year,String email,String password, String downloadUrl) async
+  Future updateStudentData(String name,String rollno,String branch,String year,String email, String downloadUrl) async
   {
     return await studentCollection.document(uid).setData({
       'student_id':uid,
@@ -67,7 +67,6 @@ class DatabaseService {
       'branch':branch,
       'year':year,
       'email':email,
-      'password':password,
       'url':downloadUrl,
       'role':'student',
     });
@@ -297,7 +296,7 @@ class DatabaseService {
         initials:doc.data['initials'] ?? '',
         email: doc.data['email'] ?? '',
         room: doc.data['room'] ?? '',
-        password: doc.data['password'] ?? '',
+        tt_status: doc.data['tt_status'] ?? '',
         teacher_id: doc.data['teacher_id'] ?? '',
         url: doc.data['url'] ?? '',
       );
@@ -319,7 +318,7 @@ class DatabaseService {
       initials: snapshot.data['initials'],
       room: snapshot.data['room'],
       email: snapshot.data['email'],
-      password: snapshot.data['password'] ?? '',
+      tt_status: snapshot.data['tt_status'] ?? '',
       teacher_id: snapshot.data['teacher_id'] ?? '',
       url: snapshot.data['url'] ?? '',
     );
@@ -353,7 +352,6 @@ class DatabaseService {
         branch: doc.data['branch'] ?? '',
         year: doc.data['year'] ?? '',
         email: doc.data['email'] ?? '',
-        password: doc.data['password'] ?? '',
         url: doc.data['url'] ?? '',
       );
     }).toList();
@@ -374,7 +372,6 @@ class DatabaseService {
       branch: snapshot.data['branch'],
       year: snapshot.data['year'] ,
       email: snapshot.data['email'],
-      password: snapshot.data['password'] ?? '',
       url: snapshot.data['url'] ?? '',
     );
   }

@@ -36,20 +36,7 @@ void callbackDispatcher(){
           curr_day=curr_day.toLowerCase().trim();
           print("CURRENT DAY: "+curr_day);
           List doc_data;
-          // List<String> static_mon = await json.decode(prefs.getString("stored_static_mon"));
-          // List<String> static_tue = await json.decode(prefs.getString("stored_static_tue"));
-          // List<String> static_wed = await json.decode(prefs.getString("stored_static_wed"));
-          // List<String> static_thurs =await json.decode(prefs.getString("stored_static_thurs"));
-          // List<String> static_fri = await json.decode(prefs.getString("stored_static_fri"));
-          // List<String> static_day=[];
-          // print("STATIC MON: "+static_mon.toString());
-          // print("STATIC TUE: "+static_tue.toString());
-          // print("STATIC WED: "+static_wed.toString());
-          // print("STATIC THURS: "+static_thurs.toString());
-          // print("STATIC FRI: "+static_fri.toString());
-          // if(static_mon.isNotEmpty && static_tue.isNotEmpty && static_wed.isNotEmpty && static_thurs.isNotEmpty && static_fri.isNotEmpty)
-          // {
-          //   print("NONE IS EMPTY");
+
             if(curr_day == "saturday")
             {
               day_to_copy = "fri";

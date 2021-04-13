@@ -39,7 +39,7 @@ class AuthService {
       );
 
       //create a new document for the teacher with the uid
-      await DatabaseService(uid:user.uid).updateFacultyData(name, emp_code, initials, room, email, password,url);
+      await DatabaseService(uid:user.uid).updateFacultyData(name, emp_code, initials, room, email, "No free slots available" ,url);
       await DatabaseService(uid:user.uid).updateTimeTable([], [], [], [], [],[], [], [], [], []);
       return _userFromFirebaseUser(user);
     }
@@ -67,7 +67,7 @@ class AuthService {
       );
 
       //create a new document for the student with the uid
-      await DatabaseService(uid:user.uid).updateStudentData(name, rollno, branch, year,email, password,url);
+      await DatabaseService(uid:user.uid).updateStudentData(name, rollno, branch, year,email, url);
       print("2");
       return _userFromFirebaseUser(user);
     }

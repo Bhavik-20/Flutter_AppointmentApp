@@ -291,7 +291,6 @@ class _student_profileState  extends State<student_profile> {
                                   branch = branch.isEmpty ? data.branch : branch;
                                   year = year.isEmpty ? data.year : year;
                                   email = data.email;
-                                  password = data.password;
                                   downloadUrl = downloadUrl.isEmpty? data.url : downloadUrl;
 
                                   print(name);
@@ -334,7 +333,6 @@ class _student_profileState  extends State<student_profile> {
                                         branch,
                                         year,
                                         email,
-                                        password,
                                         downloadUrl);
                                     print('hey');
                                     Fluttertoast.showToast(

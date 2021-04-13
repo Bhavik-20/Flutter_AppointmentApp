@@ -40,7 +40,7 @@ class _teacher_ttState extends State<teacher_tt> {
 
   Future<int> sendFile(File file,String uid) async {
     print("ENTER FUNCTION");
-    final CollectionReference timetableCollection =Firestore.instance.collection('timetable');
+    final DocumentReference facultyDoc =Firestore.instance.collection('faculty').document(uid);
     try
     {
       print("TRY 1");
@@ -79,6 +79,9 @@ class _teacher_ttState extends State<teacher_tt> {
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.TOP,
           );
+          await facultyDoc.updateData({
+            'tt_status' : "Free Slots Available"
+          });
           return 1;
           // return pdfModel;
         }

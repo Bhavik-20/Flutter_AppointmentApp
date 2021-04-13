@@ -29,7 +29,7 @@ class _teacher_profileState extends State<teacher_profile> {
   String initials="";
   String room="";
   String email="";
-  String password="";
+  String tt_status="";
   bool loading=false;
 
   // List<String> tt_mon;
@@ -277,20 +277,20 @@ class _teacher_profileState extends State<teacher_profile> {
                               initials= initials.isEmpty ? data.initials : initials;
                               room= room.isEmpty ? data.room : room;
                               email=data.email;
-                              password=data.password;
+                              tt_status=data.tt_status;
                               downloadUrl = downloadUrl.isEmpty? data.url : downloadUrl;
 
                               print(name);
                               print(initials);
                               print(room);
                               print(email);
-                              print(password);
+                              print(tt_status);
 
                               String result = validate(name, emp_code, initials, room);
                               if (result == 'valid') {
                                 setState(() => loading = true);
                                 await DatabaseService(uid: user.user_id)
-                                    .updateFacultyData(name, emp_code, initials, room, email, password,downloadUrl);
+                                    .updateFacultyData(name, emp_code, initials, room, email, tt_status,downloadUrl);
                                 Fluttertoast.showToast(
                                   backgroundColor: Colors.green,
                                   msg: 'Successfully Updated Data',

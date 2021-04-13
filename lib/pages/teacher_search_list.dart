@@ -119,7 +119,8 @@ class _SearchListState extends State<SearchList> {
                               ),
                             ),
                             title:items.length==0?Text(faculties[index].employee_code+"_"+faculties[index].name):Text(items[index].employee_code+"_"+items[index].name),
-                            subtitle:items.length==0? Text(faculties[index].initials):Text(items[index].initials),
+                            subtitle:items.length==0? Text(faculties[index].tt_status):Text(items[index].tt_status),
+                            trailing: items.length==0? Text(faculties[index].initials):Text(items[index].initials),
                           ),
                         ),
                       );
