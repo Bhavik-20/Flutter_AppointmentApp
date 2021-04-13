@@ -128,7 +128,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                       accentColor: Colors.deepPurple[300],
                       primarySwatch: Colors.deepPurple,
                       colorScheme: ColorScheme.light(
-                          primary: Colors.deepPurple[300]
+                          primary: Colors.deepPurple[500]
                       )
                   ),
                   child: Stepper(

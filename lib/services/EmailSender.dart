@@ -20,9 +20,9 @@ class EmailSender {
     Appointment purpose : ${purpose},\n
     Appointment date and time : ${date} , ${time}
     
-                         Open MeetUp to see further details of this request.
+             Open the MeetUp app to see further details of this request.
     
-    ~ MeetUp
+    ~ Team MeetUp
     """;
     final message = Message()
       ..from = Address(username)
@@ -59,9 +59,9 @@ class EmailSender {
                       ${time},\n
     Appointment Status : ${status.split(".").first}
     
-    Open MeetUp to see further details of this request.
-    
-    ~ MeetUp
+          Open the MeetUp app to see further details of this request.
+
+    ~ Team MeetUp
     """;
     final message = Message()
       ..from = Address(username)
