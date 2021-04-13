@@ -193,7 +193,7 @@ class ForgotScreen extends StatefulWidget{
                             ),
                             Container(
                               margin: EdgeInsets.symmetric(vertical: 20),
-                              width: size.width * 0.5,
+                              //width: size.width * 0.5,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(29),
                                 child: FlatButton(
@@ -204,7 +204,7 @@ class ForgotScreen extends StatefulWidget{
                                   },
                                   child: Text(
                                     'Go To Login',
-                                    style: TextStyle(color: kPrimaryColor, fontSize: 17),
+                                    style: TextStyle(color: kPrimaryColor, fontSize: size.width * 0.045),
                                   ),
                                 ),
                               ),

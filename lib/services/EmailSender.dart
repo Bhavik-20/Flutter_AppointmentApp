@@ -3,8 +3,8 @@ import 'package:mailer/smtp_server.dart';
 
 class EmailSender {
 
-  final String username = "internbmap@gmail.com";
-  final String password = "BMAP#1234";
+  final String username = "meetup.somaiya@gmail.com";
+  final String password = "B7P10M20";
 
 
   sendMailToTeacher(String to, String from, String stu_email, String stu_year, String stu_branch, String stu_roll, String purpose, String date, String time) async
@@ -20,14 +20,14 @@ class EmailSender {
     Appointment purpose : ${purpose},\n
     Appointment date and time : ${date} , ${time}
     
-                         Open -APP NAME- to see further details of this request.
+                         Open MeetUp to see further details of this request.
     
-    ~ APP NAME
+    ~ MeetUp
     """;
     final message = Message()
       ..from = Address(username)
       ..recipients.add(to)
-      ..subject = "App Name : You have a new appointment Request"
+      ..subject = "MeetUp : You have a new appointment Request"
       ..text = text;
 
     try
@@ -45,7 +45,7 @@ class EmailSender {
   {
     final smtpServer = gmail(username, password);
 
-    String subject = "App Name : Your Appointment Request with ${from} has been ${status.split(".").first}";
+    String subject = "MeetUp : Your Appointment Request with ${from} has been ${status.split(".").first}";
 
     String text = """ 
                                 REQUEST DETAILS \n
@@ -59,9 +59,9 @@ class EmailSender {
                       ${time},\n
     Appointment Status : ${status.split(".").first}
     
-    Open -APP NAME- to see further details of this request.
+    Open MeetUp to see further details of this request.
     
-    ~ APP NAME
+    ~ MeetUp
     """;
     final message = Message()
       ..from = Address(username)

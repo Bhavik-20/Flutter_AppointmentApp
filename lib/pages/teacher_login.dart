@@ -82,7 +82,7 @@ class _teacher_loginState extends State<teacher_login> {
                         // Navigator.of(context).pushNamed('/');
                       },
                     ),
-                    SizedBox(width: 50.0),
+                    SizedBox(width: size.width*0.05),
                     Text(
                       "Teacher Login",
                       style: TextStyle(

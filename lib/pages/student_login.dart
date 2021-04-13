@@ -75,7 +75,7 @@ class _student_loginState extends State<student_login> {
                         // Navigator.of(context).pushNamed('/');
                       },
                     ),
-                    SizedBox(width: 50.0),
+                    SizedBox(width: size.width*0.05),
                     Text(
                       "Student Login",
                       style: TextStyle(

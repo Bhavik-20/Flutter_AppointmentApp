@@ -69,10 +69,10 @@ class _student_request_statusState extends State<student_request_status> {
                           SizedBox(width: 10.0,),
                           Text(
                             'Name: ',
-                            overflow: TextOverflow.ellipsis,
+                            overflow: TextOverflow.visible,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: size.height * 0.02,
+                              fontSize: size.width * 0.045,
                               fontFamily: 'playfair',
                             ),
                           ),
@@ -82,7 +82,7 @@ class _student_request_statusState extends State<student_request_status> {
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: size.height * 0.02,
+                                fontSize: size.width * 0.045,
                                 fontFamily: 'playfair',
                               ),
                             ),
@@ -106,7 +106,7 @@ class _student_request_statusState extends State<student_request_status> {
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: size.height * 0.02,
+                              fontSize: size.width * 0.045,
                               fontFamily: 'playfair',
                             ),
                           ),
@@ -116,7 +116,7 @@ class _student_request_statusState extends State<student_request_status> {
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: size.height * 0.02,
+                                fontSize: size.width * 0.045,
                                 fontFamily: 'playfair',
                               ),
                             ),
@@ -140,7 +140,7 @@ class _student_request_statusState extends State<student_request_status> {
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: size.height * 0.02,
+                              fontSize: size.width * 0.045,
                               fontFamily: 'playfair',
                             ),
                           ),
@@ -150,7 +150,7 @@ class _student_request_statusState extends State<student_request_status> {
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: size.height * 0.02,
+                                fontSize: size.width * 0.045,
                                 fontFamily: 'playfair',
                               ),
                             ),
@@ -171,10 +171,10 @@ class _student_request_statusState extends State<student_request_status> {
                           SizedBox(width: 10.0,),
                           Text(
                             'Mail: ',
-                            overflow: TextOverflow.ellipsis,
+                            overflow: TextOverflow.visible,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: size.height * 0.02,
+                              fontSize: size.width * 0.045,
                               fontFamily: 'playfair',
                             ),
                           ),
@@ -184,7 +184,7 @@ class _student_request_statusState extends State<student_request_status> {
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: size.height * 0.02,
+                                fontSize: size.width * 0.045,
                                 fontFamily: 'playfair',
                               ),
                             ),
@@ -197,7 +197,7 @@ class _student_request_statusState extends State<student_request_status> {
                       thickness: 1,
                     ),
                     Container(
-                      height:40.0,
+                      height:50.0,
                       padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                       child: Row(
                         children: [
@@ -205,10 +205,10 @@ class _student_request_statusState extends State<student_request_status> {
                           SizedBox(width: 10.0,),
                           Text(
                             'Date : ',
-                            overflow: TextOverflow.ellipsis,
+                            overflow: TextOverflow.visible,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: size.height * 0.02,
+                              fontSize: size.width * 0.045,
                               fontFamily: 'playfair',
                             ),
                           ),
@@ -218,7 +218,7 @@ class _student_request_statusState extends State<student_request_status> {
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: size.height * 0.02,
+                                fontSize: size.width * 0.045,
                                 fontFamily: 'playfair',
                               ),
                             ),
@@ -231,7 +231,7 @@ class _student_request_statusState extends State<student_request_status> {
                       thickness: 1,
                     ),
                     Container(
-                      height:40.0,
+                      height:50.0,
                       padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                       child: Row(
                         children: [
@@ -242,7 +242,7 @@ class _student_request_statusState extends State<student_request_status> {
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: size.height * 0.02,
+                              fontSize: size.width * 0.045,
                               fontFamily: 'playfair',
                             ),
                           ),
@@ -252,7 +252,7 @@ class _student_request_statusState extends State<student_request_status> {
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: size.height * 0.02,
+                                fontSize: size.width * 0.045,
                                 fontFamily: 'playfair',
                               ),
                             ),
@@ -270,7 +270,7 @@ class _student_request_statusState extends State<student_request_status> {
               child: Text( 'Purpose of Meet:',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: size.height * 0.02,
+                  fontSize: size.width * 0.045,
                   fontFamily: 'playfair',
                   color: Colors.black,
                 ),),
@@ -290,7 +290,7 @@ class _student_request_statusState extends State<student_request_status> {
                         ),
                         child: TextField(
                           style: TextStyle(
-                            fontSize: size.height * 0.02,
+                            fontSize: size.width * 0.045,
                             fontFamily: 'playfair',
                             color: Colors.black,
                           ),
@@ -320,7 +320,7 @@ class _student_request_statusState extends State<student_request_status> {
                              child: Text( 'Purpose Explained:',
                                style: TextStyle(
                                  fontWeight: FontWeight.bold,
-                                 fontSize: size.height * 0.02,
+                                 fontSize: size.width * 0.045,
                                  fontFamily: 'playfair',
                                  color: Colors.black,
                                ),),
@@ -337,7 +337,7 @@ class _student_request_statusState extends State<student_request_status> {
                            ),
                            child: TextField(
                              style: TextStyle(
-                               fontSize: size.height * 0.02,
+                               fontSize: size.width * 0.045,
                                fontFamily: 'playfair',
                                color: Colors.black,
                              ),
@@ -364,7 +364,7 @@ class _student_request_statusState extends State<student_request_status> {
                          child: Text( 'Request Status:',
                            style: TextStyle(
                              fontWeight: FontWeight.bold,
-                             fontSize: size.height * 0.02,
+                             fontSize: size.width * 0.045,
                              fontFamily: 'playfair',
                              color: Colors.black,
                            ),),
@@ -381,7 +381,7 @@ class _student_request_statusState extends State<student_request_status> {
                          ),
                          child: TextField(
                            style: TextStyle(
-                             fontSize: size.height * 0.02,
+                             fontSize: size.width * 0.045,
                              fontFamily: 'playfair',
                              color: Colors.black,
                            ),
@@ -441,10 +441,10 @@ class _student_request_statusState extends State<student_request_status> {
                             SizedBox(width: size.width * 0.01,),
                             Expanded(
                               child: Text("Cancel Request",
-                                overflow: TextOverflow.ellipsis,
+                                overflow: TextOverflow.visible,
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: size.height*0.016,
+                                  fontSize: size.width * 0.042,
                                 ),),
                             )
                           ],

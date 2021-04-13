@@ -83,7 +83,7 @@ class _teacher_signupState extends State<teacher_signup> {
                         // Navigator.of(context).pushNamed('/tea_login');
                       },
                     ),
-                    SizedBox(width: 50.0),
+                    SizedBox(width: size.width*0.05),
                     Text(
                       "Teacher Sign Up",
                       style: TextStyle(

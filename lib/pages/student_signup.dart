@@ -105,13 +105,16 @@ class _State extends State {
                         // Navigator.of(context).pushNamed('/st_login');
                       },
                     ),
-                    SizedBox(width: 50.0),
-                    Text(
-                      "Student Sign Up",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'dosis',
-                        fontSize: size.width*0.1,
+                    SizedBox(width: size.width*0.05),
+                    Expanded(
+                      child: Text(
+                        "Student Sign Up",
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'dosis',
+                          fontSize: size.width*0.1,
+                        ),
                       ),
                     ),
                   ],
@@ -143,46 +146,37 @@ class _State extends State {
                   ),
                 ),
                 Container(
-                    margin: EdgeInsets.fromLTRB(10,0,0,0),
                     width: size.width * 0.8,
-                    child: Row(
-                      children: [
-                      Text( 'Branch:',
-                        style: TextStyle(fontSize: size.width*0.05),
-                      ),
-                       Expanded(
-                         child: Container(
-                           width: size.width *0.5,
-                            decoration: BoxDecoration(
-                              color: kPrimaryLightColor,
-                              borderRadius: BorderRadius.circular(29),
-                            ),
-                            margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                            padding: EdgeInsets.fromLTRB(15,5,0,5),
-                          child: DropdownButton(
-                              hint: Text('Branch',style: TextStyle(fontSize: size.width*0.045,),),
-                              dropdownColor: kPrimaryLightColor,
-                              elevation: 5,
-                              icon: Icon(Icons.arrow_drop_down),
-                              iconSize: 24,
-                              value: _branchVal,
-                              style: TextStyle(color: Colors.black , fontSize: size.width*0.045),
-                              onChanged: (value){
-                                setState(() {
-                                  _branchVal = value;
-                                  branch=value;
-                              });
-                            },
-                            items: _branch.map((value){
-                            return DropdownMenuItem(
-                                  value: value,
-                                  child: Text(value),
-                              );
-                            }).toList(),
-                          ),
-                      ),
+                    child: Container(
+                      //width: size.width *0.55,
+                       decoration: BoxDecoration(
+                         color: kPrimaryLightColor,
+                         borderRadius: BorderRadius.circular(29),
                        ),
-                      ],),
+                       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                       padding: EdgeInsets.fromLTRB(20,5,10,5),
+                     child: DropdownButton(
+                         hint: Text('Branch',style: TextStyle(fontSize: size.width*0.045,),),
+                         dropdownColor: kPrimaryLightColor,
+                         elevation: 5,
+                         icon: Icon(Icons.arrow_drop_down),
+                         iconSize: 25,
+                         value: _branchVal,
+                         style: TextStyle(color: Colors.black , fontSize: size.width*0.04),
+                         onChanged: (value){
+                           setState(() {
+                             _branchVal = value;
+                             branch=value;
+                         });
+                       },
+                       items: _branch.map((value){
+                       return DropdownMenuItem(
+                             value: value,
+                             child: Text(value),
+                         );
+                       }).toList(),
+                     ),
+                    ),
                       ),
                 Container(
                     child: Text('Select Year',
