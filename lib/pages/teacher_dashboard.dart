@@ -94,7 +94,7 @@ class _teacher_dashboardState extends State<teacher_dashboard> {
                                         height: 180,
                                         width:180,
                                         child: (data.url == '' || data.url == null) ? Image.asset('images/role_teacher.jpg',
-                                          fit: BoxFit.fill,) : Image.network(data.url, fit: BoxFit.fill,),
+                                          fit: BoxFit.cover,) : Image.network(data.url, fit: BoxFit.cover,),
                                       ),
                                     ),
                                     radius: 60.0,

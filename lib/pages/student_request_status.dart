@@ -79,7 +79,7 @@ class _student_request_statusState extends State<student_request_status> {
                           Expanded(
                             child: Text(
                               widget.request.teacher_name,
-                              overflow: TextOverflow.ellipsis,
+                              overflow: TextOverflow.visible,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: size.width * 0.045,
@@ -147,7 +147,7 @@ class _student_request_statusState extends State<student_request_status> {
                           Expanded(
                             child: Text(
                               widget.request.teacher_room,
-                              overflow: TextOverflow.ellipsis,
+                              overflow: TextOverflow.visible,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: size.width * 0.045,
@@ -181,7 +181,7 @@ class _student_request_statusState extends State<student_request_status> {
                           Expanded(
                             child: Text(
                               widget.request.teacher_mail,
-                              overflow: TextOverflow.ellipsis,
+                              overflow: TextOverflow.visible,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: size.width * 0.045,
@@ -215,7 +215,7 @@ class _student_request_statusState extends State<student_request_status> {
                           Expanded(
                             child: Text(
                               widget.request.date,
-                              overflow: TextOverflow.ellipsis,
+                              overflow: TextOverflow.visible,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: size.width * 0.045,
@@ -249,7 +249,7 @@ class _student_request_statusState extends State<student_request_status> {
                           Expanded(
                             child: Text(
                               widget.request.time,
-                              overflow: TextOverflow.ellipsis,
+                              overflow: TextOverflow.visible,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: size.width * 0.045,
@@ -409,9 +409,7 @@ class _student_request_statusState extends State<student_request_status> {
             Center(
               child: Column(
                 children: [
-                  Container(
-                    width: size.width*0.5,
-                    child: Tooltip(
+                   Tooltip(
                       message: 'Cancel Request',
                       child: RaisedButton(
                         onPressed: () async{
@@ -435,23 +433,14 @@ class _student_request_statusState extends State<student_request_status> {
                             side: BorderSide(color: Colors.red)),
                         elevation: 5,
                         padding: EdgeInsets.fromLTRB(20.0,10,20,10),
-                        child: Row(
-                          children: <Widget>[
-                            Icon(Icons.delete , color: Colors.white,),
-                            SizedBox(width: size.width * 0.01,),
-                            Expanded(
-                              child: Text("Cancel Request",
-                                overflow: TextOverflow.visible,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: size.width * 0.042,
-                                ),),
-                            )
-                          ],
-                        ),
+                        child: Text("Cancel Request",
+                          overflow: TextOverflow.visible,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: size.width * 0.042,
+                          ),),
                       ),
                     ),
-                  ),
                   SizedBox(height: 30.0,),
                 ],
               ),

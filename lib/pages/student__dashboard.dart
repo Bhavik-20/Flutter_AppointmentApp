@@ -64,7 +64,7 @@ class _student_dashboardState extends State<student_dashboard> {
                     backgroundColor: Colors.deepPurple[600],
                     title: Text('Student Dashboard',
                       style:TextStyle(
-                      fontSize: size.width*0.05,
+                      fontSize: size.width*0.047,
                     ) ,),
                     centerTitle: true,
                     actions: [

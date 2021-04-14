@@ -325,10 +325,10 @@ class _teacher_profileState extends State<teacher_profile> {
                                     width: 180.0,
                                     height: 180.0,
                                     child:(_image == null && data.url == '') ? Image.asset('images/role_teacher.jpg',
-                                      fit: BoxFit.fill,) : ((_image != null)?Image.file(_image,
-                                      fit: BoxFit.fill,):(data.url != '')?Image.network(data.url,
-                                      fit: BoxFit.fill,):Image.asset('images/role_student.jpg',
-                                      fit: BoxFit.fill,)),
+                                      fit: BoxFit.cover,) : ((_image != null)?Image.file(_image,
+                                      fit: BoxFit.cover,):(data.url != '')?Image.network(data.url,
+                                      fit: BoxFit.cover,):Image.asset('images/role_student.jpg',
+                                      fit: BoxFit.cover,)),
                                   ),
                                 ),
                               ),
@@ -336,17 +336,50 @@ class _teacher_profileState extends State<teacher_profile> {
                         ),
                       ),
                       Positioned(
-                        top: 140,
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 60.0),
-                          child: IconButton(
-                            icon: Icon(Icons.camera_alt,
-                              size: 30.0,
-                              color: Colors.grey,
+                        top: 190,
+                        left: 180,
+                        child:Align(
+                          child: CircleAvatar(
+                            radius: 30,
+                            backgroundColor: Colors.transparent,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border: Border.all(
+                                    color: Colors.grey,
+                                  ),
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(30))
+                              ),
+                              child: IconButton(
+                                icon: Icon(Icons.camera_alt,
+                                  size: 30.0,
+                                  color: Colors.grey,
+                                ),
+                                onPressed: () {
+                                  return showDialog(
+                                    context: context,
+                                    builder: (context)=> AlertDialog(
+                                      content: Container(
+                                        height: size.height*0.15,
+                                        child: Column(
+                                          children: [
+                                            FlatButton(
+                                              child: Text('Upload/Edit Photo'),
+                                              onPressed:(){getImage();},
+                                            ),
+                                            FlatButton(
+                                              child: Text('Delete Photo'),
+                                              onPressed: (){},
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
                             ),
-                            onPressed: () {
-                              getImage();
-                            },
                           ),
                         ),
                       )

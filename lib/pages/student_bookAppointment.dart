@@ -149,7 +149,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                           });
                         }
                         else {
-                          if (time == "") {
+                          if (time == "" || time == "No Slots Available") {
                             Fluttertoast.showToast(
                               backgroundColor: Colors.red,
                               msg: 'Please Select Time',
@@ -272,7 +272,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                         Expanded(
                           child: Text(
                             widget.teacher.name,
-                            overflow: TextOverflow.ellipsis,
+                            overflow: TextOverflow.visible,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize:  size.width * 0.045,
@@ -337,10 +337,10 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                         Expanded(
                           child: Text(
                             widget.teacher.email,
-                            overflow: TextOverflow.ellipsis,
+                            overflow: TextOverflow.visible,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize:size.width * 0.045,
+                              fontSize:size.width * 0.04,
                               fontFamily: 'playfair',
                             ),
                           ),
@@ -370,7 +370,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                         ),
                         Text(
                           widget.teacher.room,
-                          overflow: TextOverflow.ellipsis,
+                          overflow: TextOverflow.visible,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: size.width * 0.045,
@@ -439,7 +439,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
             SizedBox(width: 15.0,),
             Expanded(
               child: Text(full == null ? 'Select Date' : full.toString(),
-                overflow: TextOverflow.ellipsis,
+                overflow: TextOverflow.visible,
                 style: TextStyle(
                     fontFamily: 'playfair',
                     fontSize: size.width * 0.045,
@@ -472,23 +472,23 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
               if(snapshot.hasData){
                 print("IF");
                 if(day == "Monday") {
-                 free_slots = snapshot.data.dynamic_mon;
+                 free_slots = snapshot.data.dynamic_mon.isEmpty ? ["No Slots Available"] : snapshot.data.dynamic_mon;
                  remove_from="dynamic_mon";
                 }
                 else if(day == "Tuesday") {
-                  free_slots = snapshot.data.dynamic_tue;
+                  free_slots = snapshot.data.dynamic_tue.isEmpty ? ["No Slots Available"] : snapshot.data.dynamic_tue;
                   remove_from="dynamic_tue";
                 }
                 else if(day == "Wednesday") {
-                  free_slots = snapshot.data.dynamic_wed;
+                  free_slots = snapshot.data.dynamic_wed.isEmpty ? ["No Slots Available"] : snapshot.data.dynamic_wed;
                   remove_from="dynamic_wed";
                 }
                 else if(day == "Thursday") {
-                  free_slots = snapshot.data.dynamic_thurs;
+                  free_slots = snapshot.data.dynamic_thurs.isEmpty ? ["No Slots Available"] : snapshot.data.dynamic_thurs;
                   remove_from="dynamic_thurs";
                 }
                 else if(day == "Friday") {
-                  free_slots = snapshot.data.dynamic_fri;
+                  free_slots = snapshot.data.dynamic_fri.isEmpty ? ["No Slots Available"] : snapshot.data.dynamic_fri;
                   remove_from="dynamic_fri";
                 }
                 print(free_slots);
@@ -572,7 +572,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                     Expanded(
                       child: Text(
                         data.name,
-                        overflow: TextOverflow.ellipsis,
+                        overflow: TextOverflow.visible,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: size.width * 0.045,
@@ -606,7 +606,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                     Expanded(
                       child: Text(
                         data.roll,
-                        overflow: TextOverflow.ellipsis,
+                        overflow: TextOverflow.visible,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: size.width * 0.045,
@@ -640,7 +640,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                     Expanded(
                       child: Text(
                         data.branch,
-                        overflow: TextOverflow.ellipsis,
+                        overflow: TextOverflow.visible,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: size.width * 0.045,
@@ -675,7 +675,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                     Expanded(
                       child: Text(
                         data.year,
-                        overflow: TextOverflow.ellipsis,
+                        overflow: TextOverflow.visible,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: size.width * 0.045,
@@ -709,10 +709,10 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                     Expanded(
                       child: Text(
                         data.email,
-                        overflow: TextOverflow.ellipsis,
+                        overflow: TextOverflow.visible,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: size.width * 0.045,
+                          fontSize: size.width * 0.04,
                           fontFamily: 'playfair',
                         ),
                       ),
