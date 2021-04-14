@@ -358,7 +358,7 @@ class _student_profileState  extends State<student_profile> {
                           ],
                         ),
                         Positioned(
-                          top: 100,
+                          top: size.height*0.125,
                           child:  Center(
                               child: Align(
                                 child: CircleAvatar(
@@ -380,8 +380,8 @@ class _student_profileState  extends State<student_profile> {
                           ),
                         ),
                         Positioned(
-                          top: 190,
-                          left: 180,
+                          top: size.height*0.25,
+                          left: size.width*0.55,
                           child:Align(
                           child: CircleAvatar(
                             radius: 30,
@@ -405,16 +405,25 @@ class _student_profileState  extends State<student_profile> {
                                     return showDialog(
                                       context: context,
                                       builder: (context)=> AlertDialog(
+                                        contentPadding: EdgeInsets.all(5),
                                       content: Container(
-                                        height: size.height*0.15,
+                                        height: 100,
                                         child: Column(
                                           children: [
                                             FlatButton(
-                                              child: Text('Upload/Edit Photo'),
+                                              child: Text('Upload/Edit Photo',
+                                              style: TextStyle(
+                                                fontSize: size.width * 0.05,
+                                              ),
+                                              ),
                                               onPressed:(){getImage();},
                                             ),
                                             FlatButton(
-                                              child: Text('Delete Photo'),
+                                              child: Text('Delete Photo',
+                                                style: TextStyle(
+                                                  fontSize: size.width * 0.05,
+                                                ),
+                                              ),
                                               onPressed: (){},
                                             )
                                           ],

@@ -314,7 +314,7 @@ class _teacher_profileState extends State<teacher_profile> {
                         ],
                       ),
                       Positioned(
-                        top: 100,
+                        top: size.height*0.125,
                         child:  Center(
                             child: Align(
                               child: CircleAvatar(
@@ -336,8 +336,8 @@ class _teacher_profileState extends State<teacher_profile> {
                         ),
                       ),
                       Positioned(
-                        top: 190,
-                        left: 180,
+                        top: size.height*0.25,
+                        left: size.width*0.55,
                         child:Align(
                           child: CircleAvatar(
                             radius: 30,
@@ -360,17 +360,42 @@ class _teacher_profileState extends State<teacher_profile> {
                                   return showDialog(
                                     context: context,
                                     builder: (context)=> AlertDialog(
+                                      contentPadding: EdgeInsets.all(5),
                                       content: Container(
-                                        height: size.height*0.15,
+                                        height: 100,//size.height*0.15,
                                         child: Column(
                                           children: [
                                             FlatButton(
-                                              child: Text('Upload/Edit Photo'),
-                                              onPressed:(){getImage();},
+                                              child: Text('Upload/Edit Photo',
+                                              style: TextStyle(
+                                                fontSize: size.width * 0.05,
+                                              ),),
+                                              onPressed:(){
+                                                getImage();
+                                                Fluttertoast.showToast(
+                                                    backgroundColor: Colors.green,
+                                                    msg: 'Your Profile Picture has been Updated.',
+                                                    toastLength: Toast.LENGTH_LONG,
+                                                    gravity: ToastGravity.BOTTOM,
+                                                );
+                                                },
                                             ),
                                             FlatButton(
-                                              child: Text('Delete Photo'),
-                                              onPressed: (){},
+                                              child: Text('Delete Photo',
+                                                style: TextStyle(
+                                                  fontSize: size.width * 0.05,
+                                                ),
+                                              ),
+                                              onPressed: () async {
+                                                await DatabaseService().removePhoto(data.url);
+                                                print("Profile photo deleted.");
+                                                Fluttertoast.showToast(
+                                                    backgroundColor: Colors.green,
+                                                    msg: 'Your Profile Picture has been Deleted Successfully.',
+                                                    toastLength: Toast.LENGTH_LONG,
+                                                    gravity: ToastGravity.BOTTOM,
+                                                );
+                                              },
                                             )
                                           ],
                                         ),

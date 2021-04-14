@@ -204,6 +204,10 @@ class DatabaseService {
     DocumentReference docref=requestCollection.document(req_id);
     return await docref.delete();
   }
+
+  Future removePhoto(String url) async {
+
+  }
 //-------------------------------------------------------------------------------------------------------------------------------------//
 
   Stream<List<Request>> get teacher_unanswered  {
