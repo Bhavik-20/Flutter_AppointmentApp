@@ -149,7 +149,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                           });
                         }
                         else {
-                          if (time == "" || time == "No Slots Available") {
+                          if (time == "") {
                             Fluttertoast.showToast(
                               backgroundColor: Colors.red,
                               msg: 'Please Select Time',
@@ -158,6 +158,15 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                             );
                             print("Select time");
                           }
+                          if(time == "No Slots Available")
+                            {
+                              Fluttertoast.showToast(
+                                backgroundColor: Colors.red,
+                                msg: 'No Slots Available Currently',
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                              );
+                            }
                           if (full == null) {
                             Fluttertoast.showToast(
                               backgroundColor: Colors.red,
@@ -176,7 +185,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                             );
                             print("Please enter purpose");
                           }
-                          if (time != "" && full != null &&
+                          if (time != "" && time != "No Slots Available" && full != null &&
                               purpose != null && this._currentStep == 4) {
                             Fluttertoast.showToast(
                               backgroundColor: Colors.green,
@@ -207,7 +216,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                                 widget.teacher.teacher_id,
                                 widget.teacher.url,
                                 data.url,);
-                            // loading = true;
+                            print("TIME: "+time);
                             await EmailSender().sendMailToTeacher(widget.teacher.email, data.name, data.email, data.year, data.branch, data.roll, purpose, full, time);
                             Navigator.pop(context);
                             Navigator.of(context).pushNamed('/st_dash');
