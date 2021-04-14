@@ -93,7 +93,7 @@ class _teacher_dashboardState extends State<teacher_dashboard> {
                                       child: new SizedBox(
                                         height: 180,
                                         width:180,
-                                        child: (data.url == '' || data.url == null) ? Image.asset('images/role_teacher.jpg',
+                                        child: (data.url == '' || data.url == null) ? Image.asset('images/profile_faculty.png',
                                           fit: BoxFit.cover,) : Image.network(data.url, fit: BoxFit.cover,),
                                       ),
                                     ),

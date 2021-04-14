@@ -368,10 +368,10 @@ class _student_profileState  extends State<student_profile> {
                                     child: new SizedBox(
                                       width: 180.0,
                                       height: 180.0,
-                                      child:(_image == null && data.url == '') ? Image.asset('images/role_student.jpg',
+                                      child:(_image == null && data.url == '') ? Image.asset('images/profile_student.png',
                                         fit: BoxFit.cover,) : ((_image != null)?Image.file(_image,
                                         fit: BoxFit.cover,):(data.url != '')?Image.network(data.url,
-                                        fit: BoxFit.cover,):Image.asset('images/role_student.jpg',
+                                        fit: BoxFit.cover,):Image.asset('images/profile_student.png',
                                         fit: BoxFit.cover,)),
                                     ),
                                   ),
