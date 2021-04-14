@@ -58,15 +58,6 @@ class _teacher_profileState extends State<teacher_profile> {
   @override
   Widget build(BuildContext context) {
 
-    Future getImage() async {
-      // ignore: deprecated_member_use
-      var image = await ImagePicker.pickImage(source: ImageSource.gallery);
-      setState(() {
-        _image = image;
-        print('Image Path $_image');
-      });
-    }
-
     final user = Provider.of<User>(context);
 
     Size size = MediaQuery.of(context).size;
@@ -252,26 +243,6 @@ class _teacher_profileState extends State<teacher_profile> {
                           RoundedButton(
                             text: 'Save Changes',
                             press: () async {
-                              //photo upload
-                              if(_image != null) {
-                                String fileName = basename(_image.path);
-                                StorageReference firebaseStorageRef = FirebaseStorage
-                                    .instance.ref()
-                                    .child(fileName);
-                                StorageUploadTask uploadTask = firebaseStorageRef
-                                    .putFile(_image);
-                                StorageTaskSnapshot taskSnapshot = await uploadTask
-                                    .onComplete;
-                                setState(() {
-                                  print("Profile Picture uploaded");
-                                });
-                                if (taskSnapshot.error == null) {
-                                  downloadUrl =
-                                  await taskSnapshot.ref.getDownloadURL();
-                                  print(downloadUrl);
-                                }
-                              }
-                              //photo upload ends
                               name= name.isEmpty ? data.name : name;
                               emp_code=emp_code.isEmpty ? data.employee_code : emp_code;
                               initials= initials.isEmpty ? data.initials : initials;
@@ -290,7 +261,7 @@ class _teacher_profileState extends State<teacher_profile> {
                               if (result == 'valid') {
                                 setState(() => loading = true);
                                 await DatabaseService(uid: user.user_id)
-                                    .updateFacultyData(name, emp_code, initials, room, email, tt_status,downloadUrl);
+                                    .updateFacultyData(name, emp_code, initials, room, email, tt_status);
                                 Fluttertoast.showToast(
                                   backgroundColor: Colors.green,
                                   msg: 'Successfully Updated Data',
@@ -327,7 +298,7 @@ class _teacher_profileState extends State<teacher_profile> {
                                     child:(_image == null && data.url == '') ? Image.asset('images/profile_faculty.png',
                                       fit: BoxFit.cover,) : ((_image != null)?Image.file(_image,
                                       fit: BoxFit.cover,):(data.url != '')?Image.network(data.url,
-                                      fit: BoxFit.cover,):Image.asset('images/role_student.jpg',
+                                      fit: BoxFit.cover,):Image.asset('images/profile_faculty.png',
                                       fit: BoxFit.cover,)),
                                   ),
                                 ),
@@ -370,11 +341,39 @@ class _teacher_profileState extends State<teacher_profile> {
                                               style: TextStyle(
                                                 fontSize: size.width * 0.05,
                                               ),),
-                                              onPressed:(){
-                                                getImage();
+                                              onPressed:() async {
+                                                // ignore: deprecated_member_use
+                                                var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+                                                setState(() {
+                                                  _image = image;
+                                                  print('Image Path $_image');
+                                                });
+                                                //photo upload
+                                                if(_image != null) {
+                                                  String fileName = basename(_image.path);
+                                                  StorageReference firebaseStorageRef = FirebaseStorage
+                                                      .instance.ref()
+                                                      .child(fileName);
+                                                  StorageUploadTask uploadTask = firebaseStorageRef
+                                                      .putFile(_image);
+                                                  StorageTaskSnapshot taskSnapshot = await uploadTask
+                                                      .onComplete;
+                                                  setState(() {
+                                                    print("Profile Picture uploaded");
+                                                  });
+                                                  if (taskSnapshot.error == null) {
+                                                    downloadUrl =
+                                                    await taskSnapshot.ref.getDownloadURL();
+                                                    print(downloadUrl);
+                                                  }
+                                                }
+                                                //photo upload ends
+                                                await DatabaseService(uid: user.user_id)
+                                                    .updatePhoto("faculty",downloadUrl);
+
                                                 Fluttertoast.showToast(
                                                     backgroundColor: Colors.green,
-                                                    msg: 'Your Profile Picture has been Updated.',
+                                                    msg: 'Your Profile Photo has been Updated.',
                                                     toastLength: Toast.LENGTH_LONG,
                                                     gravity: ToastGravity.BOTTOM,
                                                 );
@@ -387,7 +386,7 @@ class _teacher_profileState extends State<teacher_profile> {
                                                 ),
                                               ),
                                               onPressed: () async {
-                                                await DatabaseService().removePhoto(data.url);
+                                                await DatabaseService(uid: user.user_id).removePhoto("faculty");
                                                 print("Profile photo deleted.");
                                                 Fluttertoast.showToast(
                                                     backgroundColor: Colors.green,

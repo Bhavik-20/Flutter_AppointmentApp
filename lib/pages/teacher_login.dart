@@ -73,6 +73,7 @@ class _teacher_loginState extends State<teacher_login> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Row(
+                 //a mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(padding: EdgeInsets.fromLTRB(0, 60, 0, 0)),
                     IconButton(

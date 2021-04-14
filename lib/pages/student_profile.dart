@@ -59,14 +59,14 @@ class _student_profileState  extends State<student_profile> {
 
   @override
   Widget build(BuildContext context) {
-    Future getImage() async {
-      // ignore: deprecated_member_use
-      var image = await ImagePicker.pickImage(source: ImageSource.gallery);
-      setState(() {
-        _image = image;
-        print('Image Path $_image');
-      });
-    }
+    // Future getImage() async {
+    //   // ignore: deprecated_member_use
+    //   var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    //   setState(() {
+    //     _image = image;
+    //     print('Image Path $_image');
+    //   });
+    // }
       final user = Provider.of<User>(context);
 
       Size size = MediaQuery
@@ -265,27 +265,7 @@ class _student_profileState  extends State<student_profile> {
                             RoundedButton(
                               text: 'Save Changes',
                               press: () async {
-                                //photo upload
-                                if(_image != null) {
-                                  String fileName = basename(_image.path);
-                                  StorageReference firebaseStorageRef = FirebaseStorage
-                                      .instance.ref()
-                                      .child(fileName);
-                                  StorageUploadTask uploadTask = firebaseStorageRef
-                                      .putFile(_image);
-                                  StorageTaskSnapshot taskSnapshot = await uploadTask
-                                      .onComplete;
-                                  setState(() {
-                                    print("Profile Picture uploaded");
-                                  });
 
-                                  if (taskSnapshot.error == null) {
-                                    downloadUrl =
-                                    await taskSnapshot.ref.getDownloadURL();
-                                    print(downloadUrl);
-                                  }
-                                }
-                                  //photo upload ends
                                   name = name.isEmpty ? data.name : name;
                                   roll = roll.isEmpty ? data.roll : roll;
                                   branch = branch.isEmpty ? data.branch : branch;
@@ -332,8 +312,7 @@ class _student_profileState  extends State<student_profile> {
                                         roll,
                                         branch,
                                         year,
-                                        email,
-                                        downloadUrl);
+                                        email);
                                     print('hey');
                                     Fluttertoast.showToast(
                                       backgroundColor: Colors.green,
@@ -416,7 +395,46 @@ class _student_profileState  extends State<student_profile> {
                                                 fontSize: size.width * 0.05,
                                               ),
                                               ),
-                                              onPressed:(){getImage();},
+                                              onPressed:()async {
+                                                // ignore: deprecated_member_use
+                                                var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+                                                setState(() {
+                                                  _image = image;
+                                                  print('Image Path $_image');
+                                                });
+
+                                                //photo upload
+                                                if(_image != null) {
+                                                  String fileName = basename(_image.path);
+                                                  StorageReference firebaseStorageRef = FirebaseStorage
+                                                      .instance.ref()
+                                                      .child(fileName);
+                                                  StorageUploadTask uploadTask = firebaseStorageRef
+                                                      .putFile(_image);
+                                                  StorageTaskSnapshot taskSnapshot = await uploadTask
+                                                      .onComplete;
+                                                  setState(() {
+                                                    print("Profile Picture uploaded");
+                                                  });
+
+                                                  if (taskSnapshot.error == null) {
+                                                    downloadUrl =
+                                                    await taskSnapshot.ref.getDownloadURL();
+                                                    print(downloadUrl);
+                                                  }
+                                                }
+                                                //photo upload ends
+                                                await DatabaseService(uid: user.user_id)
+                                                    .updatePhoto("student",downloadUrl);
+
+                                                Fluttertoast.showToast(
+                                                  backgroundColor: Colors.green,
+                                                  msg: 'Your Profile Photo has been Updated.',
+                                                  toastLength: Toast.LENGTH_LONG,
+                                                  gravity: ToastGravity.BOTTOM,
+                                                );
+
+                                                },
                                             ),
                                             FlatButton(
                                               child: Text('Delete Photo',
@@ -424,7 +442,16 @@ class _student_profileState  extends State<student_profile> {
                                                   fontSize: size.width * 0.05,
                                                 ),
                                               ),
-                                              onPressed: (){},
+                                              onPressed: () async {
+                                                await DatabaseService(uid: user.user_id).removePhoto("faculty");
+                                                print("Profile photo deleted.");
+                                                Fluttertoast.showToast(
+                                                  backgroundColor: Colors.green,
+                                                  msg: 'Your Profile Picture has been Deleted Successfully.',
+                                                  toastLength: Toast.LENGTH_LONG,
+                                                  gravity: ToastGravity.BOTTOM,
+                                                );
+                                              },
                                             )
                                           ],
                                         ),

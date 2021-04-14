@@ -187,7 +187,7 @@ class _student_bookAppointmentState extends State<student_bookAppointment> {
                             print(purpose);
                             print("Completed");
                             setState(() =>loading=true);
-                            await Future.delayed(const Duration(milliseconds: 3000));
+                            await Future.delayed(const Duration(milliseconds: 2000));
                             await DatabaseService(uid: widget.teacher.teacher_id).removeSlot(time,remove_from);
                             await sendRequest(
                                 data.name,

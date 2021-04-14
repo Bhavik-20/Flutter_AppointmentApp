@@ -22,7 +22,7 @@ class DatabaseService {
   // final CollectionReference timetableCollection =Firestore.instance.collection('timetable');
 
 //-------------------------------------------------------------------------------------------------------------------------------------//
-  Future updateFacultyData(String name,String emp_code, String initials,String room,String email,String tt_status, String downloadUrl) async
+  Future updateFacultyData(String name,String emp_code, String initials,String room,String email,String tt_status) async
   {
     return await facultyCollection.document(uid).setData({
       'teacher_id':uid,
@@ -32,7 +32,7 @@ class DatabaseService {
       'room':room,
       'email':email,
       'tt_status':tt_status,
-      'url':downloadUrl,
+      //'url':downloadUrl,
       'role':'faculty',
     });
   }
@@ -58,7 +58,7 @@ class DatabaseService {
     );
   }
 
-  Future updateStudentData(String name,String rollno,String branch,String year,String email, String downloadUrl) async
+  Future updateStudentData(String name,String rollno,String branch,String year,String email) async
   {
     return await studentCollection.document(uid).setData({
       'student_id':uid,
@@ -67,7 +67,6 @@ class DatabaseService {
       'branch':branch,
       'year':year,
       'email':email,
-      'url':downloadUrl,
       'role':'student',
     });
   }
@@ -205,7 +204,113 @@ class DatabaseService {
     return await docref.delete();
   }
 
-  Future removePhoto(String url) async {
+  Future removePhoto(String role_call) async {
+// remove photo from profile and requests
+  print("REMOVE PHOTO");
+  String fieldname="";
+  String fieldname2="";
+  if(role_call=="faculty")
+    {
+      await facultyCollection.document(uid).updateData({
+        "url" : ""
+      });
+      fieldname="teacher_id";
+      fieldname2="t_url";
+      print("REMOVE PHOTO 1");
+    }
+  else if(role_call=="student")
+    {
+      await studentCollection.document(uid).updateData({
+        "url" : ""
+      });
+      fieldname="student_id";
+      fieldname2="s_url";
+      print("REMOVE PHOTO 2");
+    }
+
+  await requestCollection.where(fieldname,isEqualTo: uid).getDocuments()
+      .then((querySnapshot){
+    querySnapshot.documents.forEach((doc) {
+      doc.reference.updateData({
+        fieldname2 : ""
+      });
+    });
+  });
+  print("REMOVE PHOTO 3");
+
+  await acceptCollection.where(fieldname,isEqualTo: uid).getDocuments()
+      .then((querySnapshot){
+    querySnapshot.documents.forEach((doc) {
+      doc.reference.updateData({
+        fieldname2 : ""
+      });
+    });
+  });
+  print("REMOVE PHOTO 4");
+
+  await declineCollection.where(fieldname,isEqualTo: uid).getDocuments()
+      .then((querySnapshot){
+    querySnapshot.documents.forEach((doc) {
+      doc.reference.updateData({
+      fieldname2 : ""
+      });
+    });
+  });
+  print("REMOVE PHOTO 5");
+  }
+
+  Future updatePhoto(String role_call, String url) async{
+    print("UPLOAD PHOTO");
+    String fieldname="";
+    String fieldname2="";
+    if(role_call=="faculty")
+    {
+      await facultyCollection.document(uid).updateData({
+        "url" : url
+      });
+      fieldname="teacher_id";
+      fieldname2="t_url";
+      print("UPLOAD PHOTO 1");
+    }
+    else if(role_call=="student")
+    {
+      await studentCollection.document(uid).updateData({
+        "url" : url
+      });
+      fieldname="student_id";
+      fieldname2="s_url";
+      print("UPLOAD PHOTO 2");
+    }
+
+    await requestCollection.where(fieldname,isEqualTo: uid).getDocuments()
+        .then((querySnapshot){
+      querySnapshot.documents.forEach((doc) {
+        doc.reference.updateData({
+          fieldname2 : url
+        });
+      });
+    });
+    print("UPLOAD PHOTO 3");
+
+    await acceptCollection.where(fieldname,isEqualTo: uid).getDocuments()
+        .then((querySnapshot){
+      querySnapshot.documents.forEach((doc) {
+        doc.reference.updateData({
+          fieldname2 : url
+        });
+      });
+    });
+    print("UPLOAD PHOTO 4");
+
+    await declineCollection.where(fieldname,isEqualTo: uid).getDocuments()
+        .then((querySnapshot){
+      querySnapshot.documents.forEach((doc) {
+        doc.reference.updateData({
+          fieldname2 : url
+        });
+      });
+    });
+    print("UPLOAD PHOTO 5");
 
   }
 //-------------------------------------------------------------------------------------------------------------------------------------//
