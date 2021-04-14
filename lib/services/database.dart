@@ -283,6 +283,12 @@ class DatabaseService {
       fieldname2="s_url";
       print("UPLOAD PHOTO 2");
     }
+    Fluttertoast.showToast(
+      backgroundColor: Colors.green,
+      msg: 'Your Profile Photo has been Updated.',
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.BOTTOM,
+    );
 
     await requestCollection.where(fieldname,isEqualTo: uid).getDocuments()
         .then((querySnapshot){
@@ -314,12 +320,7 @@ class DatabaseService {
     });
     print("UPLOAD PHOTO 5");
 
-    Fluttertoast.showToast(
-      backgroundColor: Colors.green,
-      msg: 'Your Profile Photo has been Updated.',
-      toastLength: Toast.LENGTH_LONG,
-      gravity: ToastGravity.BOTTOM,
-    );
+
   }
 //-------------------------------------------------------------------------------------------------------------------------------------//
 

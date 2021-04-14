@@ -418,8 +418,12 @@ class _student_profileState  extends State<student_profile> {
                                                   }
                                                 }
                                                 //photo upload ends
-                                                await DatabaseService(uid: user.user_id)
-                                                    .updatePhoto("student",downloadUrl);
+                                                if(downloadUrl !="") {
+                                                  await DatabaseService(
+                                                      uid: user.user_id)
+                                                      .updatePhoto(
+                                                      "student", downloadUrl);
+                                                }
                                                 },
                                             ),
                                             FlatButton(

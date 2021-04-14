@@ -348,6 +348,7 @@ class _teacher_profileState extends State<teacher_profile> {
                                                   _image = image;
                                                   print('Image Path $_image');
                                                 });
+                                                Navigator.pop(context);
                                                 //photo upload
                                                 if(_image != null) {
                                                   String fileName = basename(_image.path);
@@ -368,15 +369,29 @@ class _teacher_profileState extends State<teacher_profile> {
                                                   }
                                                 }
                                                 //photo upload ends
-                                                await DatabaseService(uid: user.user_id)
-                                                    .updatePhoto("faculty",downloadUrl);
+                                                if(downloadUrl !="") {
+                                                  await DatabaseService(
+                                                      uid: user.user_id)
+                                                      .updatePhoto(
+                                                      "faculty", downloadUrl);
 
-                                                Fluttertoast.showToast(
-                                                    backgroundColor: Colors.green,
-                                                    msg: 'Your Profile Photo has been Updated.',
-                                                    toastLength: Toast.LENGTH_LONG,
-                                                    gravity: ToastGravity.BOTTOM,
-                                                );
+                                                  if(loading)
+                                                    {
+                                                      Loading();
+                                                      print("loading");
+                                                    }
+                                                  else {
+                                                    Fluttertoast.showToast(
+                                                      backgroundColor: Colors
+                                                          .green,
+                                                      msg: 'Your Profile Photo has been Updated.',
+                                                      toastLength: Toast
+                                                          .LENGTH_LONG,
+                                                      gravity: ToastGravity
+                                                          .BOTTOM,
+                                                    );
+                                                  }
+                                                }
                                                 },
                                             ),
                                             FlatButton(
@@ -386,14 +401,32 @@ class _teacher_profileState extends State<teacher_profile> {
                                                 ),
                                               ),
                                               onPressed: () async {
-                                                await DatabaseService(uid: user.user_id).removePhoto("faculty");
-                                                print("Profile photo deleted.");
-                                                Fluttertoast.showToast(
+                                                try {
+                                                  StorageReference photoRef = await FirebaseStorage.instance
+                                                      .ref()
+                                                      .getStorage()
+                                                      .getReferenceFromUrl(data.url);
+                                                  print(photoRef);
+                                                  await DatabaseService(uid: user.user_id).removePhoto("faculty");
+                                                  setState(() {_image = null;});
+                                                  Navigator.pop(context);
+                                                  Fluttertoast.showToast(
                                                     backgroundColor: Colors.green,
                                                     msg: 'Your Profile Picture has been Deleted Successfully.',
                                                     toastLength: Toast.LENGTH_LONG,
                                                     gravity: ToastGravity.BOTTOM,
-                                                );
+                                                  );
+                                                  await photoRef.delete();
+
+                                                }
+                                                catch (e) {
+                                                  Fluttertoast.showToast(
+                                                    backgroundColor: Colors.red,
+                                                    msg: 'An error occcured.',
+                                                    toastLength: Toast.LENGTH_LONG,
+                                                    gravity: ToastGravity.BOTTOM,
+                                                  );
+                                                }
                                               },
                                             )
                                           ],
