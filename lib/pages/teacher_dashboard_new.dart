@@ -66,7 +66,7 @@ class _listofnewFacultyRequestsState extends State<listofnewFacultyRequests> {
                           child: new SizedBox(
                             height: 180,
                             width:180,
-                            child:(limited_req[index].s_url == '' || limited_req[index].s_url == null) ? Image.asset('images/role_student.jpg',
+                            child:(limited_req[index].s_url == '' || limited_req[index].s_url == null) ? Image.asset('images/profile_student.png',
                               fit: BoxFit.cover,) : Image.network(limited_req[index].s_url,
                               fit: BoxFit.cover,
                             ),
