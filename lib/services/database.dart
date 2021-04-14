@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_appointment_app/model/Request.dart';
 import 'package:flutter_appointment_app/model/Student.dart';
 import 'package:flutter_appointment_app/model/Teacher.dart';
 import 'package:flutter_appointment_app/model/TimeTable.dart';
 import 'package:flutter_appointment_app/model/User.dart';
 import 'package:flutter_appointment_app/services/auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 class DatabaseService {
@@ -312,6 +314,12 @@ class DatabaseService {
     });
     print("UPLOAD PHOTO 5");
 
+    Fluttertoast.showToast(
+      backgroundColor: Colors.green,
+      msg: 'Your Profile Photo has been Updated.',
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.BOTTOM,
+    );
   }
 //-------------------------------------------------------------------------------------------------------------------------------------//
 

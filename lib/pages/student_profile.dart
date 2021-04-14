@@ -59,14 +59,7 @@ class _student_profileState  extends State<student_profile> {
 
   @override
   Widget build(BuildContext context) {
-    // Future getImage() async {
-    //   // ignore: deprecated_member_use
-    //   var image = await ImagePicker.pickImage(source: ImageSource.gallery);
-    //   setState(() {
-    //     _image = image;
-    //     print('Image Path $_image');
-    //   });
-    // }
+
       final user = Provider.of<User>(context);
 
       Size size = MediaQuery
@@ -402,6 +395,7 @@ class _student_profileState  extends State<student_profile> {
                                                   _image = image;
                                                   print('Image Path $_image');
                                                 });
+                                                Navigator.pop(context);
 
                                                 //photo upload
                                                 if(_image != null) {
@@ -426,14 +420,6 @@ class _student_profileState  extends State<student_profile> {
                                                 //photo upload ends
                                                 await DatabaseService(uid: user.user_id)
                                                     .updatePhoto("student",downloadUrl);
-
-                                                Fluttertoast.showToast(
-                                                  backgroundColor: Colors.green,
-                                                  msg: 'Your Profile Photo has been Updated.',
-                                                  toastLength: Toast.LENGTH_LONG,
-                                                  gravity: ToastGravity.BOTTOM,
-                                                );
-
                                                 },
                                             ),
                                             FlatButton(
@@ -443,14 +429,32 @@ class _student_profileState  extends State<student_profile> {
                                                 ),
                                               ),
                                               onPressed: () async {
-                                                await DatabaseService(uid: user.user_id).removePhoto("faculty");
-                                                print("Profile photo deleted.");
-                                                Fluttertoast.showToast(
-                                                  backgroundColor: Colors.green,
-                                                  msg: 'Your Profile Picture has been Deleted Successfully.',
-                                                  toastLength: Toast.LENGTH_LONG,
-                                                  gravity: ToastGravity.BOTTOM,
-                                                );
+                                                try {
+                                                  StorageReference photoRef = await FirebaseStorage.instance
+                                                      .ref()
+                                                      .getStorage()
+                                                      .getReferenceFromUrl(data.url);
+                                                  print(photoRef);
+                                                  await DatabaseService(uid: user.user_id).removePhoto("student");
+                                                  setState(() {_image = null;});
+                                                  Navigator.pop(context);
+                                                  Fluttertoast.showToast(
+                                                    backgroundColor: Colors.green,
+                                                    msg: 'Your Profile Picture has been Deleted Successfully.',
+                                                    toastLength: Toast.LENGTH_LONG,
+                                                    gravity: ToastGravity.BOTTOM,
+                                                  );
+                                                  await photoRef.delete();
+
+                                                }
+                                                catch (e) {
+                                                  Fluttertoast.showToast(
+                                                    backgroundColor: Colors.red,
+                                                    msg: 'An error occcured.',
+                                                    toastLength: Toast.LENGTH_LONG,
+                                                    gravity: ToastGravity.BOTTOM,
+                                                  );
+                                                }
                                               },
                                             )
                                           ],
