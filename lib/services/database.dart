@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_appointment_app/model/Request.dart';
 import 'package:flutter_appointment_app/model/Student.dart';
@@ -206,6 +207,15 @@ class DatabaseService {
     return await docref.delete();
   }
 
+  Future removePhotoFromStorage(String url) async
+  {
+    StorageReference photoRef = await FirebaseStorage.instance
+        .ref()
+        .getStorage()
+        .getReferenceFromUrl(url);
+    await photoRef.delete();
+  }
+
   Future removePhoto(String role_call) async {
 // remove photo from profile and requests
   print("REMOVE PHOTO");
@@ -319,8 +329,6 @@ class DatabaseService {
       });
     });
     print("UPLOAD PHOTO 5");
-
-
   }
 //-------------------------------------------------------------------------------------------------------------------------------------//
 

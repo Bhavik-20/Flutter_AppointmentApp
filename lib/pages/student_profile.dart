@@ -391,11 +391,12 @@ class _student_profileState  extends State<student_profile> {
                                               onPressed:()async {
                                                 // ignore: deprecated_member_use
                                                 var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+                                                Navigator.pop(context);
                                                 setState(() {
+                                                  loading=true;
                                                   _image = image;
                                                   print('Image Path $_image');
                                                 });
-                                                Navigator.pop(context);
 
                                                 //photo upload
                                                 if(_image != null) {
@@ -419,10 +420,11 @@ class _student_profileState  extends State<student_profile> {
                                                 }
                                                 //photo upload ends
                                                 if(downloadUrl !="") {
-                                                  await DatabaseService(
-                                                      uid: user.user_id)
-                                                      .updatePhoto(
-                                                      "student", downloadUrl);
+                                                  await DatabaseService(uid: user.user_id)
+                                                      .updatePhoto("student", downloadUrl);
+                                                  setState(() {
+                                                    loading=false;
+                                                  });
                                                 }
                                                 },
                                             ),
@@ -434,22 +436,22 @@ class _student_profileState  extends State<student_profile> {
                                               ),
                                               onPressed: () async {
                                                 try {
-                                                  StorageReference photoRef = await FirebaseStorage.instance
-                                                      .ref()
-                                                      .getStorage()
-                                                      .getReferenceFromUrl(data.url);
-                                                  print(photoRef);
-                                                  await DatabaseService(uid: user.user_id).removePhoto("student");
-                                                  setState(() {_image = null;});
                                                   Navigator.pop(context);
+                                                  setState(() {
+                                                    loading = true;
+                                                  });
+                                                  await DatabaseService(uid: user.user_id).removePhoto("student");
+                                                  await DatabaseService().removePhotoFromStorage(data.url);
                                                   Fluttertoast.showToast(
                                                     backgroundColor: Colors.green,
                                                     msg: 'Your Profile Picture has been Deleted Successfully.',
                                                     toastLength: Toast.LENGTH_LONG,
                                                     gravity: ToastGravity.BOTTOM,
                                                   );
-                                                  await photoRef.delete();
-
+                                                  setState(() {
+                                                    _image = null;
+                                                    loading = false;
+                                                  });
                                                 }
                                                 catch (e) {
                                                   Fluttertoast.showToast(
