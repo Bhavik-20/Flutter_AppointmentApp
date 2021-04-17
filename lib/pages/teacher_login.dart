@@ -95,7 +95,8 @@ class _teacher_loginState extends State<teacher_login> {
                   ],
                 ),
                 SizedBox(height: size.height * 0.03),
-                SvgPicture.asset('icons/teacher.svg', height:250),
+                SvgPicture.asset('icons/teacher.svg',
+                    height:250),
                 SizedBox(height: size.height * 0.03),
                 RoundedInputField(
                   hintText: "Your Email",

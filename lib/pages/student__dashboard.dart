@@ -9,6 +9,7 @@ import 'package:flutter_appointment_app/pages/student_new_requests.dart';
 import 'package:flutter_appointment_app/services/auth.dart';
 import 'package:flutter_appointment_app/services/database.dart';
 import 'package:flutter_appointment_app/ui_helpers/Loading.dart';
+import 'package:flutter_svg/svg.dart';
 import "package:google_fonts/google_fonts.dart";
 import 'package:provider/provider.dart';
 import 'package:flutter_appointment_app/model/User.dart';
@@ -104,17 +105,26 @@ class _student_dashboardState extends State<student_dashboard> {
                     child: _widgetOptions.elementAt(_selectedIndex),
                   ),
                   floatingActionButton: FloatingActionButton(
-                    tooltip: 'Book Appointment',
-                    onPressed: (){
-                      Navigator.of(context).pushNamed('/st_search_teacher');
-                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('MeetUp',style: TextStyle(fontSize: 11)),
+                        Image.asset('images/tap.png',height:25),
+                      ],
+                    ),
+                  onPressed: (){
+                    Navigator.of(context).pushNamed('/st_search_teacher');
+                  },
                     backgroundColor: Colors.deepPurple[600],
-                    child: Icon(Icons.playlist_add_sharp, size: 30),
+                    mini: false,
                   ),
                   bottomNavigationBar: BottomNavigationBar(
                     items: const <BottomNavigationBarItem>[
                       BottomNavigationBarItem(
-                        icon: Icon(Icons.pending_actions, size: 30,),
+                        icon: Icon(Icons.pending_actions,
+                          color: Colors.white,
+                          size: 25,
+                        ),
                         label: 'Pending',
                       ),
                       BottomNavigationBarItem(
