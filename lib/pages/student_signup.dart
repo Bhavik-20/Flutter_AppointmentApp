@@ -25,7 +25,7 @@ class _State extends State {
 
   String _branchVal;
   List _branch= ['Computer','Information Technology','Mechanical','Electronics','EXTC'];
-  List _year=['FY','SY','TY','LY'];
+  List _year=['FY','SY','TY','LY','MTech'];
   int selectedIndex = 0;
 
   void changeIndex(int index){
@@ -192,6 +192,7 @@ class _State extends State {
                     customRadio(_year[1], 1),
                     customRadio(_year[2], 2),
                     customRadio(_year[3], 3),
+                    customRadio(_year[4], 4),
                   ],
                 ),
                 ),

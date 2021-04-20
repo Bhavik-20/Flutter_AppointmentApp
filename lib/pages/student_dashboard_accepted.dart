@@ -46,7 +46,7 @@ class _listofStudentAcceptedRequestsState extends State<listofStudentAcceptedReq
                     margin: EdgeInsets.fromLTRB(20, 6, 20, 0),
                     child: ListTile(
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> student_request_status(request:accepted[index])));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> student_request_status(request:accepted[index],page: "accepted",)));
                       },
                       leading: CircleAvatar(
                         child:  ClipOval(

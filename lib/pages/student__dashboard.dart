@@ -122,7 +122,6 @@ class _student_dashboardState extends State<student_dashboard> {
                     items: const <BottomNavigationBarItem>[
                       BottomNavigationBarItem(
                         icon: Icon(Icons.pending_actions,
-                          color: Colors.white,
                           size: 25,
                         ),
                         label: 'Pending',

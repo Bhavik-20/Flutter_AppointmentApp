@@ -47,7 +47,7 @@ class _listofnewStudentRequestsState extends State<listofnewStudentRequests> {
                       onTap: (){
                         print(requests[index].date);
                         print(requests[index]);
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> student_request_status(request:requests[index])));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> student_request_status(request:requests[index],page: "new",)));
                       },
                       leading: CircleAvatar(
                         child:  ClipOval(

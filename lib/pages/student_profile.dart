@@ -38,7 +38,7 @@ class _student_profileState  extends State<student_profile> {
     'Electronics',
     'EXTC'
   ];
-  List _year = ['FY', 'SY', 'TY', 'LY'];
+  List _year = ['FY', 'SY', 'TY', 'LY','MTech'];
 
   String validate(String name, String rollno, String branch, String year) {
     RegExp ofname = new RegExp(r'^[A-Za-z ]*$');

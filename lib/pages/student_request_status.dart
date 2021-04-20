@@ -12,13 +12,19 @@ void main()
 }
 
 class student_request_status extends StatefulWidget {
-  @override
-  _student_request_statusState createState() => _student_request_statusState();
+
   final Request request;
-  student_request_status({this.request});
+  final String page;
+  student_request_status({this.request,this.page});
+
+  @override
+  _student_request_statusState createState() => _student_request_statusState(page: page);
 }
 
 class _student_request_statusState extends State<student_request_status> {
+  final String page;
+  _student_request_statusState({this.page});
+
   bool loading = false;
 
   @override
@@ -27,7 +33,6 @@ class _student_request_statusState extends State<student_request_status> {
     DateTime today_date = new DateTime(now.year, now.month, now.day);
     DateTime req_date = DateTime.parse(widget.request.date.split(":").last.trim());
     bool show_options = req_date.compareTo(today_date)<0 ? false : true;
-
     Size size = MediaQuery.of(context).size;
 
     return loading ? Loading() : Scaffold(
@@ -405,7 +410,7 @@ class _student_request_statusState extends State<student_request_status> {
               ),
               ),
             SizedBox(height: 30.0,),
-            if(show_options)
+            if(show_options &&  page != "declined")
             Center(
               child: Column(
                 children: [

@@ -48,7 +48,7 @@ class _listofStudentDeclinedRequestsState extends State<listofStudentDeclinedReq
                       onTap: (){
                         print(accepted[index].date);
                         print(accepted[index]);
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> student_request_status(request:accepted[index])));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> student_request_status(request:accepted[index],page: "declined")));
                       },
                       leading: CircleAvatar(
                         child:  ClipOval(

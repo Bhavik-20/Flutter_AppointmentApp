@@ -92,7 +92,7 @@ class _student_loginState extends State<student_login> {
                 ),
                 SizedBox(height: size.height * 0.03),
                 RoundedInputField(
-                  hintText: "Your Email",
+                  hintText: "Somaiya Email",
                   onChanged: (value) {
                     setState(() => email=value);
                   },
