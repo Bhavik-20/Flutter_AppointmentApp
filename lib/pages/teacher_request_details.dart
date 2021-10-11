@@ -9,7 +9,6 @@ import 'package:flutter_appointment_app/services/database.dart';
 import 'package:flutter_appointment_app/ui_helpers/Loading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter/services.dart';
 
 void main()
 {

@@ -4,23 +4,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_appointment_app/model/TimeTable.dart';
 import 'package:flutter_appointment_app/services/Api.dart';
 import 'package:flutter_appointment_app/ui_helpers/constants.dart';
-import 'package:flutter_appointment_app/ui_helpers/rounded_button.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'dart:ui';
 import 'dart:io';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_appointment_app/model/Teacher.dart';
 import 'package:flutter_appointment_app/model/User.dart';
-import 'package:flutter_appointment_app/pages/role.dart';
 import 'package:flutter_appointment_app/services/auth.dart';
 import 'package:flutter_appointment_app/services/database.dart';
 import 'package:flutter_appointment_app/ui_helpers/Loading.dart';
-import "package:google_fonts/google_fonts.dart";
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:file_picker/file_picker.dart';
 
 class teacher_tt extends StatefulWidget {

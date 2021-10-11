@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_appointment_app/model/Teacher.dart';
 import 'package:flutter_appointment_app/pages/student_bookAppointment.dart';
 import 'package:flutter_appointment_app/ui_helpers/constants.dart';
-import 'package:flutter_appointment_app/ui_helpers/text_field_container.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 

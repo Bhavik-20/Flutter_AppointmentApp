@@ -3,11 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_appointment_app/pages/teacher_accepted_requests.dart';
 import 'package:flutter_appointment_app/pages/teacher_declined_requests.dart';
 import 'package:flutter_appointment_app/pages/teacher_new_requests.dart';
-import 'package:flutter_appointment_app/ui_helpers/constants.dart';
-import 'package:flutter_appointment_app/ui_helpers/rounded_button.dart';
-import 'package:flutter_appointment_app/ui_helpers/rounded_input_field.dart';
-import 'package:flutter_appointment_app/ui_helpers/rounded_password_field.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 void main(){
   runApp(teacher_history());

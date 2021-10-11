@@ -9,8 +9,6 @@ import 'package:flutter_appointment_app/pages/student_new_requests.dart';
 import 'package:flutter_appointment_app/services/auth.dart';
 import 'package:flutter_appointment_app/services/database.dart';
 import 'package:flutter_appointment_app/ui_helpers/Loading.dart';
-import 'package:flutter_svg/svg.dart';
-import "package:google_fonts/google_fonts.dart";
 import 'package:provider/provider.dart';
 import 'package:flutter_appointment_app/model/User.dart';
 import 'package:shared_preferences/shared_preferences.dart';

@@ -3,19 +3,12 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_appointment_app/model/User.dart';
-import 'package:flutter_appointment_app/services/auth.dart';
-import 'package:flutter_appointment_app/services/database.dart';
-import 'package:flutter_appointment_app/ui_helpers/Loading.dart';
 import 'package:flutter_appointment_app/ui_helpers/constants.dart';
 import 'package:flutter_appointment_app/ui_helpers/rounded_button.dart';
 import 'package:flutter_appointment_app/ui_helpers/rounded_input_field.dart';
-import 'package:flutter_appointment_app/ui_helpers/rounded_password_field.dart';
-import 'package:flutter_appointment_app/ui_helpers/text_field_container.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 
 class ForgotScreen extends StatefulWidget{
   @override

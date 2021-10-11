@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:ui';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +5,6 @@ import 'package:flutter_appointment_app/ui_helpers/Loading.dart';
 import 'package:flutter_appointment_app/ui_helpers/constants.dart';
 import 'package:flutter_appointment_app/ui_helpers/rounded_button.dart';
 import 'package:flutter_appointment_app/ui_helpers/rounded_input_field.dart';
-import 'package:flutter_appointment_app/ui_helpers/rounded_password_field.dart';
 import 'package:flutter_appointment_app/ui_helpers/text_field_container.dart';
 import 'package:flutter_appointment_app/services/auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';

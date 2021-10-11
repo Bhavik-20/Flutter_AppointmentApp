@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,15 +6,12 @@ import 'package:flutter_appointment_app/model/Student.dart';
 import 'package:flutter_appointment_app/model/Teacher.dart';
 import 'package:flutter_appointment_app/model/TimeTable.dart';
 import 'package:flutter_appointment_app/model/User.dart';
-import 'package:flutter_appointment_app/pages/role.dart';
 import 'package:flutter_appointment_app/services/EmailSender.dart';
 import 'package:flutter_appointment_app/services/database.dart';
 import 'package:flutter_appointment_app/ui_helpers/Loading.dart';
-import 'package:flutter_appointment_app/ui_helpers/rounded_button.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_appointment_app/ui_helpers/constants.dart';
 
 class student_bookAppointment extends StatefulWidget {
 
